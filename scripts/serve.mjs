@@ -10,7 +10,7 @@ http.createServer(async (req, res) => {
     if (pathname.endsWith('/')) pathname += 'index.html';
     let file = path.resolve(root, '.' + pathname);
     if (!file.startsWith(root + path.sep)) throw new Error('Forbidden');
-    if (root === path.resolve('.') && (pathname.startsWith('/assets/') || pathname === '/config.json')) file = path.join(root, 'public', pathname);
+    if (root === path.resolve('.') && (pathname.startsWith('/assets/') || ['/config.json','/aggregate.json'].includes(pathname))) file = path.join(root, 'public', pathname);
     if (!(await stat(file)).isFile()) throw new Error('Missing');
     const body = await readFile(file);
     res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });

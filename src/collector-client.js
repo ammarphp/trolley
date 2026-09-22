@@ -1,6 +1,6 @@
 import { CONSENT_VERSION } from './engine.js';
 export function publicPayload(record, run) {
-  const keys = ['responseId', 'engineVersion', 'templateId', 'seed', 'choice', 'confidence', 'reason', 'activeMs', 'elapsedMs', 'position', 'source', 'depth', 'stage', 'mode', 'familyFilter', 'toneFilter', 'ordinal'];
+  const keys = ['responseId', 'engineVersion', 'templateId', 'seed', 'choice', 'confidence', 'reason', 'activeMs', 'elapsedMs', 'position', 'source', 'depth', 'stage', 'mode', 'familyFilter', 'toneFilter', 'ordinal', 'route', 'branchKey'];
   return { ...Object.fromEntries(keys.map(k => [k, record[k] ?? null])), consentVersion: CONSENT_VERSION,
     runId: run.id, runToken: run.token };
 }

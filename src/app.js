@@ -21,7 +21,8 @@ if (!Number.isSafeInteger(state.depth) || state.depth < 0) state.depth = 0;
 let config = { collectorUrl: '', repositoryUrl: '' };
 let current, currentRecord, view = 'experiment', animating = false, paused = false;
 let startAt = performance.now(), activeStart = startAt, activeMs = 0;
-let source = 'descent', toastTimer, sending = false, initialMessage = '';
+let source = 'descent', toastTimer, sending = false, resyncRequested = false, initialMessage = '';
+let choiceFinished = Promise.resolve(), resolveChoice;
 const main = $('#main');
 let gameScene, autoNextTimer, interludeTimer;
 const shownInterludes = new Set();
@@ -124,17 +125,19 @@ function bindDecisions() {
 function choose(choice, agent = false) {
   if ($('.game-interlude') || currentRecord || animating || paused || view !== 'experiment' || !['pull', 'stay', 'skip'].includes(choice)) return;
   pauseTimer();
+  choiceFinished = new Promise(resolve => { resolveChoice = resolve; });
   const order = hash(`${current.scenarioId}:order`) % 2 ? ['pull', 'stay'] : ['stay', 'pull'];
   currentRecord = {
-    runId: activeRun.id, ordinal: runRecords(state).length, responseId: crypto.randomUUID(), engineVersion: ENGINE_VERSION, scenarioId: current.scenarioId,
+    runId: activeRun.id, ordinal: activeRun.nextOrdinal ?? runRecords(state).length, responseId: crypto.randomUUID(), engineVersion: ENGINE_VERSION, scenarioId: current.scenarioId,
     templateId: current.id, family: current.family, seed: current.seed, title: current.title,
     prompt: playCopy(current).prompt, note: playCopy(current).note, fullSetup: current.setup, mainOutcome: current.main, sideOutcome: current.side,
     choice, confidence: null, reason: null, activeMs: Math.min(86400000, Math.round(activeMs)), elapsedMs: Math.min(86400000, Math.round(performance.now() - startAt)),
     position: choice === 'skip' ? null : order.indexOf(choice), source: agent ? 'agent' : source,
     depth: current.depth ?? null, stage: current.stage ?? null, mode: current.mode || 'explore',
-    familyFilter: state.family, toneFilter: state.tone, createdAt: new Date().toISOString(),
+    familyFilter: state.family, toneFilter: state.tone, route: current.route ?? null, branchKey: current.branchKey ?? null, createdAt: new Date().toISOString(),
     shareAllowed: activeRun.sharing && !agent, shared: false,
   };
+  activeRun.nextOrdinal = currentRecord.ordinal + 1;
   state.records.push(currentRecord);
   // Retain 5,000 local responses. Each run has its own separate withdrawal key.
   if (state.records.length > 5000) state.records.splice(0, state.records.length - 5000);
@@ -143,7 +146,7 @@ function choose(choice, agent = false) {
   saveState(state); headerState(); syncPending();
   document.querySelectorAll('[data-choice],#skip').forEach(b => b.disabled = true);
   const finish = () => {
-    animating = false;
+    animating = false; resolveChoice?.();
     if (view !== 'experiment' || paused) return;
     $('#decision-area').innerHTML = resultHTML(); bindDecisions();
     $('#result-title').focus({ preventScroll: true });
@@ -159,7 +162,7 @@ function next() {
   $('#case-title')?.setAttribute('tabindex', '-1'); $('#case-title')?.focus({ preventScroll: true });
   if (innerWidth < 640) window.scrollTo({ top: 0, behavior: reducedMotion() ? 'instant' : 'smooth' });
 }
-function stepOutside() { clearTimeout(autoNextTimer); if(animating){animating=false;} pauseTimer(); paused=true;render();$('#resume')?.focus(); }
+function stepOutside() { clearTimeout(autoNextTimer); if(animating){animating=false;resolveChoice?.();} pauseTimer(); paused=true;render();$('#resume')?.focus(); }
 async function share() {
   const url = scenarioUrl(current, location.href);
   try { await navigator.clipboard.writeText(url); toast('Exact dilemma link copied. The recipient starts in a clean interface.'); }
@@ -220,11 +223,11 @@ function openSettings() {
     <div class="setting-row"><label for="calm">Keep the visuals calm<small>The story continues. The interface stays clean.</small></label><input class="toggle" id="calm" type="checkbox" ${state.calm?'checked':''}></div>
     <div class="setting-row"><label for="sound">Sound<small>A quiet mechanical tone. Off by default.</small></label><input class="toggle" id="sound" type="checkbox" ${state.sound?'checked':''}></div>
     <div class="setting-row"><label for="collection">Share anonymous run statistics<small>${config.collectorUrl?'No account or visitor identity. A fresh record for every new run.':'Collector not connected. This run is local only.'}</small></label><input class="toggle" id="collection" type="checkbox" ${activeRun.sharing?'checked':''} ${config.collectorUrl?'':'disabled'}></div>
-    <div class="privacy-box"><p>One run gets one random ID and a public run number. A new run gets an unrelated ID. There is no shared user identifier, fingerprint, advertising tracker, or cross-run profile.</p><p>Shared data includes choices, skips, optional reflections, rounded response timing, button order, and narrative stage. The app stores no IP addresses or user agents. Hosting providers still process ordinary network metadata. Raw responses are retained for up to 365 days.</p><p>Only aggregates are public and copied to GitHub. Small groups are withheld. Historical aggregate snapshots can remain in Git history after you withdraw a run.</p>${config.operatorName?`<p>Operated by ${e(config.operatorName)}. <a href="${e(config.contactUrl)}" target="_blank" rel="noopener noreferrer">Contact / source ↗</a></p>`:''}</div>
-    <div class="dialog-actions"><button class="secondary-button" id="download-data">Export this run</button><button class="secondary-button danger" id="withdraw-run">Withdraw this run</button><button class="secondary-button danger" id="erase-local">Erase local data</button></div>
+    <div class="privacy-box"><p>One run gets one random ID and a public run number. A new run gets an unrelated ID. There is no shared user identifier, fingerprint, advertising tracker, or cross-run profile.</p><p>Shared data includes choices, skips, optional reflections, rounded response timing, button order, and narrative stage. The app stores no IP addresses or user agents. Hosting providers still process ordinary network metadata. Raw responses are eligible for cleanup after 365 days, when new runs register.</p><p>Only aggregates are public and copied to GitHub. Small groups are withheld. Historical aggregate snapshots can remain in Git history after you withdraw a run.</p>${config.operatorName?`<p>Operated by ${e(config.operatorName)}. <a href="${e(config.contactUrl)}" target="_blank" rel="noopener noreferrer">Contact / source ↗</a></p>`:''}</div>
+    <div class="filter-group"><label for="withdraw-select">Run to withdraw</label><select id="withdraw-select">${state.runs.map((r,i)=>`<option value="${r.id}" ${r.id===activeRun.id?'selected':''}>${r.number?'Public run '+r.number:'Local run '+(i+1)}${r.withdrawn?' (withdrawn)':''}</option>`).join('')}</select></div><div class="dialog-actions"><button class="secondary-button" id="download-data">Export this run</button><button class="secondary-button danger" id="withdraw-run">Withdraw this run</button><button class="secondary-button danger" id="erase-local">Erase local data</button></div>
     <div class="setting-row restart-row"><label>A new run<small>Start with coffee and a fresh, unrelated run ID.</small></label><button class="secondary-button" id="restart">Start over</button></div><p class="small-copy">Notice ${CONSENT_VERSION}. Sharing is disclosed beside the play controls and can be disabled at any time.</p>`;
   dialog.querySelector('.close-dialog').onclick = () => dialog.close();
-  for (const key of ['motion','calm','sound']) dialog.querySelector('#'+key).onchange = event => { state[key]=event.target.checked; saveState(state); if(animating)animating=false; render(); };
+  for (const key of ['motion','calm','sound']) dialog.querySelector('#'+key).onchange = event => { state[key]=event.target.checked; saveState(state); if(animating){animating=false;resolveChoice?.();} render(); };
   $('#collection').onchange = event => {
     state.collection=event.target.checked; activeRun.sharing=state.collection;
     if (!state.collection) runRecords(state).forEach(r=>{if(!r.shared)r.shareAllowed=false;});
@@ -232,10 +235,10 @@ function openSettings() {
   };
   $('#download-data').onclick=()=>download(runRecords(state),'json');
   $('#withdraw-run').onclick=async event=>{
-    const button=event.target; button.disabled=true; activeRun.sharing=false; state.collection=false; saveState(state);
+    const button=event.target;button.disabled=true;const run=state.runs.find(r=>r.id===$('#withdraw-select').value);run.sharing=false;if(run===activeRun)state.collection=false;saveState(state);
     try {
-      if(activeRun.registered)await api(config,'/withdraw',{method:'POST',body:{runId:activeRun.id,runToken:activeRun.token}});
-      activeRun.withdrawn=true; activeRun.registered=false; runRecords(state).forEach(r=>{r.shared=false;r.shareAllowed=false;}); saveState(state); dialog.close(); render(); toast('This run has been withdrawn. Your local copy remains.');
+      if(run.registered&&!run.withdrawn)await api(config,'/withdraw',{method:'POST',body:{runId:run.id,runToken:run.token}});
+      run.withdrawn=true; run.registered=false; runRecords(state,run.id).forEach(r=>{r.shared=false;r.shareAllowed=false;}); saveState(state); dialog.close(); render(); toast('This run has been withdrawn. Your local copy remains.');
     }catch{button.disabled=false;toast('Withdrawal could not reach the collector. Sharing is off; the run key is preserved for retry.');}
   };
   $('#erase-local').onclick=()=>{
@@ -266,7 +269,8 @@ function beginExploration(family) {
   saveState(state); loadNext(); view = 'experiment'; render();
 }
 async function syncPending() {
-  if(sending||!config.collectorUrl)return;
+  if(sending){resyncRequested=true;return;}
+  if(!config.collectorUrl)return;
   sending=true;
   try{
     if(activeRun.sharing&&!activeRun.withdrawn&&!activeRun.registered){
@@ -278,11 +282,12 @@ async function syncPending() {
       const run=state.runs.find(r=>r.id===record.runId);
       if(!run?.sharing||run.withdrawn)continue;
       if(!run.registered){const result=await api(config,'/runs',{method:'POST',body:{runId:run.id,runToken:run.token,mode:run.mode,engineVersion:ENGINE_VERSION,noticeVersion:CONSENT_VERSION}});run.registered=true;run.number=result.runNumber;saveState(state);}
-      await api(config,'/responses',{method:'POST',body:publicPayload(record,run)});
-      record.shared=true;saveState(state);
+      const payload=publicPayload(record,run);
+      await api(config,'/responses',{method:'POST',body:payload});
+      record.shared=JSON.stringify(payload)===JSON.stringify(publicPayload(record,run));saveState(state);
     }
   }catch{toast('Live statistics are temporarily unavailable. Your run is saved here for retry.');}
-  finally{sending=false;}
+  finally{sending=false;if(resyncRequested){resyncRequested=false;queueMicrotask(syncPending);}}
 }
 
 let audioContext;
@@ -334,7 +339,7 @@ if (document.modelContext?.registerTool) {
   const lifecycle = new AbortController();
   for (const tool of [
     { name: 'read_trolley_dilemma', description: 'Read the current fictional dilemma and available outcomes.', inputSchema: { type: 'object', properties: {}, additionalProperties: false }, annotations: { readOnlyHint: true }, execute: () => ({ scenario: current, answered: !!currentRecord, paused }) },
-    { name: 'answer_trolley_dilemma', description: 'Record a choice in the visible dilemma. Agent responses remain local and are marked as agent-generated.', inputSchema: { type: 'object', properties: { choice: { enum: ['pull', 'stay', 'skip'] } }, required: ['choice'], additionalProperties: false }, annotations: { readOnlyHint: false }, execute: async input => { if (!['pull', 'stay', 'skip'].includes(input?.choice) || currentRecord || paused || view !== 'experiment') throw new Error('No available decision or invalid choice.'); choose(input.choice, true); return { responseId: currentRecord.responseId, choice: currentRecord.choice, shared: false }; } },
+    { name: 'answer_trolley_dilemma', description: 'Record a choice in the visible dilemma. Agent responses remain local and are marked as agent-generated.', inputSchema: { type: 'object', properties: { choice: { enum: ['pull', 'stay', 'skip'] } }, required: ['choice'], additionalProperties: false }, annotations: { readOnlyHint: false }, execute: async input => { if (!['pull', 'stay', 'skip'].includes(input?.choice) || currentRecord || paused || view !== 'experiment') throw new Error('No available decision or invalid choice.'); choose(input.choice, true); await choiceFinished; return { responseId: currentRecord.responseId, choice: currentRecord.choice, shared: false }; } },
   ]) { try { await document.modelContext.registerTool(tool, { signal: lifecycle.signal }); } catch { /* Unsupported experimental API. */ } }
   window.addEventListener('pagehide', () => lifecycle.abort(), { once: true });
 }

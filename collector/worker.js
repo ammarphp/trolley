@@ -1,5 +1,6 @@
 import { generateScenario, ENGINE_VERSION, CONSENT_VERSION, REASONS } from '../src/engine.js';
 import { SCHEMA } from './schema.js';
+import { playCopy } from '../src/play-copy.js';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const TOKEN = /^[0-9a-f-]{72}$/i;
 const initialized = new WeakSet();
@@ -34,7 +35,7 @@ export function validateResponse(data) {
   ensure(['pull', 'stay', 'skip'].includes(data.choice), 'Invalid choice.');
   ensure(['descent', 'explore', 'shared'].includes(data.source), 'Invalid response source.');
   ensure(['descent', 'explore'].includes(data.mode), 'Invalid mode.');
-  ensure(Number.isInteger(data.ordinal) && data.ordinal >= 0 && data.ordinal < 5000, 'Invalid response number.');
+  ensure(Number.isInteger(data.ordinal) && data.ordinal >= 0 && data.ordinal < 1000000, 'Invalid response number.');
   ensure(data.confidence == null || ['unsure', 'mixed', 'sure'].includes(data.confidence), 'Invalid confidence.');
   ensure(data.reason == null || REASONS.some(([r]) => r === data.reason), 'Invalid reason.');
   for (const key of ['activeMs', 'elapsedMs']) ensure(Number.isInteger(data[key]) && data[key] >= 0 && data[key] <= 86400000, 'Invalid response duration.');
@@ -44,13 +45,16 @@ export function validateResponse(data) {
   else { ensure(data.stage == null && data.depth == null, 'Exploration must not claim a narrative stage.'); }
   let scenario;
   try { scenario = generateScenario(data.seed, { templateId: data.templateId }); } catch { throw new HttpError(400, 'Invalid stimulus.'); }
-  const allowed = ['responseId','engineVersion','templateId','seed','choice','confidence','reason','activeMs','elapsedMs','position','source','depth','stage','mode','familyFilter','toneFilter','ordinal'];
+  ensure(data.route == null || ['unassigned','optimization','preservation','oscillation'].includes(data.route), 'Invalid narrative route.');
+  ensure(data.branchKey == null || (typeof data.branchKey==='string' && /^(start|[psx]{1,24})$/.test(data.branchKey)), 'Invalid route history.');
+  const allowed = ['responseId','engineVersion','templateId','seed','choice','confidence','reason','activeMs','elapsedMs','position','source','depth','stage','mode','familyFilter','toneFilter','ordinal','route','branchKey'];
   const record = Object.fromEntries(allowed.map(k => [k, data[k] ?? null]));
   for (const key of ['familyFilter', 'toneFilter']) ensure(record[key] === null || (typeof record[key] === 'string' && /^[a-z-]{1,30}$/.test(record[key])), 'Invalid filter.');
   // Quantize timings and store no client timestamp, network address, user agent, or user identifier.
   record.activeMs = Math.round(record.activeMs / 100) * 100;
   record.elapsedMs = Math.round(record.elapsedMs / 100) * 100;
   record.family = scenario.family; record.scenarioId = scenario.scenarioId;
+  record.presentation = { ...playCopy({ ...scenario, depth: record.depth, route: record.route }), mainOutcome: scenario.main, sideOutcome: scenario.side };
   return record;
 }
 export async function aggregate(db) {

@@ -20,5 +20,5 @@ export function branchState(records) {
   for (const r of records) { if (r.choice === 'pull') interventions++; else if (r.choice === 'stay') omissions++; else skips++; }
   const total = interventions + omissions;
   const route = total < 3 ? 'unassigned' : interventions / total >= .65 ? 'optimization' : interventions / total <= .35 ? 'preservation' : 'oscillation';
-  return { interventions, omissions, skips, route, key: records.map(r => r.choice[0]).join('').slice(-24) || 'start' };
+  return { interventions, omissions, skips, route, key: records.map(r => r.choice === 'skip' ? 'x' : r.choice[0]).join('').slice(-24) || 'start' };
 }

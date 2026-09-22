@@ -173,7 +173,11 @@ export function createGameScene(canvas, scenario, { motion = true, calm = false,
     if(motion){time+=dt;travel-=dt*(1.4+decay*2.2);}
     else if(decision)time+=dt;
     ctx.clearRect(0,0,width,height);ctx.fillStyle=p.paper;ctx.fillRect(0,0,width,height);
-    landscape();drawRails(-1);drawRails(1);targets(-1,left);targets(1,right);trolley();
+    landscape();
+    const sky=ctx.createLinearGradient(0,0,0,height*.29);
+    sky.addColorStop(0,p.paper);sky.addColorStop(.58,p.paper);sky.addColorStop(1,p.paper.replace('rgb(','rgba(').replace(')',',0)'));
+    ctx.fillStyle=sky;ctx.fillRect(0,0,width,height*.29);
+    drawRails(-1);drawRails(1);targets(-1,left);targets(1,right);trolley();
     if(decay>.3&&motion){const interval=10+Math.floor(seed%9),phase=time%interval;if(phase<.16){ctx.save();ctx.globalAlpha=(decay-.3)*.08;ctx.fillStyle=p.ink;ctx.fillRect(0,height*.38,width,1+decay*5);ctx.restore();}}
     if(decision&&!finished&&time-decisionTime>(motion?2:0.08)){finished=true;onReady?.();}
     frame=requestAnimationFrame(draw);

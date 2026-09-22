@@ -9,6 +9,8 @@ export function loadState() {
     memory = { ...defaultState(), ...(data && typeof data === 'object' ? data : {}) };
     if (!Array.isArray(memory.records)) memory.records = [];
     if (!Array.isArray(memory.seen)) memory.seen = [];
+    if (!Array.isArray(memory.runs)) memory.runs = [];
+    memory.records = memory.records.filter(r => r && typeof r === 'object' && ['pull','stay','skip'].includes(r.choice));
   } catch { storageAvailable = false; memory = defaultState(); }
   return memory;
 }
@@ -22,7 +24,7 @@ export function summarize(records) {
   return { total: decisions.length, pulled: decisions.filter(r => r.choice === 'pull').length, stayed: decisions.filter(r => r.choice === 'stay').length, skipped: records.length - decisions.length, families: new Set(decisions.map(r => r.family)).size };
 }
 export function csv(records) {
-  const keys = ['runId', 'ordinal', 'responseId', 'engineVersion', 'scenarioId', 'templateId', 'family', 'seed', 'choice', 'confidence', 'reason', 'activeMs', 'elapsedMs', 'position', 'source', 'mode', 'depth', 'stage', 'familyFilter', 'toneFilter', 'createdAt', 'title', 'prompt', 'mainOutcome', 'sideOutcome'];
+  const keys = ['runId', 'ordinal', 'responseId', 'engineVersion', 'scenarioId', 'templateId', 'family', 'seed', 'choice', 'confidence', 'reason', 'activeMs', 'elapsedMs', 'position', 'source', 'mode', 'depth', 'stage', 'route', 'branchKey', 'familyFilter', 'toneFilter', 'createdAt', 'title', 'prompt', 'note', 'fullSetup', 'mainOutcome', 'sideOutcome'];
   const escape = value => {
     let s = value == null ? '' : String(value);
     if (/^[=+@\-\t\r]/.test(s)) s = "'" + s;
