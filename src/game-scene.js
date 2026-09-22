@@ -21,7 +21,7 @@ export function createGameScene(canvas, scenario, { motion = true, calm = false,
     return { paper:`rgb(${rgb.join(',')})`, ink:inkColor, faint:`rgba(${mix(80,165)},${mix(94,196)},${mix(71,166)},.17)`, red: dark>.4?'#dd8a72':'#9b493a', green: dark>.4?'#b3b866':'#cfe77c', dark };
   };
   const p = palette();
-  function resize() { const box=canvas.getBoundingClientRect();width=box.width;height=box.height;const dpr=Math.min(devicePixelRatio||1,2);canvas.width=width*dpr;canvas.height=height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0); }
+  function resize() { const box=canvas.getBoundingClientRect();width=box.width;height=box.height;const dpr=Math.min(devicePixelRatio||1,2);canvas.width=width*dpr;canvas.height=height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);if(!motion){cancelAnimationFrame(frame);frame=requestAnimationFrame(draw);} }
   const observer=new ResizeObserver(resize);observer.observe(canvas);resize();
   function noise(n){return Math.sin(n*127.1+seed*.001)*.5+Math.cos(n*71.3+seed*.0001)*.5;}
   function ink(points,{color=p.ink,weight=1.8,closed=false,fill=null,wobble=1}={}){
@@ -180,8 +180,8 @@ export function createGameScene(canvas, scenario, { motion = true, calm = false,
     drawRails(-1);drawRails(1);targets(-1,left);targets(1,right);trolley();
     if(decay>.3&&motion){const interval=10+Math.floor(seed%9),phase=time%interval;if(phase<.16){ctx.save();ctx.globalAlpha=(decay-.3)*.08;ctx.fillStyle=p.ink;ctx.fillRect(0,height*.38,width,1+decay*5);ctx.restore();}}
     if(decision&&!finished&&time-decisionTime>(motion?2:0.08)){finished=true;onReady?.();}
-    frame=requestAnimationFrame(draw);
+    if(motion||(decision&&!finished))frame=requestAnimationFrame(draw);
   }
   frame=requestAnimationFrame(draw);
-  return { choose(choice, done){decision=choice;decisionTime=time;onReady=done;}, destroy(){cancelAnimationFrame(frame);observer.disconnect();}, colors:p, left,right,decay };
+  return { choose(choice, done){decision=choice;decisionTime=time;onReady=done;if(!motion)frame=requestAnimationFrame(draw);}, destroy(){cancelAnimationFrame(frame);observer.disconnect();}, colors:p, left,right,decay };
 }

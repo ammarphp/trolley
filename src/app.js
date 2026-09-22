@@ -330,7 +330,7 @@ if (!storageAvailable) toast('Browser storage is unavailable. You can still play
 try {
   config = validConfig(await (await fetch('./config.json')).json());
   if (config.repositoryUrl) { $('#source-link').href = config.repositoryUrl; $('#source-link').target = '_blank'; $('#source-link').rel = 'noopener noreferrer'; }
-  render();
+  if(!animating)render();
   syncPending();
 } catch { /* A missing optional collector must not stop the static experience. */ }
 
