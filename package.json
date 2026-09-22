@@ -1,0 +1,25 @@
+{
+  "name": "the-trolley-department",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "An inexhaustible queue of questionable decisions. A reproducible trolley dilemma generator and consent-based response collector.",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs dist",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "collector:dev": "node collector/local.mjs",
+    "catalog": "node scripts/catalog.mjs",
+    "check": "npm test && npm run build && npm run test:browser"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "playwright": "1.58.2"
+  },
+  "license": "MIT"
+}

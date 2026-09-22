@@ -1,0 +1,18 @@
+name: A problem with the problem
+description: Report a broken interaction or contradictory dilemma.
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Include what you expected. Do not include personal data or run keys.
+    validations:
+      required: true
+  - type: input
+    id: seed
+    attributes:
+      label: Dilemma link or template and seed
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and device

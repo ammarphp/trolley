@@ -1,0 +1,12 @@
+import { build } from 'esbuild';
+import { mkdir, cp, writeFile, readFile } from 'node:fs/promises';
+await mkdir('.collector-site/dist/server', { recursive: true });
+await build({ entryPoints: ['collector/worker.js'], bundle: true, format: 'esm', platform: 'browser', target: 'es2022', outfile: '.collector-site/dist/server/index.js', minify: false, sourcemap: false });
+await mkdir('.collector-site/source', { recursive: true });
+await cp('collector', '.collector-site/source/collector', { recursive: true, filter: name => !name.includes('.sqlite') });
+await cp('src', '.collector-site/source/src', { recursive: true });
+await writeFile('.collector-site/package.json', JSON.stringify({ name: 'trolley-anonymous-run-collector', private: true, type: 'module', scripts: { build: 'node build.mjs' } }, null, 2));
+await writeFile('.collector-site/build.mjs', '// Worker output is bundled and versioned in dist/server/index.js.\nconsole.log("Prebuilt Worker ready.");\n');
+await mkdir('.collector-site/dist/.openai', { recursive: true });
+await cp('.collector-site/.openai/hosting.json', '.collector-site/dist/.openai/hosting.json');
+console.log('Bundled collector for Cloudflare Workers and Sites.');
