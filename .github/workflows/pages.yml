@@ -12,24 +12,63 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.release_guard.outputs.publish }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - run: node --test tests/*.test.mjs
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '11.19.0'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm inspect:content
+      - run: pnpm collector:build
       - run: node scripts/build.mjs
         env:
           COLLECTOR_URL: ${{ vars.COLLECTOR_URL }}
+          COLLECTOR_V2_ENABLED: ${{ vars.COLLECTOR_V2_ENABLED }}
           REPOSITORY_URL: https://github.com/ammarphp/trolley
           OPERATOR_NAME: ammarphp
           CONTACT_URL: https://github.com/ammarphp/trolley
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:browser
+      - name: Enforce the source-controlled release profile
+        id: release_guard
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync, readFileSync } from 'node:fs';
+          appendFileSync(process.env.GITHUB_OUTPUT, 'publish=false\n');
+          let manifest;
+          try {
+            manifest = JSON.parse(readFileSync('dist/build-manifest.json', 'utf8'));
+          } catch {
+            const reason = 'Publication blocked: the build manifest is missing or invalid.';
+            appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## Publication blocked\n\n${reason}\n`);
+            console.error(`::error::${reason}`);
+            process.exit(1);
+          }
+          if (manifest?.profile !== 'production') {
+            const reason = 'Publication held: this build is not the reviewed production profile. Development slices are never uploaded or deployed.';
+            appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## Publication held\n\n${reason}\n\nSee docs/operations/RELEASE_HOLD.md. Manual dispatch and repository variables do not bypass this hold.\n`);
+            console.log(`::notice::${reason}`);
+          } else {
+            appendFileSync(process.env.GITHUB_OUTPUT, 'publish=true\n');
+            appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## Publication profile accepted\n\nThe source-controlled build declares production. Normal release checks and environment protections still apply.\n');
+          }
+          NODE
       - uses: actions/configure-pages@v5
+        if: steps.release_guard.outputs.publish == 'true'
       - uses: actions/upload-pages-artifact@v4
+        if: steps.release_guard.outputs.publish == 'true'
         with:
           path: dist
   deploy:
     needs: build
+    if: needs.build.outputs.publish == 'true'
     runs-on: ubuntu-latest
     permissions:
       pages: write

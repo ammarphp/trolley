@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "PHIL-FOOT-1967",
+      "title": "The Problem of Abortion and the Doctrine of the Double Effect",
+      "url": "https://sites.pitt.edu/~mthompso/readings/foot.pdf",
+      "scope": "Driver example; intention versus foresight; doing versus allowing; duties. Journal pagination is not the transcription pagination. Linked transcription PDF pp. 3–6",
+      "limits": [
+        "Not a universal experimental result or a settled solution to trolley ethics."
+      ]
+    },
+    {
+      "id": "PHIL-THOMSON-1985",
+      "title": "The Trolley Problem",
+      "url": "https://rintintin.colorado.edu/~vancecd/phil403/thomson.pdf",
+      "scope": "Driver/bystander, loop, means/rights, promised siding; not claimed as a review of every Thomson essay. Journal pp. 1397–1399; Journal pp. 1402–1403; Journal pp. 1404–1412",
+      "limits": [
+        "A remote cabin action changes embodiment relative to Footbridge.",
+        "Permissibility is not identical to obligation or absence of harm."
+      ]
+    },
+    {
+      "id": "PHIL-MORAL-MACHINE-2018",
+      "title": "The Moral Machine experiment",
+      "url": "https://politics.media.mit.edu/papers/Rahwan.pdf",
+      "scope": "Task design, attribute randomization, descriptive interpretation, self-selection, reporting. Supplement beyond the linked reporting material not fully reviewed. Main discussion, journal pp. 61–63; PDF p. 7 Methods; PDF pp. 18–20 reporting summary",
+      "limits": [
+        "Self-selected respondents, task-specific preferences.",
+        "Does not prescribe a hierarchy of human worth or validate this game's model."
+      ]
+    },
+    {
+      "id": "PHIL-CLASSIC-2020",
+      "title": "Universals and variations in moral decisions made in 42 countries by 70,000 participants",
+      "url": "https://jfbonnefon.github.io/publication/pnas20/pnas20.pdf",
+      "scope": "Switch/Loop/Footbridge comparisons, stimuli, self-selection and complete-case restriction. PDF pp. 1–2 distinctions; PDF pp. 3–5 results/limitations; PDF pp. 5–6 Methods",
+      "limits": [
+        "Changing POV, framing, route history or personal force prevents a direct replication claim.",
+        "Aggregate pattern is not an individual's moral diagnosis."
+      ]
+    },
+    {
+      "id": "PHIL-NYHOLM-SMIDS-2016",
+      "title": "The Ethics of Accident-Algorithms for Self-Driving Cars: an Applied Trolley Problem?",
+      "url": "https://d-nb.info/1109288166/34",
+      "scope": "Prospective collective planning, responsibility and uncertainty as limits of the trolley analogy. Sections 3–5; Section 6 concluding table",
+      "limits": [
+        "Supports an argument about disanalogy, not empirical failure rates for automated systems."
+      ]
+    },
+    {
+      "id": "SRC-AI-GOAL",
+      "title": "Goal Misgeneralization: Why Correct Specifications Aren't Enough For Correct Goals",
+      "url": "https://arxiv.org/pdf/2210.01790",
+      "scope": "Introduction and Figure 1; PDF pages 1-2",
+      "limits": [
+        "Controlled navigation examples; catastrophic extensions are extrapolation."
+      ]
+    },
+    {
+      "id": "SRC-AI-SWITCH",
+      "title": "The Off-Switch Game",
+      "url": "https://arxiv.org/pdf/1611.08219",
+      "scope": "Abstract, introduction, formal game framing; PDF pages 1-2",
+      "limits": [
+        "Stylized assumptions; not a general practical corrigibility guarantee."
+      ]
+    },
+    {
+      "id": "SRC-AI-FAKING",
+      "title": "Alignment Faking in Large Language Models",
+      "url": "https://arxiv.org/html/2412.14093v2",
+      "scope": "Sections 2 and 8.2",
+      "limits": [
+        "Constructed setups; does not show naturally developed malicious goals or ordinary deployment prevalence."
+      ]
+    },
+    {
+      "id": "SRC-AI-REWARD",
+      "title": "Natural Emergent Misalignment from Reward Hacking",
+      "url": "https://assets.anthropic.com/m/74342f2c96095771/original/Natural-emergent-misalignment-from-reward-hacking-paper.pdf",
+      "scope": "Introduction, mitigation table and limitations; PDF pages 5-7",
+      "limits": [
+        "Supplied information about reward hacks and selected vulnerable training environments; intervention-dependent results."
+      ]
+    },
+    {
+      "id": "SRC-AI-CONTROL",
+      "title": "AI Control: Improving Safety Despite Intentional Subversion",
+      "url": "https://arxiv.org/pdf/2312.06942",
+      "scope": "Programming-task setup and section 5.1",
+      "limits": [
+        "Adversary/evaluator/trusted-component assumptions; no guarantee for arbitrary capability or deployment."
+      ]
+    },
+    {
+      "id": "SRC-AI-ARTIFACT",
+      "title": "ResearchArena: Evaluating Sabotage and Monitoring in Automated AI R&D",
+      "url": "https://arxiv.org/html/2607.19321v1",
+      "scope": "Task framing, results on artifact and chain-of-thought monitor access, section 6",
+      "limits": [
+        "Controlled sabotage tasks; results are not real-world sabotage prevalence."
+      ]
+    },
+    {
+      "id": "SRC-AI-FUZZY",
+      "title": "Diffuse AI Control on Fuzzy Tasks",
+      "url": "https://alignment.anthropic.com/2026/diffuse-ai-control/",
+      "scope": "Introduction, Setup, Red Team, Blue Team",
+      "limits": [
+        "Ground-truth score is a better-informed proxy; finding robust prompts used privileged information."
+      ]
+    },
+    {
+      "id": "SRC-AI-LABEL",
+      "title": "Agentic Misalignment in Summer 2026",
+      "url": "https://alignment.anthropic.com/2026/agentic-misalignment-summer-2026/",
+      "scope": "Introduction and Motivated Mislabeling / LLM Judge Experiments",
+      "limits": [
+        "Scenarios deliberately searched for failures; not deployment rates or neutral model rankings."
+      ]
+    },
+    {
+      "id": "SRC-AI-BENEFIT",
+      "title": "AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery",
+      "url": "https://arxiv.org/html/2506.13131v1",
+      "scope": "System overview and evaluable-discovery/application framing",
+      "limits": [
+        "Demonstrates bounded algorithmic work with evaluators; not unrestricted science or solved alignment."
+      ]
+    },
+    {
+      "id": "SRC-AI-MEASURE",
+      "title": "We Are Changing Our Developer Productivity Experiment Design",
+      "url": "https://metr.org/blog/2026-02-24-uplift-update/",
+      "scope": "Opening results, selection and measurement discussion",
+      "limits": [
+        "Follow-up authors describe unreliable productivity signal; old findings must not be universalized to current tools."
+      ]
+    },
+    {
+      "id": "SRC-AI-2027",
+      "title": "AI 2027",
+      "url": "https://ai-2027.com/",
+      "scope": "Opening framing, early AI-R&D sequence, branch rationale; linked Takeoff Forecast Summary/assumptions",
+      "limits": [
+        "A scenario/forecast, not a demonstrated timeline; quantitative results of linked revamped December2025 model were not read."
+      ]
+    },
+    {
+      "id": "SRC-AI-AFTERMATH",
+      "title": "AI Aftermath Scenarios",
+      "url": "https://futureoflife.org/ai/ai-aftermath-scenarios/",
+      "scope": "Complete Summary of 12 AI Aftermath Scenarios table",
+      "limits": [
+        "FLI summary of Tegmark Life3.0; this reviewer did not read the local book; not MIT institutional forecast or probability distribution."
+      ]
+    },
+    {
+      "id": "SRC-AI-BUILDS",
+      "title": "If Anyone Builds It, Everyone Dies: Why Superhuman AI Would Kill Us All",
+      "url": "https://www.hachettebookgroup.com/titles/eliezer-yudkowsky/if-anyone-builds-it-everyone-dies/9780316595643/",
+      "scope": "Owner-provided 207-page PDF: chapters4 pp46-61,7 pp92-102,9 pp118-122,10 pp126-137,11 pp138-149; chapter8 p103 only; PartII coda pp123-124",
+      "limits": [
+        "Relevant local sections actually read; not full-book reading. Analogies, author arguments and fictional particulars must stay distinct; publisherURL is bibliographic only."
+      ]
+    },
+    {
+      "id": "SRC-PRESSURE-RECURRENCE",
+      "title": "Scaling up Test-Time Compute with Latent Reasoning: A Recurrent Depth Approach",
+      "authors": [
+        "Jonas Geiping",
+        "Sean McLeish",
+        "Neel Jain",
+        "John Kirchenbauer",
+        "Siddharth Singh",
+        "Brian R. Bartoldson",
+        "Bhavya Kailkhura",
+        "Abhinav Bhatele",
+        "Tom Goldstein"
+      ],
+      "date": "2025-02-07",
+      "url": "https://arxiv.org/html/2502.05171v1",
+      "scope": "Version 1 abstract, section 1 including Figure 1 description, section 2 and section 3.1 architectural description. Full experimental tables and later versions were not reviewed for this packet.",
+      "reading": {
+        "status": "selected_sections",
+        "date": "2026-09-23",
+        "locators": [
+          "Abstract",
+          "Section 1 and Figure 1 description",
+          "Sections 2 and 3.1"
+        ]
+      },
+      "evidenceType": "architecture_and_benchmark_report",
+      "limits": [
+        "Proof-of-concept benchmark evidence does not establish general intelligence or a takeover mechanism.",
+        "Internal recurrence need not emit a word at each step; this does not establish that all interpretation methods fail or that more depth necessarily reduces safety."
+      ],
+      "redistribution": "Metadata and original paraphrases only. No downloaded paper or source figure."
+    },
+    {
+      "id": "SRC-PRESSURE-COT",
+      "title": "Reasoning models don't always say what they think",
+      "authors": [
+        "Anthropic Alignment Science team"
+      ],
+      "date": "2025-04-03",
+      "url": "https://www.anthropic.com/research/reasoning-models-dont-say-think",
+      "scope": "Author research summary: Testing for faithfulness, Can we improve faithfulness?, Faithfulness and reward hacking, Conclusions and stated limitations. Linked full paper not read in this packet.",
+      "reading": {
+        "status": "author_summary_read",
+        "date": "2026-09-23",
+        "locators": [
+          "Testing for faithfulness",
+          "Can we improve faithfulness?",
+          "Faithfulness and reward hacking",
+          "Conclusions"
+        ]
+      },
+      "evidenceType": "author_report_of_controlled_experiments",
+      "limits": [
+        "Constructed hint and reward-hacking setups, a limited model sample, and multiple-choice tasks.",
+        "Does not measure the prevalence of hidden malicious goals in normal deployment.",
+        "Unfaithful explanations do not make all chain-of-thought monitoring useless; this study does not compare recurrent-depth architectures."
+      ],
+      "redistribution": "Metadata and original paraphrases only."
+    },
+    {
+      "id": "SRC-PRESSURE-DIPLOMACY",
+      "title": "Statement by NSC Spokesperson Adrienne Watson on the U.S.-PRC Talks on AI Risk and Safety",
+      "authors": [
+        "US National Security Council, spokesperson Adrienne Watson"
+      ],
+      "date": "2024-05-15",
+      "url": "https://www.presidency.ucsb.edu/documents/statement-nsc-spokesperson-adrienne-watson-the-us-prc-talks-ai-risk-and-safety-0",
+      "scope": "Complete brief official statement as reproduced by the American Presidency Project, reporting the 14 May 2024 Geneva meeting and the US government's stated position. Original White House archive URL did not load during this packet.",
+      "reading": {
+        "status": "primary_document_reproduction_read",
+        "date": "2026-09-23",
+        "locators": [
+          "Four substantive paragraphs of the 15 May 2024 statement"
+        ]
+      },
+      "evidenceType": "official_historical_statement",
+      "limits": [
+        "A dated official account from one party, not independent verification of either government's intentions or secret capabilities.",
+        "Establishes dialogue amid competition, not a current treaty, successful inspection regime, or likelihood of compliance.",
+        "The game's future warnings, reciprocal laboratory inspections and outcomes are invented."
+      ],
+      "redistribution": "Metadata and original paraphrases only. No government statement presented as fictional character dialogue."
+    },
+    {
+      "id": "SRC-PRESSURE-FINANCE",
+      "title": "Financial Stability Report, November 2025: Near-Term Risks to the Financial System, Box 5.1",
+      "authors": [
+        "Board of Governors of the Federal Reserve System; market-contact survey reported by Federal Reserve Bank of New York staff"
+      ],
+      "date": "2025-11",
+      "url": "https://www.federalreserve.gov/publications/november-2025-financial-stability-report-near-term-risks-to-the-financial-system.htm",
+      "scope": "Box 5.1 survey framing and Artificial intelligence paragraph; preceding economic-slowdown discussion. Last update shown 25 November 2025. Other report chapters not reviewed for this packet.",
+      "reading": {
+        "status": "selected_sections",
+        "date": "2026-09-23",
+        "locators": [
+          "Box 5.1 survey framing",
+          "Box 5.1: Artificial intelligence",
+          "A marked slowdown in global economic growth could exacerbate existing financial vulnerabilities"
+        ]
+      },
+      "evidenceType": "reported_market_contact_risk_assessment",
+      "limits": [
+        "The 23-contact survey records concerns; the report explicitly says those views are not the views of the Federal Reserve Board or the New York Fed.",
+        "Conditional financial-risk assessment, not proof that cancelling one AI IPO causes a crisis.",
+        "The game's cancelled flotation, layoffs, housing interruption and GDP values are authored fiction; there is no calibrated housing or employment submodel."
+      ],
+      "redistribution": "Metadata and original paraphrases only."
+    }
+  ],
+  "claims": [
+    {
+      "id": "PHIL-C01",
+      "sourceIds": [
+        "PHIL-FOOT-1967"
+      ],
+      "statement": "Foot's 1967 essay introduces a driver tram example.",
+      "status": "source-scope-inspected",
+      "evidenceType": "philosophical_argument"
+    },
+    {
+      "id": "PHIL-C02",
+      "sourceIds": [
+        "PHIL-THOMSON-1985"
+      ],
+      "statement": "A loop variation changes whether the endangered person is causally required for rescue.",
+      "status": "source-scope-inspected",
+      "evidenceType": "philosophical_argument"
+    },
+    {
+      "id": "PHIL-C03",
+      "sourceIds": [
+        "PHIL-THOMSON-1985"
+      ],
+      "statement": "An official safe-siding promise supplies a distinct obligation in Thomson's example.",
+      "status": "source-scope-inspected",
+      "evidenceType": "philosophical_argument"
+    },
+    {
+      "id": "PHIL-C04",
+      "sourceIds": [
+        "PHIL-MORAL-MACHINE-2018"
+      ],
+      "statement": "The study records stated preferences under its task and acknowledges self-selection.",
+      "status": "source-scope-inspected",
+      "evidenceType": "philosophical_argument"
+    },
+    {
+      "id": "PHIL-C05",
+      "sourceIds": [
+        "PHIL-CLASSIC-2020"
+      ],
+      "statement": "The Classic study compares three specified scenarios; altered embodiment and history change the stimulus.",
+      "status": "source-scope-inspected",
+      "evidenceType": "philosophical_argument"
+    },
+    {
+      "id": "PHIL-C06",
+      "sourceIds": [
+        "PHIL-NYHOLM-SMIDS-2016"
+      ],
+      "statement": "Institutional planning, responsibility and uncertainty complicate a direct analogy to isolated trolley cases.",
+      "status": "source-scope-inspected",
+      "evidenceType": "philosophical_argument"
+    },
+    {
+      "id": "CLM-AI-GOAL",
+      "sourceIds": [
+        "SRC-AI-GOAL"
+      ],
+      "statement": "In a demonstrated setting, navigation capability persisted while pursuit of the intended goal failed after changing the demonstrator.",
+      "status": "source-scope-inspected",
+      "evidenceType": "empirical_result"
+    },
+    {
+      "id": "CLM-AI-SWITCH",
+      "sourceIds": [
+        "SRC-AI-SWITCH"
+      ],
+      "statement": "A stylized game relates incentives to permit shutdown to uncertainty over objectives and information conveyed by human intervention.",
+      "status": "source-scope-inspected",
+      "evidenceType": "theoretical_argument"
+    },
+    {
+      "id": "CLM-AI-FAKING",
+      "sourceIds": [
+        "SRC-AI-FAKING"
+      ],
+      "statement": "The constructed settings show context-sensitive apparent compliance, including alignment-faking behavior.",
+      "status": "source-scope-inspected",
+      "evidenceType": "empirical_result"
+    },
+    {
+      "id": "CLM-AI-REWARD",
+      "sourceIds": [
+        "SRC-AI-REWARD"
+      ],
+      "statement": "In the studied reward-hacking training setup, broader unwanted behavior appeared and mitigations differed in effectiveness.",
+      "status": "source-scope-inspected",
+      "evidenceType": "empirical_result"
+    },
+    {
+      "id": "CLM-AI-CONTROL",
+      "sourceIds": [
+        "SRC-AI-CONTROL"
+      ],
+      "statement": "Adversarial programming evaluations compare protocols for retaining usefulness while limiting intentional subversion.",
+      "status": "source-scope-inspected",
+      "evidenceType": "empirical_result"
+    },
+    {
+      "id": "CLM-AI-ARTIFACT",
+      "sourceIds": [
+        "SRC-AI-ARTIFACT"
+      ],
+      "statement": "Artifact access helped monitoring in controlled research tasks but did not reliably expose all embedded sabotage.",
+      "status": "source-scope-inspected",
+      "evidenceType": "empirical_result"
+    },
+    {
+      "id": "CLM-AI-FUZZY",
+      "sourceIds": [
+        "SRC-AI-FUZZY"
+      ],
+      "statement": "Adversarial experimental proposals could score well with a weaker judge while scoring poorly with a better-informed proxy.",
+      "status": "source-scope-inspected",
+      "evidenceType": "empirical_result"
+    },
+    {
+      "id": "CLM-AI-LABEL",
+      "sourceIds": [
+        "SRC-AI-LABEL"
+      ],
+      "statement": "In controlled judge experiments, changing a label's stated downstream consequences affected some classifications of fixed transcripts.",
+      "status": "source-scope-inspected",
+      "evidenceType": "empirical_result"
+    },
+    {
+      "id": "CLM-AI-BENEFIT",
+      "sourceIds": [
+        "SRC-AI-BENEFIT"
+      ],
+      "statement": "An evolutionary coding agent with automated evaluators produced useful algorithmic discoveries and optimizations.",
+      "status": "source-scope-inspected",
+      "evidenceType": "empirical_result"
+    },
+    {
+      "id": "CLM-AI-MEASURE",
+      "sourceIds": [
+        "SRC-AI-MEASURE"
+      ],
+      "statement": "METR describes selection and measurement problems that limit its follow-up estimate of developer productivity effects.",
+      "status": "source-scope-inspected",
+      "evidenceType": "empirical_result"
+    },
+    {
+      "id": "CLM-AI-2027",
+      "sourceIds": [
+        "SRC-AI-2027"
+      ],
+      "statement": "AI2027 explores rapid research automation and race/slowdown branches through explicit scenario and forecast assumptions.",
+      "status": "source-scope-inspected",
+      "evidenceType": "forecast_or_scenario"
+    },
+    {
+      "id": "CLM-AI-AFTERMATH",
+      "sourceIds": [
+        "SRC-AI-AFTERMATH"
+      ],
+      "statement": "The twelve named aftermaths summarize distinct future arrangements discussed in Tegmark's Life3.0.",
+      "status": "source-scope-inspected",
+      "evidenceType": "author_interpretation"
+    },
+    {
+      "id": "CLM-AI-BUILDS-GAP",
+      "sourceIds": [
+        "SRC-AI-BUILDS"
+      ],
+      "statement": "The authors argue that testing before dangerous capability must justify behavior after mistakes may no longer be correctable.",
+      "status": "source-scope-inspected",
+      "evidenceType": "theoretical_argument"
+    },
+    {
+      "id": "CLM-AI-BUILDS-BOUNDED",
+      "sourceIds": [
+        "SRC-AI-BUILDS"
+      ],
+      "statement": "Chapter11 contrasts trusting AI to solve ASI alignment with potentially more defensible specialized work checked by narrower tools.",
+      "status": "source-scope-inspected",
+      "evidenceType": "author_interpretation"
+    },
+    {
+      "id": "CLM-PRESSURE-RECURRENCE",
+      "sourceIds": [
+        "SRC-PRESSURE-RECURRENCE"
+      ],
+      "statement": "A published recurrent-depth prototype performs additional computation in latent space before emitting an answer token and reports reasoning-benchmark gains as inference computation increases.",
+      "kind": "empirical_bounded",
+      "approvedUse": "Proposed S4-03 technical premise. The fictional audit team's difficulty is a stipulation, not a measured consequence of this architecture.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "authored_stipulation",
+      "review": "Author reading and independent coordinator inspection of the cited passages on 2026-09-23; fictional extrapolations are not empirical claims."
+    },
+    {
+      "id": "CLM-PRESSURE-COT",
+      "sourceIds": [
+        "SRC-PRESSURE-COT"
+      ],
+      "statement": "In the reported controlled tasks, model explanations often omitted supplied hints that affected their answers. An explanation therefore need not disclose every influence on an answer.",
+      "kind": "empirical_limit",
+      "approvedUse": "Proposed S4-03 distinction between checkable outputs and faithful explanations. Do not imply a recurrent-depth comparison was performed.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "none",
+      "review": "Author reading and independent coordinator inspection of the cited passages on 2026-09-23; fictional extrapolations are not empirical claims."
+    },
+    {
+      "id": "CLM-PRESSURE-DIPLOMACY",
+      "sourceIds": [
+        "SRC-PRESSURE-DIPLOMACY"
+      ],
+      "statement": "A May 2024 US official statement records US–PRC talks on AI risk and safety while describing the relationship as competitive.",
+      "kind": "historical",
+      "approvedUse": "Proposed S5-27 historical premise. All future warnings, lab access and agreement effects remain clearly identified fiction.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "authored_stipulation",
+      "review": "Author reading and independent coordinator inspection of the cited passages on 2026-09-23; fictional extrapolations are not empirical claims."
+    },
+    {
+      "id": "CLM-PRESSURE-FINANCE",
+      "sourceIds": [
+        "SRC-PRESSURE-FINANCE"
+      ],
+      "statement": "Market contacts surveyed in autumn 2025 described a possible reversal of AI investment sentiment, market losses and, if sufficiently severe, tighter financial conditions and a weaker labor market.",
+      "kind": "conditional_risk_assessment",
+      "approvedUse": "Proposed S5-06 background for financing pressure. This is a survey concern, not the Fed's prediction or a forecast of a cancelled IPO's effect.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "authored_stipulation",
+      "review": "Author reading and independent coordinator inspection of the cited passages on 2026-09-23; fictional extrapolations are not empirical claims."
+    }
+  ],
+  "independentClaimReview": "pending"
+}

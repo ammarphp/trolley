@@ -1,3 +1,5 @@
+> Legacy v1 reference. For the current development implementation, read [METHODOLOGY_V2.md](METHODOLOGY_V2.md). This document does not describe v2 readiness or activation.
+
 # Methodology and interpretation
 
 This is an interactive artwork and an exploratory behavioral dataset. It is not a morality assessment, clinical measure, representative poll, or validated AI-risk model.

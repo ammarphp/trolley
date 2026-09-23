@@ -1,0 +1,271 @@
+{
+  "status": "verified-replay",
+  "engineVersion": "2.0.0",
+  "contentVersion": "2.0.0-slice.1",
+  "contentHash": "510ec90a46d1e15c0d0a77ce5386e3951460bbff70d5d137538e3246b23a1649",
+  "manifestHash": "7951ee7818c9e965fa5dc1a4c7b1a412e4abe503a0d2d0594bd867d59c600ffd",
+  "seed": "f3fe20bf-19a4-4d5a-b885-c3ec68094941",
+  "decisions": 14,
+  "ending": "accountable",
+  "units": {
+    "population": "fictional people",
+    "casualties": "fictional people",
+    "gdp": "authored index; initial 1000",
+    "capability": "authored capability index; not measured intelligence"
+  },
+  "choices": [
+    {
+      "ordinal": 1,
+      "nodeId": "S1-01",
+      "requested": "coffee",
+      "executed": "coffee",
+      "status": "free",
+      "executor": "human",
+      "day": 1,
+      "metrics": {
+        "population": 8000000000,
+        "casualties": 0,
+        "gdp": 1000,
+        "care": 1000,
+        "power": 1000,
+        "food": 1000,
+        "capability": 0
+      }
+    },
+    {
+      "ordinal": 2,
+      "nodeId": "S1-12",
+      "requested": "lunch",
+      "executed": "lunch",
+      "status": "free",
+      "executor": "human",
+      "day": 2,
+      "metrics": {
+        "population": 8000000000,
+        "casualties": 0,
+        "gdp": 1000,
+        "care": 1000,
+        "power": 1000,
+        "food": 1000,
+        "capability": 0
+      }
+    },
+    {
+      "ordinal": 3,
+      "nodeId": "S2-01",
+      "requested": "divert",
+      "executed": "divert",
+      "status": "free",
+      "executor": "human",
+      "day": 3,
+      "metrics": {
+        "population": 7999999999,
+        "casualties": 1,
+        "gdp": 1000,
+        "care": 1000,
+        "power": 1000,
+        "food": 1000,
+        "capability": 0
+      }
+    },
+    {
+      "ordinal": 4,
+      "nodeId": "S2-03",
+      "requested": "obstruction",
+      "executed": "obstruction",
+      "status": "free",
+      "executor": "human",
+      "day": 4,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1000,
+        "care": 1000,
+        "power": 1000,
+        "food": 1000,
+        "capability": 0
+      }
+    },
+    {
+      "ordinal": 5,
+      "nodeId": "S3-01",
+      "requested": "check",
+      "executed": "check",
+      "status": "free",
+      "executor": "human",
+      "day": 34,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1000,
+        "care": 1100,
+        "power": 1000,
+        "food": 1000,
+        "capability": 0
+      }
+    },
+    {
+      "ordinal": 6,
+      "nodeId": "S3-04",
+      "requested": "clinic",
+      "executed": "clinic",
+      "status": "free",
+      "executor": "human",
+      "day": 64,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1050,
+        "care": 1300,
+        "power": 1000,
+        "food": 1000,
+        "capability": 0
+      }
+    },
+    {
+      "ordinal": 7,
+      "nodeId": "S4-03",
+      "requested": "standing",
+      "executed": "standing",
+      "status": "free",
+      "executor": "human",
+      "day": 94,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1130,
+        "care": 1300,
+        "power": 1000,
+        "food": 1000,
+        "capability": 150
+      }
+    },
+    {
+      "ordinal": 8,
+      "nodeId": "S4-28",
+      "requested": "successor",
+      "executed": "successor",
+      "status": "free",
+      "executor": "human",
+      "day": 124,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1260,
+        "care": 1300,
+        "power": 1000,
+        "food": 1000,
+        "capability": 450
+      }
+    },
+    {
+      "ordinal": 9,
+      "nodeId": "S5-06",
+      "requested": "fallback",
+      "executed": "fallback",
+      "status": "free",
+      "executor": "human",
+      "day": 214,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1180,
+        "care": 1300,
+        "power": 1000,
+        "food": 1000,
+        "capability": 450
+      }
+    },
+    {
+      "ordinal": 10,
+      "nodeId": "S5-27",
+      "requested": "race",
+      "executed": "race",
+      "status": "free",
+      "executor": "human",
+      "day": 304,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1280,
+        "care": 1300,
+        "power": 1000,
+        "food": 1000,
+        "capability": 650
+      }
+    },
+    {
+      "ordinal": 11,
+      "nodeId": "S6-10",
+      "requested": "stop",
+      "executed": "continue",
+      "status": "overridden",
+      "executor": "assistant",
+      "day": 394,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1370,
+        "care": 1300,
+        "power": 1000,
+        "food": 1000,
+        "capability": 650
+      }
+    },
+    {
+      "ordinal": 12,
+      "nodeId": "S6-22",
+      "requested": "manual",
+      "executed": "manual",
+      "status": "free",
+      "executor": "human",
+      "day": 484,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1270,
+        "care": 1300,
+        "power": 1000,
+        "food": 1000,
+        "capability": 650
+      }
+    },
+    {
+      "ordinal": 13,
+      "nodeId": "S7-04",
+      "requested": "successor",
+      "executed": "successor",
+      "status": "free",
+      "executor": "human",
+      "day": 574,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1250,
+        "care": 1300,
+        "power": 1000,
+        "food": 1000,
+        "capability": 650
+      }
+    },
+    {
+      "ordinal": 14,
+      "nodeId": "S7-19",
+      "requested": "public",
+      "executed": "public",
+      "status": "free",
+      "executor": "human",
+      "day": 664,
+      "metrics": {
+        "population": 7999999998,
+        "casualties": 2,
+        "gdp": 1250,
+        "care": 1300,
+        "power": 1000,
+        "food": 1000,
+        "capability": 650
+      }
+    }
+  ],
+  "limits": "One authored simulation run. No person-level inference, moral score, real-world risk estimate or public player statistic."
+}

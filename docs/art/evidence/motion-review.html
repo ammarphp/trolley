@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>100-turn cabin motion review</title>
+<style>body{margin:24px;background:#f7f6f1;color:#232321;font:16px system-ui}main{max-width:1100px;margin:auto}video{display:block;width:100%;background:#fff}button{font:inherit;margin:8px 4px 8px 0;padding:8px 12px}p{line-height:1.5}</style>
+<main>
+<h1>100-turn cabin motion review</h1>
+<p>Local renderer fixture. Four illustration stages, 100 mixed left/right turns. This records the canvas only, without game controls or participant data.</p>
+<video controls preload="metadata" src="../../../reports/validation/motion/trolley-cabin-100-turns.webm"></video>
+<p id="metadata">Loading video metadata…</p>
+<div><button id="play">Play or pause</button><button data-part="0">Opening</button><button data-part="0.26">Clinic</button><button data-part="0.51">Scarred</button><button data-part="0.76">Pristine</button><button data-part="0.99">Final turn</button></div>
+<p>Review cabin stability, continuous approach, repeated same-side turns, world continuity and line readability. This is desktop evidence, not physical-phone certification.</p>
+</main>
+<script>
+const video=document.querySelector('video');
+const metadata=document.querySelector('#metadata');
+function report(){metadata.textContent=`${video.videoWidth} × ${video.videoHeight}; duration ${Number.isFinite(video.duration)?video.duration.toFixed(2)+' seconds':'being indexed'}; playback ${video.currentTime.toFixed(2)} seconds.`}
+video.addEventListener('loadedmetadata',report);video.addEventListener('durationchange',report);video.addEventListener('seeked',report);video.addEventListener('timeupdate',report);
+document.querySelector('#play').addEventListener('click',()=>{if(video.paused)video.play();else video.pause()});
+document.querySelectorAll('button[data-part]').forEach(button=>button.addEventListener('click',()=>{video.currentTime=Number.isFinite(video.duration)?video.duration*Number(button.dataset.part):221.479*Number(button.dataset.part);video.pause()}));
+</script>
+</html>

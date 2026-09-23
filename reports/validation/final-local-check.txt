@@ -1,0 +1,130 @@
+$ pnpm run typecheck && pnpm test && pnpm run build
+$ tsc --noEmit
+$ pnpm run test:legacy && pnpm run test:v2
+$ node --test tests/*.test.mjs
+✔ independent run registration, append, idempotent retry, updated reflection, aggregate, withdrawal (28.212666ms)
+✔ new run means a new entry, without grouping by a user (8.374958ms)
+✔ malformed/forged data, wrong run keys, invalid origin and oversized bodies are rejected (3.680209ms)
+✔ cross-run collisions cannot overwrite a response or change its original choice (1.671541ms)
+✔ all templates produce complete, reproducible stimuli over diverse seeds (83.723708ms)
+✔ no empty eligible pool is silently replaced by another theme (0.228542ms)
+✔ journey starts harmlessly, rebukes at stop 15, and continues beyond the last chapter (2.562625ms)
+✔ different choice histories change later routes; seed replay remains exact (0.220375ms)
+✔ new runs have no shared identity and payloads contain no browser/user identifiers (2.427083ms)
+✔ summaries exclude skips and CSV neutralizes formula cells (0.260792ms)
+✔ 154 draft candidates retain approved stage allocation, IDs, contrasts and valid callback references (3.157833ms)
+✔ philosophy source proposals retain inspected scopes, locators, limits and linked claims (0.11225ms)
+✔ sixteen language-neutral fixture specifications cover both options and adversarial obligations (1.658875ms)
+✔ inventory checks reject duplicate IDs, repeated distinctions and false production promotion (5.554875ms)
+✔ source checks reject empty reading evidence and unsupported claim references (2.632542ms)
+✔ fixture checks reject missing alternatives, unknown candidates and claims of runtime passage (0.883583ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 140.170708
+$ node scripts/test-v2.mjs
+✔ 100 alternating and repeated turns retain position and cumulative heading (10.189ms)
+✔ the two routes share one approach and separate monotonically after the turnout (6.733042ms)
+✔ pose and tangent are continuous at both junction ends (0.127709ms)
+✔ local projection is invariant under translated and rotated world origins (0.344625ms)
+✔ easing clamps and has stationary end derivatives (0.362917ms)
+✔ cosmetic scenery wraps for negative travel over a long reading hold (1.205792ms)
+✔ all cabin and catalogue path variants pass the actual Pixi path parser (31.325792ms)
+✔ six animal species have deterministic, distinct authored gait poses (0.330792ms)
+✔ reduced graphic injury states retain a changed silhouette without red injury marks (0.156792ms)
+✔ wear creeps in by stage and graphic injury cannot appear before stage six (0.111917ms)
+✔ public snapshot excludes raw fields and rejects unqualified or inconsistent cells (8.622542ms)
+✔ saved copy has an explicit different status and unique complete cell keys (1.979208ms)
+✔ v2 is disabled by default; registration requires consent, an approved immutable bundle, and a capability (111.78125ms)
+✔ canonical replay rejects invented exposure, options, advice, ordering and edited retries without partial writes (26.194791ms)
+✔ material cells distinguish semantic sides, authority, advice and the actual preference exposure history (10.863417ms)
+✔ public cell releases require 20 eligible runs, an hour and 20 new contributions; withdrawal invalidates without recalling history (199.338042ms)
+✔ test/slice, marked agent/staff and overridden decisions never enter free-choice cells (14.907ms)
+✔ withdraw-before-registration creates an authenticated tombstone; incorrect secrets are never reported as withdrawn (2.169291ms)
+✔ retention invalidates affected cells and removes journals; legacy data remains separate (4.463833ms)
+✔ client makes no private network requests and cannot bootstrap private or imported history (2.641667ms)
+✔ client replay uses saved prior exposure, real advisor IDs and changed preferences; retries contain no raw campaign or timestamps (6.914625ms)
+✔ expired or overflowing local queues stop sharing without blocking the simulation (37.9825ms)
+✔ client withdrawal only reports success with a confirmed receipt, including a never-registered run (6.666ms)
+✔ body, batch and anonymous rate limits reject oversized work; CORS is not treated as identity (3.205875ms)
+✔ a failed database batch rolls back both replay and contribution, then the same events can retry (3.807458ms)
+✔ transport batches at 32; a lost acknowledgement retries the identical event IDs without duplicate contribution (14.20125ms)
+✔ public snapshots never create releases and contain only valid previously thresholded cells (50.273ms)
+✔ snapshot pages have generation checks, row/byte caps and no under-threshold enumeration (82.98475ms)
+✔ snapshot byte cap paginates long public keys and fails closed on corrupt published counts (74.41625ms)
+✔ aggregate client distinguishes live suppression from outages and malformed replies (0.474583ms)
+✔ withdrawal during snapshot assembly rejects the whole page instead of returning a stale cell (42.196084ms)
+✔ a stale save blocks registration before any network request and preserves both campaign branches (6.271ms)
+✔ an already-registered conflicting branch cannot send another batch but can withdraw with its capability (7.31725ms)
+✔ conflict after a registration receipt stops queued choices before upload (3.431041ms)
+✔ save conflict cancels an existing background retry and never schedules its replacement (2.081708ms)
+✔ registry resolves current content using the engine's exact bundle hash (47.376875ms)
+✔ archived browser replay retains its original full campaign and hashes (67.052166ms)
+✔ fresh current-content export replays through registry lookup (12.715167ms)
+✔ a caller cannot mutate another resolved bundle or the archive (9.063541ms)
+✔ unknown or malformed bundle hashes never fall back to current content (1.608042ms)
+✔ resolved content does not bypass replay edition or manifest checks (1.954834ms)
+✔ the revised slice preserves mechanics outside reviewed prose and exact source-claim changes (4.486833ms)
+✔ RNG canonical encoding, published vector and domain independence (21.383125ms)
+✔ replay pins complete content and input evidence; order of content files is irrelevant (77.925208ms)
+✔ commit is atomic and immutable; next revision rejects repeated or stale inputs (14.00325ms)
+✔ default course is semantic, independent of left/right, reading and advisor queries (74.421917ms)
+✔ incidents obey exact 0/10000 boundaries and named draws do not shift (13.0595ms)
+✔ delays use due-day, priority, id order; empty unless never cancels; mitigation is evaluated when due (13.554209ms)
+✔ scope grants are explicit; expiry/revocation do not reverse seized effective control (17.007583ms)
+✔ reported metrics remain separate from truth and privileged hidden facts never reach advice (11.765167ms)
+✔ casualties cap at living population and extinction absorbs every other ending (3.894791ms)
+✔ eight distinct ending witnesses, near misses and precedence derive from effects (87.260084ms)
+✔ slice preserves anchors, useful benefits, effective early restraint and honest override records (20.10525ms)
+✔ parent revocation removes descendants and a grant cycle fails without recursive overflow (2.901125ms)
+✔ unknown advice and mutated prepared content cannot be committed (1.828709ms)
+✔ event-count guard rolls back the whole transition (4.023667ms)
+✔ settlement cannot silently end the introductory stages (1.883375ms)
+✔ missing route coverage fails visibly rather than replaying a prior question (1.521542ms)
+✔ slice content has reproducible player-input witnesses for all eight families (189.461625ms)
+✔ clinical appointment grants care scope; succession distinguishes a new transfer from ratification (23.780958ms)
+✔ deployment wrapper closes legacy writes but preserves existing withdrawals (59.127958ms)
+✔ assenting to an imposed route never invents a disagreement (2.31975ms)
+✔ a rejected stop remains distinct from the executed decision (0.137416ms)
+✔ free execution and institutional execution are not attributed to Morrow (0.118958ms)
+✔ F02: certainty has no lottery; named lottery survives queries, cosmetics, import and revision changes (53.341417ms)
+✔ F05 core: hidden-world twins produce identical permitted advice and public observations (38.165209ms)
+✔ F06 core: accepting or correcting a report preserves the immutable casualty event and old report (8.965583ms)
+✔ F08 core: expiry removes authority; explicit renewal receives a new bounded receipt (13.739916ms)
+✔ F07 core: capability increases create no grants and do not authorize another resource scope (7.202166ms)
+✔ F10 core: both attempted routes preserve intention under retained and displaced authority (20.6725ms)
+✔ F11 slice regression: a drill cannot restore control without staff or after fallback loss (13.581708ms)
+✔ F12 core: rollback loses real service benefit; functioning fallback reduces that loss (7.909916ms)
+✔ F14 core: one declared common cause has one draw; relabeling reviewers does not create independence (4.826917ms)
+✔ F15 slice regression: records without a trained successor cannot claim accountable continuity (9.653041ms)
+✔ F16: effective prevention leaves survivors; failed prevention and allowance produce absorbing extinction (15.448584ms)
+✔ Escape-equivalent cancellation blocks release and its delayed trailing click (5.388958ms)
+✔ a noncrossing ordinary click remains available to the two-phase control (0.611625ms)
+✔ a normal crossing commits once and consumes its trailing click (1.544208ms)
+✔ new pointer or keyboard activation clears an unconsumed cancellation (0.452125ms)
+✔ pointer cancellation and unexpected capture loss both prevent commitment (0.41675ms)
+✔ dispose releases capture and removes all drag callbacks idempotently (0.565ms)
+✔ an unrelated pointer cannot finish the gesture, and becoming busy cancels it (0.290875ms)
+✔ atomic compare-and-save protects a committed branch from a stale tab (33.883375ms)
+✔ same-revision queue and preference updates cannot be overwritten by a stale copy (5.254375ms)
+✔ competing transactions with the same expected version have one winner (5.197916ms)
+✔ same live object serializes invocation snapshots and permits repeated saves (13.514417ms)
+✔ failed puts leave stored data and local version unchanged; a retry can succeed (9.504834ms)
+✔ deleted runs and changed same-revision campaigns cannot be resurrected or silently rewritten (4.717541ms)
+✔ pre-CAS saves normalize safely and local metadata stays out of exports (6.649958ms)
+ℹ tests 89
+ℹ suites 0
+ℹ pass 89
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 919.921917
+$ node scripts/build.mjs
+Built dist/ with relative Pages paths. Critical gzip: 296 KiB. Collector v2: disabled.
+$ node scripts/build-collector.mjs
+Built collector wrapper. No service was provisioned or activated.

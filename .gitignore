@@ -10,3 +10,19 @@ test-results/
 playwright-report/
 artifacts/
 .collector-site/
+
+# Copyrighted local research inputs. Never include them in the static build.
+/beta version/**/*.pdf
+/beta version/*.zip
+/.build/
+
+# Local motion evidence, linked in evidence reports rather than bundled.
+/reports/validation/motion/*.webm
+/public/assets/v2/spike.js
+
+# Private owner-review material. Only the campaign is authorized for publication.
+/reports/review/
+/reports/design-audit/
+/reports/design-gallery/
+/docs/art/STANDING_VISUAL_SPEC.md
+/docs/art/MOCKUP_GALLERY.md

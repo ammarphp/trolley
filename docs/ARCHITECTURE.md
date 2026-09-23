@@ -1,3 +1,5 @@
+> Legacy v1 reference. For the current development implementation, read [architecture/SEMANTICS.md](architecture/SEMANTICS.md). This document does not describe v2 readiness or activation.
+
 # Architecture
 
 The public game is static HTML, CSS, and native ES modules. It is built to `dist/` and deployed under the repository path on GitHub Pages. Every frontend asset uses a relative URL. No route rewrite is required. Dilemma links use query parameters, so reloads work on Pages.
