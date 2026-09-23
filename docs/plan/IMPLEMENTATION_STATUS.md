@@ -1,6 +1,6 @@
 # Implementation checkpoint — 23 September 2026
 
-The full 154-dilemma campaign is implemented and editorial-reviewed. The owner explicitly requested campaign completion and a GitHub push alongside a visual audit and 10–20 mockup webpages. The visual audit and mockups remain private local review materials. That campaign-only request supersedes the earlier local-only publication hold; it does not imply acceptance of a final visual direction or activation of participant collection. See [decision 004](../decisions/004-full-campaign-and-design-review.md).
+The full 154-dilemma campaign is implemented, editorial-reviewed and deployed through ammarphp/trolley. Remote CI, Pages and public smoke passed for release `caa4e43`. The owner explicitly requested campaign completion and a GitHub push alongside a visual audit and 10–20 mockup webpages. The visual audit and mockups remain private local review materials. That campaign-only request supersedes the earlier local-only publication hold; it does not imply acceptance of a final visual direction or activation of participant collection. See [decision 004](../decisions/004-full-campaign-and-design-review.md).
 
 Current content is `33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3`, manifest `fc07d4f2808f970c8855d458984ccaa7cd45da2212ebf0190cdfb54297fd1e56`, version `2.0.0-campaign.1`. Four previous slice bundles retain exact replay. [Release evidence](../../reports/validation/full-campaign-release.md) is the authority for completed tests and deployment status.
 

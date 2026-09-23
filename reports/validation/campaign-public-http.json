@@ -1,0 +1,91 @@
+{
+  "checkedAt": "2026-09-23T07:28:37.867448+00:00",
+  "releaseCommit": "caa4e437243f4d17dc41e213230c35b9bc96345d",
+  "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+  "resources": {
+    "build-manifest.json": {
+      "httpStatus": 200,
+      "bytes": 616,
+      "sha256": "d816c677a965e8425a74ca3614e7bfe88e8c7951bdb53fef8e68f9ab89d847ad",
+      "data": {
+        "engine": "2.0.0",
+        "content": "2.0.0-campaign.1",
+        "profile": "production",
+        "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+        "manifestHash": "fc07d4f2808f970c8855d458984ccaa7cd45da2212ebf0190cdfb54297fd1e56",
+        "nodes": 154,
+        "reviewedNodes": 154,
+        "stageBudgets": [
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            2,
+            5
+          ]
+        ],
+        "collectorV2Enabled": false,
+        "criticalGzipBytes": 443164,
+        "reviewArtifacts": []
+      }
+    },
+    "config.json": {
+      "httpStatus": 200,
+      "bytes": 257,
+      "sha256": "365481f0ceb562e11e99be8b598a28b027f3aab411f0fa4114233d1534d28e80",
+      "data": {
+        "collectorUrl": "https://trolley-department-collector.zyphrost.chatgpt.site",
+        "repositoryUrl": "https://github.com/ammarphp/trolley",
+        "operatorName": "ammarphp",
+        "contactUrl": "https://github.com/ammarphp/trolley",
+        "collectorV2Enabled": false
+      }
+    },
+    "index.html": {
+      "httpStatus": 200,
+      "bytes": 2122,
+      "sha256": "8a2dc5dda13ae104b0675466599481fe88e1132175c7d4419856ef6c95da13f8",
+      "matchesLocalBuild": true
+    },
+    "game.js": {
+      "httpStatus": 200,
+      "bytes": 1550968,
+      "sha256": "8bdeef0d0b608c70b6bc1096906c3f379405e032408403c9a99f99781ce1c712",
+      "matchesLocalBuild": true
+    },
+    "game.css": {
+      "httpStatus": 200,
+      "bytes": 19325,
+      "sha256": "251457bcada562eebb62dde127a4ee4cf3063767c89fc92a066b754d14f1f680",
+      "matchesLocalBuild": true
+    }
+  },
+  "excludedReviewPaths": {
+    "reports/design-audit/index.html": 404,
+    "reports/design-audit/audit.json": 404,
+    "reports/design-audit/assets/reference-inspiration-detailed.png": 404,
+    "reports/design-gallery/index.html": 404,
+    "reports/review/index.html": 404
+  }
+}
