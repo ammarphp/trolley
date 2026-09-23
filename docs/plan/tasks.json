@@ -1491,7 +1491,7 @@
         "Production repository-base build and direct-route smoke tests pass locally/preview; least-privilege workflow and rollback documented."
       ],
       "reviewer_role": "QA",
-      "status": "review",
+      "status": "done",
       "risk": "high",
       "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
       "applies_to_profiles": [
@@ -1499,7 +1499,7 @@
         "remote_statistics",
         "formal_study"
       ],
-      "status_note": "Pages and scheduled publication now require source production profile plus type,unit,content and browser checks; remote verification follows authorized push."
+      "status_note": "Campaign-only Pages build, strict release guard, remote unit/browser checks, deployment and public resource smoke passed. Review folders are Git-ignored and absent from Pages; the optional service remains inactive."
     },
     {
       "id": "T057",
@@ -1516,7 +1516,7 @@
         "Working run/replay instructions, limitations, credits, provenance, artifact contribution and research status documented."
       ],
       "reviewer_role": "ARCH",
-      "status": "in_progress",
+      "status": "done",
       "risk": "medium",
       "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
       "applies_to_profiles": [
@@ -1529,7 +1529,7 @@
           "T052B"
         ]
       },
-      "status_note": "README,methods,architecture,deployment/status and latest visual spec updated for154-node campaign; exact final release evidence pending."
+      "status_note": "Current campaign README, methods, architecture, replay/content CLI, provenance, evidence and operating limits are documented. Formal study artifacts remain separate."
     },
     {
       "id": "T058",
@@ -1547,7 +1547,7 @@
         "No critical unresolved issue; actual evidence indexed; owner review and collection/deployment approval status explicit."
       ],
       "reviewer_role": "LEAD",
-      "status": "in_progress",
+      "status": "done",
       "risk": "medium",
       "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
       "applies_to_profiles": [
@@ -1555,7 +1555,7 @@
         "remote_statistics",
         "formal_study"
       ],
-      "status_note": "Owner explicitly authorized full campaign and GitHub push. Static story release candidate assembled with collection off; final visual selection remains open."
+      "status_note": "Authorized static story release verified: 154 reviewed nodes, 125 v2 and 16 legacy tests, 10,000 campaigns covering all 154 nodes and 308 options, eight ending replays, and two actual browser journeys. Final art, full model, device and service limits remain explicit."
     },
     {
       "id": "T059",
@@ -1570,7 +1570,7 @@
         "Owner authorization recorded; actual Pages smoke test; optional service status truthful; no unapproved study recruitment."
       ],
       "reviewer_role": "QA",
-      "status": "in_progress",
+      "status": "done",
       "risk": "high",
       "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
       "applies_to_profiles": [
@@ -1578,7 +1578,7 @@
         "remote_statistics",
         "formal_study"
       ],
-      "status_note": "Push and Pages publication authorized by current owner request; final local checks and remote deployment still pending."
+      "status_note": "Campaign-only release caa4e43 published to ammarphp/trolley and Pages. Remote CI and deployment succeeded; public core files match the local build and review paths return 404. Collection is off; no study recruitment is active."
     },
     {
       "id": "T060",
@@ -1593,7 +1593,7 @@
         "Versions, open backlog, retention/operations owners, reproducibility bundle and first next tasks recorded."
       ],
       "reviewer_role": "ARCH",
-      "status": "in_progress",
+      "status": "done",
       "risk": "medium",
       "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
       "applies_to_profiles": [
@@ -1601,7 +1601,7 @@
         "remote_statistics",
         "formal_study"
       ],
-      "status_note": "Campaign continuation baseline drafted; final deployed commit and links will be recorded after actual publication."
+      "status_note": "docs/handoffs/release-baseline.md records the deployed version, evidence and next work. Optional service activation and visual acceptance remain separate."
     },
     {
       "id": "T052A",
@@ -1638,7 +1638,7 @@
     "G4": "final-hash actual26-choice restraint and35-choice all7stage succession routes, exactdownloadedreplays, compact/390px,reducedsettings,override,reload/resume checked; fullaccessibilitymatrixopen",
     "G5": "154 reviewed executable nodes; final art acceptance open",
     "G6": "bounded independent review and local hardening; physical-device and remote-service limits explicit",
-    "G7": "static story push/publication explicitly authorized; release verification in progress"
+    "G7": "Campaign-only release caa4e43 pushed; remote CI and Pages succeeded; public game hash and assets verified; review paths return 404; collection is off."
   },
   "updatedAt": "2026-09-23",
   "validationSummary": {
