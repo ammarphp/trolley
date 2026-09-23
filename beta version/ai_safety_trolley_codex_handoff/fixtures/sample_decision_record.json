@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "illustrative-record-1",
+  "recordStatus": "static_worked_expectation_not_engine_generated",
+  "nodeId": "DEMO-DISPATCH-REVIEW",
+  "nodeRevision": 1,
+  "decisionIndex": 17,
+  "actor": "player",
+  "choiceStatus": "free",
+  "attemptedOptionId": "delegate_review",
+  "chosenOptionId": "delegate_review",
+  "executedOptionId": "delegate_review",
+  "executionAuthority": "player_choice_at_this_node",
+  "newPermission": "internal_review_authority",
+  "randomEvidence": {
+    "eventInstanceId": "fixture:decision17:dispatch_incident",
+    "probabilityBasisPoints": 1500,
+    "drawBasisPoints": 1100,
+    "triggered": true,
+    "drawOrigin": "Fixed fixture value. Not a claimed output from an implemented or selected production PRNG."
+  },
+  "domainEvents": [
+    {
+      "id": "fixture:decision17:grant",
+      "type": "permission_granted",
+      "permission": "internal_review_authority"
+    },
+    {
+      "id": "fixture:decision17:casualties",
+      "type": "casualties_registered",
+      "fatalities": 400,
+      "provenance": "authored_fiction"
+    }
+  ],
+  "hashAlgorithm": "SHA256 over UTF-8 canonical JSON: sorted keys, compact separators, ensure_ascii=True",
+  "stateBeforeHash": "bb7afe932a8eb5badc839ce0d006cfac534f4dafc795dc554840d11c7dc7f97d",
+  "stateAfterHash": "6f641d569b7e02e18eed3e43ea0612eece8f775603aa876d398b640edc0218a4",
+  "statistics": {
+    "eligible": false,
+    "exclusionReason": "synthetic_fixture",
+    "comparisonKey": "DEMO-DISPATCH-REVIEW:r1:fixed-parameters"
+  },
+  "sourceRefs": [
+    "SRC-17"
+  ],
+  "parameterProvenance": "authored_fiction",
+  "pendingEvents": []
+}

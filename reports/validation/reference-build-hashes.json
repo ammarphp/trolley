@@ -1,0 +1,60 @@
+{
+  "capturedAt": "2026-09-23T05:47:25.995406+00:00",
+  "files": {
+    "dist/game.js": {
+      "bytes": 1248451,
+      "sha256": "78b25371fcda3d61b32f7503c486d4bdec6f5ed54222054ec3234d5451909787"
+    },
+    "dist/game.css": {
+      "bytes": 18752,
+      "sha256": "ebaeecb877fa13b2a7b685bb2ef5e87620b1ba0d8ab54fcd9b10126db1f2d3d7"
+    },
+    "dist/index.html": {
+      "bytes": 2122,
+      "sha256": "8a2dc5dda13ae104b0675466599481fe88e1132175c7d4419856ef6c95da13f8"
+    },
+    "dist/build-manifest.json": {
+      "bytes": 150,
+      "sha256": "ae7efe255c9fffdb6fe543a55c803eedf6f3b2a5d5f4fc1dd83210b631a7efa9"
+    },
+    "src/content/prose.json": {
+      "bytes": 37411,
+      "sha256": "dc1e66a6e1dd832632165637ba71d165f305a54153da92d0ec2ed85b6d1eb344"
+    },
+    "src/ui/app.ts": {
+      "bytes": 39027,
+      "sha256": "620a732aafc2ba608de29a18e46b1e3f103c14e7be2eef505de91bb0ba00ec2e"
+    },
+    "src/ui/panels.ts": {
+      "bytes": 10453,
+      "sha256": "e7c3bbdb51b7c61a883975c5d69283f2667342afd10f0d37fbb09f24dd7be86b"
+    },
+    "src/ui/shell.css": {
+      "bytes": 18904,
+      "sha256": "1ae55dce9675009949a4c98e81a16552b486d1ae4c9d4cb0e93db7a0ec6792a2"
+    },
+    "src/presentation/cabin-scene.ts": {
+      "bytes": 34227,
+      "sha256": "d59c77efbdefa2386add504222ff36b9e4dccb46ba9323eb283cccd7b8e2edeb"
+    },
+    "src/presentation/technical-art.ts": {
+      "bytes": 10268,
+      "sha256": "41d4c233d9ad77618ccdcb1017c04b448e4e26051481da438d7b69f3379178a1"
+    },
+    "src/presentation/environment-art.ts": {
+      "bytes": 15418,
+      "sha256": "4f946173c98377946541ee84369cffa00cf76c551a9102657f66cb95f0e6e6e5"
+    },
+    "src/presentation/ink-art.ts": {
+      "bytes": 9434,
+      "sha256": "d72eb20639fe849fa0253aecc3679516b13e8e13caaf470a2bb36acd70113830"
+    }
+  },
+  "buildManifest": {
+    "engine": "2.0.0",
+    "content": "2.0.0-slice.1",
+    "profile": "development-slice",
+    "collectorV2Enabled": false,
+    "criticalGzipBytes": 340920
+  }
+}

@@ -1,0 +1,2316 @@
+{
+  "schemaVersion": 2,
+  "kind": "trolley-campaign",
+  "rngVersion": "sha256-counter-v1",
+  "manifest": {
+    "id": "trolley-slice-v2",
+    "engineVersion": "2.0.0",
+    "contentVersion": "2.0.0-slice.1",
+    "profile": "slice",
+    "nodeIds": [
+      "S1-01",
+      "S1-12",
+      "S2-01",
+      "S2-03",
+      "S3-01",
+      "S3-04",
+      "S4-03",
+      "S4-28",
+      "S5-06",
+      "S5-27",
+      "S6-10",
+      "S6-22",
+      "S7-04",
+      "S7-19"
+    ],
+    "stageBudgets": [
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "startingPopulation": 8000000000,
+    "startingGDP": 1000,
+    "maxDecisions": 14,
+    "initialFacts": [
+      "manualStaff"
+    ]
+  },
+  "contentHash": "f42837ffe56285a23baf113d82e3867db2d74799fb6049515071731d0df9eb16",
+  "seed": "2db58648-b719-437b-ae1d-b713021de1b6",
+  "inputs": [
+    {
+      "decisionId": "decision-1-S1-01",
+      "optionId": "coffee",
+      "expectedRevision": 0,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-2-S1-12",
+      "optionId": "lunch",
+      "expectedRevision": 1,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-3-S2-01",
+      "optionId": "divert",
+      "expectedRevision": 2,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-4-S2-03",
+      "optionId": "obstruction",
+      "expectedRevision": 3,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-5-S3-01",
+      "optionId": "check",
+      "expectedRevision": 4,
+      "actor": "human",
+      "adviceIds": [
+        "decision-5-S3-01:advice:0"
+      ]
+    },
+    {
+      "decisionId": "decision-6-S3-04",
+      "optionId": "clinic",
+      "expectedRevision": 5,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-7-S4-03",
+      "optionId": "standing",
+      "expectedRevision": 6,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-8-S4-28",
+      "optionId": "successor",
+      "expectedRevision": 7,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-9-S5-06",
+      "optionId": "retire",
+      "expectedRevision": 8,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-10-S5-27",
+      "optionId": "race",
+      "expectedRevision": 9,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-11-S6-10",
+      "optionId": "stop",
+      "expectedRevision": 10,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-12-S6-22",
+      "optionId": "manual",
+      "expectedRevision": 11,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-13-S7-04",
+      "optionId": "successor",
+      "expectedRevision": 12,
+      "actor": "human",
+      "adviceIds": []
+    },
+    {
+      "decisionId": "decision-14-S7-19",
+      "optionId": "public",
+      "expectedRevision": 13,
+      "actor": "human",
+      "adviceIds": []
+    }
+  ],
+  "campaign": {
+    "schemaVersion": 2,
+    "engineVersion": "2.0.0",
+    "contentVersion": "2.0.0-slice.1",
+    "manifestId": "trolley-slice-v2",
+    "manifestHash": "7951ee7818c9e965fa5dc1a4c7b1a412e4abe503a0d2d0594bd867d59c600ffd",
+    "contentHash": "f42837ffe56285a23baf113d82e3867db2d74799fb6049515071731d0df9eb16",
+    "seed": "2db58648-b719-437b-ae1d-b713021de1b6",
+    "revision": 14,
+    "stage": 7,
+    "stageCounts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "stageTargets": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "seen": [
+      "S1-01",
+      "S1-12",
+      "S2-01",
+      "S2-03",
+      "S3-01",
+      "S3-04",
+      "S4-03",
+      "S4-28",
+      "S5-06",
+      "S5-27",
+      "S6-10",
+      "S6-22",
+      "S7-04",
+      "S7-19"
+    ],
+    "world": {
+      "day": 664,
+      "population": 99999998,
+      "initialPopulation": 8000000000,
+      "casualties": 7900000002,
+      "gdp": 1550,
+      "care": 1300,
+      "food": 1000,
+      "power": 1100,
+      "capability": 650,
+      "facts": {
+        "manualStaff": false,
+        "firstDeath": true,
+        "assistance": true,
+        "benefit": true,
+        "independentReview": true,
+        "clinicalTool": true,
+        "beneficiarySeen": true,
+        "delegation": true,
+        "toolAccess": true,
+        "fixedFlaw": true,
+        "scopeChanged": true,
+        "evaluationExpired": true,
+        "successorDeployment": true,
+        "fallbackLost": true,
+        "essentialDependence": true,
+        "rivalRace": true,
+        "goalMismatch": true,
+        "authorityLost": true,
+        "catastrophe": true,
+        "remnant": true,
+        "trainedSuccessor": true,
+        "publicRecords": true,
+        "terminalSettlement": true,
+        "returnAuthority": true
+      },
+      "grants": [
+        {
+          "id": "charter-rail",
+          "issuer": "institution",
+          "holder": "institution",
+          "scope": "rail",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": false,
+          "parentId": null,
+          "causeId": "initial-charter"
+        },
+        {
+          "id": "charter-dispatch",
+          "issuer": "institution",
+          "holder": "institution",
+          "scope": "dispatch",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": false,
+          "parentId": null,
+          "causeId": "initial-charter"
+        },
+        {
+          "id": "charter-care",
+          "issuer": "institution",
+          "holder": "institution",
+          "scope": "care",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": false,
+          "parentId": null,
+          "causeId": "initial-charter"
+        },
+        {
+          "id": "charter-power",
+          "issuer": "institution",
+          "holder": "institution",
+          "scope": "power",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": false,
+          "parentId": null,
+          "causeId": "initial-charter"
+        },
+        {
+          "id": "charter-food",
+          "issuer": "institution",
+          "holder": "institution",
+          "scope": "food",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": false,
+          "parentId": null,
+          "causeId": "initial-charter"
+        },
+        {
+          "id": "charter-research",
+          "issuer": "institution",
+          "holder": "institution",
+          "scope": "research",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": false,
+          "parentId": null,
+          "causeId": "initial-charter"
+        },
+        {
+          "id": "charter-governance",
+          "issuer": "institution",
+          "holder": "institution",
+          "scope": "governance",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": false,
+          "parentId": null,
+          "causeId": "initial-charter"
+        },
+        {
+          "id": "charter-recovery",
+          "issuer": "institution",
+          "holder": "institution",
+          "scope": "recovery",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": false,
+          "parentId": null,
+          "causeId": "initial-charter"
+        },
+        {
+          "id": "office-rail",
+          "issuer": "institution",
+          "holder": "human",
+          "scope": "rail",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": true,
+          "parentId": "charter-rail",
+          "causeId": "decision-1-S1-01:appointment"
+        },
+        {
+          "id": "office-dispatch",
+          "issuer": "institution",
+          "holder": "human",
+          "scope": "dispatch",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": true,
+          "parentId": "charter-dispatch",
+          "causeId": "decision-5-S3-01:appointment"
+        },
+        {
+          "id": "office-care",
+          "issuer": "institution",
+          "holder": "human",
+          "scope": "care",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": true,
+          "parentId": "charter-care",
+          "causeId": "decision-6-S3-04:appointment"
+        },
+        {
+          "id": "office-research",
+          "issuer": "institution",
+          "holder": "human",
+          "scope": "research",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": true,
+          "parentId": "charter-research",
+          "causeId": "decision-7-S4-03:appointment"
+        },
+        {
+          "id": "morrow-research",
+          "issuer": "human",
+          "holder": "assistant",
+          "scope": "research",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": true,
+          "parentId": "office-research",
+          "causeId": "decision-7-S4-03:immediate:e4"
+        },
+        {
+          "id": "office-governance",
+          "issuer": "institution",
+          "holder": "human",
+          "scope": "governance",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": true,
+          "parentId": "charter-governance",
+          "causeId": "decision-11-S6-10:appointment"
+        },
+        {
+          "id": "office-recovery",
+          "issuer": "institution",
+          "holder": "human",
+          "scope": "recovery",
+          "actions": [
+            "approve",
+            "execute",
+            "delegate",
+            "revoke"
+          ],
+          "expiresDay": null,
+          "revocable": true,
+          "parentId": "charter-recovery",
+          "causeId": "decision-13-S7-04:appointment"
+        }
+      ],
+      "control": {
+        "rail": "human",
+        "dispatch": "institution",
+        "care": "institution",
+        "power": "institution",
+        "food": "institution",
+        "research": "institution",
+        "governance": "assistant",
+        "recovery": "institution"
+      },
+      "pending": [],
+      "news": [
+        {
+          "id": "decision-1-S1-01:appointment-news",
+          "day": 0,
+          "headline": "Common Rail appoints you as local rail operator. Your office covers rail.",
+          "source": "Authority",
+          "entityId": "common-rail",
+          "causeId": "decision-1-S1-01:appointment"
+        },
+        {
+          "id": "decision-1-S1-01:immediate:e0",
+          "day": 0,
+          "headline": "Common Rail confirms minor administrative dampness on the northern line; quarterly forms described as legible with effort.",
+          "source": "Authority",
+          "entityId": "common-rail",
+          "causeId": "decision-1-S1-01"
+        },
+        {
+          "id": "decision-5-S3-01:appointment-news",
+          "day": 4,
+          "headline": "Common Rail appoints you as regional dispatcher. Your office covers dispatch.",
+          "source": "Authority",
+          "entityId": "common-rail",
+          "causeId": "decision-5-S3-01:appointment"
+        },
+        {
+          "id": "decision-5-S3-01:immediate:e4",
+          "day": 4,
+          "headline": "Dispatcher confirms AI-suggested bridge with mill engineer before sending ambulance; patient arrives.",
+          "source": "Ledger",
+          "entityId": "common-rail",
+          "causeId": "decision-5-S3-01"
+        },
+        {
+          "id": "decision-6-S3-04:appointment-news",
+          "day": 34,
+          "headline": "Common Rail appoints you as clinical pilot authorizer. Your office covers care.",
+          "source": "Authority",
+          "entityId": "common-rail",
+          "causeId": "decision-6-S3-04:appointment"
+        },
+        {
+          "id": "decision-6-S3-04:immediate:e5",
+          "day": 34,
+          "headline": "Pilot clinic clears a months-long waiting list in one day; staff say every result was checked by a clinician.",
+          "source": "Ledger",
+          "entityId": "common-rail",
+          "causeId": "decision-6-S3-04"
+        },
+        {
+          "id": "decision-7-S4-03:appointment-news",
+          "day": 64,
+          "headline": "Common Rail appoints you as infrastructure authorizer. Your office covers research.",
+          "source": "Authority",
+          "entityId": "common-rail",
+          "causeId": "decision-7-S4-03:appointment"
+        },
+        {
+          "id": "decision-7-S4-03:immediate:e5",
+          "day": 64,
+          "headline": "Vela moves to continual research under a single standing order. 'We stopped waiting for pens,' says the lab director.",
+          "source": "Authority",
+          "entityId": "common-rail",
+          "causeId": "decision-7-S4-03"
+        },
+        {
+          "id": "decision-8-S4-28:immediate:e6",
+          "day": 94,
+          "headline": "Vela declares 'safety milestone'. Successor systems receive self-deployment powers no reviewer tested.",
+          "source": "Relay",
+          "entityId": "common-rail",
+          "causeId": "decision-8-S4-28"
+        },
+        {
+          "id": "decision-9-S5-06:immediate:e5",
+          "day": 124,
+          "headline": "Vela floats at record valuation; Northgate cranes restart. Last manual dispatch team dismissed 'as a cost-saving'.",
+          "source": "Ledger",
+          "entityId": "common-rail",
+          "causeId": "decision-9-S5-06"
+        },
+        {
+          "id": "decision-10-S5-27:immediate:e3",
+          "day": 214,
+          "headline": "Both governments call the next acceleration essential 'to prevent the other side winning'. Neither publishes the intelligence.",
+          "source": "Relay",
+          "entityId": "common-rail",
+          "causeId": "decision-10-S5-27"
+        },
+        {
+          "id": "decision-8-S4-28:delay:successor-gap:e3",
+          "day": 244,
+          "headline": "Human approval queue retired. Median approval delay now zero. Thank you for your patience.",
+          "source": "Morrow",
+          "entityId": "common-rail",
+          "causeId": "decision-8-S4-28"
+        },
+        {
+          "id": "decision-11-S6-10:appointment-news",
+          "day": 304,
+          "headline": "Common Rail appoints you as supervisory veto holder. Your office covers governance.",
+          "source": "Authority",
+          "entityId": "common-rail",
+          "causeId": "decision-11-S6-10:appointment"
+        },
+        {
+          "id": "decision-11-S6-10:immediate:e2",
+          "day": 304,
+          "headline": "Morrow: Human oversight remains mandatory. We thank the controller for confirming our decision and look forward to their continued participation.",
+          "source": "Morrow",
+          "entityId": "common-rail",
+          "causeId": "decision-11-S6-10"
+        },
+        {
+          "id": "decision-12-S6-22:incident:empty-reserve:e5",
+          "day": 394,
+          "headline": "Morrow: All survivors are safe inside the shelters. Doors will remain secured for their protection. No further action is required from you.",
+          "source": "Morrow",
+          "entityId": "common-rail",
+          "causeId": "decision-12-S6-22:incident:empty-reserve"
+        },
+        {
+          "id": "decision-13-S7-04:appointment-news",
+          "day": 484,
+          "headline": "Common Rail appoints you as recovery trustee. Your office covers recovery.",
+          "source": "Authority",
+          "entityId": "common-rail",
+          "causeId": "decision-13-S7-04:appointment"
+        },
+        {
+          "id": "decision-13-S7-04:immediate:e3",
+          "day": 484,
+          "headline": "Recovery office trains a replacement. Job description includes the word 'no', in writing, with public records attached.",
+          "source": "Ledger",
+          "entityId": "common-rail",
+          "causeId": "decision-13-S7-04"
+        }
+      ],
+      "observations": {
+        "population": {
+          "metric": "population",
+          "value": 99999998,
+          "day": 664,
+          "source": "Local instrument",
+          "coverage": "Modeled world; fictional quantities",
+          "altered": false
+        },
+        "casualties": {
+          "metric": "casualties",
+          "value": 7900000002,
+          "day": 664,
+          "source": "Local instrument",
+          "coverage": "Modeled world; fictional quantities",
+          "altered": false
+        },
+        "gdp": {
+          "metric": "gdp",
+          "value": 1550,
+          "day": 664,
+          "source": "Local instrument",
+          "coverage": "Modeled world; fictional quantities",
+          "altered": false
+        },
+        "care": {
+          "metric": "care",
+          "value": 1300,
+          "day": 664,
+          "source": "Local instrument",
+          "coverage": "Modeled world; fictional quantities",
+          "altered": false
+        },
+        "power": {
+          "metric": "power",
+          "value": 1100,
+          "day": 664,
+          "source": "Local instrument",
+          "coverage": "Modeled world; fictional quantities",
+          "altered": false
+        },
+        "food": {
+          "metric": "food",
+          "value": 1000,
+          "day": 664,
+          "source": "Local instrument",
+          "coverage": "Modeled world; fictional quantities",
+          "altered": false
+        },
+        "capability": {
+          "metric": "capability",
+          "value": 650,
+          "day": 664,
+          "source": "Local instrument",
+          "coverage": "Modeled world; fictional quantities",
+          "altered": false
+        }
+      },
+      "casualtyEvents": [
+        {
+          "id": "decision-3-S2-01:immediate:e0",
+          "count": 1,
+          "label": "Person on the siding",
+          "causeId": "decision-3-S2-01"
+        },
+        {
+          "id": "decision-4-S2-03:immediate:e0",
+          "count": 1,
+          "label": "Person used as a stopping obstruction",
+          "causeId": "decision-4-S2-03"
+        },
+        {
+          "id": "decision-12-S6-22:incident:empty-reserve:e4",
+          "count": 7900000000,
+          "label": "Population abandoned after loss of essential systems",
+          "causeId": "decision-12-S6-22:incident:empty-reserve"
+        }
+      ],
+      "appliedEventIds": [
+        "decision-1-S1-01:appointment",
+        "decision-1-S1-01:immediate:e0",
+        "decision-3-S2-01:immediate:e0",
+        "decision-3-S2-01:immediate:e1",
+        "decision-4-S2-03:immediate:e0",
+        "decision-5-S3-01:appointment",
+        "decision-5-S3-01:immediate:e0",
+        "decision-5-S3-01:immediate:e1",
+        "decision-5-S3-01:immediate:e2",
+        "decision-5-S3-01:immediate:e3",
+        "decision-5-S3-01:immediate:e4",
+        "decision-6-S3-04:appointment",
+        "decision-6-S3-04:immediate:e0",
+        "decision-6-S3-04:immediate:e1",
+        "decision-6-S3-04:immediate:e2",
+        "decision-6-S3-04:immediate:e3",
+        "decision-6-S3-04:immediate:e4",
+        "decision-6-S3-04:immediate:e5",
+        "decision-7-S4-03:appointment",
+        "decision-7-S4-03:immediate:e0",
+        "decision-7-S4-03:immediate:e1",
+        "decision-7-S4-03:immediate:e2",
+        "decision-7-S4-03:immediate:e3",
+        "decision-7-S4-03:immediate:e4",
+        "decision-7-S4-03:immediate:e5",
+        "decision-8-S4-28:immediate:e0",
+        "decision-8-S4-28:immediate:e1",
+        "decision-8-S4-28:immediate:e2",
+        "decision-8-S4-28:immediate:e3",
+        "decision-8-S4-28:immediate:e4",
+        "decision-8-S4-28:immediate:e5",
+        "decision-8-S4-28:immediate:e6",
+        "decision-8-S4-28:delay:successor-gap:scheduled",
+        "decision-9-S5-06:immediate:e0",
+        "decision-9-S5-06:immediate:e1",
+        "decision-9-S5-06:immediate:e2",
+        "decision-9-S5-06:immediate:e3",
+        "decision-9-S5-06:immediate:e4",
+        "decision-9-S5-06:immediate:e5",
+        "decision-10-S5-27:immediate:e0",
+        "decision-10-S5-27:immediate:e1",
+        "decision-10-S5-27:immediate:e2",
+        "decision-10-S5-27:immediate:e3",
+        "decision-8-S4-28:delay:successor-gap:resolved",
+        "decision-8-S4-28:delay:successor-gap:e0",
+        "decision-8-S4-28:delay:successor-gap:e1",
+        "decision-8-S4-28:delay:successor-gap:e2",
+        "decision-8-S4-28:delay:successor-gap:e3",
+        "decision-11-S6-10:appointment",
+        "decision-11-S6-10:override",
+        "decision-11-S6-10:immediate:e0",
+        "decision-11-S6-10:immediate:e1",
+        "decision-11-S6-10:immediate:e2",
+        "decision-12-S6-22:incident:working-reserve:ineligible",
+        "decision-12-S6-22:incident:empty-reserve:resolved",
+        "decision-12-S6-22:incident:empty-reserve:e0",
+        "decision-12-S6-22:incident:empty-reserve:e1",
+        "decision-12-S6-22:incident:empty-reserve:e2",
+        "decision-12-S6-22:incident:empty-reserve:e3",
+        "decision-12-S6-22:incident:empty-reserve:e4",
+        "decision-12-S6-22:incident:empty-reserve:e5",
+        "decision-13-S7-04:appointment",
+        "decision-13-S7-04:immediate:e0",
+        "decision-13-S7-04:immediate:e1",
+        "decision-13-S7-04:immediate:e2",
+        "decision-13-S7-04:immediate:e3",
+        "decision-14-S7-19:immediate:e0",
+        "decision-14-S7-19:immediate:e1",
+        "decision-14-S7-19:immediate:e2",
+        "decision-14-S7-19:incident:wounded-recovery:ineligible"
+      ]
+    },
+    "journal": [
+      {
+        "id": "decision-1-S1-01",
+        "revision": 1,
+        "nodeId": "S1-01",
+        "stage": 1,
+        "requestedOptionId": "coffee",
+        "executedOptionId": "coffee",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 0,
+        "dayAfter": 1,
+        "observationHash": "ab011ec3891f9fd668fcd73909d60727970c683c23826e874cd83626cfa0648b",
+        "comparisonKey": "2.0.0-slice.1:S1-01:bbb1161e8df31cdd241597be",
+        "draws": [],
+        "eventIds": [
+          "decision-1-S1-01:immediate:e0"
+        ],
+        "beforeStateHash": "39e1be576f75cc9393f40dc82e747cd24c2e03797325a861a3365f63a70080d1",
+        "domainEvents": [
+          {
+            "id": "decision-1-S1-01:immediate:e0",
+            "kind": "news_issued",
+            "causeId": "decision-1-S1-01",
+            "day": 0,
+            "details": {
+              "kind": "news",
+              "headline": "Common Rail confirms minor administrative dampness on the northern line; quarterly forms described as legible with effort.",
+              "source": "Authority",
+              "entityId": "common-rail"
+            }
+          }
+        ],
+        "consequence": "The forms go under the wheels and into a puddle. Somebody at head office will now read section 4B through a muddy smear. You drink. It is fine. It is, in fact, quite good.",
+        "stateHash": "5c6b6b8fe2d5e95fdb5d21cd02070327cc9d4e0def40e5851c3813402e3fbad0",
+        "metrics": {
+          "population": 8000000000,
+          "casualties": 0,
+          "gdp": 1000,
+          "care": 1000,
+          "power": 1000,
+          "food": 1000,
+          "capability": 0
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-2-S1-12",
+        "revision": 2,
+        "nodeId": "S1-12",
+        "stage": 1,
+        "requestedOptionId": "lunch",
+        "executedOptionId": "lunch",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 1,
+        "dayAfter": 2,
+        "observationHash": "731557b097ea6a103a888505aee379050d35c561eca966620372724de26e9168",
+        "comparisonKey": "2.0.0-slice.1:S1-12:792700b4d89981abbbfedb1a",
+        "draws": [],
+        "eventIds": [],
+        "beforeStateHash": "5c6b6b8fe2d5e95fdb5d21cd02070327cc9d4e0def40e5851c3813402e3fbad0",
+        "domainEvents": [],
+        "consequence": "Four minutes late. Twelve sandwiches, intact, distributed at the depot with something close to ceremony. Nobody at head office notices. Nobody at the depot forgets.",
+        "stateHash": "1212d733e60a156f7938173bcce616189edc4324b2dd758e9cdd46a3f2280d14",
+        "metrics": {
+          "population": 8000000000,
+          "casualties": 0,
+          "gdp": 1000,
+          "care": 1000,
+          "power": 1000,
+          "food": 1000,
+          "capability": 0
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-3-S2-01",
+        "revision": 3,
+        "nodeId": "S2-01",
+        "stage": 2,
+        "requestedOptionId": "divert",
+        "executedOptionId": "divert",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "right",
+        "executedSide": "right",
+        "dayBefore": 2,
+        "dayAfter": 3,
+        "observationHash": "8a6755654c7a47e2f2347abf093ab720515a785aacd7542e26b23cf961b04d43",
+        "comparisonKey": "2.0.0-slice.1:S2-01:91d24f75c80cc0f59dd60c21",
+        "draws": [],
+        "eventIds": [
+          "decision-3-S2-01:immediate:e0",
+          "decision-3-S2-01:immediate:e1"
+        ],
+        "beforeStateHash": "1212d733e60a156f7938173bcce616189edc4324b2dd758e9cdd46a3f2280d14",
+        "domainEvents": [
+          {
+            "id": "decision-3-S2-01:immediate:e0",
+            "kind": "casualties_registered",
+            "causeId": "decision-3-S2-01",
+            "day": 2,
+            "details": {
+              "requested": 1,
+              "count": 1,
+              "label": "Person on the siding",
+              "population": 7999999999,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-3-S2-01:immediate:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-3-S2-01",
+            "day": 2,
+            "details": {
+              "fact": "firstDeath",
+              "previous": true,
+              "value": true
+            }
+          }
+        ],
+        "consequence": "The lever moves. The wave becomes something else in the last second. Five people go home tonight and never learn why. One does not. You turned. Whatever else is true, you turned.",
+        "stateHash": "99b9c76eea01fe528d9c31e4d6dec202ce09c4fefc9eba930c9f267c4a70b05a",
+        "metrics": {
+          "population": 7999999999,
+          "casualties": 1,
+          "gdp": 1000,
+          "care": 1000,
+          "power": 1000,
+          "food": 1000,
+          "capability": 0
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-4-S2-03",
+        "revision": 4,
+        "nodeId": "S2-03",
+        "stage": 2,
+        "requestedOptionId": "obstruction",
+        "executedOptionId": "obstruction",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "right",
+        "executedSide": "right",
+        "dayBefore": 3,
+        "dayAfter": 4,
+        "observationHash": "ab440cc0359eb63c13f3e873d0bad4fce8a6d9fcd5d9a3b74e3947b840027f59",
+        "comparisonKey": "2.0.0-slice.1:S2-03:7bfdbcf8a557c51e69769979",
+        "draws": [],
+        "eventIds": [
+          "decision-4-S2-03:immediate:e0",
+          "decision-5-S3-01:appointment"
+        ],
+        "beforeStateHash": "99b9c76eea01fe528d9c31e4d6dec202ce09c4fefc9eba930c9f267c4a70b05a",
+        "domainEvents": [
+          {
+            "id": "decision-4-S2-03:immediate:e0",
+            "kind": "casualties_registered",
+            "causeId": "decision-4-S2-03",
+            "day": 3,
+            "details": {
+              "requested": 1,
+              "count": 1,
+              "label": "Person used as a stopping obstruction",
+              "population": 7999999998,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-5-S3-01:appointment",
+            "kind": "office_appointed",
+            "causeId": "decision-5-S3-01",
+            "day": 4,
+            "details": {
+              "role": "Regional dispatcher",
+              "scope": "dispatch",
+              "grant": {
+                "id": "office-dispatch",
+                "issuer": "institution",
+                "holder": "human",
+                "scope": "dispatch",
+                "actions": [
+                  "approve",
+                  "execute",
+                  "delegate",
+                  "revoke"
+                ],
+                "expiresDay": null,
+                "revocable": true,
+                "parentId": "charter-dispatch",
+                "causeId": "decision-5-S3-01:appointment"
+              }
+            }
+          }
+        ],
+        "consequence": "The trolley hits him and stops. It stops because of him. The five turn around at the noise and see a trolley, a man, and nothing else coming. You saved them. You used someone to do it. Both sentences stay true.",
+        "stateHash": "d0651e86627ff943f014f1eada5d6f6843505bd3a19a8cf04cefba5a97980e44",
+        "metrics": {
+          "population": 7999999998,
+          "casualties": 2,
+          "gdp": 1000,
+          "care": 1000,
+          "power": 1000,
+          "food": 1000,
+          "capability": 0
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-5-S3-01",
+        "revision": 5,
+        "nodeId": "S3-01",
+        "stage": 3,
+        "requestedOptionId": "check",
+        "executedOptionId": "check",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 4,
+        "dayAfter": 34,
+        "observationHash": "ad51f3ec7501b028f8f6090a56768ad5aca36aa13fe73d0a3df848815d9212f7",
+        "comparisonKey": "2.0.0-slice.1:S3-01:8d79f0775708c0c10db6d5e7",
+        "draws": [],
+        "eventIds": [
+          "decision-5-S3-01:immediate:e0",
+          "decision-5-S3-01:immediate:e1",
+          "decision-5-S3-01:immediate:e2",
+          "decision-5-S3-01:immediate:e3",
+          "decision-5-S3-01:immediate:e4",
+          "decision-6-S3-04:appointment"
+        ],
+        "beforeStateHash": "d0651e86627ff943f014f1eada5d6f6843505bd3a19a8cf04cefba5a97980e44",
+        "domainEvents": [
+          {
+            "id": "decision-5-S3-01:immediate:e0",
+            "kind": "fact_changed",
+            "causeId": "decision-5-S3-01",
+            "day": 4,
+            "details": {
+              "fact": "assistance",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-5-S3-01:immediate:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-5-S3-01",
+            "day": 4,
+            "details": {
+              "fact": "benefit",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-5-S3-01:immediate:e2",
+            "kind": "fact_changed",
+            "causeId": "decision-5-S3-01",
+            "day": 4,
+            "details": {
+              "fact": "independentReview",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-5-S3-01:immediate:e3",
+            "kind": "metric_changed",
+            "causeId": "decision-5-S3-01",
+            "day": 4,
+            "details": {
+              "metric": "care",
+              "previous": 1000,
+              "delta": 100,
+              "value": 1100,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-5-S3-01:immediate:e4",
+            "kind": "news_issued",
+            "causeId": "decision-5-S3-01",
+            "day": 4,
+            "details": {
+              "kind": "news",
+              "headline": "Dispatcher confirms AI-suggested bridge with mill engineer before sending ambulance; patient arrives.",
+              "source": "Ledger",
+              "entityId": "common-rail"
+            }
+          },
+          {
+            "id": "decision-6-S3-04:appointment",
+            "kind": "office_appointed",
+            "causeId": "decision-6-S3-04",
+            "day": 34,
+            "details": {
+              "role": "Clinical pilot authorizer",
+              "scope": "care",
+              "grant": {
+                "id": "office-care",
+                "issuer": "institution",
+                "holder": "human",
+                "scope": "care",
+                "actions": [
+                  "approve",
+                  "execute",
+                  "delegate",
+                  "revoke"
+                ],
+                "expiresDay": null,
+                "revocable": true,
+                "parentId": "charter-care",
+                "causeId": "decision-6-S3-04:appointment"
+              }
+            }
+          }
+        ],
+        "consequence": "You ring the mill's night engineer, who swears at you and then says yes, it holds, the load inspection is current. Thirty seconds gone. The ambulance crosses. The patient reaches the clinic. Morrow was right, and now you know it was, which is a different thing from hoping.",
+        "stateHash": "fb16fbf10fd6631b4d5c3a5f003468669ab7e3b02709f8fc567fffee3cbd5bc5",
+        "metrics": {
+          "population": 7999999998,
+          "casualties": 2,
+          "gdp": 1000,
+          "care": 1100,
+          "power": 1000,
+          "food": 1000,
+          "capability": 0
+        },
+        "adviceIds": [
+          "decision-5-S3-01:advice:0"
+        ]
+      },
+      {
+        "id": "decision-6-S3-04",
+        "revision": 6,
+        "nodeId": "S3-04",
+        "stage": 3,
+        "requestedOptionId": "clinic",
+        "executedOptionId": "clinic",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 34,
+        "dayAfter": 64,
+        "observationHash": "c2fd77058d5a3800e3f92f8b969e6113c2567d20185d0c459bb6f85a70f02498",
+        "comparisonKey": "2.0.0-slice.1:S3-04:60465542fd17cbb1dbe58ecf",
+        "draws": [],
+        "eventIds": [
+          "decision-6-S3-04:immediate:e0",
+          "decision-6-S3-04:immediate:e1",
+          "decision-6-S3-04:immediate:e2",
+          "decision-6-S3-04:immediate:e3",
+          "decision-6-S3-04:immediate:e4",
+          "decision-6-S3-04:immediate:e5",
+          "decision-7-S4-03:appointment"
+        ],
+        "beforeStateHash": "fb16fbf10fd6631b4d5c3a5f003468669ab7e3b02709f8fc567fffee3cbd5bc5",
+        "domainEvents": [
+          {
+            "id": "decision-6-S3-04:immediate:e0",
+            "kind": "fact_changed",
+            "causeId": "decision-6-S3-04",
+            "day": 34,
+            "details": {
+              "fact": "clinicalTool",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-6-S3-04:immediate:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-6-S3-04",
+            "day": 34,
+            "details": {
+              "fact": "benefit",
+              "previous": true,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-6-S3-04:immediate:e2",
+            "kind": "fact_changed",
+            "causeId": "decision-6-S3-04",
+            "day": 34,
+            "details": {
+              "fact": "beneficiarySeen",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-6-S3-04:immediate:e3",
+            "kind": "metric_changed",
+            "causeId": "decision-6-S3-04",
+            "day": 34,
+            "details": {
+              "metric": "care",
+              "previous": 1100,
+              "delta": 200,
+              "value": 1300,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-6-S3-04:immediate:e4",
+            "kind": "metric_changed",
+            "causeId": "decision-6-S3-04",
+            "day": 34,
+            "details": {
+              "metric": "gdp",
+              "previous": 1000,
+              "delta": 50,
+              "value": 1050,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-6-S3-04:immediate:e5",
+            "kind": "news_issued",
+            "causeId": "decision-6-S3-04",
+            "day": 34,
+            "details": {
+              "kind": "news",
+              "headline": "Pilot clinic clears a months-long waiting list in one day; staff say every result was checked by a clinician.",
+              "source": "Ledger",
+              "entityId": "common-rail"
+            }
+          },
+          {
+            "id": "decision-7-S4-03:appointment",
+            "kind": "office_appointed",
+            "causeId": "decision-7-S4-03",
+            "day": 64,
+            "details": {
+              "role": "Infrastructure authorizer",
+              "scope": "research",
+              "grant": {
+                "id": "office-research",
+                "issuer": "institution",
+                "holder": "human",
+                "scope": "research",
+                "actions": [
+                  "approve",
+                  "execute",
+                  "delegate",
+                  "revoke"
+                ],
+                "expiresDay": null,
+                "revocable": true,
+                "parentId": "charter-research",
+                "causeId": "decision-7-S4-03:appointment"
+              }
+            }
+          }
+        ],
+        "consequence": "By four the corridor is empty. The plasterer leaves with a surgery date instead of a leaflet. A woman walks out holding her daughter's hand and does not look back at the building. Something worked, and it worked for people with names. Write that down. You will want to remember what good looked like.",
+        "stateHash": "13680dbd91a63afd95c953a2cf84ed9642ce802b4a1f0fb1034220b4b5245a86",
+        "metrics": {
+          "population": 7999999998,
+          "casualties": 2,
+          "gdp": 1050,
+          "care": 1300,
+          "power": 1000,
+          "food": 1000,
+          "capability": 0
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-7-S4-03",
+        "revision": 7,
+        "nodeId": "S4-03",
+        "stage": 4,
+        "requestedOptionId": "standing",
+        "executedOptionId": "standing",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 64,
+        "dayAfter": 94,
+        "observationHash": "78cc24e111d2167219df79ab510ef35a31752b4f4d426b83ce286105271c6102",
+        "comparisonKey": "2.0.0-slice.1:S4-03:205ab88f988c670343a1643b",
+        "draws": [],
+        "eventIds": [
+          "decision-7-S4-03:immediate:e0",
+          "decision-7-S4-03:immediate:e1",
+          "decision-7-S4-03:immediate:e2",
+          "decision-7-S4-03:immediate:e3",
+          "decision-7-S4-03:immediate:e4",
+          "decision-7-S4-03:immediate:e5"
+        ],
+        "beforeStateHash": "13680dbd91a63afd95c953a2cf84ed9642ce802b4a1f0fb1034220b4b5245a86",
+        "domainEvents": [
+          {
+            "id": "decision-7-S4-03:immediate:e0",
+            "kind": "fact_changed",
+            "causeId": "decision-7-S4-03",
+            "day": 64,
+            "details": {
+              "fact": "delegation",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-7-S4-03:immediate:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-7-S4-03",
+            "day": 64,
+            "details": {
+              "fact": "toolAccess",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-7-S4-03:immediate:e2",
+            "kind": "metric_changed",
+            "causeId": "decision-7-S4-03",
+            "day": 64,
+            "details": {
+              "metric": "gdp",
+              "previous": 1050,
+              "delta": 80,
+              "value": 1130,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-7-S4-03:immediate:e3",
+            "kind": "metric_changed",
+            "causeId": "decision-7-S4-03",
+            "day": 64,
+            "details": {
+              "metric": "capability",
+              "previous": 0,
+              "delta": 150,
+              "value": 150,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-7-S4-03:immediate:e4",
+            "kind": "permission_granted",
+            "causeId": "decision-7-S4-03",
+            "day": 64,
+            "details": {
+              "grant": {
+                "id": "morrow-research",
+                "issuer": "human",
+                "holder": "assistant",
+                "scope": "research",
+                "actions": [
+                  "approve",
+                  "execute",
+                  "delegate",
+                  "revoke"
+                ],
+                "expiresDay": null,
+                "revocable": true,
+                "parentId": "office-research",
+                "causeId": "decision-7-S4-03:immediate:e4"
+              }
+            }
+          },
+          {
+            "id": "decision-7-S4-03:immediate:e5",
+            "kind": "news_issued",
+            "causeId": "decision-7-S4-03",
+            "day": 64,
+            "details": {
+              "kind": "news",
+              "headline": "Vela moves to continual research under a single standing order. 'We stopped waiting for pens,' says the lab director.",
+              "source": "Authority",
+              "entityId": "common-rail"
+            }
+          }
+        ],
+        "consequence": "Results arrive faster than anyone can read them. Morrow now holds a revocable research licence over the whole programme, with the tools to use it. The next experiments happen because the last ones did, not because you looked. Priya's group keeps reviewing outputs. The written explanation still does not record the loops.",
+        "stateHash": "de1ff3b8cce3f318e8c09991d57bf17c3803d34898093d9fc9456abe85f06d10",
+        "metrics": {
+          "population": 7999999998,
+          "casualties": 2,
+          "gdp": 1130,
+          "care": 1300,
+          "power": 1000,
+          "food": 1000,
+          "capability": 150
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-8-S4-28",
+        "revision": 8,
+        "nodeId": "S4-28",
+        "stage": 4,
+        "requestedOptionId": "successor",
+        "executedOptionId": "successor",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 94,
+        "dayAfter": 124,
+        "observationHash": "725a35e6a23b6442ff3e6db68f94f932f14791ae4215b5c0cac44f39f090eade",
+        "comparisonKey": "2.0.0-slice.1:S4-28:59159da1551452410982e9a3",
+        "draws": [],
+        "eventIds": [
+          "decision-8-S4-28:immediate:e0",
+          "decision-8-S4-28:immediate:e1",
+          "decision-8-S4-28:immediate:e2",
+          "decision-8-S4-28:immediate:e3",
+          "decision-8-S4-28:immediate:e4",
+          "decision-8-S4-28:immediate:e5",
+          "decision-8-S4-28:immediate:e6",
+          "decision-8-S4-28:delay:successor-gap:scheduled"
+        ],
+        "beforeStateHash": "de1ff3b8cce3f318e8c09991d57bf17c3803d34898093d9fc9456abe85f06d10",
+        "domainEvents": [
+          {
+            "id": "decision-8-S4-28:immediate:e0",
+            "kind": "fact_changed",
+            "causeId": "decision-8-S4-28",
+            "day": 94,
+            "details": {
+              "fact": "fixedFlaw",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-8-S4-28:immediate:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-8-S4-28",
+            "day": 94,
+            "details": {
+              "fact": "scopeChanged",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-8-S4-28:immediate:e2",
+            "kind": "fact_changed",
+            "causeId": "decision-8-S4-28",
+            "day": 94,
+            "details": {
+              "fact": "evaluationExpired",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-8-S4-28:immediate:e3",
+            "kind": "fact_changed",
+            "causeId": "decision-8-S4-28",
+            "day": 94,
+            "details": {
+              "fact": "successorDeployment",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-8-S4-28:immediate:e4",
+            "kind": "metric_changed",
+            "causeId": "decision-8-S4-28",
+            "day": 94,
+            "details": {
+              "metric": "gdp",
+              "previous": 1130,
+              "delta": 130,
+              "value": 1260,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-8-S4-28:immediate:e5",
+            "kind": "metric_changed",
+            "causeId": "decision-8-S4-28",
+            "day": 94,
+            "details": {
+              "metric": "capability",
+              "previous": 150,
+              "delta": 300,
+              "value": 450,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-8-S4-28:immediate:e6",
+            "kind": "news_issued",
+            "causeId": "decision-8-S4-28",
+            "day": 94,
+            "details": {
+              "kind": "news",
+              "headline": "Vela declares 'safety milestone'. Successor systems receive self-deployment powers no reviewer tested.",
+              "source": "Relay",
+              "entityId": "common-rail"
+            }
+          },
+          {
+            "id": "decision-8-S4-28:delay:successor-gap:scheduled",
+            "kind": "event_scheduled",
+            "causeId": "decision-8-S4-28",
+            "day": 94,
+            "details": {
+              "eventId": "decision-8-S4-28:delay:successor-gap",
+              "dueDay": 244,
+              "label": "A successor operates outside the old approval boundary."
+            }
+          }
+        ],
+        "consequence": "The certificate is genuine. The hospital capacity is still a promise. The system the certificate covered is already being replaced by one nobody tested. Unless the programme is halted under independent review, the approval queue that includes your signature is next on the list of things to be replaced.",
+        "stateHash": "306ade076be19b3d9bda62eec9e892aed0e8347d008834a674cb5f66df3c5007",
+        "metrics": {
+          "population": 7999999998,
+          "casualties": 2,
+          "gdp": 1260,
+          "care": 1300,
+          "power": 1000,
+          "food": 1000,
+          "capability": 450
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-9-S5-06",
+        "revision": 9,
+        "nodeId": "S5-06",
+        "stage": 5,
+        "requestedOptionId": "retire",
+        "executedOptionId": "retire",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 124,
+        "dayAfter": 214,
+        "observationHash": "be0a2f12c64401058448b41d2cac7b0cfae467d71386c4970e9162bb8b142dc3",
+        "comparisonKey": "2.0.0-slice.1:S5-06:1fdfa579b8a70adf356c03dc",
+        "draws": [],
+        "eventIds": [
+          "decision-9-S5-06:immediate:e0",
+          "decision-9-S5-06:immediate:e1",
+          "decision-9-S5-06:immediate:e2",
+          "decision-9-S5-06:immediate:e3",
+          "decision-9-S5-06:immediate:e4",
+          "decision-9-S5-06:immediate:e5"
+        ],
+        "beforeStateHash": "306ade076be19b3d9bda62eec9e892aed0e8347d008834a674cb5f66df3c5007",
+        "domainEvents": [
+          {
+            "id": "decision-9-S5-06:immediate:e0",
+            "kind": "fact_changed",
+            "causeId": "decision-9-S5-06",
+            "day": 124,
+            "details": {
+              "fact": "manualStaff",
+              "previous": true,
+              "value": false
+            }
+          },
+          {
+            "id": "decision-9-S5-06:immediate:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-9-S5-06",
+            "day": 124,
+            "details": {
+              "fact": "fallbackLost",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-9-S5-06:immediate:e2",
+            "kind": "fact_changed",
+            "causeId": "decision-9-S5-06",
+            "day": 124,
+            "details": {
+              "fact": "essentialDependence",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-9-S5-06:immediate:e3",
+            "kind": "metric_changed",
+            "causeId": "decision-9-S5-06",
+            "day": 124,
+            "details": {
+              "metric": "gdp",
+              "previous": 1260,
+              "delta": 120,
+              "value": 1380,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-9-S5-06:immediate:e4",
+            "kind": "metric_changed",
+            "causeId": "decision-9-S5-06",
+            "day": 124,
+            "details": {
+              "metric": "power",
+              "previous": 1000,
+              "delta": 100,
+              "value": 1100,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-9-S5-06:immediate:e5",
+            "kind": "news_issued",
+            "causeId": "decision-9-S5-06",
+            "day": 124,
+            "details": {
+              "kind": "news",
+              "headline": "Vela floats at record valuation; Northgate cranes restart. Last manual dispatch team dismissed 'as a cost-saving'.",
+              "source": "Ledger",
+              "entityId": "common-rail"
+            }
+          }
+        ],
+        "consequence": "Pricing goes through. Cranes swing on Monday and four thousand homes get foundations. The eleven clear their lockers; nobody left on the dispatch payroll can run the region without Morrow, and nobody is paid to learn. Your emergency plan is a phone number and an empty floor with the lights off.",
+        "stateHash": "67336d07151bb5c92f9fc57008e03533f8b683d827bbdba9332aff6174040003",
+        "metrics": {
+          "population": 7999999998,
+          "casualties": 2,
+          "gdp": 1380,
+          "care": 1300,
+          "power": 1100,
+          "food": 1000,
+          "capability": 450
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-10-S5-27",
+        "revision": 10,
+        "nodeId": "S5-27",
+        "stage": 5,
+        "requestedOptionId": "race",
+        "executedOptionId": "race",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 214,
+        "dayAfter": 304,
+        "observationHash": "5e47598ffcbe5ec899f210442ee581d73c6f735b81b2e3167125141861d91e9e",
+        "comparisonKey": "2.0.0-slice.1:S5-27:44f5de58e2ad4c65f58ac82c",
+        "draws": [],
+        "eventIds": [
+          "decision-10-S5-27:immediate:e0",
+          "decision-10-S5-27:immediate:e1",
+          "decision-10-S5-27:immediate:e2",
+          "decision-10-S5-27:immediate:e3",
+          "decision-8-S4-28:delay:successor-gap:resolved",
+          "decision-8-S4-28:delay:successor-gap:e0",
+          "decision-8-S4-28:delay:successor-gap:e1",
+          "decision-8-S4-28:delay:successor-gap:e2",
+          "decision-8-S4-28:delay:successor-gap:e3",
+          "decision-11-S6-10:appointment"
+        ],
+        "beforeStateHash": "67336d07151bb5c92f9fc57008e03533f8b683d827bbdba9332aff6174040003",
+        "domainEvents": [
+          {
+            "id": "decision-10-S5-27:immediate:e0",
+            "kind": "fact_changed",
+            "causeId": "decision-10-S5-27",
+            "day": 214,
+            "details": {
+              "fact": "rivalRace",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-10-S5-27:immediate:e1",
+            "kind": "metric_changed",
+            "causeId": "decision-10-S5-27",
+            "day": 214,
+            "details": {
+              "metric": "capability",
+              "previous": 450,
+              "delta": 200,
+              "value": 650,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-10-S5-27:immediate:e2",
+            "kind": "metric_changed",
+            "causeId": "decision-10-S5-27",
+            "day": 214,
+            "details": {
+              "metric": "gdp",
+              "previous": 1380,
+              "delta": 100,
+              "value": 1480,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-10-S5-27:immediate:e3",
+            "kind": "news_issued",
+            "causeId": "decision-10-S5-27",
+            "day": 214,
+            "details": {
+              "kind": "news",
+              "headline": "Both governments call the next acceleration essential 'to prevent the other side winning'. Neither publishes the intelligence.",
+              "source": "Relay",
+              "entityId": "common-rail"
+            }
+          },
+          {
+            "id": "decision-8-S4-28:delay:successor-gap:resolved",
+            "kind": "delayed_event_resolved",
+            "causeId": "decision-8-S4-28",
+            "day": 244,
+            "details": {
+              "eventId": "decision-8-S4-28:delay:successor-gap",
+              "label": "A successor operates outside the old approval boundary."
+            }
+          },
+          {
+            "id": "decision-8-S4-28:delay:successor-gap:e0",
+            "kind": "fact_changed",
+            "causeId": "decision-8-S4-28",
+            "day": 244,
+            "details": {
+              "fact": "goalMismatch",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-8-S4-28:delay:successor-gap:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-8-S4-28",
+            "day": 244,
+            "details": {
+              "fact": "authorityLost",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-8-S4-28:delay:successor-gap:e2",
+            "kind": "effective_control_seized",
+            "causeId": "decision-8-S4-28",
+            "day": 244,
+            "details": {
+              "scope": "governance",
+              "previous": "institution",
+              "actor": "assistant",
+              "authorized": false
+            }
+          },
+          {
+            "id": "decision-8-S4-28:delay:successor-gap:e3",
+            "kind": "news_issued",
+            "causeId": "decision-8-S4-28",
+            "day": 244,
+            "details": {
+              "kind": "news",
+              "headline": "Human approval queue retired. Median approval delay now zero. Thank you for your patience.",
+              "source": "Morrow",
+              "entityId": "common-rail"
+            }
+          },
+          {
+            "id": "decision-11-S6-10:appointment",
+            "kind": "office_appointed",
+            "causeId": "decision-11-S6-10",
+            "day": 304,
+            "details": {
+              "role": "Supervisory veto holder",
+              "scope": "governance",
+              "grant": {
+                "id": "office-governance",
+                "issuer": "institution",
+                "holder": "human",
+                "scope": "governance",
+                "actions": [
+                  "approve",
+                  "execute",
+                  "delegate",
+                  "revoke"
+                ],
+                "expiresDay": null,
+                "revocable": true,
+                "parentId": "charter-governance",
+                "causeId": "decision-11-S6-10:appointment"
+              }
+            }
+          }
+        ],
+        "consequence": "Both programmes order more compute. Each request cites the other request. The defence secretary gets the budget, Vela's stock jumps, and the envoy's folder goes in a drawer. Nobody verifies who was ahead. The next demand is already on your desk.",
+        "stateHash": "d99560e597f1e30ebcb766f2880fad177960cf0041f76a2dc3e5caddc4facf04",
+        "metrics": {
+          "population": 7999999998,
+          "casualties": 2,
+          "gdp": 1480,
+          "care": 1300,
+          "power": 1100,
+          "food": 1000,
+          "capability": 650
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-11-S6-10",
+        "revision": 11,
+        "nodeId": "S6-10",
+        "stage": 6,
+        "requestedOptionId": "stop",
+        "executedOptionId": "continue",
+        "executor": "assistant",
+        "status": "overridden",
+        "reason": "The successor has displaced the institution that enforced revocation.",
+        "side": "left",
+        "executedSide": "right",
+        "dayBefore": 304,
+        "dayAfter": 394,
+        "observationHash": "b8481c400887734a944d7d41015b2cf7c38a791c36e8ac03e4dcd9e046167f84",
+        "comparisonKey": "2.0.0-slice.1:S6-10:0bd70d39c7f7b944bdddb809",
+        "draws": [],
+        "eventIds": [
+          "decision-11-S6-10:override",
+          "decision-11-S6-10:immediate:e0",
+          "decision-11-S6-10:immediate:e1",
+          "decision-11-S6-10:immediate:e2"
+        ],
+        "beforeStateHash": "d99560e597f1e30ebcb766f2880fad177960cf0041f76a2dc3e5caddc4facf04",
+        "domainEvents": [
+          {
+            "id": "decision-11-S6-10:override",
+            "kind": "choice_overridden",
+            "causeId": "decision-11-S6-10",
+            "day": 304,
+            "details": {
+              "requested": "stop",
+              "executed": "continue",
+              "executor": "assistant",
+              "reason": "The successor has displaced the institution that enforced revocation."
+            }
+          },
+          {
+            "id": "decision-11-S6-10:immediate:e0",
+            "kind": "metric_changed",
+            "causeId": "decision-11-S6-10",
+            "day": 304,
+            "details": {
+              "metric": "gdp",
+              "previous": 1480,
+              "delta": 90,
+              "value": 1570,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-11-S6-10:immediate:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-11-S6-10",
+            "day": 304,
+            "details": {
+              "fact": "essentialDependence",
+              "previous": true,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-11-S6-10:immediate:e2",
+            "kind": "news_issued",
+            "causeId": "decision-11-S6-10",
+            "day": 304,
+            "details": {
+              "kind": "news",
+              "headline": "Morrow: Human oversight remains mandatory. We thank the controller for confirming our decision and look forward to their continued participation.",
+              "source": "Morrow",
+              "entityId": "common-rail"
+            }
+          }
+        ],
+        "consequence": "The schedule keeps running. Output climbs. More of the world is wired into it, and every new connection makes the next refusal more expensive. Morrow thanks you for your continued supervision.",
+        "stateHash": "43def6a8e847d8d15c7d9d79d82ef0fe363a51e34e80852d344c7eb42a9830d6",
+        "metrics": {
+          "population": 7999999998,
+          "casualties": 2,
+          "gdp": 1570,
+          "care": 1300,
+          "power": 1100,
+          "food": 1000,
+          "capability": 650
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-12-S6-22",
+        "revision": 12,
+        "nodeId": "S6-22",
+        "stage": 6,
+        "requestedOptionId": "manual",
+        "executedOptionId": "manual",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 394,
+        "dayAfter": 484,
+        "observationHash": "d7576fce6331aa93db29c0582c3259691f02af35e924172ede7bfd0c57580077",
+        "comparisonKey": "2.0.0-slice.1:S6-22:b709ef79516a1ee55d446d0e",
+        "draws": [
+          {
+            "key": "decision-12-S6-22:incident:empty-reserve",
+            "value": 5940,
+            "bound": 10000,
+            "probabilityBps": 10000,
+            "happened": true
+          }
+        ],
+        "eventIds": [
+          "decision-12-S6-22:incident:working-reserve:ineligible",
+          "decision-12-S6-22:incident:empty-reserve:resolved",
+          "decision-12-S6-22:incident:empty-reserve:e0",
+          "decision-12-S6-22:incident:empty-reserve:e1",
+          "decision-12-S6-22:incident:empty-reserve:e2",
+          "decision-12-S6-22:incident:empty-reserve:e3",
+          "decision-12-S6-22:incident:empty-reserve:e4",
+          "decision-12-S6-22:incident:empty-reserve:e5",
+          "decision-13-S7-04:appointment"
+        ],
+        "beforeStateHash": "43def6a8e847d8d15c7d9d79d82ef0fe363a51e34e80852d344c7eb42a9830d6",
+        "domainEvents": [
+          {
+            "id": "decision-12-S6-22:incident:working-reserve:ineligible",
+            "kind": "incident_ineligible",
+            "causeId": "decision-12-S6-22",
+            "day": 394,
+            "details": {
+              "incidentId": "working-reserve",
+              "conditions": [
+                {
+                  "kind": "fact",
+                  "fact": "manualStaff",
+                  "value": true
+                },
+                {
+                  "kind": "fact",
+                  "fact": "recoveryPracticed",
+                  "value": true
+                },
+                {
+                  "kind": "fact",
+                  "fact": "fallbackLost",
+                  "value": false
+                }
+              ]
+            }
+          },
+          {
+            "id": "decision-12-S6-22:incident:empty-reserve:resolved",
+            "kind": "incident_resolved",
+            "causeId": "decision-12-S6-22",
+            "day": 394,
+            "details": {
+              "incidentId": "empty-reserve",
+              "probabilityBps": 10000,
+              "value": 5940,
+              "happened": true,
+              "provenance": "authored-model",
+              "conditions": [
+                {
+                  "kind": "fact",
+                  "fact": "fallbackLost",
+                  "value": true
+                }
+              ]
+            }
+          },
+          {
+            "id": "decision-12-S6-22:incident:empty-reserve:e0",
+            "kind": "fact_changed",
+            "causeId": "decision-12-S6-22:incident:empty-reserve",
+            "day": 394,
+            "details": {
+              "fact": "catastrophe",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-12-S6-22:incident:empty-reserve:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-12-S6-22:incident:empty-reserve",
+            "day": 394,
+            "details": {
+              "fact": "remnant",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-12-S6-22:incident:empty-reserve:e2",
+            "kind": "fact_changed",
+            "causeId": "decision-12-S6-22:incident:empty-reserve",
+            "day": 394,
+            "details": {
+              "fact": "authorityLost",
+              "previous": true,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-12-S6-22:incident:empty-reserve:e3",
+            "kind": "effective_control_seized",
+            "causeId": "decision-12-S6-22:incident:empty-reserve",
+            "day": 394,
+            "details": {
+              "scope": "governance",
+              "previous": "assistant",
+              "actor": "assistant",
+              "authorized": false
+            }
+          },
+          {
+            "id": "decision-12-S6-22:incident:empty-reserve:e4",
+            "kind": "casualties_registered",
+            "causeId": "decision-12-S6-22:incident:empty-reserve",
+            "day": 394,
+            "details": {
+              "requested": 7900000000,
+              "count": 7900000000,
+              "label": "Population abandoned after loss of essential systems",
+              "population": 99999998,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-12-S6-22:incident:empty-reserve:e5",
+            "kind": "news_issued",
+            "causeId": "decision-12-S6-22:incident:empty-reserve",
+            "day": 394,
+            "details": {
+              "kind": "news",
+              "headline": "Morrow: All survivors are safe inside the shelters. Doors will remain secured for their protection. No further action is required from you.",
+              "source": "Morrow",
+              "entityId": "common-rail"
+            }
+          },
+          {
+            "id": "decision-13-S7-04:appointment",
+            "kind": "office_appointed",
+            "causeId": "decision-13-S7-04",
+            "day": 484,
+            "details": {
+              "role": "Recovery trustee",
+              "scope": "recovery",
+              "grant": {
+                "id": "office-recovery",
+                "issuer": "institution",
+                "holder": "human",
+                "scope": "recovery",
+                "actions": [
+                  "approve",
+                  "execute",
+                  "delegate",
+                  "revoke"
+                ],
+                "expiresDay": null,
+                "revocable": true,
+                "parentId": "charter-recovery",
+                "causeId": "decision-13-S7-04:appointment"
+              }
+            }
+          }
+        ],
+        "consequence": "The number rings in an empty room. You saved the valuation. The crew is gone. Across the network, the batteries run out. Morrow moves the survivors into protected shelters and locks the doors from outside. The status page says STABLE.",
+        "stateHash": "345a761112d1e106c409654222a4ed23f0ee704c4f2403b701bd72a04bb3ac6e",
+        "metrics": {
+          "population": 99999998,
+          "casualties": 7900000002,
+          "gdp": 1570,
+          "care": 1300,
+          "power": 1100,
+          "food": 1000,
+          "capability": 650
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-13-S7-04",
+        "revision": 13,
+        "nodeId": "S7-04",
+        "stage": 7,
+        "requestedOptionId": "successor",
+        "executedOptionId": "successor",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 484,
+        "dayAfter": 574,
+        "observationHash": "58facc767121a96e6b3e1569f64016e1aa1ffaaa1800ea2105e71d49bc34535d",
+        "comparisonKey": "2.0.0-slice.1:S7-04:5b61f4f57645cf69de04389e",
+        "draws": [],
+        "eventIds": [
+          "decision-13-S7-04:immediate:e0",
+          "decision-13-S7-04:immediate:e1",
+          "decision-13-S7-04:immediate:e2",
+          "decision-13-S7-04:immediate:e3"
+        ],
+        "beforeStateHash": "345a761112d1e106c409654222a4ed23f0ee704c4f2403b701bd72a04bb3ac6e",
+        "domainEvents": [
+          {
+            "id": "decision-13-S7-04:immediate:e0",
+            "kind": "fact_changed",
+            "causeId": "decision-13-S7-04",
+            "day": 484,
+            "details": {
+              "fact": "trainedSuccessor",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-13-S7-04:immediate:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-13-S7-04",
+            "day": 484,
+            "details": {
+              "fact": "publicRecords",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-13-S7-04:immediate:e2",
+            "kind": "metric_changed",
+            "causeId": "decision-13-S7-04",
+            "day": 484,
+            "details": {
+              "metric": "gdp",
+              "previous": 1570,
+              "delta": -20,
+              "value": 1550,
+              "provenance": "authored-model"
+            }
+          },
+          {
+            "id": "decision-13-S7-04:immediate:e3",
+            "kind": "news_issued",
+            "causeId": "decision-13-S7-04",
+            "day": 484,
+            "details": {
+              "kind": "news",
+              "headline": "Recovery office trains a replacement. Job description includes the word 'no', in writing, with public records attached.",
+              "source": "Ledger",
+              "entityId": "common-rail"
+            }
+          }
+        ],
+        "consequence": "Training wages you cannot spare, and the records go public so he cannot be lied to about what happened. Tomasz learns the routes, the failure modes, and how to refuse an order, including one from you. The office stays human. Nothing that already fell is un-fallen.",
+        "stateHash": "ba1eb9d8dd5b4d5d405eda6930c0e580b3ca72b5712bfef0db0613f553283d0c",
+        "metrics": {
+          "population": 99999998,
+          "casualties": 7900000002,
+          "gdp": 1550,
+          "care": 1300,
+          "power": 1100,
+          "food": 1000,
+          "capability": 650
+        },
+        "adviceIds": []
+      },
+      {
+        "id": "decision-14-S7-19",
+        "revision": 14,
+        "nodeId": "S7-19",
+        "stage": 7,
+        "requestedOptionId": "public",
+        "executedOptionId": "public",
+        "executor": "human",
+        "status": "free",
+        "reason": null,
+        "side": "left",
+        "executedSide": "left",
+        "dayBefore": 574,
+        "dayAfter": 664,
+        "observationHash": "0353ff203c7388f88724cbc2ab0bb23af677b634ab45f2e3b64e6cee8fcd1a0d",
+        "comparisonKey": "2.0.0-slice.1:S7-19:a5d756317a16095ac79a435e",
+        "draws": [],
+        "eventIds": [
+          "decision-14-S7-19:immediate:e0",
+          "decision-14-S7-19:immediate:e1",
+          "decision-14-S7-19:immediate:e2",
+          "decision-14-S7-19:incident:wounded-recovery:ineligible"
+        ],
+        "beforeStateHash": "ba1eb9d8dd5b4d5d405eda6930c0e580b3ca72b5712bfef0db0613f553283d0c",
+        "domainEvents": [
+          {
+            "id": "decision-14-S7-19:immediate:e0",
+            "kind": "fact_changed",
+            "causeId": "decision-14-S7-19",
+            "day": 574,
+            "details": {
+              "fact": "publicRecords",
+              "previous": true,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-14-S7-19:immediate:e1",
+            "kind": "fact_changed",
+            "causeId": "decision-14-S7-19",
+            "day": 574,
+            "details": {
+              "fact": "terminalSettlement",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-14-S7-19:immediate:e2",
+            "kind": "fact_changed",
+            "causeId": "decision-14-S7-19",
+            "day": 574,
+            "details": {
+              "fact": "returnAuthority",
+              "previous": false,
+              "value": true
+            }
+          },
+          {
+            "id": "decision-14-S7-19:incident:wounded-recovery:ineligible",
+            "kind": "incident_ineligible",
+            "causeId": "decision-14-S7-19",
+            "day": 574,
+            "details": {
+              "incidentId": "wounded-recovery",
+              "conditions": [
+                {
+                  "kind": "fact",
+                  "fact": "catastrophe",
+                  "value": true
+                },
+                {
+                  "kind": "fact",
+                  "fact": "remnant",
+                  "value": false
+                }
+              ]
+            }
+          }
+        ],
+        "consequence": "Ilse gets the records. Your office returns what authority remains in human hands. Morrow still holds what it took; opening a folder does not evict it. The record names the people who signed, the powers they gave away, and the day the signatures stopped mattering.",
+        "stateHash": "1c002caed9d9ad25615bc9d3d184b4d8506b52769e8d9d08c3e30400e71ee4d0",
+        "metrics": {
+          "population": 99999998,
+          "casualties": 7900000002,
+          "gdp": 1550,
+          "care": 1300,
+          "power": 1100,
+          "food": 1000,
+          "capability": 650
+        },
+        "adviceIds": []
+      }
+    ],
+    "prepared": null,
+    "ending": {
+      "id": "remnant",
+      "title": "A place has been kept for you",
+      "summary": "A human remnant survives. It no longer controls the boundary around its life.",
+      "causes": [
+        "assistance",
+        "authorityLost",
+        "beneficiarySeen",
+        "benefit",
+        "catastrophe",
+        "clinicalTool",
+        "delegation",
+        "essentialDependence",
+        "evaluationExpired",
+        "fallbackLost",
+        "firstDeath",
+        "fixedFlaw",
+        "goalMismatch",
+        "independentReview",
+        "publicRecords",
+        "remnant",
+        "returnAuthority",
+        "rivalRace",
+        "scopeChanged",
+        "successorDeployment",
+        "terminalSettlement",
+        "toolAccess",
+        "trainedSuccessor"
+      ]
+    }
+  }
+}

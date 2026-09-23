@@ -1,96 +1,87 @@
 # trolley.
 
-An endless trolley problem that starts with spilled coffee and ends somewhere the department would rather not explain.
+A dark comedy about small decisions, useful machines, and the people who still get to make the next decision.
 
-**[Play](https://ammarphp.github.io/trolley/)** · [How it works](docs/ARCHITECTURE.md) · [The experiment](docs/METHODOLOGY.md) · [Data and privacy](docs/PRIVACY.md) · [Publishing](docs/DEPLOYMENT.md)
+You sit behind a rail controller. The world keeps moving. Choose a track, then move the lever. A spilled coffee becomes a dispatch problem, a helpful assistant becomes infrastructure, and infrastructure becomes a government. Earlier choices determine whether control can still be recovered. Catastrophe is possible; useful, accountable AI and costly restraint are possible too.
 
-You ride behind a little hand-drawn trolley. It keeps moving. There are two tracks and a choice. At first, nothing matters much. Then people appear. Then the systems built to help you start making suggestions. The other lab is moving faster. Safety becomes a delay. Eventually, the objective survives and the people become an implementation detail.
+**Campaign release:** this revision contains 154 authored scenes across seven stages, with a deterministic causal engine, original cabin animation, local saves and exact replay. A full-length route selects 27–43 decisions; early endings can shorten it. Thirty to forty-five minutes remains a pacing target, not a measured completion time. The owner has authorized the GitHub push and Pages release through [ammarphp/trolley](https://github.com/ammarphp/trolley). The [release evidence](reports/validation/full-campaign-release.md) records the final checks, hashes and deployment result as they are completed; authorization is not evidence that deployment already succeeded. The optional public collector remains disabled.
 
-This is a dark comedy and a fictional AI-safety PSA, not a prediction, an AI-generated morality test, or a claim that all AI development follows one inevitable path.
 
-## Play
+## Run
 
-- Click a track, or use **← / →** or **1 / 2**.
-- **Escape** pauses. The pause control always works.
-- After a choice, the trolley continues after a short result. Click **On we go** to continue immediately.
-- **Wait, I have thoughts** pauses advancement for an optional reason/confidence response.
-- Reduced motion disables camera movement and automatic advancement. **Keep the visuals calm** preserves the opening palette while the story progresses.
-- The report icon opens charts. The menu holds sound, privacy, restart, and withdrawal.
-- **Another track?** explores individual dilemmas without the descent. Shared links reproduce a specific dilemma in the calm interface.
-
-## Run locally
-
-Node **22.13 or newer** is required for the local SQLite collector and tests. Node 24 is recommended.
+Use Node 24 and pnpm 11.19.0.
 
 ```sh
-corepack enable
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open `http://127.0.0.1:4173`. No API key, account, paid model, remote font, or frontend dependency is needed. You can also run `node scripts/serve.mjs` without installing dependencies to play locally.
+Open `http://127.0.0.1:4173`. If that port is occupied, use `PORT=4181 pnpm dev`. No API key, model service, account or collector is needed. The static game uses relative URLs and can be hosted beneath a GitHub Pages repository path.
 
 ```sh
-pnpm test                # deterministic stimuli and real SQLite collector tests
-pnpm build               # static dist/ for GitHub Pages, including project subpaths
-pnpm preview             # serve the built site
+pnpm check                         # strict types, unit/integration tests, static build
+pnpm simulate -- --profile campaign --runs 10000 --policy random --seed campaign-audit
+pnpm simulate -- --profile slice --runs 10000 --policy enumerate --seed slice-audit
+pnpm collector:build               # compile optional service; does not deploy
+pnpm preview                       # serve dist/
 pnpm exec playwright install chromium
-pnpm test:browser        # isolated private browser tests; no live collector writes
-pnpm catalog             # regenerate the inspectable catalog
+pnpm test:browser                   # browser CI suite
 ```
 
-The development `public/config.json` deliberately has no collector. The Pages workflow injects the production collector URL from the repository variable `COLLECTOR_URL`.
+The simulator defaults to the full campaign. Enumeration is restricted to the old slice; it is not a complete search of the campaign. Named policies use explicit anchor choices and synthetic intent priorities for other scenes, not a model of human behavior. Actual test evidence, including its limits, is in [reports/validation](reports/validation). A written test command is not evidence that it ran. The browser CI suite, manual desktop/phone-viewport inspection and physical-device accessibility testing are separate checks.
 
-## What is included
+## Controls
 
-- 120+ authored templates across twelve philosophical themes, plus a seven-stage continuous narrative. `docs/CATALOG.md` is the generated inventory with exact counts.
-- A seeded generator. A seed, template ID, and engine version reproduce a dilemma. Choice history changes later selections and creates distinct runs.
-- A Canvas 2D perspective renderer with moving sleepers, a controller, uneven pen strokes, swaying figures, server farms, drones, and slow changes in palette and scenery. No raster art or asset downloads.
-- Standalone exploration, keyboard controls, mobile layouts, a real pause, quiet optional sound, reduced motion, and calm visuals.
-- Local run history, CSV/JSON exports, SVG chart exports, and four per-run views: choices, response timing, descent trajectory, and stage heatmap.
-- A public collector with a separate random ID and withdrawal key **for each run**. There is no user or visitor table and no identifier shared across runs.
-- Aggregate live statistics plus a scheduled GitHub Action that writes aggregate JSON into the repository and republishes Pages. No raw run or response records are committed.
-- A Cloudflare Worker collector, a matching local Node/SQLite adapter, migration schema, abuse limits, validation, CORS, retry deduplication, and withdrawal.
-- Methodology, a threat model, content rules, contribution guidance, and analysis templates.
+- Select either route, then press **Toggle lever**. The drawn lever reflects the executed route.
+- Arrow keys select a route. Enter or Space on the grip commits it. Escape cancels selection.
+- The lever stays where it was left, but each new decision starts unarmed. Waiting never chooses for you.
+- **Keep going** leaves the consequence and starts the next decision. There is no reading deadline.
+- Pause, settings and the run record remain available during the horror. Less motion, less graphic detail and sound are independent settings.
+- The information button beside the dilemma opens context, the scene description and sources. Morrow's conversation and the news feed enter at stage three, with selectable questions instead of a text box. The meters enter at stage four.
 
-## Anonymous runs, not anonymous people
+Your place is saved locally when browser storage is available. Reopening the page offers resume. Replay export includes the pinned content version and causal journal; exports exclude the private withdrawal key. Supported archived slice bundles remain available for exact replay and resume. Unknown content is rejected or kept exportable, rather than silently rewritten as campaign history.
 
-One playthrough is one record. Ten playthroughs from one person are ten unrelated records. Refreshing resumes the current local run; **Start over** creates a new one. We do not attempt to estimate unique people.
+## What exists
 
-When the production collector is connected, a notice beside the game controls discloses shared run statistics and provides an opt-out. Private runs still play and produce local charts. Shared data includes decisions, skips, optional reflections, rounded active/elapsed timing, track order, and narrative stage. No name, email, free text, IP, user-agent string, or browser fingerprint is stored by this application. Infrastructure providers necessarily process ordinary connection metadata.
+The v2 game separates a pure deterministic simulation from its observations, input, animation, persistence and telemetry. Prepared decisions are immutable; commitments are version checked and atomic. SHA-256 keyed randomness separates route selection from fictional incidents. A replay must reproduce every recorded decision and state hash. Cosmetic motion cannot draw an incident, advance a fictional day or kill anyone.
 
-Only aggregate results are public. Detailed buckets require at least ten runs; this is a suppression rule, **not** a formal anonymity guarantee or differential privacy. Historical aggregate commits may remain after a run is withdrawn. See [PRIVACY.md](docs/PRIVACY.md).
+The full bank covers useful advice, bounded clinical benefits, incentives and financing pressure, permission creep, misleading assurance, maintained fallbacks, verified coordination, conditional loss of control, and the return or transfer of power. Eight ending families have explicit predicates. Earlier slice witnesses and tests remain historical evidence; the current full-campaign witnesses and coverage belong to the [release report](reports/validation/full-campaign-release.md). All incident probabilities and numeric outcomes are authored fiction, not estimates of real AI risk or judgments about a player.
 
-## What “endless” means
+Four early rail cases now resolve ordered contact, loop re-entry and independent brakes against distinct population cohorts, including identified fictional workers. Removing the stopping obstruction changes the causal outcome; drawing a curved rail alone does not. Most later casualties still use anonymous counts, and named characters in prose do not automatically become persistent simulated people. The [campaign review](reports/validation/campaign-editorial-review.md) distinguishes these implemented mechanics from remaining full-model obligations.
 
-There is no final stop. After the last narrative stage, the seeded generator keeps serving dilemmas. There are finite authored templates and finite distinct parameter combinations. Seed uniqueness does not make every dilemma philosophically new. The name describes the game loop, not a mathematical claim of infinite original content.
+The original illustration system uses technical line art, a rear view of the uniformed controller, stationary hands, a toggling lever, persistent world movement and changing environments. Sound is original browser synthesis. Earlier renderer and motion checks remain in [motion evidence](docs/art/SPIKE_EVIDENCE.md); they do not substitute for inspecting the full campaign. Further visual refinement and device review remain open.
 
-The game is not a controlled study. Narrative order, humor, graphics, and content deliberately change together. Comparisons are exploratory and cannot establish causal effects or population preferences. The report does not assign a moral score.
+## Run collection
 
-## Repository map
+Sharing is **disabled for this release**. Collector code exists, but publishing the game does not activate it. With a separately configured and approved service, a player could opt in when starting a fresh run. Each shared run gets a fresh random identifier and capability key. There is no user, visitor or cross-run identity in the application. Ten runs by one person are ten runs, not ten people.
 
-```text
-src/
-  app.js                 interaction, pause, navigation, records, exports
-  game-scene.js          continuous perspective drawing and motion
-  game.css               minimal play surface
-  catalog.js             twelve core families
-  story-catalog.js       AI-safety narrative scenarios
-  descent.js             pacing and history-sensitive selection
-  engine.js              seeded parameters, versions, replay links
-  play-copy.js           short on-screen language
-  runs.js                independent run identity and route history
-  charts.js              inspectable SVG/HTML run and aggregate charts
-  collector-client.js    typed-by-validation API payload allowlist
-collector/
-  worker.js              public API for Workers/D1
-  schema.js              SQLite schema
-  local.mjs              local HTTP adapter
-  sqlite-adapter.js      D1-compatible local SQLite test adapter
-scripts/                 build, serve, catalog, aggregate sync, analysis
-tests/                   generator, collector, browser coverage
-docs/                    content, methodology, privacy, deployment, security
-.github/workflows/       Pages deployment, CI, aggregate snapshots
-```
+Only allowlisted decision/exposure events are sent. No name, free text, fingerprint or application-stored IP address is collected. Hosting providers can process connection metadata separately. Collection failure never blocks play. Public comparable cells require at least twenty eligible runs; test, development, delegated and overridden records are excluded. Suppression is not differential privacy or a guarantee of anonymity. Withdrawal affects stored events and future releases; it cannot recall copies already downloaded.
 
-Code and original project content are MIT licensed. The repository contains no third-party illustration assets. The familiar trolley problem belongs to a much longer philosophical tradition; see the reading notes in the methodology.
+The optional v2 service validates decisions by replaying the server's approved content. Its own tables and routes are separate from v1. The deployment wrapper closes new v1 submissions while preserving old withdrawal and aggregate access. Scheduled retention and aggregate-refresh code exists; no v2 service has been activated by this implementation. GitHub Actions writes aggregate snapshots into the Pages artifact, not into Git history. See [collection design](docs/privacy/v2-collection-design.md) and [service integration](collector/v2/README.md).
+
+The legacy implementation remains at `legacy.html`, with new sharing disabled in this branch. Its templates, exports and tests are retained. It is not counted as finished v2 content.
+
+## Research and boundaries
+
+[Research dossiers](research/README.md), the [public source registry](research/registry/public-sources.json), [model semantics](docs/architecture/SEMANTICS.md), and [methodology](docs/METHODOLOGY_V2.md) distinguish published mechanisms, authored assumptions, software verification and any future participant evidence. The local books are reading inputs, not redistributable assets; they are excluded from source publication and the build.
+
+This game is an AI-safety warning. It is not a controlled study, psychological diagnosis, real-world forecast or morality score. Formal recruitment and efficacy claims require a separate study protocol. No participant results have been invented or inferred from synthetic campaigns.
+
+## Repository
+
+| Path | Purpose |
+|---|---|
+| `src/contracts/` | Runtime-validated nodes, permissions, effects and records |
+| `src/simulation/` | Pure transitions, routing, incidents, endings and replay |
+| `src/content/campaign/` | The 154 authored scenes and campaign assembly |
+| `src/content/archive/` | Pinned prior content for exact replay |
+| `src/presentation/` | Original cabin, world geometry, line art and audio |
+| `src/ui/` | Semantic DOM, lever controls and debrief |
+| `src/persistence/` | Local runs, saves and safe exports |
+| `src/telemetry/` | Consent, bounded retry queue and public comparisons |
+| `collector/v2/` | Optional validation, storage, withdrawal and suppression |
+| `research/` | Evidence, candidate inventory and analysis specifications |
+| `docs/plan/` | Accepted plan, task ledger and implementation status |
+| `reports/validation/` | Actual checks and reproducible evidence |
+
+Code and original artwork are MIT licensed. Third-party dependencies retain their own licenses; cited research is not included under the project's license. No source book or third-party illustration is bundled.

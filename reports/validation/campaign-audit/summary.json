@@ -1,0 +1,86 @@
+{
+  "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+  "runs": 10000,
+  "choices": 338578,
+  "minChoices": 22,
+  "maxChoices": 43,
+  "endings": {
+    "recovery": 2051,
+    "restraint": 769,
+    "succession": 3062,
+    "extinction": 665,
+    "remnant": 2171,
+    "containment": 467,
+    "tutelage": 754,
+    "accountable": 61
+  },
+  "coverageSummary": {
+    "nodes": 154,
+    "bank": 154,
+    "requestedOptions": 308,
+    "executedOptions": 308,
+    "missingNodes": [],
+    "missingOptions": [],
+    "unexecutedOptions": []
+  },
+  "replays": [
+    {
+      "file": "random-accountable.json",
+      "ending": "accountable",
+      "decisions": 35,
+      "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+      "verified": true
+    },
+    {
+      "file": "random-containment.json",
+      "ending": "containment",
+      "decisions": 34,
+      "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+      "verified": true
+    },
+    {
+      "file": "random-extinction.json",
+      "ending": "extinction",
+      "decisions": 29,
+      "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+      "verified": true
+    },
+    {
+      "file": "random-recovery.json",
+      "ending": "recovery",
+      "decisions": 36,
+      "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+      "verified": true
+    },
+    {
+      "file": "random-remnant.json",
+      "ending": "remnant",
+      "decisions": 28,
+      "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+      "verified": true
+    },
+    {
+      "file": "random-restraint.json",
+      "ending": "restraint",
+      "decisions": 28,
+      "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+      "verified": true
+    },
+    {
+      "file": "random-succession.json",
+      "ending": "succession",
+      "decisions": 34,
+      "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+      "verified": true
+    },
+    {
+      "file": "random-tutelage.json",
+      "ending": "tutelage",
+      "decisions": 37,
+      "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+      "verified": true
+    }
+  ],
+  "errors": [],
+  "warning": "Synthetic keyed policy probes of an authored model. Frequencies are neither observed player responses nor estimates of real-world AI risk."
+}

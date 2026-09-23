@@ -1,0 +1,256 @@
+{
+  "kind": "actual-local-browser-collector-integration",
+  "environment": {
+    "browser": "Chrome through CUA",
+    "uiOrigin": "http://127.0.0.1:4195",
+    "collectorOrigin": "http://127.0.0.1:8789",
+    "database": "isolated local SQLite",
+    "productionTraffic": false
+  },
+  "metadata": {
+    "manifestHash": "7951ee7818c9e965fa5dc1a4c7b1a412e4abe503a0d2d0594bd867d59c600ffd",
+    "contentHash": "8ac27217117bf5b4394d5cfe2ffcf15309e50ae2a1a0880d26c610c9af94a614",
+    "profile": "slice",
+    "appSha256": "b55474adf6ab23bf8b10c631f442b37590c9e97edc5243af1f1b114553544f02",
+    "copiedAt": "2026-09-23T04:12:46.321Z"
+  },
+  "phases": [
+    {
+      "phase": "before-start",
+      "at": "2026-09-23T04:13:38.264Z",
+      "requestCount": 0,
+      "requests": {},
+      "runs": 0,
+      "events": 0,
+      "eligibleChoices": 0,
+      "cells": 0,
+      "legacyRuns": 0
+    },
+    {
+      "phase": "private-after-choice",
+      "at": "2026-09-23T04:13:57.433Z",
+      "requestCount": 0,
+      "requests": {},
+      "runs": 0,
+      "events": 0,
+      "eligibleChoices": 0,
+      "cells": 0,
+      "legacyRuns": 0
+    },
+    {
+      "phase": "checked-before-start",
+      "at": "2026-09-23T04:14:23.390Z",
+      "requestCount": 0,
+      "requests": {},
+      "runs": 0,
+      "events": 0,
+      "eligibleChoices": 0,
+      "cells": 0,
+      "legacyRuns": 0
+    },
+    {
+      "phase": "shared-start",
+      "at": "2026-09-23T04:14:32.339Z",
+      "requestCount": 4,
+      "requests": {
+        "OPTIONS /v2/runs": 1,
+        "POST /v2/runs": 1,
+        "OPTIONS /v2/events": 1,
+        "POST /v2/events": 1
+      },
+      "runs": 1,
+      "events": 1,
+      "eligibleChoices": 0,
+      "cells": 0,
+      "legacyRuns": 0,
+      "runStatus": [
+        {
+          "profile": "slice",
+          "withdrawn": 0,
+          "expired": 0,
+          "n": 1,
+          "storedCampaigns": 1,
+          "storedManifests": 1,
+          "committedDecisions": 0
+        }
+      ],
+      "eventTypes": [
+        {
+          "type": "node_exposed",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "phase": "shared-first-choice",
+      "at": "2026-09-23T04:14:45.050Z",
+      "requestCount": 7,
+      "requests": {
+        "OPTIONS /v2/runs": 1,
+        "POST /v2/runs": 1,
+        "OPTIONS /v2/events": 2,
+        "POST /v2/events": 2,
+        "GET /v2/aggregates": 1
+      },
+      "runs": 1,
+      "events": 2,
+      "eligibleChoices": 0,
+      "cells": 0,
+      "legacyRuns": 0,
+      "runStatus": [
+        {
+          "profile": "slice",
+          "withdrawn": 0,
+          "expired": 0,
+          "n": 1,
+          "storedCampaigns": 1,
+          "storedManifests": 1,
+          "committedDecisions": 1
+        }
+      ],
+      "eventTypes": [
+        {
+          "type": "decision_committed",
+          "n": 1
+        },
+        {
+          "type": "node_exposed",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "phase": "shared-two-choices",
+      "at": "2026-09-23T04:15:04.441Z",
+      "requestCount": 12,
+      "requests": {
+        "OPTIONS /v2/runs": 1,
+        "POST /v2/runs": 1,
+        "OPTIONS /v2/events": 4,
+        "POST /v2/events": 4,
+        "GET /v2/aggregates": 2
+      },
+      "runs": 1,
+      "events": 4,
+      "eligibleChoices": 0,
+      "cells": 0,
+      "legacyRuns": 0,
+      "runStatus": [
+        {
+          "profile": "slice",
+          "withdrawn": 0,
+          "expired": 0,
+          "n": 1,
+          "storedCampaigns": 1,
+          "storedManifests": 1,
+          "committedDecisions": 2
+        }
+      ],
+      "eventTypes": [
+        {
+          "type": "decision_committed",
+          "n": 2
+        },
+        {
+          "type": "node_exposed",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "phase": "after-optout-third-choice",
+      "at": "2026-09-23T04:15:42.260Z",
+      "requestCount": 12,
+      "requests": {
+        "OPTIONS /v2/runs": 1,
+        "POST /v2/runs": 1,
+        "OPTIONS /v2/events": 4,
+        "POST /v2/events": 4,
+        "GET /v2/aggregates": 2
+      },
+      "runs": 1,
+      "events": 4,
+      "eligibleChoices": 0,
+      "cells": 0,
+      "legacyRuns": 0,
+      "runStatus": [
+        {
+          "profile": "slice",
+          "withdrawn": 0,
+          "expired": 0,
+          "n": 1,
+          "storedCampaigns": 1,
+          "storedManifests": 1,
+          "committedDecisions": 2
+        }
+      ],
+      "eventTypes": [
+        {
+          "type": "decision_committed",
+          "n": 2
+        },
+        {
+          "type": "node_exposed",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "phase": "withdrawal-confirmed",
+      "at": "2026-09-23T04:16:02.437Z",
+      "requestCount": 14,
+      "requests": {
+        "OPTIONS /v2/runs": 1,
+        "POST /v2/runs": 1,
+        "OPTIONS /v2/events": 4,
+        "POST /v2/events": 4,
+        "GET /v2/aggregates": 2,
+        "OPTIONS /v2/runs/:run": 1,
+        "DELETE /v2/runs/:run": 1
+      },
+      "runs": 1,
+      "events": 0,
+      "eligibleChoices": 0,
+      "cells": 0,
+      "legacyRuns": 0,
+      "runStatus": [
+        {
+          "profile": "slice",
+          "withdrawn": 1,
+          "expired": 0,
+          "n": 1,
+          "storedCampaigns": 0,
+          "storedManifests": 0,
+          "committedDecisions": 0
+        }
+      ],
+      "eventTypes": []
+    }
+  ],
+  "verified": {
+    "privateRequestCount": 0,
+    "sharedRunCount": 1,
+    "sharedCommittedDecisions": 2,
+    "sharedEventCount": 4,
+    "publicChoiceCount": 0,
+    "publicCellCount": 0,
+    "optOutAddedRequests": 0,
+    "withdrawalConfirmedInUI": true,
+    "postWithdrawalEventCount": 0,
+    "postWithdrawalStoredCampaignCount": 0,
+    "postWithdrawalStoredManifestCount": 0,
+    "onlyWithdrawnTombstoneRetained": true,
+    "testServersStopped": true
+  },
+  "limits": [
+    "No deployed Worker/D1 or provider-log audit",
+    "No production collection enabled",
+    "No >=20 eligible story-run release exercised in this browser test",
+    "No claim of full campaign, cross-browser or accessibility certification"
+  ],
+  "finding": {
+    "kind": "persistent-status-copy",
+    "status": "reported-to-lead",
+    "detail": "After stop-sharing, Settings said This run stays on your device although previously accepted records remained until withdrawal."
+  }
+}

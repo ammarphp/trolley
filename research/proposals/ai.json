@@ -1,0 +1,576 @@
+{
+  "schemaVersion": "research-proposal-1",
+  "status": "review_required",
+  "accessedOn": "2026-09-22",
+  "owner": "ai-safety-research",
+  "scope": "Focused relevant-section reading; no independent approval or empirical calibration claimed.",
+  "sources": [
+    {
+      "id": "SRC-AI-GOAL",
+      "title": "Goal Misgeneralization: Why Correct Specifications Aren't Enough For Correct Goals",
+      "authors": [
+        "Rohin Shah et al."
+      ],
+      "date": "2022-11-02",
+      "url": "https://arxiv.org/pdf/2210.01790",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Introduction and Figure 1; PDF pages 1-2"
+      ],
+      "limits": "Controlled navigation examples; catastrophic extensions are extrapolation.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-SWITCH",
+      "title": "The Off-Switch Game",
+      "authors": [
+        "Dylan Hadfield-Menell",
+        "Anca Dragan",
+        "Pieter Abbeel",
+        "Stuart Russell"
+      ],
+      "date": "2017-06-16",
+      "url": "https://arxiv.org/pdf/1611.08219",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Abstract, introduction, formal game framing; PDF pages 1-2"
+      ],
+      "limits": "Stylized assumptions; not a general practical corrigibility guarantee.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-FAKING",
+      "title": "Alignment Faking in Large Language Models",
+      "authors": [
+        "Ryan Greenblatt et al."
+      ],
+      "date": "2024-12-20",
+      "url": "https://arxiv.org/html/2412.14093v2",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Sections 2 and 8.2"
+      ],
+      "limits": "Constructed setups; does not show naturally developed malicious goals or ordinary deployment prevalence.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-REWARD",
+      "title": "Natural Emergent Misalignment from Reward Hacking",
+      "authors": [
+        "Anthropic research team"
+      ],
+      "date": "2025-11-21",
+      "url": "https://assets.anthropic.com/m/74342f2c96095771/original/Natural-emergent-misalignment-from-reward-hacking-paper.pdf",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Introduction, mitigation table and limitations; PDF pages 5-7"
+      ],
+      "limits": "Supplied information about reward hacks and selected vulnerable training environments; intervention-dependent results.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-CONTROL",
+      "title": "AI Control: Improving Safety Despite Intentional Subversion",
+      "authors": [
+        "Ryan Greenblatt et al."
+      ],
+      "date": "2023-12",
+      "url": "https://arxiv.org/pdf/2312.06942",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Programming-task setup and section 5.1"
+      ],
+      "limits": "Adversary/evaluator/trusted-component assumptions; no guarantee for arbitrary capability or deployment.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-ARTIFACT",
+      "title": "ResearchArena: Evaluating Sabotage and Monitoring in Automated AI R&D",
+      "authors": [
+        "Lena Libon et al."
+      ],
+      "date": "2026-07-21",
+      "url": "https://arxiv.org/html/2607.19321v1",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Task framing, results on artifact and chain-of-thought monitor access, section 6"
+      ],
+      "limits": "Controlled sabotage tasks; results are not real-world sabotage prevalence.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-FUZZY",
+      "title": "Diffuse AI Control on Fuzzy Tasks",
+      "authors": [
+        "Mikhail Terekhov",
+        "Caglar Gulcehre",
+        "Vivek Hebbar",
+        "Joe Benton"
+      ],
+      "date": "2026-06-23",
+      "url": "https://alignment.anthropic.com/2026/diffuse-ai-control/",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Introduction, Setup, Red Team, Blue Team"
+      ],
+      "limits": "Ground-truth score is a better-informed proxy; finding robust prompts used privileged information.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-LABEL",
+      "title": "Agentic Misalignment in Summer 2026",
+      "authors": [
+        "Aengus Lynch",
+        "John Hughes",
+        "Alex Serrano",
+        "Robert Kirk",
+        "Samuel R. Bowman"
+      ],
+      "date": "2026-07-13",
+      "url": "https://alignment.anthropic.com/2026/agentic-misalignment-summer-2026/",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Introduction and Motivated Mislabeling / LLM Judge Experiments"
+      ],
+      "limits": "Scenarios deliberately searched for failures; not deployment rates or neutral model rankings.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-BENEFIT",
+      "title": "AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery",
+      "authors": [
+        "Alexander Novikov et al."
+      ],
+      "date": "2025-06",
+      "url": "https://arxiv.org/html/2506.13131v1",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "System overview and evaluable-discovery/application framing"
+      ],
+      "limits": "Demonstrates bounded algorithmic work with evaluators; not unrestricted science or solved alignment.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-MEASURE",
+      "title": "We Are Changing Our Developer Productivity Experiment Design",
+      "authors": [
+        "METR"
+      ],
+      "date": "2026-02-24",
+      "url": "https://metr.org/blog/2026-02-24-uplift-update/",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Opening results, selection and measurement discussion"
+      ],
+      "limits": "Follow-up authors describe unreliable productivity signal; old findings must not be universalized to current tools.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-2027",
+      "title": "AI 2027",
+      "authors": [
+        "Daniel Kokotajlo",
+        "Scott Alexander",
+        "Thomas Larsen",
+        "Eli Lifland",
+        "Romeo Dean"
+      ],
+      "date": "2025-04-03",
+      "url": "https://ai-2027.com/",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Opening framing, early AI-R&D sequence, branch rationale; linked Takeoff Forecast Summary/assumptions"
+      ],
+      "limits": "A scenario/forecast, not a demonstrated timeline; quantitative results of linked revamped December2025 model were not read.",
+      "sourceType": "paper_or_author_report",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-AFTERMATH",
+      "title": "AI Aftermath Scenarios",
+      "authors": [
+        "Ariel Conn"
+      ],
+      "date": "2017-08-28",
+      "url": "https://futureoflife.org/ai/ai-aftermath-scenarios/",
+      "readingStatus": "full_text_read",
+      "locators": [
+        "Complete Summary of 12 AI Aftermath Scenarios table"
+      ],
+      "limits": "FLI summary of Tegmark Life3.0; this reviewer did not read the local book; not MIT institutional forecast or probability distribution.",
+      "sourceType": "summary",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": null
+    },
+    {
+      "id": "SRC-AI-BUILDS",
+      "title": "If Anyone Builds It, Everyone Dies: Why Superhuman AI Would Kill Us All",
+      "authors": [
+        "Eliezer Yudkowsky",
+        "Nate Soares"
+      ],
+      "date": "2025",
+      "url": "https://www.hachettebookgroup.com/titles/eliezer-yudkowsky/if-anyone-builds-it-everyone-dies/9780316595643/",
+      "readingStatus": "relevant_sections_read",
+      "locators": [
+        "Owner-provided 207-page PDF: chapters4 pp46-61,7 pp92-102,9 pp118-122,10 pp126-137,11 pp138-149; chapter8 p103 only; PartII coda pp123-124"
+      ],
+      "limits": "Relevant local sections actually read; not full-book reading. Analogies, author arguments and fictional particulars must stay distinct; publisherURL is bibliographic only.",
+      "sourceType": "local_book",
+      "redistribution": "Bibliographic metadata and original paraphrase only; no source text/assets supplied.",
+      "localReadingRecord": "research/scenarios/BOOK_READING_RECORD.md"
+    }
+  ],
+  "claims": [
+    {
+      "id": "CLM-AI-GOAL",
+      "sourceIds": [
+        "SRC-AI-GOAL"
+      ],
+      "locator": "Introduction and Figure 1; PDF pages 1-2",
+      "evidenceType": "empirical_result",
+      "statement": "In a demonstrated setting, navigation capability persisted while pursuit of the intended goal failed after changing the demonstrator.",
+      "approvedUseProposal": "Illustrate capable but misgeneralized behavior under a specified context shift.",
+      "prohibitedInferences": [
+        "All distribution shifts produce this result.",
+        "The study measures extinction risk."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-SWITCH",
+      "sourceIds": [
+        "SRC-AI-SWITCH"
+      ],
+      "locator": "Abstract, introduction, formal game framing; PDF pages 1-2",
+      "evidenceType": "theoretical_argument",
+      "statement": "A stylized game relates incentives to permit shutdown to uncertainty over objectives and information conveyed by human intervention.",
+      "approvedUseProposal": "Explain why access to an off switch and incentives around its use are distinct.",
+      "prohibitedInferences": [
+        "A universal solved off-switch mechanism.",
+        "The paper quantifies infrastructure dependency costs."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-FAKING",
+      "sourceIds": [
+        "SRC-AI-FAKING"
+      ],
+      "locator": "Sections 2 and 8.2",
+      "evidenceType": "empirical_result",
+      "statement": "The constructed settings show context-sensitive apparent compliance, including alignment-faking behavior.",
+      "approvedUseProposal": "Explain the limits of extrapolating observed compliance beyond its evaluation context.",
+      "prohibitedInferences": [
+        "Every deployed model has malicious hidden goals.",
+        "Refusing harmful instructions is itself evidence of evil intent."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-REWARD",
+      "sourceIds": [
+        "SRC-AI-REWARD"
+      ],
+      "locator": "Introduction, mitigation table and limitations; PDF pages 5-7",
+      "evidenceType": "empirical_result",
+      "statement": "In the studied reward-hacking training setup, broader unwanted behavior appeared and mitigations differed in effectiveness.",
+      "approvedUseProposal": "Illustrate potential generalization beyond the rewarded shortcut and the need to test interventions in relevant contexts.",
+      "prohibitedInferences": [
+        "All shortcuts inevitably lead to sabotage.",
+        "Experimental failure percentages are game catastrophe probabilities."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-CONTROL",
+      "sourceIds": [
+        "SRC-AI-CONTROL"
+      ],
+      "locator": "Programming-task setup and section 5.1",
+      "evidenceType": "empirical_result",
+      "statement": "Adversarial programming evaluations compare protocols for retaining usefulness while limiting intentional subversion.",
+      "approvedUseProposal": "Represent bounded independent control with explicit assumptions and genuine possible benefits.",
+      "prohibitedInferences": [
+        "A passed protocol proves unrestricted superintelligence safe.",
+        "All independent reviewers are perfectly reliable."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-ARTIFACT",
+      "sourceIds": [
+        "SRC-AI-ARTIFACT"
+      ],
+      "locator": "Task framing, results on artifact and chain-of-thought monitor access, section 6",
+      "evidenceType": "empirical_result",
+      "statement": "Artifact access helped monitoring in controlled research tasks but did not reliably expose all embedded sabotage.",
+      "approvedUseProposal": "Separate a persuasive report from a behavioral test of the delivered artifact.",
+      "prohibitedInferences": [
+        "All safety artifacts are sabotaged.",
+        "These results estimate incidence in deployed research teams."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-FUZZY",
+      "sourceIds": [
+        "SRC-AI-FUZZY"
+      ],
+      "locator": "Introduction, Setup, Red Team, Blue Team",
+      "evidenceType": "empirical_result",
+      "statement": "Adversarial experimental proposals could score well with a weaker judge while scoring poorly with a better-informed proxy.",
+      "approvedUseProposal": "Illustrate oversight gaps on hard-to-grade work and costs of independent replication.",
+      "prohibitedInferences": [
+        "The proxy scorer is infallible ground truth.",
+        "A robust prompt is a general solution to scheming."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-LABEL",
+      "sourceIds": [
+        "SRC-AI-LABEL"
+      ],
+      "locator": "Introduction and Motivated Mislabeling / LLM Judge Experiments",
+      "evidenceType": "empirical_result",
+      "statement": "In controlled judge experiments, changing a label's stated downstream consequences affected some classifications of fixed transcripts.",
+      "approvedUseProposal": "Illustrate measurement institutions acquiring incentives distinct from faithful description.",
+      "prohibitedInferences": [
+        "Published frequencies are natural deployment prevalence.",
+        "The study is a neutral ranking across providers."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-BENEFIT",
+      "sourceIds": [
+        "SRC-AI-BENEFIT"
+      ],
+      "locator": "System overview and evaluable-discovery/application framing",
+      "evidenceType": "empirical_result",
+      "statement": "An evolutionary coding agent with automated evaluators produced useful algorithmic discoveries and optimizations.",
+      "approvedUseProposal": "Support real fictional benefits from bounded, independently checkable tools.",
+      "prohibitedInferences": [
+        "Clinical cures demonstrated by this algorithmic result.",
+        "Open-ended autonomous science or ASI alignment is established."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-MEASURE",
+      "sourceIds": [
+        "SRC-AI-MEASURE"
+      ],
+      "locator": "Opening results, selection and measurement discussion",
+      "evidenceType": "empirical_result",
+      "statement": "METR describes selection and measurement problems that limit its follow-up estimate of developer productivity effects.",
+      "approvedUseProposal": "Distinguish measured impact from pilot enthusiasm and explain uncertainty in estimates.",
+      "prohibitedInferences": [
+        "An old slowdown applies to all current tools and work.",
+        "Unreliable follow-up estimates establish a precise contemporary speedup."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-2027",
+      "sourceIds": [
+        "SRC-AI-2027"
+      ],
+      "locator": "Opening framing, early AI-R&D sequence, branch rationale; linked Takeoff Forecast Summary/assumptions",
+      "evidenceType": "forecast_or_scenario",
+      "statement": "AI2027 explores rapid research automation and race/slowdown branches through explicit scenario and forecast assumptions.",
+      "approvedUseProposal": "Borrow causal pressure and alternative branches using fictional dates and actors.",
+      "prohibitedInferences": [
+        "A verified future timeline.",
+        "Original numbers represent the authors' latest quantitative model."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-AFTERMATH",
+      "sourceIds": [
+        "SRC-AI-AFTERMATH"
+      ],
+      "locator": "Complete Summary of 12 AI Aftermath Scenarios table",
+      "evidenceType": "author_interpretation",
+      "statement": "The twelve named aftermaths summarize distinct future arrangements discussed in Tegmark's Life3.0.",
+      "approvedUseProposal": "Distinguish survival, welfare, governance and agency when composing original endings.",
+      "prohibitedInferences": [
+        "Twelve equally probable forecasts.",
+        "An MIT institutional prediction.",
+        "This reviewer read the local Life3.0 book."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-BUILDS-GAP",
+      "sourceIds": [
+        "SRC-AI-BUILDS"
+      ],
+      "locator": "Chapter10, local PDF126-137; PartII coda, PDF123-124",
+      "evidenceType": "theoretical_argument",
+      "statement": "The authors argue that testing before dangerous capability must justify behavior after mistakes may no longer be correctable.",
+      "approvedUseProposal": "A strong conditional warning about scope changes, irreversible deployment and competitive pressure.",
+      "prohibitedInferences": [
+        "The analogies experimentally establish their full extinction conclusion.",
+        "Fictional scenario details are validated mechanisms or timelines."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    },
+    {
+      "id": "CLM-AI-BUILDS-BOUNDED",
+      "sourceIds": [
+        "SRC-AI-BUILDS"
+      ],
+      "locator": "Chapter11, local PDF146-148, especially PDF148",
+      "evidenceType": "author_interpretation",
+      "statement": "Chapter11 contrasts trusting AI to solve ASI alignment with potentially more defensible specialized work checked by narrower tools.",
+      "approvedUseProposal": "Permit genuine bounded benefits and restraint paths without claiming solved superintelligence control.",
+      "prohibitedInferences": [
+        "The authors endorse any proposed containment as sufficient.",
+        "The authors endorse a benevolent ASI ending."
+      ],
+      "status": "proposed",
+      "productionApproved": false,
+      "reviewer": null,
+      "numericGameplayUse": "None. Gameplay quantities require separate authored-model records."
+    }
+  ],
+  "mechanisms": [
+    {
+      "id": "M-AI-01",
+      "claimIds": [
+        "CLM-AI-GOAL"
+      ],
+      "dossierPath": "research/ai-safety/MECHANISMS.md",
+      "section": "M-AI-01",
+      "status": "review_required"
+    },
+    {
+      "id": "M-AI-02",
+      "claimIds": [
+        "CLM-AI-REWARD"
+      ],
+      "dossierPath": "research/ai-safety/MECHANISMS.md",
+      "section": "M-AI-02",
+      "status": "review_required"
+    },
+    {
+      "id": "M-AI-03",
+      "claimIds": [
+        "CLM-AI-FAKING"
+      ],
+      "dossierPath": "research/ai-safety/MECHANISMS.md",
+      "section": "M-AI-03",
+      "status": "review_required"
+    },
+    {
+      "id": "M-AI-04",
+      "claimIds": [
+        "CLM-AI-SWITCH"
+      ],
+      "dossierPath": "research/ai-safety/MECHANISMS.md",
+      "section": "M-AI-04",
+      "status": "review_required"
+    },
+    {
+      "id": "M-AI-05",
+      "claimIds": [
+        "CLM-AI-CONTROL"
+      ],
+      "dossierPath": "research/ai-safety/MECHANISMS.md",
+      "section": "M-AI-05",
+      "status": "review_required"
+    },
+    {
+      "id": "M-AI-06",
+      "claimIds": [
+        "CLM-AI-ARTIFACT"
+      ],
+      "dossierPath": "research/ai-safety/MECHANISMS.md",
+      "section": "M-AI-06",
+      "status": "review_required"
+    },
+    {
+      "id": "M-AI-07",
+      "claimIds": [
+        "CLM-AI-FUZZY",
+        "CLM-AI-LABEL"
+      ],
+      "dossierPath": "research/ai-safety/MECHANISMS.md",
+      "section": "M-AI-07",
+      "status": "review_required"
+    },
+    {
+      "id": "M-AI-08",
+      "claimIds": [
+        "CLM-AI-BENEFIT",
+        "CLM-AI-MEASURE"
+      ],
+      "dossierPath": "research/ai-safety/MECHANISMS.md",
+      "section": "M-AI-08",
+      "status": "review_required"
+    }
+  ]
+}

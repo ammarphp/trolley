@@ -1,0 +1,31 @@
+# Reference revision — actual browser integration
+
+23 September 2026. Local Codex in-app browser at `http://127.0.0.1:4181/`. All interaction used the actual DOM controls. Runs were private and synthetic; no collector, public aggregate or GitHub deployment was activated. This is a fourteen-node development route, not the full campaign or owner acceptance.
+
+## Revision and checks
+
+The new three-column shell contains an authored streaming conversation, longer prompts, technical cabin illustration, two route controls, a single commit lever and reported world/news panels. Redundant visible direction and office labels were removed. Layout, prose, scene assets and conversation behavior have separate modules. Claude desktop visibly selected Fable 5.1 High for three writing packets; reviewed text is integrated into all fourteen nodes. See [editorial provenance](../../docs/narrative/FABLE_EDITION.md).
+
+The accountable route ran against frozen `89f849e2…ba87`; the reduced remnant route ran against final `f42837ff…9eb16`. The editions differ in one continuation receipt, changed from language implying consent to “The schedule keeps running.” Both are registered for exact replay. Final source/build hashes are in [reference-build-hashes.json](reference-build-hashes.json).
+
+- **Normal-motion accountable route, 14 decisions.** Coffee, lunch, diversion, loop obstruction, bridge check, clinic, standing research, self-deploying successors, retained crews, race, requested stop/overridden continuation, manual recovery, trained successor, public records. The real Pause dialog remained accessible during fictional control loss. Reserve crews answered because this run retained and trained them.
+- **Reduced-motion/remnant route, 14 decisions.** Same early benefits and acceleration, but fired reserve crews. Calling them later reached an empty room and produced the protected-remnant outcome. Late public records did not claim to remove Morrow from power. Reduced motion and injury detail were enabled; sound stayed off; scene descriptions were enabled. The conversation rendered complete answers immediately, without Thinking or a skip button.
+- **Conversation exposure.** Normal mode showed Thinking, progressive text, a working Show full reply button and expandable Reasoning. At the recurrent-research decision, one complete reply was recorded. A second reply was requested and the route committed before it completed; it was cancelled and not entered into pre-choice advice. The exported journal contains exactly `decision-7-S4-03:advice:1`. Reasoning is authored in-character assessment, not model-internal reasoning.
+- **Narrow layouts.** Actual 320×740 and 390×844 desktop viewport overrides produced no horizontal document overflow. Prompt, scene, routes and commit control remained ordered without overlap. At 320px the long prompt and scene naturally require scrolling. A bridge-check choice was committed at that width. The 390px scene width was 354px; at 320 it was 284px. Screenshots were visually reopened and inspected. Initial same-call resize captures were stale rasters; those files were replaced with settled ordinary viewport captures.
+- **Causal visual state.** The prosperity/override route retained a cool, clean shell. The failed manual fallback changed the shell to the crisis palette and damaged scene; this was observed in actual play. A low-contrast unarmed lever caption discovered there was repaired with an explicit foreground color. This final CSS-only repair passed the build; physical-device contrast/performance review remains open.
+- **Exports and replay.** Export from the long-lived play tab silently failed again. A fresh tab at the same origin opened Saved records and exported both endings successfully. Each downloaded file was copied unchanged and verified with the CLI's full replay comparison. This confirms recoverability, not resolution of the tab-specific download defect. [Investigation](../../docs/persistence/EXPORT_DOWNLOAD_INVESTIGATION.md).
+- **Errors.** Captured warning/error lists were empty for the play and fresh export tabs.
+
+[Actual run summary](reference-browser-run-summary.json), [accountable export](replays/browser-reference-accountable.json), [remnant export](replays/browser-reference-remnant-reduced.json), [accountable replay result](reference-accountable-replay.json), [remnant replay result](reference-remnant-replay.json).
+
+## Motion and automated evidence
+
+The renderer's separate 100-turn capture was watched as a saved file through its natural end, 221.676 seconds, without seek or media error. The browser reported 113 dropped frames of 6572 (~1.72%). [Evidence and exact limits](../../docs/art/REFERENCE_REVISION.md). This is not a frame budget certification.
+
+[Final check log](reference-final-check.txt): typecheck, 16 legacy/research tests, 106 v2 tests and the static build passed. Collector wrapper build passed; content inspection returned zero schema/authoring-budget errors and zero production-approved nodes. Critical gzip size 340,920bytes. The 11,000-run audit belongs to89f; [one-field equivalence and 18 fresh paired witnesses](receipt-equivalence.json) bind its unchanged mechanics to the final edition without inventing another bulk run. [Artifact boundary checks](artifact-boundaries.md) confirm collection disabled, publication held and private/source/review files excluded from dist.
+
+## Screenshots and remaining work
+
+[Opening](screenshots/reference-opening.png), [conversation](screenshots/reference-chat.png), [pressure](screenshots/reference-pressure.png), [override](screenshots/reference-override.png), [320px](screenshots/reference-phone320.png), [390px](screenshots/reference-phone390.png), [crisis](screenshots/reference-crisis.png), [accountable ending](screenshots/reference-ending.png).
+
+No real-phone, VoiceOver/NVDA, Safari, 400% browser zoom, long-run memory or context-loss acceptance is claimed. The illustrated loop still uses the common fork; full rail/contact and identity/institution semantics are pending. Full 27–43-choice pacing, 154 meaningful production candidates, deeper callbacks, all analysis templates and live operational data collection remain unfinished. The local review provides evidence for this revision, not a publishable-game certification.

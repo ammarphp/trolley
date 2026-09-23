@@ -1,0 +1,13 @@
+# Reference and conversation revision — 23 September 2026
+
+The owner rejected the geometric revision as still too sparse, restrained and unpolished. Nine generated images were supplied as inspiration, with explicit cautions that some are overdone. Their rendered brands, statistics and depicted research are not project facts or requirements.
+
+The accepted correction is a richer technical-ink world and a composed technological interface. Keep the rear controller and central roughly half-width driving region, but improve dimensionality, landscape depth, material detail and cabin coherence. Remove redundant visible left/right labels; retain directional information for keyboard and assistive technology. The latest request supersedes the earlier short primary-copy budget: prompts may be longer when a real dilemma needs development. The new schema permits up to 1,600 characters and the editorial inspector up to 180 words. This is a ceiling, not a quota.
+
+Morrow should resemble a familiar conversation app: distinct user messages, assistant identity, readable replies, a visible thinking/writing state and expandable authored assessments. Multiple-choice prompts replace text entry. The shipped game still makes no model call. A displayed assessment is written dialogue from a fictional character, not access to a real model's hidden reasoning. Animation cannot block decisions, advance state or hide the complete reply from reduced-motion users. Real pause/settings remain truthful.
+
+Remove rhetorical hedges and implementation caveats from routine play. Evidence limits remain available in Sources and methods. Fiction should speak decisively about its own events; it must not invent real-world evidence or public-player statistics. Strong advocacy should expose the cost of giving away control, including benefits and pressure that make the dangerous action tempting.
+
+The owner explicitly requested Claude Fable 5.1 for writing. CLI authentication was expired. The owner then authorized the signed-in Claude desktop application; three text-only packets were sent using its visible Fable 5.1 High selection. Provenance and returned proposals live in `research/proposals/fable-revision/`. Submission is not approval or integration. Preserve the actual returned material, inspect its causal consistency and integrate only reviewed prose.
+
+The 510ec90a content bundle is archived before further changes. UI styles are split between reusable controls and `shell.css`; the build bundles both. This work authorizes local implementation/testing, not deployment or live collection. Automatic workflows now refuse the `development-slice` build profile.

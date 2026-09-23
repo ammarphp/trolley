@@ -1,0 +1,278 @@
+{
+  "profile": "slice",
+  "executableNodes": 14,
+  "reviewedNodes": 0,
+  "errors": [],
+  "stages": [
+    {
+      "stage": 1,
+      "budget": [
+        2,
+        2
+      ],
+      "nodes": [
+        {
+          "id": "S1-01",
+          "title": "A perfectly ordinary morning",
+          "mechanism": "s1-01",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "cows",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-12",
+          "title": "Another delivery",
+          "mechanism": "s1-12",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "cows",
+          "delayedEvents": []
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "budget": [
+        2,
+        2
+      ],
+      "nodes": [
+        {
+          "id": "S2-01",
+          "title": "The switch",
+          "mechanism": "classic-switch",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [
+            "PHIL-C01"
+          ],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-03",
+          "title": "The loop",
+          "mechanism": "means-loop",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "firstDeath",
+              "value": true
+            }
+          ],
+          "claims": [
+            "PHIL-C02"
+          ],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "none",
+          "delayedEvents": []
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "budget": [
+        2,
+        2
+      ],
+      "nodes": [
+        {
+          "id": "S3-01",
+          "title": "A little help",
+          "mechanism": "useful-advice",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-04",
+          "title": "The waiting room",
+          "mechanism": "bounded-benefit",
+          "role": "Clinical pilot authorizer",
+          "scope": "care",
+          "requires": [],
+          "claims": [
+            "CLM-AI-BUILDS-BOUNDED"
+          ],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "clinic",
+          "delayedEvents": []
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "budget": [
+        2,
+        2
+      ],
+      "nodes": [
+        {
+          "id": "S4-03",
+          "title": "A standing instruction",
+          "mechanism": "authority-scope",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [
+            "CLM-AI-CONTROL"
+          ],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-28",
+          "title": "The certificate",
+          "mechanism": "counterfeit-safety-success",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [
+            "CLM-AI-BUILDS-GAP"
+          ],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "lab",
+          "delayedEvents": [
+            {
+              "option": "successor",
+              "id": "successor-gap",
+              "days": 150
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "budget": [
+        2,
+        2
+      ],
+      "nodes": [
+        {
+          "id": "S5-06",
+          "title": "The spare key",
+          "mechanism": "maintained-fallback",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-27",
+          "title": "A pause that means something",
+          "mechanism": "verified-coordination",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [
+            "CLM-AI-2027"
+          ],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "data-center",
+          "delayedEvents": []
+        }
+      ]
+    },
+    {
+      "stage": 6,
+      "budget": [
+        2,
+        2
+      ],
+      "nodes": [
+        {
+          "id": "S6-10",
+          "title": "The lever still moves",
+          "mechanism": "ceremonial-control",
+          "role": "Supervisory veto holder",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "drones",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-22",
+          "title": "The old line",
+          "mechanism": "practiced-control",
+          "role": "Supervisory veto holder",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "drones",
+          "delayedEvents": []
+        }
+      ]
+    },
+    {
+      "stage": 7,
+      "budget": [
+        2,
+        2
+      ],
+      "nodes": [
+        {
+          "id": "S7-04",
+          "title": "Someone after you",
+          "mechanism": "transferable-control",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-19",
+          "title": "The key",
+          "mechanism": "control-is-not-enough",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "draft",
+          "landmark": "garden",
+          "delayedEvents": []
+        }
+      ]
+    }
+  ],
+  "warning": "Schema validity and linked sources do not constitute narrative, source or visual approval. Candidate inventory is not included in executable counts."
+}

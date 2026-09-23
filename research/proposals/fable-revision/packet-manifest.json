@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "status": "proposal_delivery_complete_local_integration_under_review",
+  "requestedModel": "Claude Fable 5.1",
+  "verifiedModel": "Fable 5.1 (visible desktop model selection)",
+  "contentHash": "510ec90a46d1e15c0d0a77ce5386e3951460bbff70d5d137538e3246b23a1649",
+  "manifestHash": "7951ee7818c9e965fa5dc1a4c7b1a412e4abe503a0d2d0594bd867d59c600ffd",
+  "packets": [
+    {
+      "id": "01-opening-benefit",
+      "nodeIds": [
+        "S1-01",
+        "S1-12",
+        "S2-01",
+        "S2-03",
+        "S3-01",
+        "S3-04"
+      ],
+      "prompt": "01-opening-benefit.prompt.txt",
+      "expectedOutput": "01-opening-benefit.response.json",
+      "outputExists": true,
+      "reviewedOutput": "reviewed-01.json",
+      "rawSHA256": "ce733986bac6247eff06d93ff2a1acc071a866da87640ebbced733a9d95ef116",
+      "reviewedSHA256": "3d37a41a35420ab60fade59295357ed01930e1bf5a2ce05ff5838d4f8c4bacb4",
+      "rawContainsNonJSONPrefix": false,
+      "promptSHA256": "6b43a846a58b83625cb7630a2ac40208c3ee88f9e8f8e364e637c48a7ae84726"
+    },
+    {
+      "id": "02-acceleration-pressure",
+      "nodeIds": [
+        "S4-03",
+        "S4-28",
+        "S5-06",
+        "S5-27"
+      ],
+      "prompt": "02-acceleration-pressure.prompt.txt",
+      "expectedOutput": "02-acceleration-pressure.response.json",
+      "outputExists": true,
+      "reviewedOutput": "reviewed-02.json",
+      "rawSHA256": "78e7ad4c3cd7e73e72249bd0d0e0d8f34ef234b2754a3e4b5823e138d0640d00",
+      "reviewedSHA256": "41e230719167f1c7e812c6ee641340798e936f25efda83ba5f9d557584e05ba4",
+      "rawContainsNonJSONPrefix": false,
+      "promptSHA256": "3f3adbf6971bba38f4f84b6f6299a31529755c929cf513d4c8562fd90ac29bf0"
+    },
+    {
+      "id": "03-control-aftermath",
+      "nodeIds": [
+        "S6-10",
+        "S6-22",
+        "S7-04",
+        "S7-19"
+      ],
+      "prompt": "03-control-aftermath.prompt.txt",
+      "expectedOutput": "03-control-aftermath.response.txt",
+      "outputExists": true,
+      "reviewedOutput": "reviewed-03.json",
+      "rawSHA256": "6478437460523915f47f4ac8ad106df3e7220c8fd1166789822b9eee11e28335",
+      "reviewedSHA256": "c7de1d879fc7f0b359d7b4ea6668efc21e1ca2db28fee60a6bf556a635a337ca",
+      "rawContainsNonJSONPrefix": true,
+      "promptSHA256": "ab750b0a40b954ce174925dd81acfec738f317897a6be328148a274a3adb5676"
+    }
+  ],
+  "sourceFiles": [
+    "src/content/slice.ts",
+    "beta version/ai_safety_trolley_codex_handoff/source/user_original_brief.txt",
+    "beta version/ai_safety_trolley_codex_handoff/source/user_addendum.md",
+    "research/proposals/narrative-pressure.json"
+  ],
+  "proposedFieldLimits": {
+    "promptCharacters": 1600,
+    "adviceAnswerCharacters": 1600,
+    "optionalAuthoredReasoningCharacters": 800,
+    "choiceLabelWords": 12
+  },
+  "blocker": null,
+  "visibleEffort": "High",
+  "identityEvidence": "provenance.json",
+  "integrationReview": "../../../docs/narrative/FABLE_EDITION.md"
+}

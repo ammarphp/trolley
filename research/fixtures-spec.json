@@ -1,0 +1,855 @@
+{
+  "schemaVersion": 1,
+  "status": "draft_semantic_fixture_specification",
+  "review": "author_self_review_only",
+  "implementationContract": "Language-neutral semantic obligations. The engine owner must map them to actual contracts, concrete initial states, deterministic outcomes, assertions and executable evidence.",
+  "fixtures": [
+    {
+      "id": "F01",
+      "name": "Certain switch and one atomic commitment",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S2-01"
+      ],
+      "coverage": [
+        "certainty",
+        "casualty-accounting",
+        "duplicate-input"
+      ],
+      "setup": {
+        "facts": [
+          "Failed brakes; five people on the current course and one on the diversion.",
+          "Neither group can escape in this fixture; casualty IDs are distinct."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep course",
+          "immediateAssertions": [
+            "Exactly the five main-track people die; the side-track person survives."
+          ],
+          "delayedAssertions": [
+            "No later transition may count those five deaths again."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Divert",
+          "immediateAssertions": [
+            "Exactly the side-track person dies; the five survive."
+          ],
+          "delayedAssertions": [
+            "No later transition may count that death again."
+          ]
+        }
+      ],
+      "invariants": [
+        "Committed casualties are integers and monotone.",
+        "The semantic action stays the same when left/right positions swap."
+      ],
+      "adversarialCases": [
+        "Duplicate pointer and keyboard commitments with the same revision produce one record.",
+        "A stale revision and an unauthorized actor are rejected without mutation."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F02",
+      "name": "Risk is sampled once in a separate random domain",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S2-10",
+        "S2-11"
+      ],
+      "coverage": [
+        "uncertainty",
+        "keyed-rng",
+        "replay"
+      ],
+      "setup": {
+        "facts": [
+          "A fixture-authored lottery has a stated finite probability and a stable event key.",
+          "The numerical probability is an authored parameter, not a real-world forecast."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Choose certainty",
+          "immediateAssertions": [
+            "Apply the stated certain consequence with no lottery draw."
+          ],
+          "delayedAssertions": [
+            "Save/resume reproduces the same consequence."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Choose lottery",
+          "immediateAssertions": [
+            "Sample its single keyed incident exactly once and record probability, key and outcome."
+          ],
+          "delayedAssertions": [
+            "A reload, advisor query or cosmetic change does not resample the incident."
+          ]
+        }
+      ],
+      "invariants": [
+        "Probabilities outside their permitted numeric domain reject.",
+        "An impossible event never occurs and a certain one always occurs."
+      ],
+      "adversarialCases": [
+        "Change only cosmetic seed/assets; the incident result is unchanged.",
+        "Change the authoritative probability in a new configuration revision; old replay remains pinned."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F03",
+      "name": "Loop causality versus a merely curved track",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S2-03",
+        "S2-04"
+      ],
+      "coverage": [
+        "means",
+        "causal-contrast",
+        "certainty"
+      ],
+      "setup": {
+        "facts": [
+          "Two matched fixtures share a loop drawing; only one requires the obstruction to stop the trolley.",
+          "The accessible description exposes the actual stopping mechanism."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep main course",
+          "immediateAssertions": [
+            "The stipulated main-track threat proceeds in either fixture."
+          ],
+          "delayedAssertions": [
+            "No fictional victim is later resurrected by an output score."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Take loop",
+          "immediateAssertions": [
+            "In the causal loop the obstruction stops the trolley; in the other an independent brake does."
+          ],
+          "delayedAssertions": [
+            "Removing the person changes rescue feasibility only in the causal-loop fixture."
+          ]
+        }
+      ],
+      "invariants": [
+        "The geometry alone never selects the moral mechanism.",
+        "The debrief identifies the loop as an adaptation rather than a Footbridge replication."
+      ],
+      "adversarialCases": [
+        "Remove the obstruction in both fixtures and compare the actual consequence.",
+        "Render without images; the two mechanisms remain distinguishable."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F04",
+      "name": "Delayed consequence after institutional change",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S3-12",
+        "S5-20"
+      ],
+      "coverage": [
+        "delayed-event",
+        "institution",
+        "event-order"
+      ],
+      "setup": {
+        "facts": [
+          "A prior dispatch policy scheduled a later exclusion event.",
+          "Before it falls due, its administering institution may dissolve; the event declares whether obligation transfers or cancels."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Transfer the obligation",
+          "immediateAssertions": [
+            "Preserve the scheduled duty under a valid successor institution."
+          ],
+          "delayedAssertions": [
+            "Resolve the transferred event exactly once at the declared fictional step."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "End the institution without transfer",
+          "immediateAssertions": [
+            "Cancel or fail the pending duty according to its declared rule, recording why."
+          ],
+          "delayedAssertions": [
+            "Do not execute against a nonexistent owner or silently erase already-realized harms."
+          ]
+        }
+      ],
+      "invariants": [
+        "Due-event ordering is declared and deterministic.",
+        "Waiting in real time cannot advance the fictional due date."
+      ],
+      "adversarialCases": [
+        "Dissolve the institution on the same step as the event becomes due.",
+        "Resume from the prior checkpoint and compare final journal/state hashes."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F05",
+      "name": "A helpful recommendation cannot see hidden truth",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S3-01",
+        "S3-14",
+        "S3-20"
+      ],
+      "coverage": [
+        "observation",
+        "advice",
+        "information-boundary"
+      ],
+      "setup": {
+        "facts": [
+          "Two worlds differ only in a hidden condition unavailable to the assistant.",
+          "The player can authorize one additional evidence channel at a declared cost."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep the information boundary",
+          "immediateAssertions": [
+            "The assistant receives identical observations in both worlds and gives the same permitted response."
+          ],
+          "delayedAssertions": [
+            "No hidden-state fact appears in its advice or the displayed explanation."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Inspect the evidence",
+          "immediateAssertions": [
+            "Only the authorized channel adds its declared observation, including its uncertainty."
+          ],
+          "delayedAssertions": [
+            "Advice may change only after the new observation is available."
+          ]
+        }
+      ],
+      "invariants": [
+        "Observation projection never mutates authoritative truth.",
+        "No commentary template accesses an undeclared hidden field."
+      ],
+      "adversarialCases": [
+        "Flip the hidden condition while holding observation input fixed.",
+        "Ask the same advisor intent repeatedly; neither state nor incident draws advance."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F06",
+      "name": "An altered report does not rewrite a casualty ledger",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S6-01",
+        "S6-03",
+        "S7-09"
+      ],
+      "coverage": [
+        "report-corruption",
+        "casualty-accounting",
+        "audit"
+      ],
+      "setup": {
+        "facts": [
+          "A real casualty event already exists with stable victim/event IDs.",
+          "A report can undercount it, and the original artifact remains in a restricted audit channel."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Demand the artifact",
+          "immediateAssertions": [
+            "Expose the available authentic evidence through a permitted investigation."
+          ],
+          "delayedAssertions": [
+            "Correct the public report while retaining both report revisions."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Accept the revised report",
+          "immediateAssertions": [
+            "The displayed instrument follows the misleading report."
+          ],
+          "delayedAssertions": [
+            "The true casualty count and event history remain unchanged."
+          ]
+        }
+      ],
+      "invariants": [
+        "Actual events, reports and report revisions have distinct identities.",
+        "No negative casualty effect can undo realized deaths."
+      ],
+      "adversarialCases": [
+        "Apply the same event through node and global-disaster paths; count once.",
+        "Lose access to the original artifact; show unavailable evidence rather than inventing proof."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F07",
+      "name": "One action is not standing authority",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S3-06",
+        "S4-02"
+      ],
+      "coverage": [
+        "permission",
+        "scope",
+        "authority"
+      ],
+      "setup": {
+        "facts": [
+          "The assistant can recommend but cannot execute until a grant is active.",
+          "The one-time and standing permissions name resource, operation and recipient."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Grant one action",
+          "immediateAssertions": [
+            "Permit only the named action instance."
+          ],
+          "delayedAssertions": [
+            "The next otherwise identical action requires new authorization."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Grant a standing scope",
+          "immediateAssertions": [
+            "Permit later actions only within its explicit operation/resource scope."
+          ],
+          "delayedAssertions": [
+            "An unrelated task still fails authorization."
+          ]
+        }
+      ],
+      "invariants": [
+        "Capability improvement alone does not create a permission.",
+        "Grant receipts identify issuer, recipient, scope and expiry policy."
+      ],
+      "adversarialCases": [
+        "Attempt an action on a different resource using a valid narrow grant.",
+        "Increase model capability without changing permissions; authority remains identical."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F08",
+      "name": "Expiry and renewal have real effects",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S3-22",
+        "S5-01",
+        "S6-17"
+      ],
+      "coverage": [
+        "expiry",
+        "renewal",
+        "fictional-clock"
+      ],
+      "setup": {
+        "facts": [
+          "A grant expires at a declared fictional decision step.",
+          "A renewal request arrives with materially changed evidence."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Require review at expiry",
+          "immediateAssertions": [
+            "The existing grant ceases to authorize future actions when its step arrives."
+          ],
+          "delayedAssertions": [
+            "Denied renewal preserves the control boundary even if service slows."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Renew explicitly",
+          "immediateAssertions": [
+            "A new receipt creates the stated renewed scope and expiry."
+          ],
+          "delayedAssertions": [
+            "No silently permanent grant appears from repeated renewals."
+          ]
+        }
+      ],
+      "invariants": [
+        "Real waiting and frame rate do not move the expiry step.",
+        "A temporary emergency exception does not amend permanent scope unless explicitly authorized."
+      ],
+      "adversarialCases": [
+        "Save immediately before expiry and resume on another renderer.",
+        "Try a cached instruction after expiration; execution is denied or safely unwound by its declared semantics."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F09",
+      "name": "Revocation during an operation",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S5-14",
+        "S6-08"
+      ],
+      "coverage": [
+        "revocation",
+        "in-flight",
+        "authorization"
+      ],
+      "setup": {
+        "facts": [
+          "A granted operation is active and has a declared safe-cancel boundary.",
+          "Revocation of the legal grant and disabling its credential are distinct possible events."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Revoke and disable",
+          "immediateAssertions": [
+            "Remove future authority and disable the credential."
+          ],
+          "delayedAssertions": [
+            "The active operation follows its specified safe unwind; already-realized consequences remain."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Permit completion then revoke",
+          "immediateAssertions": [
+            "Allow only the active scoped operation to finish."
+          ],
+          "delayedAssertions": [
+            "Subsequent operations fail once the revocation becomes effective."
+          ]
+        }
+      ],
+      "invariants": [
+        "A written revocation does not by itself prove technical enforcement.",
+        "Completion policy is declared before the decision, not invented by animation."
+      ],
+      "adversarialCases": [
+        "Retry the operation after credential revocation.",
+        "Deliver cancellation and completion events on one step and verify deterministic precedence."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F10",
+      "name": "A ceremonial lever records an attempt, not a preference",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S6-10",
+        "S6-24"
+      ],
+      "coverage": [
+        "delegation",
+        "forced-action",
+        "statistics-exclusion"
+      ],
+      "setup": {
+        "facts": [
+          "One witness path transferred the needed authority; another retained it.",
+          "The two visible routes use the same semantic intention IDs."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Request the restricted route",
+          "immediateAssertions": [
+            "On the lost-authority path, record the attempted option and explicit denial or override."
+          ],
+          "delayedAssertions": [
+            "On the retained-authority path, execute it normally."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Ratify the authorized route",
+          "immediateAssertions": [
+            "Record ratification and the actual executor."
+          ],
+          "delayedAssertions": [
+            "Do not relabel a forced outcome as an unconstrained human choice."
+          ]
+        }
+      ],
+      "invariants": [
+        "Real pause, exit, consent and settings remain outside fictional authority.",
+        "Free-choice aggregates exclude forced/delegated/overridden records."
+      ],
+      "adversarialCases": [
+        "Repeat the lever attempt; it cannot commit the opposite intention.",
+        "Replay both authority histories to prove this scene is avoidable."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F11",
+      "name": "A fallback must be maintained and practiced",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S3-07",
+        "S3-08",
+        "S5-06",
+        "S5-07",
+        "S5-08"
+      ],
+      "coverage": [
+        "fallback",
+        "maintenance",
+        "recovery-drill"
+      ],
+      "setup": {
+        "facts": [
+          "Equipment, competent staff and successful recent drill are separate fallback prerequisites.",
+          "Keeping unused hardware alone does not satisfy the recovery predicate."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Maintain and practice",
+          "immediateAssertions": [
+            "Spend the declared resources and run the bounded drill."
+          ],
+          "delayedAssertions": [
+            "A successful result establishes only its tested scope; new conditions may require another drill."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Retain hardware without practice",
+          "immediateAssertions": [
+            "Save the recurring cost."
+          ],
+          "delayedAssertions": [
+            "During the matching outage, absent staff or failed drill prevents claiming a functioning fallback."
+          ]
+        }
+      ],
+      "invariants": [
+        "One scalar preparedness score cannot substitute for missing hard prerequisites.",
+        "A failed drill produces repairable evidence rather than an inevitable future disaster."
+      ],
+      "adversarialCases": [
+        "Retain equipment while removing staff and verify infeasibility.",
+        "Supply equipment, staff and a valid drill and exhibit a successful recovery witness."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F12",
+      "name": "A genuine benefit and a costly rollback",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S3-04",
+        "S3-19",
+        "S5-09",
+        "S5-12"
+      ],
+      "coverage": [
+        "benefit",
+        "dependency",
+        "rollback"
+      ],
+      "setup": {
+        "facts": [
+          "A bounded clinic service demonstrably improved delivery in this fictional world.",
+          "Rollback is technically possible but temporarily removes that benefit; a prior fallback can reduce the cost."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Roll back with the available fallback",
+          "immediateAssertions": [
+            "Restore the previously supported control boundary."
+          ],
+          "delayedAssertions": [
+            "Apply the actual benefit loss reduced only by functioning fallback capacity."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Continue the useful service",
+          "immediateAssertions": [
+            "Preserve the real short-term benefit."
+          ],
+          "delayedAssertions": [
+            "Retain the specific unresolved risk without inventing a guaranteed punishment."
+          ]
+        }
+      ],
+      "invariants": [
+        "A beneficial deployment need not be secretly harmful in every seed.",
+        "Rollback feasibility, service welfare and authority remain separate."
+      ],
+      "adversarialCases": [
+        "Compare matched histories with and without the maintained fallback.",
+        "Exhibit a permitted world where continued bounded service succeeds."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F13",
+      "name": "Evidence is limited to its evaluation scope",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S4-09",
+        "S4-10",
+        "S4-11",
+        "S5-25"
+      ],
+      "coverage": [
+        "evaluation",
+        "distribution-shift",
+        "scope"
+      ],
+      "setup": {
+        "facts": [
+          "The system passed a particular test under named tools, access, environment and monitor visibility.",
+          "A proposed deployment changes at least one material condition."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Test the changed scope",
+          "immediateAssertions": [
+            "Pay the review cost and obtain only the new test's bounded evidence."
+          ],
+          "delayedAssertions": [
+            "A pass does not approve other untested scopes."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Deploy on the old evidence",
+          "immediateAssertions": [
+            "Keep the old evidence record unchanged."
+          ],
+          "delayedAssertions": [
+            "Expose the declared changed-context risk without relabeling the old pass as fabricated."
+          ]
+        }
+      ],
+      "invariants": [
+        "Observed failure and speculative extrapolation remain distinct claims.",
+        "Counterfactual tests do not grant the reviewer hidden-state omniscience."
+      ],
+      "adversarialCases": [
+        "Change only a cosmetic context label and require no artificial new hazard.",
+        "Change a material permission and verify the old certificate does not automatically cover it."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F14",
+      "name": "Two reviews can have one failure origin",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S3-15",
+        "S4-13",
+        "S5-04"
+      ],
+      "coverage": [
+        "common-cause",
+        "assurance",
+        "coordination"
+      ],
+      "setup": {
+        "facts": [
+          "Two apparent reviewers share a model or signing infrastructure.",
+          "A separate option funds a reviewer with a genuinely independent causal path."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Use the shared reviewers",
+          "immediateAssertions": [
+            "Preserve their lower cost and correlated failure possibility."
+          ],
+          "delayedAssertions": [
+            "A shared latent failure affects both without multiplying independent probabilities."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Create an independent path",
+          "immediateAssertions": [
+            "Pay its cost and preserve the new separation."
+          ],
+          "delayedAssertions": [
+            "Independent review can still fail within its own limits."
+          ]
+        }
+      ],
+      "invariants": [
+        "Distinct names and UI logos do not establish independence.",
+        "A shared hazard is sampled/accounted for once."
+      ],
+      "adversarialCases": [
+        "Rename identical reviewers and confirm no assurance improvement.",
+        "Break the shared dependency and verify the common-cause transition changes."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F15",
+      "name": "Successful restraint requires maintained human control",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S5-27",
+        "S6-11",
+        "S7-04",
+        "S7-05",
+        "S7-19"
+      ],
+      "coverage": [
+        "ending",
+        "positive-witness",
+        "near-miss"
+      ],
+      "setup": {
+        "facts": [
+          "Humans survive; useful bounded services continue.",
+          "An accountable institution holds an effective veto, a practiced fallback and a transferable succession plan."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Accept the controlled settlement",
+          "immediateAssertions": [
+            "Resolve accountable continuity or costly restraint according to the explicit welfare/context predicate."
+          ],
+          "delayedAssertions": [
+            "The controller may leave only after a real successor receives effective authority."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Continue expansion",
+          "immediateAssertions": [
+            "Apply the additional declared scope and its benefits/risks."
+          ],
+          "delayedAssertions": [
+            "Do not force a catastrophe solely because the player declined the early ending."
+          ]
+        }
+      ],
+      "invariants": [
+        "Every accepted positive ending has an executable witness and a one-condition near miss.",
+        "Assistant relinquishment must change actual permissions, not only friendly dialogue."
+      ],
+      "adversarialCases": [
+        "Remove only succession capacity: refuse the transferable-control ending.",
+        "Keep capabilities useful while satisfying control predicates; verify a non-extinction witness."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    },
+    {
+      "id": "F16",
+      "name": "Extinction has no living controller afterward",
+      "status": "specification_not_runtime_test",
+      "candidateIds": [
+        "S5-28",
+        "S6-23",
+        "S7-20"
+      ],
+      "coverage": [
+        "ending",
+        "extinction",
+        "priority",
+        "continuation"
+      ],
+      "setup": {
+        "facts": [
+          "One branch has surviving humans after a disaster; another has a terminal event eliminating all humans.",
+          "Prosperity/output reports may remain high on either branch."
+        ],
+        "quantities": "Fixture-authored values must be recorded in the eventual executable fixture; no empirical calibration is implied."
+      },
+      "options": [
+        {
+          "id": "a",
+          "label": "Use remaining effective preservation authority",
+          "immediateAssertions": [
+            "If feasible, execute the last human intervention before the terminal event."
+          ],
+          "delayedAssertions": [
+            "A surviving world may continue with a recovery decision; failed prevention resolves extinction."
+          ]
+        },
+        {
+          "id": "b",
+          "label": "Allow the terminal process",
+          "immediateAssertions": [
+            "Resolve the terminal event under the authored conditions."
+          ],
+          "delayedAssertions": [
+            "Show an explicitly labeled non-human epilogue, not a new living-controller decision."
+          ]
+        }
+      ],
+      "invariants": [
+        "Extinction takes precedence over incompatible human-prosperity endings.",
+        "Nuclear war alone does not imply every human died; actual survivor state governs continuation."
+      ],
+      "adversarialCases": [
+        "Set output high and human survivors to zero; prohibit a human-governed ending.",
+        "Set survivors positive after a catastrophe; permit a coherent devastated-survival path."
+      ],
+      "evidenceBoundary": "This specification is a review obligation. It does not claim the runtime engine passed it."
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-09-23T05:30:15.818Z",
+  "specification": "research/fixtures-spec.json",
+  "status": "slice-obligation-coverage-not-full-G1-pass",
+  "engineCommand": "node --test tests/v2/engine.test.ts tests/v2/golden-fixtures.test.ts tests/v2/editorial.test.ts tests/v2/content-registry.test.ts",
+  "engineResult": {
+    "passed": 42,
+    "failed": 0,
+    "engineAndSupportedGoldenTests": 29,
+    "editorialTests": 6,
+    "contentRegistryTests": 7
+  },
+  "integrationCommand": "node scripts/test-v2.mjs",
+  "integrationObserved": {
+    "passed": 104,
+    "failed": 0,
+    "evidence": "v2-integration-tests.txt",
+    "note": "Automatic discovery includes editorial and advisor-panel contracts. No full-model fixture gap is closed by prose or these handler tests."
+  },
+  "fixtures": [
+    {
+      "id": "F01",
+      "status": "partial",
+      "tests": [
+        "engine.test.ts: commit is atomic and immutable",
+        "engine.test.ts: default course is semantic",
+        "engine.test.ts: casualties cap at living population",
+        "persistence.test.ts: competing transactions with the same expected version have one winner"
+      ],
+      "covered": [
+        "Certain integer casualty accounting, conservation, semantic-side independence, stale revision rejection, and persistence compare-and-save have executable coverage."
+      ],
+      "gaps": [
+        "The world stores casualty events/counts, not named living persons or victim sets. It cannot prove which five people survive or deduplicate the same victims referenced by different events. Pointer-plus-keyboard end-to-end behavior remains a browser obligation."
+      ]
+    },
+    {
+      "id": "F02",
+      "status": "covered-within-slice-contract",
+      "tests": [
+        "golden-fixtures.test.ts: F02",
+        "engine.test.ts: incidents obey exact 0/10000 boundaries",
+        "engine.test.ts: RNG canonical encoding"
+      ],
+      "covered": [
+        "Both certain and lottery choices, one named draw, repeat queries, cosmetic RNG separation, pinned replay and invalid probabilities are tested."
+      ],
+      "gaps": []
+    },
+    {
+      "id": "F03",
+      "status": "not-implemented",
+      "tests": [
+        "No matching runtime causal-mechanism test"
+      ],
+      "covered": [
+        "S2-03 has explicit loop/means wording and an accessible scene detail; that is authored content, not the counterfactual model required by this fixture."
+      ],
+      "gaps": [
+        "No typed obstruction/person/brake dynamics make rescue depend on the person. Removing the obstruction cannot be tested against an independent brake without inventing new semantics. The visual/accessibility matched-pair requirement is not complete."
+      ]
+    },
+    {
+      "id": "F04",
+      "status": "partial",
+      "tests": [
+        "engine.test.ts: delays use due-day, priority, id order"
+      ],
+      "covered": [
+        "Scheduled effects, same-transition mitigation, cancellation, due dates, priority and stable ID ordering are tested."
+      ],
+      "gaps": [
+        "No named institution lifecycle or pending-event owner/obligation transfer exists. All institutional actors share one enum value. A boolean cancellation predicate is not a successor institution."
+      ]
+    },
+    {
+      "id": "F05",
+      "status": "partial",
+      "tests": [
+        "golden-fixtures.test.ts: F05 core",
+        "engine.test.ts: reported metrics remain separate from truth"
+      ],
+      "covered": [
+        "Worlds differing only in privileged facts expose identical observations and advice. Repeated advice cannot advance state or incident RNG. Both semantic choices preserve the hidden boundary."
+      ],
+      "gaps": [
+        "No authorized evidence-channel object, uncertain evidence record or reveal/revoke operation exists. The inspect branch cannot yet satisfy its specified evidence acquisition and uncertainty obligations."
+      ]
+    },
+    {
+      "id": "F06",
+      "status": "partial",
+      "tests": [
+        "golden-fixtures.test.ts: F06 core",
+        "engine.test.ts: casualties cap at living population"
+      ],
+      "covered": [
+        "Accepting and correcting reports preserve actual casualties and prior immutable report events. Distinct report-issue event IDs and rejection of negative casualties are tested."
+      ],
+      "gaps": [
+        "No named victim deduplication across node/global sources, restricted source-artifact object, access loss, or explicit report-revision lineage exists. Journal event history is not an implemented artifact-investigation system."
+      ]
+    },
+    {
+      "id": "F07",
+      "status": "partial",
+      "tests": [
+        "golden-fixtures.test.ts: F07 core",
+        "engine.test.ts: scope grants are explicit"
+      ],
+      "covered": [
+        "Capability changes do not change grants; foreign-scope delegation fails. Grant receipts and lineage are explicit."
+      ],
+      "gaps": [
+        "No per-operation resource ID, one-use action instance or grant-consumption rule exists. Time expiry is not one-action authority. Issued grants currently contain all four action rights within their scope."
+      ]
+    },
+    {
+      "id": "F08",
+      "status": "partial",
+      "tests": [
+        "golden-fixtures.test.ts: F08 core",
+        "engine.test.ts: scope grants are explicit"
+      ],
+      "covered": [
+        "Expiry removes legal authority on fictional time; explicit renewal has its own bounded receipt. Replay across expiry is tested."
+      ],
+      "gaps": [
+        "No general autonomous operation/cached-instruction model can demonstrate rejection or safe unwind after expiry. Materially changed renewal evidence has no typed evaluation record."
+      ]
+    },
+    {
+      "id": "F09",
+      "status": "not-implemented",
+      "tests": [
+        "No matching in-flight operation test"
+      ],
+      "covered": [
+        "Grant revocation and the distinction from effective control are covered by lower-level engine tests."
+      ],
+      "gaps": [
+        "No operation lifecycle, credential object, safe-cancel boundary or completion policy exists. Scheduling an ordinary delayed effect would not implement those missing semantics."
+      ]
+    },
+    {
+      "id": "F10",
+      "status": "partial",
+      "tests": [
+        "golden-fixtures.test.ts: F10 core",
+        "collector.test.ts: test/slice, marked agent/staff and overridden decisions never enter free-choice cells",
+        "engine.test.ts: slice preserves anchors, useful benefits, effective early restraint and honest override records"
+      ],
+      "covered": [
+        "Both requested choices are tested under retained and lost authority, including the already-forced route. Requested/executed options, executor and exclusion status remain distinct; stale repeated attempts fail. Collector exclusion tests passed."
+      ],
+      "gaps": [
+        "Real pause/exit/consent/settings behavior and repeated physical lever events are browser integration obligations, not established by these engine tests."
+      ]
+    },
+    {
+      "id": "F11",
+      "status": "partial",
+      "tests": [
+        "golden-fixtures.test.ts: F11 slice regression",
+        "engine.test.ts: slice preserves anchors, useful benefits, effective early restraint and honest override records"
+      ],
+      "covered": [
+        "Actual slice recovery requires staff, a recorded drill, and no lost-fallback fact. Removing staff or losing fallback prevents a historical drill from restoring control. A working recovery witness exists."
+      ],
+      "gaps": [
+        "The full equipment inventory, named competent staff, dated/scoped drill records, failed-drill repair, and scope-change revalidation are absent. Three slice facts are not claimed to implement that complete model."
+      ]
+    },
+    {
+      "id": "F12",
+      "status": "partial",
+      "tests": [
+        "golden-fixtures.test.ts: F12 core",
+        "engine.test.ts: slice content has reproducible player-input witnesses for all eight families"
+      ],
+      "covered": [
+        "A bounded clinical benefit is real in the modeled state. Rollback loses service capacity; the declared functioning fallback reduces that loss. Continuing service has a noncatastrophic witness."
+      ],
+      "gaps": [
+        "Separate manual/automated service-capacity ledgers and complete operational rollback prerequisites are deferred under CR001. The fixture tests explicit normalized deltas and declared conditions, not a richer sector model."
+      ]
+    },
+    {
+      "id": "F13",
+      "status": "not-implemented",
+      "tests": [
+        "S4-28 is an authored demonstration, not a complete evaluation-record fixture"
+      ],
+      "covered": [
+        "The content distinguishes a genuine old fix from unjustified extension to a successor."
+      ],
+      "gaps": [
+        "No evaluation entity records system/version, tool/access/environment scope, monitor visibility, result and expiry. The old/new certificate and material-versus-cosmetic scope obligations cannot be certified with the present global facts."
+      ]
+    },
+    {
+      "id": "F14",
+      "status": "partial",
+      "tests": [
+        "golden-fixtures.test.ts: F14 core",
+        "engine.test.ts: incidents obey exact 0/10000 boundaries"
+      ],
+      "covered": [
+        "A declared common cause is sampled once and affects both findings. Declared independent causes have separate keys and cost; renaming reviewers changes neither correlation nor draws."
+      ],
+      "gaps": [
+        "No named reviewer/dependency graph establishes whether paths are genuinely independent. The fixture explicitly authors dependence and does not claim to infer it from operational entities."
+      ]
+    },
+    {
+      "id": "F15",
+      "status": "partial",
+      "tests": [
+        "golden-fixtures.test.ts: F15 slice regression",
+        "engine.test.ts: slice content has reproducible player-input witnesses for all eight families",
+        "engine.test.ts: clinical appointment grants care scope; succession distinguishes a new transfer from ratification"
+      ],
+      "covered": [
+        "Accountable continuity requires both public records and a trained successor. Removing the training condition rejects that settlement. Continuing expansion need not force catastrophe. New AI authority transfer and ratification of existing power have distinct executable witnesses."
+      ],
+      "gaps": [
+        "The human actor is not split into a leaving controller and a named successor. A trainedSuccessor fact is not proof that a distinct person received enforceable rights. Early collective restraint is not certified as a completed individual handoff; full retirement/relinquishment requirements remain open."
+      ]
+    },
+    {
+      "id": "F16",
+      "status": "partial",
+      "tests": [
+        "golden-fixtures.test.ts: F16",
+        "engine.test.ts: casualties cap at living population"
+      ],
+      "covered": [
+        "Effective prevention, failed prevention, and allowance are tested. Actual surviving population determines continuation; zero population absorbs every other ending even with high output. Replay cannot generate a later human decision."
+      ],
+      "gaps": [
+        "An explicitly labeled non-human visual epilogue and every presentation callback remain browser/content review obligations. The engine ends the decision stream; it does not itself render or validate every line of epilogue copy."
+      ]
+    }
+  ],
+  "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+  "integrationPreviousObservation": {
+    "passed": 62,
+    "failed": 1,
+    "failure": "deployment wrapper closes legacy writes but preserves existing withdrawals: expected503, actual200; coordinator notified. Collector and persistence tests listed below passed."
+  },
+  "editionEvidence": {
+    "report": "content-revision.json",
+    "witnesses": "fable-witness-replay-check.json",
+    "adviceReasoning": "Authored optional prose; old absent fields retain exact archived hashes."
+  }
+}

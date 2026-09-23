@@ -1,42 +1,58 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f5f5f0">
-    <meta name="description" content="An endless queue of trolley problems. Make a choice, question your reasoning, and file it with the Department of Unresolved Ethics.">
-    <meta property="og:title" content="The Trolley Department">
-    <meta property="og:description" content="Same trolley. Increasingly questionable circumstances.">
-    <meta property="og:type" content="website">
-    <title>The Trolley Department — An endless ethical inconvenience</title>
-    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="./src/styles.css">
-    <script type="module" src="./src/app.js"></script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#faf9f3" />
+    <meta
+      name="description"
+      content="A short ride. A very long way down. An illustrated trolley game about useful machines, difficult choices, and who keeps the controls."
+    />
+    <meta property="og:title" content="trolley." />
+    <meta
+      property="og:description"
+      content="A short ride. A very long way down."
+    />
+    <title>trolley. — keep your hands on the controls</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./game.css" />
+    <script type="module" src="./game.js"></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to the dilemma</a>
-    <header class="site-header">
-      <a class="brand" href="#" aria-label="The Trolley Department, experiment">
-        <img src="./assets/favicon.svg" width="38" height="38" alt="">
-        <span>THE TROLLEY<br>DEPARTMENT</span>
-      </a>
-      <nav aria-label="Main navigation">
-        <button class="nav-link active" data-view="experiment" aria-current="page">The experiment</button>
-        <button class="nav-link" data-view="record">Run report <span id="record-count">0</span></button>
-        <button class="nav-link" data-view="guide">Field guide</button>
+    <a href="#decision" class="skip-link">Skip to the decision</a>
+    <header class="toolbar">
+      <a class="wordmark" href="./">trolley<span>.</span></a>
+      <span class="brand-note">A better tomorrow. Please hold.</span>
+      <nav aria-label="Game controls">
+        <button id="history-button" aria-label="Your run record">Record</button
+        ><button id="settings-button" aria-label="Settings and privacy">
+          Settings</button
+        ><button id="pause-button" aria-label="Pause the journey">Pause</button>
       </nav>
-      <button class="icon-button" id="preferences-button" aria-label="Preferences and privacy" title="Preferences and privacy">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="8" cy="7" r="3" fill="var(--paper)"/><circle cx="16" cy="17" r="3" fill="var(--paper)"/></svg>
-      </button>
     </header>
-    <main id="main" tabindex="-1"></main>
-    <footer class="site-footer">
-      <span>DEPT. OF UNRESOLVED ETHICS <span class="footer-slash">/</span> EST. APPROXIMATELY NOW</span>
-      <div><button data-view="guide">About the experiment</button><button id="privacy-button">Your data & privacy</button><a id="source-link" href="./README.md">Source & documentation ↗</a></div>
-    </footer>
-    <dialog id="settings-dialog" aria-labelledby="settings-title"></dialog>
-    <dialog id="explore-dialog" aria-labelledby="explore-title"></dialog>
-    <div id="toast" role="status" aria-live="polite"></div>
-    <noscript><div class="noscript">The trolley is waiting for JavaScript. Enable it to generate dilemmas and make choices. No account is needed.</div></noscript>
+    <div id="workspace">
+      <main id="app"><div id="scene" aria-hidden="true"></div></main>
+      <aside id="assistant-panel" hidden></aside>
+      <aside id="telemetry-panel" hidden></aside>
+    </div>
+    <div
+      id="announcer"
+      class="sr-only"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+    <div id="notice" class="notice" role="status" hidden></div>
+    <dialog id="drawer" aria-labelledby="drawer-title"></dialog>
+    <noscript
+      ><main class="no-script">
+        <h1>trolley.</h1>
+        <p>This illustrated game needs JavaScript. No account is required.</p>
+        <a href="./docs/METHODOLOGY_V2.md">Read the methodology</a>
+      </main></noscript
+    >
   </body>
 </html>

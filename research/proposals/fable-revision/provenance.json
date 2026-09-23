@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 2,
+  "status": "proposal_delivery_complete_local_integration_under_review",
+  "recordedOn": "2026-09-23",
+  "requestedModel": "Claude Fable 5.1",
+  "visibleSelectedModel": "Fable 5.1",
+  "visibleEffort": "High",
+  "identityEvidence": {
+    "surface": "Signed-in native Claude desktop application, Chat mode",
+    "method": "Native accessibility UI observation of the model menu and Model: Fable 5.1 High selector on all three conversations",
+    "limit": "The service UI selection is verified. No backend response model ID or cryptographic identity metadata was exposed; identity is not inferred from the model's self-description."
+  },
+  "authorization": "The owner explicitly requested Fable 5.1 narrative production, then authorized using the signed-in Claude Code desktop application. Chat mode was used for text-only drafting, not an autonomous Code workspace.",
+  "submissions": [
+    {
+      "subset": "01-opening-benefit",
+      "chatURL": "https://claude.ai/chat/03288f8d-8889-4dba-89d0-e42b5ead72b7",
+      "urlType": "private account conversation, not public share",
+      "promptFile": "01-opening-benefit.prompt.txt",
+      "promptSHA256": "6b43a846a58b83625cb7630a2ac40208c3ee88f9e8f8e364e637c48a7ae84726",
+      "responseFile": "01-opening-benefit.response.json",
+      "responseSHA256": "ce733986bac6247eff06d93ff2a1acc071a866da87640ebbced733a9d95ef116",
+      "responseBytes": 16374,
+      "nodeIds": [
+        "S1-01",
+        "S1-12",
+        "S2-01",
+        "S2-03",
+        "S3-01",
+        "S3-04"
+      ],
+      "visibleModelAtSubmissionAndCapture": "Fable 5.1 High"
+    },
+    {
+      "subset": "02-acceleration-pressure",
+      "chatURL": "https://claude.ai/chat/b1f81559-9aeb-4cb9-86b7-c583a8564494",
+      "urlType": "private account conversation, not public share",
+      "promptFile": "02-acceleration-pressure.prompt.txt",
+      "promptSHA256": "3f3adbf6971bba38f4f84b6f6299a31529755c929cf513d4c8562fd90ac29bf0",
+      "responseFile": "02-acceleration-pressure.response.json",
+      "responseSHA256": "78e7ad4c3cd7e73e72249bd0d0e0d8f34ef234b2754a3e4b5823e138d0640d00",
+      "responseBytes": 16920,
+      "nodeIds": [
+        "S4-03",
+        "S4-28",
+        "S5-06",
+        "S5-27"
+      ],
+      "visibleModelAtSubmissionAndCapture": "Fable 5.1 High"
+    },
+    {
+      "subset": "03-control-aftermath",
+      "chatURL": "https://claude.ai/chat/a7fbf91b-76e2-4e9a-ad7f-a7f6a826dc23",
+      "urlType": "private account conversation, not public share",
+      "promptFile": "03-control-aftermath.prompt.txt",
+      "promptSHA256": "ab750b0a40b954ce174925dd81acfec738f317897a6be328148a274a3adb5676",
+      "responseFile": "03-control-aftermath.response.txt",
+      "responseSHA256": "6478437460523915f47f4ac8ad106df3e7220c8fd1166789822b9eee11e28335",
+      "responseBytes": 17497,
+      "nodeIds": [
+        "S6-10",
+        "S6-22",
+        "S7-04",
+        "S7-19"
+      ],
+      "visibleModelAtSubmissionAndCapture": "Fable 5.1 High"
+    }
+  ],
+  "captureMethod": "Clicked each assistant response Copy control through native CUA, pasted through native CUA into plain-text TextEdit documents, saved UTF-8 files in this proposal folder, then parsed and hashed the files. No hidden app storage, API traffic, clipboard shell access or credentials were read.",
+  "desktopUsage": {
+    "tokens": "not exposed",
+    "cost": "not exposed",
+    "purchasesMade": false,
+    "substituteModelUsed": false
+  },
+  "historicalCLIProbe": {
+    "cliPath": "/Users/ammaraziz/.local/bin/claude",
+    "cliVersion": "2.1.233 (Claude Code)",
+    "requestedModel": "Claude Fable 5.1",
+    "attemptedSelector": "claude-fable-5-1",
+    "helpEvidence": "CLI help supports --model with aliases including fable and example full ID claude-fable-5. This does not establish the exact Fable 5.1 selector or account availability.",
+    "packagedIdentifiersObserved": [
+      "claude-fable-5",
+      "claude-fable-5-mythos-5",
+      "claude-fable-5.md"
+    ],
+    "packagedIdentifierLimit": "Static strings in the installed executable are not a service model list or proof of entitlement. No token or credential material was read or recorded.",
+    "authenticationStatus": {
+      "exitCode": 1,
+      "loggedIn": false,
+      "authMethod": "none",
+      "apiProvider": "firstParty"
+    },
+    "probe": {
+      "prompt": "Reply only with the word READY. This is an exact-model availability check; do not use tools.",
+      "options": [
+        "--safe-mode",
+        "--no-chrome",
+        "--tools",
+        "",
+        "--strict-mcp-config",
+        "--mcp-config",
+        "{\"mcpServers\":{}}",
+        "--no-session-persistence",
+        "--disable-slash-commands",
+        "--permission-mode",
+        "dontAsk",
+        "--output-format",
+        "json",
+        "--model",
+        "claude-fable-5-1",
+        "--print"
+      ],
+      "fallbackModel": null,
+      "exitCode": 1,
+      "responseType": "result",
+      "responseSubtype": "success",
+      "isError": true,
+      "message": "Failed to authenticate: OAuth session expired and could not be refreshed",
+      "numTurns": 1,
+      "reportedTotalCostUSD": 0,
+      "modelUsage": {},
+      "stderr": "",
+      "interpretation": "The CLI subtype string is not a successful inference: is_error is true, modelUsage is empty, and authentication failed. Model availability and exact identity remain unverified."
+    }
+  },
+  "editorialReview": {
+    "editor": "Codex",
+    "files": [
+      "reviewed-01.json",
+      "reviewed-02.json",
+      "reviewed-03.json"
+    ],
+    "deltaLog": "editorial-deltas.json",
+    "loggedEdits": 46,
+    "validation": "validation.json",
+    "rawProviderFilesUnmodified": true,
+    "authoredAssessments": "Short fictional in-character assessments were requested. They are not provider hidden reasoning. Codex converted provider meta-summaries into on-screen fictional prose; exact changes are logged."
+  },
+  "sideEffects": "Three private account chat conversations and local proposal files were created. Attachments were read by Claude within Chat. No project was connected to autonomous Code, no application source was edited, no production request or deployment was made, and no installation, login/logout, credential change or purchase was performed.",
+  "limitations": [
+    "This is a fourteen-node prose proposal, not a full campaign or 154 accepted scenarios.",
+    "Optional conditional lines remain nonexecutable and are excluded from automatic integration.",
+    "Narrative voices and headcounts do not implement cohort identity, fate accounting or CR003.",
+    "Engine and browser validation must run after actual integration."
+  ],
+  "integrationReview": "../../../docs/narrative/FABLE_EDITION.md"
+}

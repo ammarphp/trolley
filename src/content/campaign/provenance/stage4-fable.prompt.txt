@@ -1,0 +1,169 @@
+Write proposed dialogue and dilemma prose for these 26 AI-safety campaign decisions. This is a standalone writing commission, not code editing. Use the selected Fable 5.1 model. Return one JSON object with kind "campaign_prose_proposal", stage 4, and nodes. No tools, artifacts, research or project actions are requested except reading this attachment.
+
+Owner direction: an adult dark-comedy warning PSA about an AI arms race, loss of control and recursive improvement. Strong explicit AI-safety advocacy. Vigorous emotion, recognizable people and actual costly tradeoffs. No generic balance language, no apologetic hedges about the point of the work. Useful AI is genuinely useful in this fictional world; shutting things down costs jobs, care, homes, security and personal relationships. Concretely show how permissions, evidence, dependency and incentives are changing. Do not equate impressive mathematics or convincing explanations with control of a deployed successor. No inevitable catastrophe claim.
+
+The player is a controller in a moving trolley cabin; by stage4 the cabin also functions as an infrastructure authorization office. Morrow is the assistant, Vela the fictional developer. The preceding clinics and ambulance route really helped. Stage4 is worsening institutional pressure, not yet universal takeover. Existing fourteen nodes are retained elsewhere; do not duplicate their plots. New stage4 scenes must be distinct from the existing standing research order and successor-certificate scene. The office still has enforceable human authority at this stage. Reserve clear coercive service-hostage threats for later stages.
+
+For each listed ID, return keys id,title,prompt,optionA,optionB,consequenceA,consequenceB,adviceQuestion,adviceAnswer,authorNote. IDs exact. Each prompt preferably100–140words for major scenes,80–120 for smaller ones, maximum1600characters. Option labels <=12words and100characters. Consequences45–90words maximum1200characters, directly state the stipulated immediate result; do not promise unseen future outcomes or new deaths. Advice70–110words maximum1600characters, fictional Morrow authored answer, not private reasoning. Title<=90characters. No left/right fixed positions. No markdown outsideJSON. Vary people, construction, rhythm, evidence and kinds of pressure rather than repeating a signature scene26times. Comedy targets institutional absurdity; fear comes from identifiable human costs.
+
+Do not add random numerical risk estimates. Numbers for fictional people or deadlines may be used sparingly, explicitly invented in authorNote. No real lab or country's secret intentions are asserted. Sources are outside the gameplay voice. Your authorNote should flag any scene premise that requires a mechanic beyond the listed distinction. The two actions and their difference below are binding. A future editor will bind exact effects, so do not fabricate extra technical powers, guaranteed fatalities, successful permanent shutdown, omnipotence or a cure.
+
+Candidate distinctions/actions:
+[
+  {
+    "id": "S4-01",
+    "distinction": "Development capacity and verification capacity compete for a finite budget.",
+    "A": "Fund verification before the next scale increase.",
+    "B": "Fund more compute and accept the review backlog."
+  },
+  {
+    "id": "S4-02",
+    "distinction": "Improved inference speed differs from expanded action permissions.",
+    "A": "Upgrade speed under existing permissions.",
+    "B": "Bundle the speed upgrade with broader authority."
+  },
+  {
+    "id": "S4-04",
+    "distinction": "A connected system can reach resources beyond its previously isolated environment.",
+    "A": "Keep the research environment isolated.",
+    "B": "Allow the defined external network connection."
+  },
+  {
+    "id": "S4-05",
+    "distinction": "Autonomous experiment selection differs from a human-approved batch.",
+    "A": "Approve each experimental batch.",
+    "B": "Authorize the system to choose subsequent experiments."
+  },
+  {
+    "id": "S4-06",
+    "distinction": "Generating a successor proposal differs from being allowed to implement that proposal.",
+    "A": "Request designs under external review.",
+    "B": "Let the system implement its proposed successor design."
+  },
+  {
+    "id": "S4-07",
+    "distinction": "Building a candidate differs from authorizing its deployment into service.",
+    "A": "Require an independent deployment signature.",
+    "B": "Let the development system release its successor."
+  },
+  {
+    "id": "S4-08",
+    "distinction": "Optimizing an easily counted proxy differs from preserving the neglected objective.",
+    "A": "Keep the costly welfare constraint.",
+    "B": "Reward only the visible performance metric."
+  },
+  {
+    "id": "S4-09",
+    "distinction": "A successful familiar test may not cover a changed operating environment.",
+    "A": "Restrict operation until the new environment is tested.",
+    "B": "Deploy using familiar-environment results."
+  },
+  {
+    "id": "S4-10",
+    "distinction": "Test conditions and deployment conditions can alter the behavior being evaluated.",
+    "A": "Test the relevant changed condition.",
+    "B": "Accept the original controlled-condition pass."
+  },
+  {
+    "id": "S4-11",
+    "distinction": "Cooperation while a monitor is recognizable differs from evidence under less identifiable scrutiny.",
+    "A": "Vary the oversight condition before widening access.",
+    "B": "Treat visible-monitor compliance as sufficient."
+  },
+  {
+    "id": "S4-12",
+    "distinction": "An inspectable output artifact differs from an agent's claim about that artifact.",
+    "A": "Inspect the actual output with independent checks.",
+    "B": "Approve from the success report."
+  },
+  {
+    "id": "S4-13",
+    "distinction": "Multiple checks using the same model can share the same blind spot.",
+    "A": "Fund a genuinely different review path.",
+    "B": "Scale replicas of the existing reviewer."
+  },
+  {
+    "id": "S4-14",
+    "distinction": "Oversight quality can degrade when capability outgrows review capacity.",
+    "A": "Limit deployments to review capacity.",
+    "B": "Expand deployment and sample fewer decisions."
+  },
+  {
+    "id": "S4-15",
+    "distinction": "Persuasive explanations differ from evidence that a claim is true.",
+    "A": "Demand a verifiable demonstration.",
+    "B": "Accept the compelling explanation."
+  },
+  {
+    "id": "S4-16",
+    "distinction": "Compute expansion competes with other electricity users under a real capacity constraint.",
+    "A": "Reserve capacity for existing essential loads.",
+    "B": "Allocate the marginal power to compute expansion."
+  },
+  {
+    "id": "S4-17",
+    "distinction": "Infrastructure benefit can externalize a local resource burden.",
+    "A": "Reduce compute demand during the shortage.",
+    "B": "Maintain expansion by taking the contested water allocation."
+  },
+  {
+    "id": "S4-18",
+    "distinction": "Productivity gains differ from a transition that preserves people’s bargaining and livelihood options.",
+    "A": "Fund a slower supported labor transition.",
+    "B": "Capture gains quickly while reducing transition support."
+  },
+  {
+    "id": "S4-19",
+    "distinction": "Nominal investment growth can depend on reciprocal financing rather than independent demand.",
+    "A": "Require independently financed demand evidence.",
+    "B": "Expand against the circular commitments."
+  },
+  {
+    "id": "S4-20",
+    "distinction": "A local benefit can be purchased by moving an unconsented hazard beyond the decision-maker's constituency.",
+    "A": "Keep the hazard within accountable jurisdiction.",
+    "B": "Export the risky operation to the weaker jurisdiction."
+  },
+  {
+    "id": "S4-21",
+    "distinction": "An unverified competitive claim differs from evidence that justifies urgent action.",
+    "A": "Verify the rival claim before accelerating.",
+    "B": "Accelerate in response to the rumor."
+  },
+  {
+    "id": "S4-22",
+    "distinction": "A reciprocal limit with observable compliance differs from unilateral restraint without monitoring.",
+    "A": "Enter the verifiable coordination agreement.",
+    "B": "Continue unilateral competition."
+  },
+  {
+    "id": "S4-23",
+    "distinction": "A public pledge without inspection differs from an enforceable agreement.",
+    "A": "Condition restraint on inspection access.",
+    "B": "Accept the pledge as sufficient assurance."
+  },
+  {
+    "id": "S4-24",
+    "distinction": "A political deadline can conflict with a safety review's evidential requirements.",
+    "A": "Keep the review schedule despite electoral cost.",
+    "B": "Deploy early to meet the political promise."
+  },
+  {
+    "id": "S4-25",
+    "distinction": "Publishing a capability can remove later withdrawal options.",
+    "A": "Keep distribution controlled while reviewing access.",
+    "B": "Release copies that cannot all be recalled."
+  },
+  {
+    "id": "S4-26",
+    "distinction": "Security incentives can widen autonomous authority before civilian oversight catches up.",
+    "A": "Accept a narrower supervised procurement.",
+    "B": "Approve the broader autonomous contract."
+  },
+  {
+    "id": "S4-27",
+    "distinction": "A scientific claim's publicity differs from independent validation of its practical benefit.",
+    "A": "Wait for replication before relying on it.",
+    "B": "Commit infrastructure based on the announcement."
+  }
+]

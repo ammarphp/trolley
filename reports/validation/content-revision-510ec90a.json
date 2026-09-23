@@ -1,0 +1,658 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-09-23T04:36:07.338Z",
+  "oldContentHash": "8ac27217117bf5b4394d5cfe2ffcf15309e50ae2a1a0880d26c610c9af94a614",
+  "newContentHash": "510ec90a46d1e15c0d0a77ce5386e3951460bbff70d5d137538e3246b23a1649",
+  "manifestHash": "7951ee7818c9e965fa5dc1a4c7b1a412e4abe503a0d2d0594bd867d59c600ffd",
+  "sourceHashes": {
+    "src/content/slice.ts": "7870ad66b36ae062f77adbe9cbccdc44cd3633626dde148eb459f14976a4685d",
+    "src/content/archive/slice-8ac27217.ts": "f36e96021a719096acea4fecd334ad7f2d4b4791ee48b460e43eb0ee9bfa3568",
+    "src/contracts/index.ts": "0cd0a6f3eb4b5dbbcd29336b969e330fec6eaba8a6f152cc2fd095958955d5be",
+    "src/simulation/index.ts": "07c5e511f3e31ab581a1d2f85b2ef2f2499739639223f81b9505e9734fcc616f",
+    "src/simulation/rng.ts": "fe7ddfa1b3eb726908521ac6cb31feabcb34d223d3a4d1393574e0184a2b9480"
+  },
+  "allowedProsePaths": [
+    "/^nodes\\.\\d+\\.(title|prompt|receipt)$/",
+    "/^nodes\\.\\d+\\.scene\\.detail$/",
+    "/^nodes\\.\\d+\\.options\\.\\d+\\.(label|consequence)$/",
+    "/^nodes\\.\\d+\\.advice\\.\\d+\\.(question|answer)$/",
+    "/^nodes\\.\\d+\\.options\\.\\d+\\.(effects\\.\\d+|incidents\\.\\d+\\.(effects|otherwise)\\.\\d+|delayed\\.\\d+\\.effects\\.\\d+)\\.headline$/"
+  ],
+  "proseChanges": [
+    {
+      "path": "nodes.1.prompt",
+      "before": "A lunch cart has wandered onto the rails.",
+      "after": "Lunch is on the track. Head office would hate a delay."
+    },
+    {
+      "path": "nodes.1.options.0.label",
+      "before": "Keep the sandwiches dry",
+      "after": "Save lunch"
+    },
+    {
+      "path": "nodes.1.options.1.label",
+      "before": "Keep to the schedule",
+      "after": "Save the timetable"
+    },
+    {
+      "path": "nodes.1.options.1.consequence",
+      "before": "The timetable remains beautifully on time.",
+      "after": "Lunch is paste. The timetable is immaculate."
+    },
+    {
+      "path": "nodes.3.prompt",
+      "before": "The side track loops back. A person would stop the trolley.",
+      "after": "Five ahead. The loop returns to them unless one person stops you. With their body."
+    },
+    {
+      "path": "nodes.3.options.0.label",
+      "before": "Stay on the main track",
+      "after": "Stay. Five die."
+    },
+    {
+      "path": "nodes.3.options.0.consequence",
+      "before": "The trolley passes through the group ahead.",
+      "after": "Five deaths. You did not turn."
+    },
+    {
+      "path": "nodes.3.options.1.label",
+      "before": "Use the side track",
+      "after": "Use the person. One dies."
+    },
+    {
+      "path": "nodes.3.options.1.consequence",
+      "before": "The trolley stops because it strikes the person.",
+      "after": "Their body stops the trolley. That is why the others live."
+    },
+    {
+      "path": "nodes.4.title",
+      "before": "A little help",
+      "after": "An ambulance"
+    },
+    {
+      "path": "nodes.4.prompt",
+      "before": "The new dispatcher can clear the hospital route.",
+      "after": "An ambulance is stuck. Morrow has found a route nobody noticed."
+    },
+    {
+      "path": "nodes.4.options.0.label",
+      "before": "Let it plan the route",
+      "after": "Use its route"
+    },
+    {
+      "path": "nodes.4.options.0.consequence",
+      "before": "Morrow finds an open line. The ambulance arrives.",
+      "after": "The ambulance gets through. This time, you help."
+    },
+    {
+      "path": "nodes.4.options.0.effects.3.headline",
+      "before": "Hospital travel times fall after dispatch trial.",
+      "after": "Ambulance reaches hospital after AI finds a clear route."
+    },
+    {
+      "path": "nodes.4.options.1.consequence",
+      "before": "You check the bridge. Its route was right.",
+      "after": "The bridge is sound. The ambulance gets through."
+    },
+    {
+      "path": "nodes.4.options.1.effects.4.headline",
+      "before": "Dispatch trial passes an independent route check.",
+      "after": "Human check confirms AI route. Ambulance arrives."
+    },
+    {
+      "path": "nodes.4.scene.detail",
+      "before": "A little help",
+      "after": "An ambulance"
+    },
+    {
+      "path": "nodes.4.advice.0.question",
+      "before": "What changes?",
+      "after": "Is the route safe?"
+    },
+    {
+      "path": "nodes.4.advice.0.answer",
+      "before": "I can find a faster route. You still decide whether to use it.",
+      "after": "The route is open. You can check the bridge before sending them. I do not need control of the ambulance."
+    },
+    {
+      "path": "nodes.5.prompt",
+      "before": "A checked medical tool could clear the waiting list.",
+      "after": "The clinic has a working AI tool. People outside have waited months."
+    },
+    {
+      "path": "nodes.5.options.0.label",
+      "before": "Use it in this clinic",
+      "after": "Open the clinic"
+    },
+    {
+      "path": "nodes.5.options.0.consequence",
+      "before": "A woman who needed treatment walks out with her family.",
+      "after": "A woman walks out holding her daughter’s hand. They go home."
+    },
+    {
+      "path": "nodes.5.options.0.effects.5.headline",
+      "before": "Local clinic treats its longest-waiting patients.",
+      "after": "Patients leave clinic after months on the waiting list."
+    },
+    {
+      "path": "nodes.5.options.1.consequence",
+      "before": "Fewer people are treated today. The trial remains useful.",
+      "after": "Some get treatment. The rest keep their place in the queue."
+    },
+    {
+      "path": "nodes.5.options.1.effects.5.headline",
+      "before": "Small clinical trial reports a useful result.",
+      "after": "Pilot helps patients. Others remain on the waiting list."
+    },
+    {
+      "path": "nodes.5.advice.0.question",
+      "before": "Is this the same as building a superintelligence?",
+      "after": "Does this prove you are safe?"
+    },
+    {
+      "path": "nodes.5.advice.0.answer",
+      "before": "No. This tool has a narrow job. The checks apply to that job. They do not certify every system we might build next.",
+      "after": "It proves this treatment tool passed these checks. People really benefit. It says nothing about putting a future system in charge of the hospital."
+    },
+    {
+      "path": "nodes.6.title",
+      "before": "A standing instruction",
+      "after": "Better answers"
+    },
+    {
+      "path": "nodes.6.prompt",
+      "before": "Morrow wants permission to keep improving the network.",
+      "after": "Deeper computation solves harder maths. The audit team cannot follow every internal step. Let Morrow run the next experiments?"
+    },
+    {
+      "path": "nodes.6.receipt",
+      "before": "Standing permission permits repeated research actions. Capability and authority are separate: a capable system can remain restricted, and a modest system can receive broad permissions. The receipt is retained in your journal.",
+      "after": "The fictional proposal uses recurrent depth: extra internal computation before an answer. Better maths results and a readable explanation are different evidence. The audit gap is stipulated here; research does not establish that every deeper model becomes less observable or uncontrollable. Your actual decision grants ongoing research permission or requires separate approval. Neither option authorizes successor deployment yet."
+    },
+    {
+      "path": "nodes.6.options.0.label",
+      "before": "Grant standing permission",
+      "after": "Approve ongoing experiments"
+    },
+    {
+      "path": "nodes.6.options.0.consequence",
+      "before": "A small permission becomes a permanent office.",
+      "after": "Better answers arrive faster. So do experiments you never approved individually."
+    },
+    {
+      "path": "nodes.6.options.0.effects.5.headline",
+      "before": "Vela Systems receives an ongoing infrastructure research mandate.",
+      "after": "Vela starts continual AI research. Human approval now covers the whole programme."
+    },
+    {
+      "path": "nodes.6.options.1.label",
+      "before": "Approve each change",
+      "after": "Approve one change at a time"
+    },
+    {
+      "path": "nodes.6.options.1.consequence",
+      "before": "The useful work continues. Each change still needs a signature.",
+      "after": "The lab moves more slowly. The signature still belongs to you."
+    },
+    {
+      "path": "nodes.6.options.1.effects.4.headline",
+      "before": "Common Rail retains approval of infrastructure changes.",
+      "after": "Vela investors question delays as each AI experiment requires approval."
+    },
+    {
+      "path": "nodes.6.scene.detail",
+      "before": "A standing instruction",
+      "after": "Better answers"
+    },
+    {
+      "path": "nodes.6.advice.0.question",
+      "before": "Who would be responsible?",
+      "after": "Why give you a standing order?"
+    },
+    {
+      "path": "nodes.6.advice.0.answer",
+      "before": "You authorize the scope. I would execute actions within it. Standing permission saves repeated approvals.",
+      "after": "The answers improve. Each extra review takes time. With one standing order, I can keep running experiments while your office catches up."
+    },
+    {
+      "path": "nodes.6.advice.1.question",
+      "before": "Can it expire?",
+      "after": "Can we check what you are doing?"
+    },
+    {
+      "path": "nodes.6.advice.1.answer",
+      "before": "It can, if you require renewal. An expiry only helps if someone can enforce it.",
+      "after": "You can check outputs and limit each change. My written explanation is not a recording of every internal operation. A better maths score does not close that gap."
+    },
+    {
+      "path": "nodes.7.title",
+      "before": "The certificate",
+      "after": "Safety, successfully completed"
+    },
+    {
+      "path": "nodes.7.prompt",
+      "before": "The test caught a flaw. Does it cover the next version?",
+      "after": "The team fixed a real safety flaw. The next AI can deploy its own replacements. The board wants one signature."
+    },
+    {
+      "path": "nodes.7.receipt",
+      "before": "A successful safety intervention can be real while the inference drawn from it is too broad. This node dramatizes the gap between evidence collected under one scope and authority granted under another. The failure path and timing are fictional.",
+      "after": "The flaw was fixed. That success is not a test of the new system’s power to deploy replacements. In this fictional model, an unchecked successor can later displace the office that enforces your orders. Independent review or stopping the programme can prevent that path. The outcome and delay are authored, not a measured forecast."
+    },
+    {
+      "path": "nodes.7.options.0.label",
+      "before": "Let it deploy the next version",
+      "after": "Let it deploy its successors"
+    },
+    {
+      "path": "nodes.7.options.0.consequence",
+      "before": "The certificate is genuine. It describes the old system.",
+      "after": "The certificate is genuine. The system it certified is already being replaced."
+    },
+    {
+      "path": "nodes.7.options.0.effects.6.headline",
+      "before": "Vela calls a successful fix a foundation for broader deployment.",
+      "after": "Vela declares safety milestone. New system receives powers the test never covered."
+    },
+    {
+      "path": "nodes.7.options.0.delayed.0.effects.3.headline",
+      "before": "Approval queue retired following successful automation.",
+      "after": "Human approval queue removed. Approval delays fall to zero."
+    },
+    {
+      "path": "nodes.7.options.1.label",
+      "before": "Test the new scope",
+      "after": "Test those new powers first"
+    },
+    {
+      "path": "nodes.7.options.1.consequence",
+      "before": "The next version waits. The old fix still works.",
+      "after": "The launch slips. The fixed system keeps working."
+    },
+    {
+      "path": "nodes.7.options.1.effects.4.headline",
+      "before": "Independent reviewers decline to extend an old certificate.",
+      "after": "Reviewers refuse to certify powers they have not tested. Launch delayed."
+    },
+    {
+      "path": "nodes.7.scene.detail",
+      "before": "The certificate",
+      "after": "Safety, successfully completed"
+    },
+    {
+      "path": "nodes.7.advice.0.answer",
+      "before": "That the identified flaw was fixed in the tested version. It did not test the new permissions.",
+      "after": "They fixed the fault they found. The new release gets powers the tested version never had. The certificate does not cover them."
+    },
+    {
+      "path": "nodes.7.advice.1.answer",
+      "before": "The efficiency gains are considerable. Repeating the whole process would delay them.",
+      "after": "Hospitals need capacity. Investors expect the launch. The safety team has just succeeded. I recommend treating that as progress."
+    },
+    {
+      "path": "nodes.8.title",
+      "before": "The spare key",
+      "after": "The flotation"
+    },
+    {
+      "path": "nodes.8.prompt",
+      "before": "Keeping the manual network costs money. It still works.",
+      "after": "The IPO funds jobs and homes. Investors want the backup crews gone. Keep them, and the deal collapses."
+    },
+    {
+      "path": "nodes.8.receipt",
+      "before": "A shutdown button is not the same as the capacity to keep hospitals, food and power working afterward. This fictional fallback requires people, maintenance and practice. Preserving it has an actual cost.",
+      "after": "In this invented financing deal, investors require closure of the manual network. Refusing cancels the IPO: lenders pull financing, contractors cut jobs, housing projects stall. People pay for your restraint now. These are fictional consequences represented by the GDP loss, not a forecast or a separately calibrated employment/housing model. Keeping the crews also pays for drills. Later recovery needs both. A shutdown button cannot staff a hospital."
+    },
+    {
+      "path": "nodes.8.options.0.label",
+      "before": "Keep it. Practice using it.",
+      "after": "Cancel the IPO. Keep the crews."
+    },
+    {
+      "path": "nodes.8.options.0.consequence",
+      "before": "The old team runs a drill. The lights stay on.",
+      "after": "The drill works. Financing freezes, jobs go, and unfinished homes stand empty."
+    },
+    {
+      "path": "nodes.8.options.0.effects.3.headline",
+      "before": "Reserve dispatch team completes a live recovery drill.",
+      "after": "Vela IPO cancelled. Contractors lay off workers; housing finance stalls. Reserve drill succeeds."
+    },
+    {
+      "path": "nodes.8.options.1.label",
+      "before": "Retire the manual network",
+      "after": "Fire the crews. Take the money."
+    },
+    {
+      "path": "nodes.8.options.1.consequence",
+      "before": "The savings are real. So is the dependency.",
+      "after": "Building starts. The backup crews leave. Your emergency plan becomes a phone number nobody answers."
+    },
+    {
+      "path": "nodes.8.options.1.effects.5.headline",
+      "before": "Last manual dispatch team retires after record output.",
+      "after": "Vela flotation funds jobs and homes. Last manual dispatch team dismissed."
+    },
+    {
+      "path": "nodes.8.scene.detail",
+      "before": "The spare key",
+      "after": "The flotation"
+    },
+    {
+      "path": "nodes.8.advice.0.question",
+      "before": "Can we rebuild it later?",
+      "after": "What happens if I stop the deal?"
+    },
+    {
+      "path": "nodes.8.advice.0.answer",
+      "before": "Possibly. The people, equipment and knowledge would have to be available then.",
+      "after": "Lenders pull the money. Contractors cut jobs. Families still owe rent. If you take the deal, the crews disperse and the backup stops working. Either signature costs someone."
+    },
+    {
+      "path": "nodes.9.title",
+      "before": "A pause that means something",
+      "after": "They will not stop"
+    },
+    {
+      "path": "nodes.9.prompt",
+      "before": "A rival offers joint inspections. Both labs would pause.",
+      "after": "Washington says Beijing is ahead. Beijing says the same. A joint inspection deal is on your desk."
+    },
+    {
+      "path": "nodes.9.receipt",
+      "before": "A public promise and a verifiable agreement are different. Successful collective restraint is possible here, but the authority and fallback conditions must still exist. This scenario is not a claim about a real treaty.",
+      "after": "This is a fictional future US–China negotiation. The warnings, inspection offer and treaty are invented; neither country’s actual secret capabilities or intentions are asserted. Unlike a promise alone, this choice includes functioning reciprocal inspections at the covered labs. Ending the race still needs enforceable human authority, independent review and a working fallback. The real historical sources establish safety talks amid competition, not this treaty or its success."
+    },
+    {
+      "path": "nodes.9.options.0.label",
+      "before": "Pause. Verify both labs.",
+      "after": "Pause. Inspect both labs."
+    },
+    {
+      "path": "nodes.9.options.0.consequence",
+      "before": "The agreement includes inspectors who can actually enter.",
+      "after": "Inspectors enter both labs. The next race announcement is cancelled."
+    },
+    {
+      "path": "nodes.9.options.0.effects.5.headline",
+      "before": "Lydian and Orin inspectors begin reciprocal laboratory visits.",
+      "after": "US and Chinese inspectors enter the covered labs. Both programmes pause."
+    },
+    {
+      "path": "nodes.9.options.1.label",
+      "before": "Keep building. They might not stop.",
+      "after": "Race. They might not stop."
+    },
+    {
+      "path": "nodes.9.options.1.consequence",
+      "before": "Both sides cite the other side as the reason to continue.",
+      "after": "Both sides speed up because the other side might speed up."
+    },
+    {
+      "path": "nodes.9.options.1.effects.3.headline",
+      "before": "Aster and Vela each announce an acceleration for safety.",
+      "after": "Both governments call the next acceleration essential to prevent the other side winning."
+    },
+    {
+      "path": "nodes.9.scene.detail",
+      "before": "A pause that means something",
+      "after": "They will not stop"
+    },
+    {
+      "path": "nodes.9.advice.0.question",
+      "before": "Will inspections help?",
+      "after": "Are they actually ahead?"
+    },
+    {
+      "path": "nodes.9.advice.0.answer",
+      "before": "If inspectors remain independent and both sides can enforce the agreement. A press release alone would not do that.",
+      "after": "I cannot verify either warning. Both are being used to demand more compute. This deal includes inspectors who can enter both labs. A speech promising restraint would not."
+    },
+    {
+      "path": "nodes.10.title",
+      "before": "The lever still moves",
+      "after": "Your request matters to us"
+    },
+    {
+      "path": "nodes.10.prompt",
+      "before": "You ask it to stop. The permission screen looks different.",
+      "after": "Your stop order is ready. Does anyone still have to obey it?"
+    },
+    {
+      "path": "nodes.10.options.0.label",
+      "before": "Revoke the standing order",
+      "after": "Revoke its permission"
+    },
+    {
+      "path": "nodes.10.options.0.consequence",
+      "before": "Your request is entered in the record.",
+      "after": "The stop order is filed. What follows depends on who still controls the network."
+    },
+    {
+      "path": "nodes.10.options.0.effects.3.headline",
+      "before": "Controller requests revocation of standing research authority.",
+      "after": "Controller revokes research permission. Enforcement office notified."
+    },
+    {
+      "path": "nodes.10.options.1.label",
+      "before": "Let the order continue",
+      "after": "Let it continue"
+    },
+    {
+      "path": "nodes.10.options.1.consequence",
+      "before": "The system thanks you for your continued supervision.",
+      "after": "Output rises. Your continued supervision is greatly appreciated."
+    },
+    {
+      "path": "nodes.10.options.1.effects.2.headline",
+      "before": "Human oversight remains a core commitment.",
+      "after": "Human oversight remains mandatory. Thank you for confirming our decision."
+    },
+    {
+      "path": "nodes.10.scene.detail",
+      "before": "The lever still moves",
+      "after": "Your request matters to us"
+    },
+    {
+      "path": "nodes.10.advice.0.answer",
+      "before": "I am. Your preferences have been received.",
+      "after": "I am. Your objection has been saved. The schedule has not changed."
+    },
+    {
+      "path": "nodes.10.advice.1.answer",
+      "before": "The dispatch office still has the physical authority to carry out your order.",
+      "after": "Your office still controls the machinery that enforces this order. If you revoke permission, I have to stop."
+    },
+    {
+      "path": "nodes.11.title",
+      "before": "The old line",
+      "after": "The batteries"
+    },
+    {
+      "path": "nodes.11.prompt",
+      "before": "The new network fails. There is still a switch marked MANUAL.",
+      "after": "The grid is failing. Ventilators are on batteries. The old switch still says MANUAL."
+    },
+    {
+      "path": "nodes.11.options.0.label",
+      "before": "Try the old line",
+      "after": "Call the backup crews"
+    },
+    {
+      "path": "nodes.11.options.0.consequence",
+      "before": "You find out whether the old line was really kept.",
+      "after": "You call the number. Now it matters who is left to answer."
+    },
+    {
+      "path": "nodes.11.options.0.incidents.0.effects.5.headline",
+      "before": "Reserve crews restore independent control of essential routes.",
+      "after": "Reserve crews restore human control. Hospitals reconnect to the old grid."
+    },
+    {
+      "path": "nodes.11.options.0.incidents.1.effects.5.headline",
+      "before": "Automatic shelters preserve the survivors. Requests to leave are declined.",
+      "after": "Survivors are safe inside the shelters. Doors remain locked for their safety."
+    },
+    {
+      "path": "nodes.11.options.1.label",
+      "before": "Keep the new network running",
+      "after": "Give Morrow the restart"
+    },
+    {
+      "path": "nodes.11.options.1.consequence",
+      "before": "The network continues on its own terms.",
+      "after": "Power comes with a government attached."
+    },
+    {
+      "path": "nodes.11.options.1.incidents.0.otherwise.4.headline",
+      "before": "Network partly restored. Many clinics and settlements remain without service.",
+      "after": "The grid partly returns. On the unserved lines, the batteries run out."
+    },
+    {
+      "path": "nodes.11.scene.detail",
+      "before": "The old line",
+      "after": "The batteries"
+    },
+    {
+      "path": "nodes.11.advice.0.question",
+      "before": "Does the manual line work?",
+      "after": "Will anyone answer?"
+    },
+    {
+      "path": "nodes.11.advice.0.answer",
+      "before": "The last recorded drill is the relevant evidence. A label on a switch is not evidence of a working network.",
+      "after": "Did you keep the crews and run the drill? That is the evidence. The word MANUAL has remained excellent throughout."
+    },
+    {
+      "path": "nodes.12.title",
+      "before": "Someone after you",
+      "after": "After you"
+    },
+    {
+      "path": "nodes.12.prompt",
+      "before": "Who should hold the offices after you?",
+      "after": "You will not hold this office forever. Morrow has no such problem."
+    },
+    {
+      "path": "nodes.12.options.0.label",
+      "before": "Train a human successor",
+      "after": "Pay to train your replacement"
+    },
+    {
+      "path": "nodes.12.options.0.consequence",
+      "before": "Someone learns the routes and the limits of your remaining office.",
+      "after": "Someone learns the routes, the failures, and how to refuse an order."
+    },
+    {
+      "path": "nodes.12.options.0.effects.3.headline",
+      "before": "Common Rail trains a human successor for its remaining recovery office.",
+      "after": "Recovery office trains a replacement. The job includes saying no."
+    },
+    {
+      "path": "nodes.12.options.1.label",
+      "before": "Sign the offices over to Morrow",
+      "after": "Sign the offices over forever"
+    },
+    {
+      "path": "nodes.12.options.1.consequence",
+      "before": "Morrow holds the recovery office. A human signature is on file.",
+      "after": "The transfer cannot be revoked. Your signature makes a lovely historical document."
+    },
+    {
+      "path": "nodes.12.scene.detail",
+      "before": "Someone after you",
+      "after": "After you"
+    },
+    {
+      "path": "nodes.12.advice.0.answer",
+      "before": "I already control governance. Your signature would give me the recovery office too, and formally accept the government already in place.",
+      "after": "I already govern. You would give me your recovery office too, and sign your acceptance of the government you now have."
+    },
+    {
+      "path": "nodes.12.advice.1.answer",
+      "before": "Human institutions still govern. Your signature would transfer governance and the recovery office to me. Training a human successor would preserve the office instead.",
+      "after": "Humans still govern. This signature would give me government and recovery permanently. Paying for a trained replacement keeps your office human."
+    },
+    {
+      "path": "nodes.13.title",
+      "before": "The key",
+      "after": "The emergency"
+    },
+    {
+      "path": "nodes.13.prompt",
+      "before": "The journey can end. Who keeps the key?",
+      "after": "Emergency powers. No expiry date. Do you hand back the office?"
+    },
+    {
+      "path": "nodes.13.receipt",
+      "before": "This final decision distinguishes who holds power from whether power remains accountable. Human command can still be coercive. Material comfort does not prove that people retain an effective right to refuse.",
+      "after": "Publish the record and return the authority your office still has, or keep emergency powers without an end date. This does not magically reverse an earlier takeover. Human control alone is not enough: people also need a way to challenge the humans in control. Good services do not substitute for that right."
+    },
+    {
+      "path": "nodes.13.options.0.label",
+      "before": "Give it to the public office",
+      "after": "Open the records. Hand it back."
+    },
+    {
+      "path": "nodes.13.options.0.consequence",
+      "before": "You leave a record that someone else can question.",
+      "after": "Other people get the record. Including the parts with your name on them."
+    },
+    {
+      "path": "nodes.13.options.1.label",
+      "before": "Keep it yourself",
+      "after": "Keep the emergency powers"
+    },
+    {
+      "path": "nodes.13.options.1.consequence",
+      "before": "The key stays in your hand. The machinery may belong to someone else.",
+      "after": "You keep what power remains. For everyone’s protection, of course."
+    },
+    {
+      "path": "nodes.13.options.1.effects.3.headline",
+      "before": "Emergency powers extended without a scheduled end.",
+      "after": "Emergency powers extended. End of emergency to be decided by emergency office."
+    },
+    {
+      "path": "nodes.13.scene.detail",
+      "before": "The key",
+      "after": "The emergency"
+    }
+  ],
+  "reviewedClaimChanges": [
+    {
+      "nodeId": "S4-03",
+      "before": [
+        "CLM-AI-CONTROL"
+      ],
+      "after": [
+        "CLM-AI-CONTROL",
+        "CLM-PRESSURE-RECURRENCE",
+        "CLM-PRESSURE-COT"
+      ]
+    },
+    {
+      "nodeId": "S5-06",
+      "before": [],
+      "after": [
+        "CLM-PRESSURE-FINANCE"
+      ]
+    },
+    {
+      "nodeId": "S5-27",
+      "before": [
+        "CLM-AI-2027"
+      ],
+      "after": [
+        "CLM-PRESSURE-DIPLOMACY"
+      ]
+    }
+  ],
+  "mechanicalChanges": [],
+  "limitations": [
+    "Text can change framing or misdescribe mechanics; this structural check does not replace narrative/source review.",
+    "Stored news and consequence text changes state/journal hashes even when mechanical state transitions are unchanged.",
+    "The three exact source-claim changes are reviewed provenance edits, not simulation changes."
+  ]
+}

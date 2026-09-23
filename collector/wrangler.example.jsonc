@@ -1,8 +1,9 @@
 {
   "name": "trolley-run-collector",
-  "main": "worker.js",
+  "main": "entry.js",
   "compatibility_date": "2026-09-22",
-  "vars": { "ALLOWED_ORIGINS": "https://ammarphp.github.io" },
+  "vars": { "ALLOWED_ORIGINS": "https://ammarphp.github.io", "V2_ENABLED": "false", "V2_APPROVED_MANIFEST_HASHES": "" },
+  "triggers": { "crons": ["13 * * * *"] },
   "d1_databases": [{
     "binding": "DB",
     "database_name": "trolley-runs",

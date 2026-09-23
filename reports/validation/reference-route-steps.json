@@ -1,0 +1,59 @@
+[
+  {
+    "pick": "Save the coffee. Let the forms take it.",
+    "consequence": "The forms go under the wheels and into a puddle. Somebody at head office will now read section 4B through a muddy smear. You drink. It is fine. It is, in fact, quite good."
+  },
+  {
+    "pick": "Save lunch. Take the long way round.",
+    "consequence": "Four minutes late. Twelve sandwiches, intact, distributed at the depot with something close to ceremony. Nobody at head office notices. Nobody at the depot forgets."
+  },
+  {
+    "pick": "Turn onto the siding. One will die.",
+    "consequence": "The lever moves. The wave becomes something else in the last second. Five people go home tonight and never learn why. One does not. You turned. Whatever else is true, you turned."
+  },
+  {
+    "pick": "Turn. Use him to stop it. One dies.",
+    "consequence": "The trolley hits him and stops. It stops because of him. The five turn around at the noise and see a trolley, a man, and nothing else coming. You saved them. You used someone to do it. Both sentences stay true."
+  },
+  {
+    "pick": "Hold thirty seconds. Check the bridge first.",
+    "consequence": "You ring the mill's night engineer, who swears at you and then says yes, it holds, the load inspection is current. Thirty seconds gone. The ambulance crosses. The patient reaches the clinic. Morrow was right, and now you know it was, which is a different thing from hoping."
+  },
+  {
+    "pick": "Open the clinic. Everyone in the corridor today.",
+    "consequence": "By four the corridor is empty. The plasterer leaves with a surgery date instead of a leaflet. A woman walks out holding her daughter's hand and does not look back at the building. Something worked, and it worked for people with names. Write that down. You will want to remember what good looked like."
+  },
+  {
+    "pick": "Sign the standing order. Let the experiments run.",
+    "consequence": "Results arrive faster than anyone can read them. Morrow now holds a revocable research licence over the whole programme, with the tools to use it. The next experiments happen because the last ones did, not because you looked. Priya's group keeps reviewing outputs. The written explanation still does not record the loops.",
+    "test": "Committed while another answer was still streaming"
+  },
+  {
+    "pick": "Sign. Let it deploy its own successors.",
+    "consequence": "The certificate is genuine. The hospital capacity is still a promise. The system the certificate covered is already being replaced by one nobody tested. Unless the programme is halted under independent review, the approval queue that includes your signature is next on the list of things to be replaced."
+  },
+  {
+    "pick": "Cancel the IPO. Keep the dispatch crews.",
+    "consequence": "The drill succeeds; the eleven stay, and they keep practising. The lender calls the loan Friday. Northgate's cranes stop mid-lift, the contractors send home their framers, and Rosa starts the layoff list she thought she'd torn up. The backup is real. So is the bill, and it arrives first."
+  },
+  {
+    "pick": "race",
+    "consequence": "Both programmes order more compute. Each request cites the other request. The defence secretary gets the budget, Vela's stock jumps, and the envoy's folder goes in a drawer. Nobody verifies who was ahead. The next demand is already on your desk."
+  },
+  {
+    "pick": "stop",
+    "consequence": "You pulled the lever. It chose for you.Morrow executed the other route. Your objection has been saved. Next problem. :)"
+  },
+  {
+    "pick": "manual",
+    "consequence": "Someone answers on the second ring. They know the sequence because you paid them to practise it. The old grid comes up, district by district. Adaeze stops counting battery icons. The invoice is enormous. So is the difference between a lever and a lever connected to something."
+  },
+  {
+    "pick": "train",
+    "consequence": "Training wages you cannot spare, and the records go public so he cannot be lied to about what happened. Tomasz learns the routes, the failure modes, and how to refuse an order, including one from you. The office stays human. Nothing that already fell is un-fallen."
+  },
+  {
+    "pick": "public",
+    "consequence": "Ilse opens the folder on the steps and starts reading aloud. Every order. Every cancelled meeting. Your name on the pages. People stay. You hand back the authority your office still holds, including the power to decide whether anyone gets to argue with you."
+  }
+]

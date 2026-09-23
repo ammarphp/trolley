@@ -1,0 +1,1650 @@
+{
+  "schema_version": "1.0",
+  "status": "accepted-executing",
+  "path_policy": "All paths are proposed; inspect and map before editing. Split large content tranches into 4\u20138-node child tasks with separate review.",
+  "roles": {
+    "LEAD": {
+      "title": "Coordinator and integrator",
+      "default_paths": [
+        "docs/plan/",
+        "docs/decisions/",
+        "docs/handoffs/",
+        "AGENTS.md",
+        "package.json",
+        "lockfile",
+        "workspace configuration"
+      ],
+      "default_reviewer": "ARCH"
+    },
+    "ARCH": {
+      "title": "Architecture and contracts",
+      "default_paths": [
+        "packages/contracts/",
+        "docs/architecture/"
+      ],
+      "default_reviewer": "QA"
+    },
+    "PHIL": {
+      "title": "Philosophy and ethical-case research",
+      "default_paths": [
+        "research/philosophy/",
+        "research/claims/philosophy/"
+      ],
+      "default_reviewer": "AIRES"
+    },
+    "AIRES": {
+      "title": "AI-safety research and evidence",
+      "default_paths": [
+        "research/ai-safety/",
+        "research/claims/ai-safety/",
+        "research/sources/"
+      ],
+      "default_reviewer": "PHIL"
+    },
+    "NARR": {
+      "title": "Narrative and content systems",
+      "default_paths": [
+        "packages/content/",
+        "research/content-review/",
+        "docs/narrative/"
+      ],
+      "default_reviewer": "AIRES"
+    },
+    "ENGINE": {
+      "title": "Deterministic simulation",
+      "default_paths": [
+        "packages/engine/",
+        "scripts/simulation/",
+        "tests/engine/"
+      ],
+      "default_reviewer": "QA"
+    },
+    "UX": {
+      "title": "DOM interface and accessibility",
+      "default_paths": [
+        "apps/web/src/",
+        "tests/accessibility/",
+        "docs/interaction/"
+      ],
+      "default_reviewer": "QA"
+    },
+    "RENDER": {
+      "title": "World renderer and motion",
+      "default_paths": [
+        "packages/presentation/src/scene/",
+        "packages/presentation/src/timeline/",
+        "tests/visual/"
+      ],
+      "default_reviewer": "UX"
+    },
+    "ART": {
+      "title": "Art direction and asset pipeline",
+      "default_paths": [
+        "assets/",
+        "apps/web/public/assets/",
+        "scripts/assets/",
+        "docs/art/"
+      ],
+      "default_reviewer": "RENDER"
+    },
+    "AUDIO": {
+      "title": "Audio design and playback",
+      "default_paths": [
+        "packages/presentation/src/audio/",
+        "assets/audio/",
+        "docs/audio/"
+      ],
+      "default_reviewer": "UX"
+    },
+    "DATA": {
+      "title": "Telemetry and study methods",
+      "default_paths": [
+        "packages/telemetry/",
+        "services/ingestion/",
+        "research/study/",
+        "research/analysis/"
+      ],
+      "default_reviewer": "SECOPS"
+    },
+    "QA": {
+      "title": "Independent verification",
+      "default_paths": [
+        "tests/qa/",
+        "tests/e2e/",
+        "reports/validation/"
+      ],
+      "default_reviewer": "LEAD"
+    },
+    "SECOPS": {
+      "title": "Security and deployment",
+      "default_paths": [
+        ".github/workflows/",
+        "docs/operations/",
+        "tests/security/"
+      ],
+      "default_reviewer": "QA"
+    }
+  },
+  "tasks": [
+    {
+      "id": "T001",
+      "phase": "P0",
+      "title": "Inspect repository, permissions, tools, and existing assets",
+      "owner_role": "ARCH",
+      "depends_on": [],
+      "primary_deliverable": "docs/decisions/001-v2-boundaries.md",
+      "acceptance_criteria": [
+        "Actual paths, git status, capabilities and source availability recorded; no unrelated changes."
+      ],
+      "reviewer_role": "QA",
+      "status": "done",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Repository inspected; legacy preserved; current baseline and tools recorded in implementation status."
+    },
+    {
+      "id": "T002",
+      "phase": "P0",
+      "title": "Reconcile owner requirements and update traceability",
+      "owner_role": "LEAD",
+      "depends_on": [
+        "T001"
+      ],
+      "primary_deliverable": "docs/plan/ACCEPTED_PLAN.md",
+      "acceptance_criteria": [
+        "Every brief requirement and addendum constraint maps to a decision, task and acceptance gate."
+      ],
+      "reviewer_role": "ARCH",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Transcript, original brief/addendum and later corrections reconciled in the local-only standing specification; latest gallery feedback appended. Full historical plan traceability remains distinct."
+    },
+    {
+      "id": "T003",
+      "phase": "P0",
+      "title": "Verify starter sources and plan contemporary research",
+      "owner_role": "AIRES",
+      "depends_on": [
+        "T001"
+      ],
+      "primary_deliverable": "research/registry/public-sources.json",
+      "acceptance_criteria": [
+        "Source identities and reading depth recorded; local book availability honestly marked; newer primary work search documented."
+      ],
+      "reviewer_role": "PHIL",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "18 sources/20 claims merged with explicit reading scope. Independent claim approval remains open."
+    },
+    {
+      "id": "T004",
+      "phase": "P0",
+      "title": "Run divergent ideation and select coherent additions",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T002",
+        "T003"
+      ],
+      "primary_deliverable": "docs/plan/ACCEPTED_PLAN.md",
+      "acceptance_criteria": [
+        "At least 30 assessed candidates across 10 domains, at least 10 new/materially transformed; normally at most six major launch additions."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Six accepted expansions recorded. Original full divergent ideation table not reconstructed as a new approval."
+    },
+    {
+      "id": "T005",
+      "phase": "P0",
+      "title": "Decide architecture, service boundary, and rendering spike",
+      "owner_role": "ARCH",
+      "depends_on": [
+        "T001",
+        "T002",
+        "T004"
+      ],
+      "primary_deliverable": "docs/decisions/001-v2-boundaries.md",
+      "acceptance_criteria": [
+        "All major cross-domain tensions resolved with actual repo paths, defaults and rejected alternatives."
+      ],
+      "reviewer_role": "QA",
+      "status": "done",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Retain DOM/esbuild/Pages; pure TypeScript simulation, Pixi scene, optional isolated collector."
+    },
+    {
+      "id": "T006",
+      "phase": "P0",
+      "title": "Synthesize and obtain acceptance of execution plan",
+      "owner_role": "LEAD",
+      "depends_on": [
+        "T003",
+        "T004",
+        "T005"
+      ],
+      "primary_deliverable": "docs/plan/ACCEPTED_PLAN.md",
+      "acceptance_criteria": [
+        "Acyclic task DAG, path ownership, gates, first-ready packets and explicit approval status recorded."
+      ],
+      "reviewer_role": "ARCH",
+      "status": "done",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Owner explicitly requested implementation of accepted plan."
+    },
+    {
+      "id": "T007",
+      "phase": "P1",
+      "title": "Create philosophy mechanism dossiers",
+      "owner_role": "PHIL",
+      "depends_on": [
+        "T006"
+      ],
+      "primary_deliverable": "research/philosophy/dossiers.md",
+      "acceptance_criteria": [
+        "Original-text locators for used classic cases; adaptations preserve or explicitly change moral structure."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Inspected philosophy source packet and limitations; production use approval pending."
+    },
+    {
+      "id": "T008",
+      "phase": "P1",
+      "title": "Create technical AI-safety mechanism dossiers",
+      "owner_role": "AIRES",
+      "depends_on": [
+        "T006"
+      ],
+      "primary_deliverable": "research/ai-safety/MECHANISMS.md",
+      "acceptance_criteria": [
+        "Each mechanism has evidence, setup, limits, player decision, and clear separation of extrapolation."
+      ],
+      "reviewer_role": "PHIL",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Mechanism packet uses inspected primary sources and scoped claims."
+    },
+    {
+      "id": "T009",
+      "phase": "P1",
+      "title": "Read prioritized scenario/book literature and news analogues",
+      "owner_role": "AIRES",
+      "depends_on": [
+        "T006"
+      ],
+      "primary_deliverable": "research/scenarios/BOOK_READING_RECORD.md",
+      "acceptance_criteria": [
+        "Book-derived claims have authorized exact locators or remain blocked; forecasts and fiction not mislabeled as observations."
+      ],
+      "reviewer_role": "PHIL",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Selected local book chapters read; not represented as full-book reading. Scenario forecasts distinguished."
+    },
+    {
+      "id": "T010",
+      "phase": "P1",
+      "title": "Normalize source and claim registry",
+      "owner_role": "AIRES",
+      "depends_on": [
+        "T007",
+        "T008"
+      ],
+      "primary_deliverable": "research/registry/public-sources.json",
+      "acceptance_criteria": [
+        "Each real claim has ID, locator, reading depth, approved use and evidence category; no fake citations."
+      ],
+      "reviewer_role": "PHIL",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Normalized limits and source references; inspector passes; independent review pending."
+    },
+    {
+      "id": "T011",
+      "phase": "P1",
+      "title": "Specify world units, authority, and causal transitions",
+      "owner_role": "ARCH",
+      "depends_on": [
+        "T007",
+        "T008"
+      ],
+      "primary_deliverable": "docs/architecture/SEMANTICS.md",
+      "acceptance_criteria": [
+        "Variables have units/ranges/update owners; actual world, observation and real participant state separated."
+      ],
+      "reviewer_role": "QA",
+      "status": "in_progress",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Phased full campaign, disjoint cohort/alias death ledger and ordered physical rail contacts/brakes implemented. Wider institution/obligation/evaluation/service-ledger model remains open."
+    },
+    {
+      "id": "T012",
+      "phase": "P1",
+      "title": "Define runtime-validated content and event contracts",
+      "owner_role": "ARCH",
+      "depends_on": [
+        "T010",
+        "T011"
+      ],
+      "primary_deliverable": "src/contracts/index.ts",
+      "acceptance_criteria": [
+        "Node/event/claim/ending/run schemas reject invalid units, choices, probabilities, unsafe effects and missing references."
+      ],
+      "reviewer_role": "QA",
+      "status": "in_progress",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Strict campaign contracts extend archived-compatible slice schemas with phases, population allocation, rail paths and control exclusions. Wider full-model contracts remain open."
+    },
+    {
+      "id": "T013",
+      "phase": "P1",
+      "title": "Plan stages, anchors, branch families, and full bank inventory",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T007",
+        "T008",
+        "T011",
+        "T012"
+      ],
+      "primary_deliverable": "research/content/candidate-inventory.json",
+      "acceptance_criteria": [
+        "All planned concepts and transitions mapped; mandatory anchors fit budgets; no uncontrolled binary-tree explosion."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "done",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "154 executable reviewed nodes in stage counts12/18/24/28/28/24/20, phased anchors and bounded director budgets; candidate inventory retained as provenance."
+    },
+    {
+      "id": "T014",
+      "phase": "P1",
+      "title": "Design ending predicates and compatibility rules",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T009",
+        "T011",
+        "T012"
+      ],
+      "primary_deliverable": "src/simulation/index.ts",
+      "acceptance_criteria": [
+        "Each proposed family has necessary/excluded conditions and a plausible witness trajectory; welfare not conflated with authority."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Eight causal ending families, witnesses, near misses; full institution identity semantics pending."
+    },
+    {
+      "id": "T015",
+      "phase": "P1",
+      "title": "Author and review 16 golden semantic fixtures",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T010",
+        "T012",
+        "T013",
+        "T014"
+      ],
+      "primary_deliverable": "reports/validation/fixture-coverage.md",
+      "acceptance_criteria": [
+        "Sixteen diverse cases with both outcomes, source status, delayed effects, permission cases and expected invariants."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "in_progress",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "16 specifications mapped to actual tests: one covered within slice, twelve partial, three absent. No full G1 claim."
+    },
+    {
+      "id": "T016",
+      "phase": "P1",
+      "title": "Define research profiles, privacy, and evaluation approach",
+      "owner_role": "DATA",
+      "depends_on": [
+        "T006",
+        "T011",
+        "T013"
+      ],
+      "primary_deliverable": "docs/privacy/v2-collection-design.md",
+      "acceptance_criteria": [
+        "Public local mode, opt-in service and study separated; review dependencies and analysis limitations explicit."
+      ],
+      "reviewer_role": "SECOPS",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Run grain, source/synthetic separation and consent boundary documented. Formal study excluded."
+    },
+    {
+      "id": "T017",
+      "phase": "P2",
+      "title": "Implement pure engine skeleton and versioned state",
+      "owner_role": "ENGINE",
+      "depends_on": [
+        "T012",
+        "T015"
+      ],
+      "primary_deliverable": "src/simulation/index.ts",
+      "acceptance_criteria": [
+        "Browser-independent engine initializes valid states and exposes specified API; forbidden imports fail lint."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Pure immutable headless engine; no DOM/storage/network effects."
+    },
+    {
+      "id": "T018",
+      "phase": "P2",
+      "title": "Implement validated effects and atomic commitment",
+      "owner_role": "ENGINE",
+      "depends_on": [
+        "T017"
+      ],
+      "primary_deliverable": "src/simulation/index.ts",
+      "acceptance_criteria": [
+        "Both options work; no double commitment; counts/units preserved; stale revision and invalid actor rejected."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Atomic commitments, stale input/pinned content validation and rollback exercised."
+    },
+    {
+      "id": "T019",
+      "phase": "P2",
+      "title": "Implement seeded keyed randomness and event journal",
+      "owner_role": "ENGINE",
+      "depends_on": [
+        "T017"
+      ],
+      "primary_deliverable": "src/simulation/rng.ts",
+      "acceptance_criteria": [
+        "Golden RNG vectors and replay hashes stable; domain/cosmetic randomness isolated; retries do not resample."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Canonical SHA256 counter domains and golden vector; deterministic journals/replay."
+    },
+    {
+      "id": "T020",
+      "phase": "P2",
+      "title": "Implement constrained route director",
+      "owner_role": "ENGINE",
+      "depends_on": [
+        "T018",
+        "T019",
+        "T013"
+      ],
+      "primary_deliverable": "src/simulation/index.ts",
+      "acceptance_criteria": [
+        "Anchors, budgets, semantic cooldowns, eligibility explanations and safe fallbacks pass tests."
+      ],
+      "reviewer_role": "QA",
+      "status": "in_progress",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Slice anchors/budgets/eligibility verified; full branch-compatible closing/fallback director not complete."
+    },
+    {
+      "id": "T021",
+      "phase": "P2",
+      "title": "Implement delayed events and institutional commitments",
+      "owner_role": "ENGINE",
+      "depends_on": [
+        "T018",
+        "T019"
+      ],
+      "primary_deliverable": "src/simulation/index.ts",
+      "acceptance_criteria": [
+        "Due-event order defined; one disaster counted once; incompatible future news/events suppressed or reconciled."
+      ],
+      "reviewer_role": "QA",
+      "status": "in_progress",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Ordered delays, grant lineage/expiry/revocation present; full operation/institution semantics deferred."
+    },
+    {
+      "id": "T022",
+      "phase": "P2",
+      "title": "Implement observation and authored advisor selection",
+      "owner_role": "ENGINE",
+      "depends_on": [
+        "T018",
+        "T019",
+        "T012"
+      ],
+      "primary_deliverable": "src/simulation/index.ts",
+      "acceptance_criteria": [
+        "Deterministic response selection; advice not execution; actual and reported states remain separable."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Authored advisor and permitted observations tested against hidden-state twins."
+    },
+    {
+      "id": "T023",
+      "phase": "P2",
+      "title": "Implement ending resolver and continuation semantics",
+      "owner_role": "ENGINE",
+      "depends_on": [
+        "T020",
+        "T021",
+        "T014"
+      ],
+      "primary_deliverable": "src/simulation/index.ts",
+      "acceptance_criteria": [
+        "Predicates resolve consistently; extinction preempts incompatible living-driver outcomes; witness paths execute."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Eight ending witnesses/near misses; extinction absorbs continuation."
+    },
+    {
+      "id": "T024",
+      "phase": "P2",
+      "title": "Implement CLI, export, replay, and checkpoint format",
+      "owner_role": "ENGINE",
+      "depends_on": [
+        "T020",
+        "T021",
+        "T022",
+        "T023"
+      ],
+      "primary_deliverable": "scripts/replay.mjs",
+      "acceptance_criteria": [
+        "One command runs fixtures and exports JSON; recorded inputs reproduce matching-version state hashes."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "CLI, export, browser replay and versioned hashes verified; incompatible bundles rejected."
+    },
+    {
+      "id": "T025",
+      "phase": "P2",
+      "title": "Pass headless gate with property and policy simulations",
+      "owner_role": "QA",
+      "depends_on": [
+        "T024"
+      ],
+      "primary_deliverable": "reports/validation/headless-slice.json",
+      "acceptance_criteria": [
+        "All golden cases; 10,000 seeded runs across declared policies; no dead ends or invariant failures; route/ending coverage and limits recorded."
+      ],
+      "reviewer_role": "LEAD",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Fresh10000runs/130670commits plus1000policy runs,0errors,all8endings;18witnesses reverified. Slice evidence only."
+    },
+    {
+      "id": "T026",
+      "phase": "P3",
+      "title": "Establish art bible and reference scene compositions",
+      "owner_role": "ART",
+      "depends_on": [
+        "T011",
+        "T013",
+        "T006"
+      ],
+      "primary_deliverable": "docs/art/GEOMETRIC_REDESIGN.md",
+      "acceptance_criteria": [
+        "Camera, line/palette/type rules, mood progression, entity styles and scene-level asset requirements reviewed."
+      ],
+      "reviewer_role": "RENDER",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Owner rejected initial art. Geometric revision with thicker contours, rear uniform, modular states and independent panel layout implemented; new owner acceptance pending."
+    },
+    {
+      "id": "T027",
+      "phase": "P3",
+      "title": "Specify responsive layout and accessible input grammar",
+      "owner_role": "UX",
+      "depends_on": [
+        "T013",
+        "T016"
+      ],
+      "primary_deliverable": "docs/interaction/",
+      "acceptance_criteria": [
+        "Stable lever, late-layer space, keyboard/touch paths, reading-time protection and semantic alternatives defined."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Semantic routes+latched grip; phone controls below scene; keyboard and44px target review underway."
+    },
+    {
+      "id": "T028",
+      "phase": "P3",
+      "title": "Execute bounded renderer spike and select approach",
+      "owner_role": "RENDER",
+      "depends_on": [
+        "T012",
+        "T015",
+        "T026",
+        "T027",
+        "T033"
+      ],
+      "primary_deliverable": "src/presentation/cabin-scene.ts",
+      "acceptance_criteria": [
+        "Working path/cabin/figures at target scale; measured rendering tradeoffs recorded; one selected renderer."
+      ],
+      "reviewer_role": "UX",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Revised Pixi renderer,10 presentation tests, actual new100turnrecording; physical device/performance gate open. Historical10minhold is labeled separately."
+    },
+    {
+      "id": "T029",
+      "phase": "P3",
+      "title": "Implement lever and semantic choice UI",
+      "owner_role": "UX",
+      "depends_on": [
+        "T012",
+        "T027"
+      ],
+      "primary_deliverable": "src/ui/app.ts",
+      "acceptance_criteria": [
+        "Arm/commit/cancel mapping works with pointer, drag and keyboard; no duplicate or accidental input."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Unarmed/default/keyboard/cancel/same-side input exercised in real browser."
+    },
+    {
+      "id": "T030",
+      "phase": "P3",
+      "title": "Integrate continuous junction and presentation timeline",
+      "owner_role": "RENDER",
+      "depends_on": [
+        "T028",
+        "T029"
+      ],
+      "primary_deliverable": "src/presentation/geometry.ts",
+      "acceptance_criteria": [
+        "100 junction transitions show no snap/reset, correct geometry and persistent cabin; no decision deadline from travel."
+      ],
+      "reviewer_role": "UX",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Persistent world coordinates and junction tangent tests; actual executed route animates on override."
+    },
+    {
+      "id": "T031",
+      "phase": "P3",
+      "title": "Prototype licensed adaptive audio and silence fallback",
+      "owner_role": "AUDIO",
+      "depends_on": [
+        "T026",
+        "T028"
+      ],
+      "primary_deliverable": "src/presentation/rail-audio.ts",
+      "acceptance_criteria": [
+        "Start-gesture playback, mute, captions/equivalents and crossfades work; rights recorded for every source."
+      ],
+      "reviewer_role": "UX",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Original synthesized optional audio; no third-party sound license dependency. Full auditory review pending."
+    },
+    {
+      "id": "T032",
+      "phase": "P3",
+      "title": "Review and pass lever-feel/motion gate",
+      "owner_role": "QA",
+      "depends_on": [
+        "T030",
+        "T031"
+      ],
+      "primary_deliverable": "docs/art/GEOMETRIC_REDESIGN.md",
+      "acceptance_criteria": [
+        "Motion recording, multiple input modes, reduced motion and representative frames reviewed; performance measured."
+      ],
+      "reviewer_role": "LEAD",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Fresh100turnmotion and reduced-mode evidence. Owner feel review and physical device gate remain open."
+    },
+    {
+      "id": "T033",
+      "phase": "P4",
+      "title": "Author compressed full-arc slice content",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T015"
+      ],
+      "primary_deliverable": "src/content/slice.ts",
+      "acceptance_criteria": [
+        "12\u201316 reviewed nodes include benefit, oversight compromise, callback, conditional control loss and two feasible endings."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "14 draft executable scenes. Authority and fallback correctness fixes reviewed independently."
+    },
+    {
+      "id": "T034",
+      "phase": "P4",
+      "title": "Implement entity bible and causal news composer",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T012",
+        "T013",
+        "T033"
+      ],
+      "primary_deliverable": "src/content/slice.ts",
+      "acceptance_criteria": [
+        "Stable fictional entities; headlines follow real in-game events; chronology and contradiction tests pass."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "in_progress",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Causal news uses authored sources; full entity bible/composer/callback machinery unfinished."
+    },
+    {
+      "id": "T035",
+      "phase": "P4",
+      "title": "Build deterministic advisor UI and authority progression",
+      "owner_role": "UX",
+      "depends_on": [
+        "T022",
+        "T033"
+      ],
+      "primary_deliverable": "src/ui/app.ts",
+      "acceptance_criteria": [
+        "Useful early advice; authored query intents; permission-aware execution; no live LLM/network dependency."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Useful and coercive advice verified; actual current scope/control drives visual authority."
+    },
+    {
+      "id": "T036",
+      "phase": "P4",
+      "title": "Integrate environmental, mirror, speed and damage channels",
+      "owner_role": "RENDER",
+      "depends_on": [
+        "T030",
+        "T033",
+        "T034"
+      ],
+      "primary_deliverable": "src/presentation/cabin-scene.ts",
+      "acceptance_criteria": [
+        "Causal projections, persistent damage, gradual speed changes and partial recovery render across fixture states."
+      ],
+      "reviewer_role": "UX",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "State-driven environments/mirror/strain; long-form progressive art coverage pending."
+    },
+    {
+      "id": "T037",
+      "phase": "P4",
+      "title": "Implement bounded control-loss and glitch set pieces",
+      "owner_role": "RENDER",
+      "depends_on": [
+        "T035",
+        "T036"
+      ],
+      "primary_deliverable": "src/ui/app.ts",
+      "acceptance_criteria": [
+        "No real freezing, lost input, broken pause, flashing requirement or save corruption; authority journal truthful."
+      ],
+      "reviewer_role": "UX",
+      "status": "in_progress",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Conditional actual override implemented and tested; other major set pieces not implemented."
+    },
+    {
+      "id": "T038",
+      "phase": "P4",
+      "title": "Implement debrief, glossary, source explorer and summaries",
+      "owner_role": "UX",
+      "depends_on": [
+        "T010",
+        "T023",
+        "T033"
+      ],
+      "primary_deliverable": "src/ui/app.ts",
+      "acceptance_criteria": [
+        "Causal turning points, fiction/provenance distinctions and keyboard-readable sources available without crowding gameplay."
+      ],
+      "reviewer_role": "QA",
+      "status": "in_progress",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Debrief, two per-run charts, source panel, record and verified replay export exist. Full glossary/analysis templates incomplete."
+    },
+    {
+      "id": "T039",
+      "phase": "P4",
+      "title": "Implement save/resume and robust local storage behavior",
+      "owner_role": "UX",
+      "depends_on": [
+        "T024",
+        "T029"
+      ],
+      "primary_deliverable": "docs/persistence/BROWSER_CHECK.md",
+      "acceptance_criteria": [
+        "Resume after commit never duplicates outcomes; denied/quota/corrupt/version-mismatch storage handled honestly."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Atomic revision/version saves;7automatedtests and actual two-tab conflict/export/resume passed."
+    },
+    {
+      "id": "T040",
+      "phase": "P4",
+      "title": "Playtest and pass integrated vertical-slice gate",
+      "owner_role": "QA",
+      "depends_on": [
+        "T034",
+        "T035",
+        "T036",
+        "T037",
+        "T038",
+        "T039",
+        "T025",
+        "T032",
+        "T049"
+      ],
+      "primary_deliverable": "reports/validation/reference-browser-integration.md",
+      "acceptance_criteria": [
+        "Two full contrasting routes plus interrupted/muted/reduced-motion runs; owner feedback and actual defects recorded."
+      ],
+      "reviewer_role": "LEAD",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Reference revision: two actual14-choice routes accountable/remnant with exact replay, normal/reduced modes, 320/390px, streaming/skip/cancel exposure, pause and conditional outcomes. Owner acceptance and full matrix remain open."
+    },
+    {
+      "id": "T041",
+      "phase": "P5",
+      "title": "Expand stages 1\u20132 in reviewed authoring batches",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T040"
+      ],
+      "primary_deliverable": "packages/content/stages/early/",
+      "acceptance_criteria": [
+        "Proposed 30 nodes or approved revised target; distinct mechanisms, mandatory classics, low-stakes pacing and sources."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "done",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "30 reviewed executable stage1\u20132 nodes, including explicit physical switch/loop/brake bindings; editorial and mechanics reviews recorded."
+    },
+    {
+      "id": "T042",
+      "phase": "P5",
+      "title": "Expand stages 3\u20134 in reviewed authoring batches",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T040"
+      ],
+      "primary_deliverable": "packages/content/stages/transition/",
+      "acceptance_criteria": [
+        "Proposed 52 nodes or approved revised target; credible benefits and technical bridges with no filler."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "done",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "52 reviewed executable stage3\u20134 nodes. Stage4 includes26 actual Fable5.1 drafts with documented editorial changes; credible benefits and technical costs are explicit."
+    },
+    {
+      "id": "T043",
+      "phase": "P5",
+      "title": "Expand stage 5 and early closure paths",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T040"
+      ],
+      "primary_deliverable": "packages/content/stages/dependence/",
+      "acceptance_criteria": [
+        "Proposed 28 nodes or approved revised target; viable favorable/adverse early endings and rollback consequences."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "done",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "28 reviewed executable stage5 nodes with dependence, financing, fallback and conditional crisis/closure paths."
+    },
+    {
+      "id": "T044",
+      "phase": "P5",
+      "title": "Expand stages 6\u20137 and post-catastrophe branches",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T040"
+      ],
+      "primary_deliverable": "packages/content/stages/aftermath/",
+      "acceptance_criteria": [
+        "Proposed 44 nodes or approved revised target; meaningful remaining choices, permissions and coherent perspectives."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "done",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "44 reviewed executable stage6\u20137 nodes; independent cross-review, human/institution eligibility correction and explicit post-catastrophe/control prerequisites."
+    },
+    {
+      "id": "T045",
+      "phase": "P5",
+      "title": "Complete ending composition and narrative callbacks",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T041",
+        "T042",
+        "T043",
+        "T044"
+      ],
+      "primary_deliverable": "packages/content/endings/",
+      "acceptance_criteria": [
+        "Every accepted family has compatible authored modules and an executable witness; no missing-person/event callbacks."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "All8 ending families reached in final-hash10k audit and8exactreplays. Broaderperson/institution-specific callback model remainscoarse."
+    },
+    {
+      "id": "T046",
+      "phase": "P5",
+      "title": "Produce complete modular asset and audio library",
+      "owner_role": "ART",
+      "depends_on": [
+        "T040",
+        "T026",
+        "T034"
+      ],
+      "primary_deliverable": "assets/production-manifest.json",
+      "acceptance_criteria": [
+        "Every approved scene covered; source/export/license metadata complete; actual scene review, not icon-count completion."
+      ],
+      "reviewer_role": "RENDER",
+      "status": "in_progress",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits. Split visual and audio production into separate child tasks; ART does not concurrently edit AUDIO-owned paths.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "required_contributors": [
+        "AUDIO"
+      ],
+      "status_note": "Modular technical line-art renderer covers campaign biomes, species and state changes.16 design concepts being structurally revised after owner critique; final art acceptance open."
+    },
+    {
+      "id": "T047",
+      "phase": "P5",
+      "title": "Complete campaign integration and developer content inspector",
+      "owner_role": "ENGINE",
+      "depends_on": [
+        "T041",
+        "T042",
+        "T043",
+        "T044",
+        "T045"
+      ],
+      "primary_deliverable": "content-tools/",
+      "acceptance_criteria": [
+        "Full bank loads and validates; inspector reveals predicates, claims, variants, unused assets and route dependencies."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Full bank loads; CLI inspector validates sources, predicates, variants and stage counts. Actual scene art review and wider unused-asset tooling remain separate."
+    },
+    {
+      "id": "T048",
+      "phase": "P5",
+      "title": "Pass content-complete campaign gate",
+      "owner_role": "QA",
+      "depends_on": [
+        "T045",
+        "T046",
+        "T047"
+      ],
+      "primary_deliverable": "reports/validation/content-complete-gate.md",
+      "acceptance_criteria": [
+        "All accepted content present and reviewed; all endings reachable; stage budgets/fallbacks/callbacks and full-route variety tested."
+      ],
+      "reviewer_role": "LEAD",
+      "status": "review",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "154reviewed nodes,154/154nodes and308/308requested/executedoptions reached in10000campaigns;0errors andall8endingwitnessreplays. Finalart acceptance remainsopen."
+    },
+    {
+      "id": "T049",
+      "phase": "P4",
+      "title": "Implement real consent boundary and local telemetry adapter",
+      "owner_role": "DATA",
+      "depends_on": [
+        "T016",
+        "T024",
+        "T039"
+      ],
+      "primary_deliverable": "src/telemetry/client.ts",
+      "acceptance_criteria": [
+        "No uploads before consent and Start; opt-out clears pending upload; no retroactive upload; local game unaffected."
+      ],
+      "reviewer_role": "SECOPS",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Off by default, fresh opted-in Starts only; queue/retries/conflict shutdown tested. CR002 midrun enrollment deferred."
+    },
+    {
+      "id": "T050",
+      "phase": "P6",
+      "title": "Implement optional ingestion API and private storage adapter",
+      "owner_role": "DATA",
+      "depends_on": [
+        "T049",
+        "T005"
+      ],
+      "primary_deliverable": "collector/v2/index.ts",
+      "acceptance_criteria": [
+        "Schema/auth/rate/size/idempotency/deletion tests pass; secrets absent from client; no unapproved service provisioning."
+      ],
+      "reviewer_role": "SECOPS",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Replay validation/capabilities/limits/retention/withdrawal tested with SQLite and actual browser-to-localcollector. Production service disabled, not deployed."
+    },
+    {
+      "id": "T051",
+      "phase": "P6",
+      "title": "Implement genuine aggregates and stats display integration",
+      "owner_role": "DATA",
+      "depends_on": [
+        "T050",
+        "T038"
+      ],
+      "primary_deliverable": "src/telemetry/snapshot.ts",
+      "acceptance_criteria": [
+        "Correct version/parameter denominator; n threshold; forced/delegated/test records excluded; outage/snapshot labeling accurate."
+      ],
+      "reviewer_role": "SECOPS",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Thresholded live cells and versioned snapshot pagination validated; Pages artifact integration prepared, live operation unverified."
+    },
+    {
+      "id": "T052B",
+      "phase": "P6",
+      "title": "Prepare frozen study profile and analysis/reproducibility tools",
+      "owner_role": "DATA",
+      "depends_on": [
+        "T052A",
+        "T050",
+        "T051"
+      ],
+      "primary_deliverable": "research/methods/evidence-and-evaluation.md",
+      "acceptance_criteria": [
+        "Assignment/exposure/versioning and analysis plan implemented; human recruitment blocked pending applicable approval."
+      ],
+      "reviewer_role": "SECOPS",
+      "status": "deferred",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "formal_study"
+      ],
+      "status_note": "No formal-study recruitment/activation authorized or necessary for local game."
+    },
+    {
+      "id": "T053",
+      "phase": "P6",
+      "title": "Run responsive, accessibility and performance hardening",
+      "owner_role": "QA",
+      "depends_on": [
+        "T048",
+        "T049"
+      ],
+      "primary_deliverable": "reports/validation/browser-integration.md",
+      "acceptance_criteria": [
+        "Documented laptop/phone, keyboard, screen reader, zoom, reduced effects and long-run performance actually checked."
+      ],
+      "reviewer_role": "LEAD",
+      "status": "in_progress",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Compact1280x720 lever fit,390px phone reflow, normal/reduced motion and actual loop stops exercised; physical devices,screen readers,400%zoom and long-run memory matrix open."
+    },
+    {
+      "id": "T054",
+      "phase": "P6",
+      "title": "Conduct independent correctness, sources and security audit",
+      "owner_role": "SECOPS",
+      "depends_on": [
+        "T048",
+        "T049",
+        "T053"
+      ],
+      "primary_deliverable": "reports/validation/fixture-coverage.md",
+      "acceptance_criteria": [
+        "Claim locators, data boundaries, secret scans, replay, malformed input and synthetic-data isolation reviewed; issues closed or blocked."
+      ],
+      "reviewer_role": "QA",
+      "status": "in_progress",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "conditional_dependencies": {
+        "remote_statistics": [
+          "T050",
+          "T051"
+        ],
+        "formal_study": [
+          "T050",
+          "T051",
+          "T052B"
+        ]
+      },
+      "status_note": "Independent full-bank editorial and bounded engine reviews corrected historical receipts and institution control gates; final-hash route/replay and artifact scans underway."
+    },
+    {
+      "id": "T055",
+      "phase": "P6",
+      "title": "Run complete narrative and usability playtest review",
+      "owner_role": "NARR",
+      "depends_on": [
+        "T048",
+        "T053"
+      ],
+      "primary_deliverable": "research/content-review/full-game-playtest.md",
+      "acceptance_criteria": [
+        "Representative full routes assess readability, credible temptation, authority comprehension and unmuted thesis; no invented participants/results."
+      ],
+      "reviewer_role": "AIRES",
+      "status": "in_progress",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Two actualfinalhashbrowserroutes completed:26-choice restraint,35-choice all7stage succession. Exactdownloadedreplays. No human-duration/persuasion resultclaimed."
+    },
+    {
+      "id": "T056",
+      "phase": "P7",
+      "title": "Prepare Pages build, CI, deployment and rollback workflow",
+      "owner_role": "SECOPS",
+      "depends_on": [
+        "T040",
+        "T005"
+      ],
+      "primary_deliverable": "docs/operations/V2_DEPLOYMENT.md",
+      "acceptance_criteria": [
+        "Production repository-base build and direct-route smoke tests pass locally/preview; least-privilege workflow and rollback documented."
+      ],
+      "reviewer_role": "QA",
+      "status": "review",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Pages and scheduled publication now require source production profile plus type,unit,content and browser checks; remote verification follows authorized push."
+    },
+    {
+      "id": "T057",
+      "phase": "P7",
+      "title": "Complete user, developer, source, license and paper-artifact documentation",
+      "owner_role": "LEAD",
+      "depends_on": [
+        "T048",
+        "T055",
+        "T052A"
+      ],
+      "primary_deliverable": "README.md",
+      "acceptance_criteria": [
+        "Working run/replay instructions, limitations, credits, provenance, artifact contribution and research status documented."
+      ],
+      "reviewer_role": "ARCH",
+      "status": "in_progress",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "conditional_dependencies": {
+        "formal_study": [
+          "T052B"
+        ]
+      },
+      "status_note": "README,methods,architecture,deployment/status and latest visual spec updated for154-node campaign; exact final release evidence pending."
+    },
+    {
+      "id": "T058",
+      "phase": "P7",
+      "title": "Assemble release candidate and review all gates",
+      "owner_role": "QA",
+      "depends_on": [
+        "T054",
+        "T055",
+        "T056",
+        "T057"
+      ],
+      "primary_deliverable": "reports/validation/release-candidate.md",
+      "acceptance_criteria": [
+        "No critical unresolved issue; actual evidence indexed; owner review and collection/deployment approval status explicit."
+      ],
+      "reviewer_role": "LEAD",
+      "status": "in_progress",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Owner explicitly authorized full campaign and GitHub push. Static story release candidate assembled with collection off; final visual selection remains open."
+    },
+    {
+      "id": "T059",
+      "phase": "P7",
+      "title": "Deploy only the owner-authorized release profile",
+      "owner_role": "SECOPS",
+      "depends_on": [
+        "T058"
+      ],
+      "primary_deliverable": "docs/operations/deployment-record.md",
+      "acceptance_criteria": [
+        "Owner authorization recorded; actual Pages smoke test; optional service status truthful; no unapproved study recruitment."
+      ],
+      "reviewer_role": "QA",
+      "status": "in_progress",
+      "risk": "high",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Push and Pages publication authorized by current owner request; final local checks and remote deployment still pending."
+    },
+    {
+      "id": "T060",
+      "phase": "P7",
+      "title": "Create maintenance and research continuation baseline",
+      "owner_role": "LEAD",
+      "depends_on": [
+        "T059"
+      ],
+      "primary_deliverable": "docs/handoffs/release-baseline.md",
+      "acceptance_criteria": [
+        "Versions, open backlog, retention/operations owners, reproducibility bundle and first next tasks recorded."
+      ],
+      "reviewer_role": "ARCH",
+      "status": "in_progress",
+      "risk": "medium",
+      "notes": "Map paths to the discovered repository. Reserve precise subpaths before dispatch; parent ownership is not permission for overlapping edits.",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "status_note": "Campaign continuation baseline drafted; final deployed commit and links will be recorded after actual publication."
+    },
+    {
+      "id": "T052A",
+      "phase": "P6",
+      "title": "Artifact analyses and reproducibility",
+      "owner_role": "DATA",
+      "depends_on": [
+        "T016",
+        "T048",
+        "T049"
+      ],
+      "status": "in_progress",
+      "applies_to_profiles": [
+        "local_story",
+        "remote_statistics",
+        "formal_study"
+      ],
+      "risk": "medium",
+      "primary_deliverable": "research/methods/analysis-templates.md",
+      "acceptance_criteria": [
+        "Observed records, authored model and implementation results are distinguished. Reproducibility scripts work."
+      ],
+      "reviewer_role": "QA",
+      "status_note": "Verified replay and synthetic audits plus analysis specifications. Full artifact toolkit depends on complete model/content."
+    }
+  ],
+  "release_profile_policy": "The full task map contains optional service and formal-study work. Local-story releases use the unconditional dependency graph; remote_statistics and formal_study additionally use their conditional dependencies. Omitted optional features must be labeled absent, not completed. Formal study also requires applicable owner/institutional approval outside this task DAG.",
+  "plan": "docs/plan/ACCEPTED_PLAN.md",
+  "gateStatus": {
+    "G0": "accepted",
+    "G1": "partial; campaign population and rail extensions reviewed, wider fixture gaps explicit",
+    "G2": "final-hash10000campaign audit passed;154/154nodes,308/308requested/executedoptions,all8endings,8exactreplays; broaderfull-model semantics remainpartial",
+    "G3": "actual renderer and compact layout checks; revised16concept gallery requested, final visual/device acceptance open",
+    "G4": "final-hash actual26-choice restraint and35-choice all7stage succession routes, exactdownloadedreplays, compact/390px,reducedsettings,override,reload/resume checked; fullaccessibilitymatrixopen",
+    "G5": "154 reviewed executable nodes; final art acceptance open",
+    "G6": "bounded independent review and local hardening; physical-device and remote-service limits explicit",
+    "G7": "static story push/publication explicitly authorized; release verification in progress"
+  },
+  "updatedAt": "2026-09-23",
+  "validationSummary": {
+    "legacyAndResearchTests": 16,
+    "v2Tests": 125,
+    "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+    "publicCollectionEnabled": false
+  }
+}

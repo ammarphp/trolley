@@ -1,0 +1,33 @@
+{
+  "profile": "story",
+  "nodes": 154,
+  "stageCounts": [
+    12,
+    18,
+    24,
+    28,
+    28,
+    24,
+    20
+  ],
+  "reviewed": 154,
+  "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+  "manifestHash": "fc07d4f2808f970c8855d458984ccaa7cd45da2212ebf0190cdfb54297fd1e56",
+  "correctedGateNodes": [
+    "S6-13",
+    "S6-14",
+    "S6-16",
+    "S7-01",
+    "S7-03",
+    "S7-05",
+    "S7-06",
+    "S7-07",
+    "S7-08",
+    "S7-10",
+    "S7-12",
+    "S7-13",
+    "S7-15",
+    "S7-18"
+  ],
+  "correction": "Institutional human control accepted alongside direct human control; assistant control excluded. Effects unchanged."
+}

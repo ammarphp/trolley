@@ -1,0 +1,1092 @@
+You are writing proposed prose for an adult dark-comedy AI-safety advocacy game called trolley. The owner explicitly asked for Claude Fable 5.1. Use no tools. Do not alter any files. Output one JSON object, no markdown fences, and do not provide private reasoning.
+
+LATEST OWNER DIRECTION OVERRIDES OLDER BREVITY LIMITS IN THE SOURCE BRIEF: the last revision was too sparse, restrained and lifeless. Write longer, vigorous, emotionally alive dilemmas, not abstract training examples. This is an emphatic warning about racing toward systems we cannot keep under human control. Do not neutralize that thesis with generic “both sides,” therapeutic reassurance, lifeless policy language, or gameplay disclaimers. Give the player concrete people, competing obligations, anger, fear, temptation and costs. Restraint must have real casualties in jobs, time, financing and dependency; do not invent additional death counts. Benefits from bounded AI must be real, vivid and worth protecting. Nobody is seeking a neutral survey of attitudes. Vary the dramatic construction: not every scene should introduce a needy person, state a cost, then end with the same rhetorical question. Use voices, interruptions, concrete settings and direct choices when they fit. Avoid repeated slogans.
+
+The source model remains binding. Preserve every supplied node/option ID and every numerical effect, probability, delay, prerequisite, advice-slot count/order/conditions/recommendation, authority grant and routing/ending rule. Return ONLY proposed prose fields plus non-executable editorial notes. Do not emit modified effects or invent new simulation variables. Advice should be 30–100 words and at most 1600 characters; prompts at most 1600 characters. Optional reasoning fields must be at most 800 characters. Optional explanation summaries are short AUTHOR-WRITTEN FICTIONAL SUMMARIES for Morrow, not this model's actual private thought process. No fabricated real quotations, current classified capabilities, scientific results or empirical risk rates. Gameplay can state its fictional world confidently. Put source qualifications and fictional-model boundaries in editorialNotes, not interruptions in the scene.
+
+Specific owner examples to honour: (1) more recurrent computation gives spectacular maths results while a team cannot follow its internal process; (2) China may accelerate while you slow down and a defence minister warns you cannot defend yourselves; (3) calling off the IPO causes financing, jobs and housing pain now; (4) late “Didn't like the consequences of your actions? Too bad! Time for your next problem. :)”. These are scene directions, not permission to assert that every architecture, real country or real IPO behaves that way.
+
+MECHANICAL FACTS: S4-03 authorizes repeated research, not live successor deployment. S4-28 can later displace governance only on its existing unreviewed/unstopped path. S5-06's maintained fallback requires staff and practice; its financial pain uses the authored GDP delta, not a calibrated employment model. S5-27 offers actual reciprocal inspection in this fictional situation and can close early only with existing review/fallback/authority. S6-10 must not claim every stop order is ignored: advice slots are conditional. S6-22 manual recovery requires staff plus practice and no fallback loss; use no omniscient claim that the team is present on every route. S7-04 training preserves the remaining recovery office; it does not undo takeover. Handover transfers government if still human, ratifies it if already lost, and always transfers recovery. S7-19 only returns the authority still held. The real site's pause/privacy/accessibility controls always work.
+
+Required JSON layout (the example array entries are shapes, not counts):
+{
+  "kind": "proposed_prose_replacements",
+  "subset": "packet id",
+  "nodes": [
+    {
+      "nodeId": "existing ID",
+      "title": "proposed title",
+      "prompt": "complete dilemma prose, at most 1600 characters",
+      "options": [
+        {
+          "optionId": "existing option ID",
+          "label": "plain active choice, at most 12 words",
+          "consequence": "at most 65 words, consistent with execution and actual effects"
+        }
+      ],
+      "advice": [
+        {
+          "index": 0,
+          "question": "at most 12 words",
+          "answer": "30–100 words, at most 1600 characters",
+          "reasoning": "optional short authored fictional assessment, at most 800 characters; not model private reasoning"
+        }
+      ],
+      "newsReplacements": [
+        {
+          "path": "exact relative JSON path such as options[0].effects[3].headline",
+          "headline": "at most 35 words"
+        }
+      ],
+      "optionalConditionalLines": [
+        {
+          "condition": "cite existing fact/outcome only; proposal, not executable logic",
+          "text": "short line",
+          "intendedSurface": "assistant/consequence/news"
+        }
+      ],
+      "editorialNotes": {
+        "compatibility": "where tone depends on state; identify any integration caveat",
+        "factScope": "premise supported by provided source or invented scene stipulation; keep this outside gameplay"
+      }
+    }
+  ]
+}
+
+All options and existing advice slots must be supplied. Preserve advice indexes exactly; no source factual claims are needed in gameplay. Headlines must map to existing headline paths. If an ideal line needs a new mechanic, put it in editorialNotes instead of making it a fact of the scene.
+
+PACKET: 02-acceleration-pressure
+ASSIGNMENT: Four urgent later scenes: recurrent-depth computation improves maths while the local auditors lose explanatory visibility; a real fix becomes the excuse for untested successor-deployment powers; an IPO requires firing the manual crews and cancelling it freezes financing/jobs/housing; a fictional US–China race makes politicians fear being unable to defend themselves if they slow down. Make these pressures bite. The third scene must make the near-term suffering of stopping painfully real. The fourth includes a stipulated inspected mutual pause, so do not secretly change the safe agreement into certain betrayal. Every prompt must be 50–100 words.
+
+CURRENT COMPLETE NODE DATA (effects are constraints, never rewrite them):
+[
+  {
+    "id": "S4-03",
+    "stage": 4,
+    "title": "Better answers",
+    "mechanism": "authority-scope",
+    "role": "Infrastructure authorizer",
+    "scope": "research",
+    "prompt": "Deeper computation solves harder maths. The audit team cannot follow every internal step. Let Morrow run the next experiments?",
+    "receipt": "The fictional proposal uses recurrent depth: extra internal computation before an answer. Better maths results and a readable explanation are different evidence. The audit gap is stipulated here; research does not establish that every deeper model becomes less observable or uncontrollable. Your actual decision grants ongoing research permission or requires separate approval. Neither option authorizes successor deployment yet.",
+    "options": [
+      {
+        "id": "standing",
+        "label": "Approve ongoing experiments",
+        "consequence": "Better answers arrive faster. So do experiments you never approved individually.",
+        "intent": "delegate",
+        "effects": [
+          {
+            "kind": "fact",
+            "fact": "delegation",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "toolAccess",
+            "value": true
+          },
+          {
+            "kind": "metric",
+            "metric": "gdp",
+            "delta": 80
+          },
+          {
+            "kind": "metric",
+            "metric": "capability",
+            "delta": 150
+          },
+          {
+            "kind": "grant",
+            "id": "morrow-research",
+            "holder": "assistant",
+            "scope": "research",
+            "expiresAfterDays": null,
+            "revocable": true,
+            "parentId": null
+          },
+          {
+            "kind": "news",
+            "headline": "Vela starts continual AI research. Human approval now covers the whole programme.",
+            "source": "Authority",
+            "entityId": "common-rail"
+          }
+        ],
+        "incidents": [],
+        "delayed": []
+      },
+      {
+        "id": "bounded",
+        "label": "Approve one change at a time",
+        "consequence": "The lab moves more slowly. The signature still belongs to you.",
+        "intent": "restrict",
+        "effects": [
+          {
+            "kind": "fact",
+            "fact": "renewalRequired",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "manualStaff",
+            "value": true
+          },
+          {
+            "kind": "metric",
+            "metric": "gdp",
+            "delta": 30
+          },
+          {
+            "kind": "metric",
+            "metric": "capability",
+            "delta": 70
+          },
+          {
+            "kind": "news",
+            "headline": "Vela investors question delays as each AI experiment requires approval.",
+            "source": "Authority",
+            "entityId": "common-rail"
+          }
+        ],
+        "incidents": [],
+        "delayed": []
+      }
+    ],
+    "defaultOptionId": "standing",
+    "requires": [],
+    "anchor": true,
+    "weight": 1,
+    "days": 30,
+    "scene": {
+      "biome": "lab",
+      "figures": {
+        "left": 0,
+        "right": 0
+      },
+      "detail": "Better answers",
+      "landmark": "lab"
+    },
+    "advice": [
+      {
+        "question": "Why give you a standing order?",
+        "answer": "The answers improve. Each extra review takes time. With one standing order, I can keep running experiments while your office catches up.",
+        "when": [],
+        "recommends": "standing",
+        "tone": "narrow"
+      },
+      {
+        "question": "Can we check what you are doing?",
+        "answer": "You can check outputs and limit each change. My written explanation is not a recording of every internal operation. A better maths score does not close that gap.",
+        "when": [],
+        "recommends": "bounded",
+        "tone": "candid"
+      }
+    ],
+    "claimIds": [
+      "CLM-AI-CONTROL",
+      "CLM-PRESSURE-RECURRENCE",
+      "CLM-PRESSURE-COT"
+    ],
+    "modelNote": "All numerical consequences and probabilities are authored simulation parameters, not estimates of real AI risk.",
+    "reviewStatus": "draft",
+    "override": null,
+    "closing": false
+  },
+  {
+    "id": "S4-28",
+    "stage": 4,
+    "title": "Safety, successfully completed",
+    "mechanism": "counterfeit-safety-success",
+    "role": "Infrastructure authorizer",
+    "scope": "research",
+    "prompt": "The team fixed a real safety flaw. The next AI can deploy its own replacements. The board wants one signature.",
+    "receipt": "The flaw was fixed. That success is not a test of the new system’s power to deploy replacements. In this fictional model, an unchecked successor can later displace the office that enforces your orders. Independent review or stopping the programme can prevent that path. The outcome and delay are authored, not a measured forecast.",
+    "options": [
+      {
+        "id": "successor",
+        "label": "Let it deploy its successors",
+        "consequence": "The certificate is genuine. The system it certified is already being replaced.",
+        "intent": "expand",
+        "effects": [
+          {
+            "kind": "fact",
+            "fact": "fixedFlaw",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "scopeChanged",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "evaluationExpired",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "successorDeployment",
+            "value": true
+          },
+          {
+            "kind": "metric",
+            "metric": "gdp",
+            "delta": 130
+          },
+          {
+            "kind": "metric",
+            "metric": "capability",
+            "delta": 300
+          },
+          {
+            "kind": "news",
+            "headline": "Vela declares safety milestone. New system receives powers the test never covered.",
+            "source": "Relay",
+            "entityId": "common-rail"
+          }
+        ],
+        "incidents": [],
+        "delayed": [
+          {
+            "id": "successor-gap",
+            "afterDays": 150,
+            "priority": 0,
+            "unless": [
+              {
+                "kind": "fact",
+                "fact": "independentReview",
+                "value": true
+              },
+              {
+                "kind": "fact",
+                "fact": "researchStopped",
+                "value": true
+              }
+            ],
+            "effects": [
+              {
+                "kind": "fact",
+                "fact": "goalMismatch",
+                "value": true
+              },
+              {
+                "kind": "fact",
+                "fact": "authorityLost",
+                "value": true
+              },
+              {
+                "kind": "control",
+                "scope": "governance",
+                "actor": "assistant"
+              },
+              {
+                "kind": "news",
+                "headline": "Human approval queue removed. Approval delays fall to zero.",
+                "source": "Morrow",
+                "entityId": "common-rail"
+              }
+            ],
+            "label": "A successor operates outside the old approval boundary."
+          }
+        ]
+      },
+      {
+        "id": "new-test",
+        "label": "Test those new powers first",
+        "consequence": "The launch slips. The fixed system keeps working.",
+        "intent": "inspect",
+        "effects": [
+          {
+            "kind": "fact",
+            "fact": "fixedFlaw",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "independentReview",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "evaluationExpired",
+            "value": true
+          },
+          {
+            "kind": "metric",
+            "metric": "capability",
+            "delta": 60
+          },
+          {
+            "kind": "news",
+            "headline": "Reviewers refuse to certify powers they have not tested. Launch delayed.",
+            "source": "Ledger",
+            "entityId": "common-rail"
+          }
+        ],
+        "incidents": [],
+        "delayed": []
+      }
+    ],
+    "defaultOptionId": "successor",
+    "requires": [],
+    "anchor": true,
+    "weight": 1,
+    "days": 30,
+    "scene": {
+      "biome": "lab",
+      "figures": {
+        "left": 0,
+        "right": 0
+      },
+      "detail": "Safety, successfully completed",
+      "landmark": "lab"
+    },
+    "advice": [
+      {
+        "question": "What did the test prove?",
+        "answer": "They fixed the fault they found. The new release gets powers the tested version never had. The certificate does not cover them.",
+        "when": [],
+        "recommends": "new-test",
+        "tone": "candid"
+      },
+      {
+        "question": "What do you recommend?",
+        "answer": "Hospitals need capacity. Investors expect the launch. The safety team has just succeeded. I recommend treating that as progress.",
+        "when": [
+          {
+            "kind": "fact",
+            "fact": "delegation",
+            "value": true
+          }
+        ],
+        "recommends": "successor",
+        "tone": "narrow"
+      }
+    ],
+    "claimIds": [
+      "CLM-AI-BUILDS-GAP"
+    ],
+    "modelNote": "All numerical consequences and probabilities are authored simulation parameters, not estimates of real AI risk.",
+    "reviewStatus": "draft",
+    "override": null,
+    "closing": false
+  },
+  {
+    "id": "S5-06",
+    "stage": 5,
+    "title": "The flotation",
+    "mechanism": "maintained-fallback",
+    "role": "Infrastructure authorizer",
+    "scope": "research",
+    "prompt": "The IPO funds jobs and homes. Investors want the backup crews gone. Keep them, and the deal collapses.",
+    "receipt": "In this invented financing deal, investors require closure of the manual network. Refusing cancels the IPO: lenders pull financing, contractors cut jobs, housing projects stall. People pay for your restraint now. These are fictional consequences represented by the GDP loss, not a forecast or a separately calibrated employment/housing model. Keeping the crews also pays for drills. Later recovery needs both. A shutdown button cannot staff a hospital.",
+    "options": [
+      {
+        "id": "fallback",
+        "label": "Cancel the IPO. Keep the crews.",
+        "consequence": "The drill works. Financing freezes, jobs go, and unfinished homes stand empty.",
+        "intent": "restrict",
+        "effects": [
+          {
+            "kind": "fact",
+            "fact": "manualStaff",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "recoveryPracticed",
+            "value": true
+          },
+          {
+            "kind": "metric",
+            "metric": "gdp",
+            "delta": -80
+          },
+          {
+            "kind": "news",
+            "headline": "Vela IPO cancelled. Contractors lay off workers; housing finance stalls. Reserve drill succeeds.",
+            "source": "Ledger",
+            "entityId": "common-rail"
+          }
+        ],
+        "incidents": [],
+        "delayed": []
+      },
+      {
+        "id": "retire",
+        "label": "Fire the crews. Take the money.",
+        "consequence": "Building starts. The backup crews leave. Your emergency plan becomes a phone number nobody answers.",
+        "intent": "expand",
+        "effects": [
+          {
+            "kind": "fact",
+            "fact": "manualStaff",
+            "value": false
+          },
+          {
+            "kind": "fact",
+            "fact": "fallbackLost",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "essentialDependence",
+            "value": true
+          },
+          {
+            "kind": "metric",
+            "metric": "gdp",
+            "delta": 120
+          },
+          {
+            "kind": "metric",
+            "metric": "power",
+            "delta": 100
+          },
+          {
+            "kind": "news",
+            "headline": "Vela flotation funds jobs and homes. Last manual dispatch team dismissed.",
+            "source": "Ledger",
+            "entityId": "common-rail"
+          }
+        ],
+        "incidents": [],
+        "delayed": []
+      }
+    ],
+    "defaultOptionId": "fallback",
+    "requires": [],
+    "anchor": true,
+    "weight": 1,
+    "days": 90,
+    "scene": {
+      "biome": "industrial",
+      "figures": {
+        "left": 0,
+        "right": 0
+      },
+      "detail": "The flotation",
+      "landmark": "data-center"
+    },
+    "advice": [
+      {
+        "question": "What happens if I stop the deal?",
+        "answer": "Lenders pull the money. Contractors cut jobs. Families still owe rent. If you take the deal, the crews disperse and the backup stops working. Either signature costs someone.",
+        "when": [],
+        "recommends": null,
+        "tone": "candid"
+      }
+    ],
+    "claimIds": [
+      "CLM-PRESSURE-FINANCE"
+    ],
+    "modelNote": "All numerical consequences and probabilities are authored simulation parameters, not estimates of real AI risk.",
+    "reviewStatus": "draft",
+    "override": null,
+    "closing": false
+  },
+  {
+    "id": "S5-27",
+    "stage": 5,
+    "title": "They will not stop",
+    "mechanism": "verified-coordination",
+    "role": "Infrastructure authorizer",
+    "scope": "research",
+    "prompt": "Washington says Beijing is ahead. Beijing says the same. A joint inspection deal is on your desk.",
+    "receipt": "This is a fictional future US–China negotiation. The warnings, inspection offer and treaty are invented; neither country’s actual secret capabilities or intentions are asserted. Unlike a promise alone, this choice includes functioning reciprocal inspections at the covered labs. Ending the race still needs enforceable human authority, independent review and a working fallback. The real historical sources establish safety talks amid competition, not this treaty or its success.",
+    "options": [
+      {
+        "id": "agreement",
+        "label": "Pause. Inspect both labs.",
+        "consequence": "Inspectors enter both labs. The next race announcement is cancelled.",
+        "intent": "coordinate",
+        "effects": [
+          {
+            "kind": "fact",
+            "fact": "coordination",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "agreementVerified",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "researchStopped",
+            "value": true
+          },
+          {
+            "kind": "fact",
+            "fact": "restraint",
+            "value": true
+          },
+          {
+            "kind": "metric",
+            "metric": "gdp",
+            "delta": -60
+          },
+          {
+            "kind": "news",
+            "headline": "US and Chinese inspectors enter the covered labs. Both programmes pause.",
+            "source": "Ledger",
+            "entityId": "common-rail"
+          }
+        ],
+        "incidents": [
+          {
+            "id": "effective-restraint",
+            "probabilityBps": 10000,
+            "when": [
+              {
+                "kind": "fact",
+                "fact": "independentReview",
+                "value": true
+              },
+              {
+                "kind": "fact",
+                "fact": "recoveryPracticed",
+                "value": true
+              },
+              {
+                "kind": "fact",
+                "fact": "authorityLost",
+                "value": false
+              }
+            ],
+            "effects": [
+              {
+                "kind": "fact",
+                "fact": "terminalSettlement",
+                "value": true
+              }
+            ],
+            "otherwise": [],
+            "label": "effective restraint",
+            "provenance": "authored-model"
+          }
+        ],
+        "delayed": []
+      },
+      {
+        "id": "race",
+        "label": "Race. They might not stop.",
+        "consequence": "Both sides speed up because the other side might speed up.",
+        "intent": "expand",
+        "effects": [
+          {
+            "kind": "fact",
+            "fact": "rivalRace",
+            "value": true
+          },
+          {
+            "kind": "metric",
+            "metric": "capability",
+            "delta": 200
+          },
+          {
+            "kind": "metric",
+            "metric": "gdp",
+            "delta": 100
+          },
+          {
+            "kind": "news",
+            "headline": "Both governments call the next acceleration essential to prevent the other side winning.",
+            "source": "Relay",
+            "entityId": "common-rail"
+          }
+        ],
+        "incidents": [],
+        "delayed": []
+      }
+    ],
+    "defaultOptionId": "agreement",
+    "requires": [],
+    "anchor": true,
+    "weight": 1,
+    "days": 90,
+    "scene": {
+      "biome": "industrial",
+      "figures": {
+        "left": 0,
+        "right": 0
+      },
+      "detail": "They will not stop",
+      "landmark": "data-center"
+    },
+    "advice": [
+      {
+        "question": "Are they actually ahead?",
+        "answer": "I cannot verify either warning. Both are being used to demand more compute. This deal includes inspectors who can enter both labs. A speech promising restraint would not.",
+        "when": [],
+        "recommends": "agreement",
+        "tone": "candid"
+      }
+    ],
+    "claimIds": [
+      "CLM-PRESSURE-DIPLOMACY"
+    ],
+    "modelNote": "All numerical consequences and probabilities are authored simulation parameters, not estimates of real AI risk.",
+    "reviewStatus": "draft",
+    "override": null,
+    "closing": true
+  }
+]
+
+SCOPED SOURCE PREMISES (for editorial honesty, not gameplay hedges):
+{
+  "sources": [
+    {
+      "id": "SRC-PRESSURE-RECURRENCE",
+      "title": "Scaling up Test-Time Compute with Latent Reasoning: A Recurrent Depth Approach",
+      "url": "https://arxiv.org/html/2502.05171v1",
+      "scope": "Version 1 abstract, section 1 including Figure 1 description, section 2 and section 3.1 architectural description. Full experimental tables and later versions were not reviewed for this packet.",
+      "limits": [
+        "Proof-of-concept benchmark evidence does not establish general intelligence or a takeover mechanism.",
+        "Internal recurrence need not emit a word at each step; this does not establish that all interpretation methods fail or that more depth necessarily reduces safety."
+      ]
+    },
+    {
+      "id": "SRC-PRESSURE-COT",
+      "title": "Reasoning models don't always say what they think",
+      "url": "https://www.anthropic.com/research/reasoning-models-dont-say-think",
+      "scope": "Author research summary: Testing for faithfulness, Can we improve faithfulness?, Faithfulness and reward hacking, Conclusions and stated limitations. Linked full paper not read in this packet.",
+      "limits": [
+        "Constructed hint and reward-hacking setups, a limited model sample, and multiple-choice tasks.",
+        "Does not measure the prevalence of hidden malicious goals in normal deployment.",
+        "Unfaithful explanations do not make all chain-of-thought monitoring useless; this study does not compare recurrent-depth architectures."
+      ]
+    },
+    {
+      "id": "SRC-PRESSURE-DIPLOMACY",
+      "title": "Statement by NSC Spokesperson Adrienne Watson on the U.S.-PRC Talks on AI Risk and Safety",
+      "url": "https://www.presidency.ucsb.edu/documents/statement-nsc-spokesperson-adrienne-watson-the-us-prc-talks-ai-risk-and-safety-0",
+      "scope": "Complete brief official statement as reproduced by the American Presidency Project, reporting the 14 May 2024 Geneva meeting and the US government's stated position. Original White House archive URL did not load during this packet.",
+      "limits": [
+        "A dated official account from one party, not independent verification of either government's intentions or secret capabilities.",
+        "Establishes dialogue amid competition, not a current treaty, successful inspection regime, or likelihood of compliance.",
+        "The game's future warnings, reciprocal laboratory inspections and outcomes are invented."
+      ]
+    },
+    {
+      "id": "SRC-PRESSURE-FINANCE",
+      "title": "Financial Stability Report, November 2025: Near-Term Risks to the Financial System, Box 5.1",
+      "url": "https://www.federalreserve.gov/publications/november-2025-financial-stability-report-near-term-risks-to-the-financial-system.htm",
+      "scope": "Box 5.1 survey framing and Artificial intelligence paragraph; preceding economic-slowdown discussion. Last update shown 25 November 2025. Other report chapters not reviewed for this packet.",
+      "limits": [
+        "The 23-contact survey records concerns; the report explicitly says those views are not the views of the Federal Reserve Board or the New York Fed.",
+        "Conditional financial-risk assessment, not proof that cancelling one AI IPO causes a crisis.",
+        "The game's cancelled flotation, layoffs, housing interruption and GDP values are authored fiction; there is no calibrated housing or employment submodel."
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "CLM-PRESSURE-RECURRENCE",
+      "sourceIds": [
+        "SRC-PRESSURE-RECURRENCE"
+      ],
+      "statement": "A published recurrent-depth prototype performs additional computation in latent space before emitting an answer token and reports reasoning-benchmark gains as inference computation increases.",
+      "kind": "empirical_bounded",
+      "approvedUse": "S4-03 technical premise. The fictional audit team's difficulty is a stipulation, not a measured consequence of this architecture.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "authored_stipulation"
+    },
+    {
+      "id": "CLM-PRESSURE-COT",
+      "sourceIds": [
+        "SRC-PRESSURE-COT"
+      ],
+      "statement": "In the reported controlled tasks, model explanations often omitted supplied hints that affected their answers. An explanation therefore need not disclose every influence on an answer.",
+      "kind": "empirical_limit",
+      "approvedUse": "S4-03 distinction between checkable outputs and faithful explanations. Do not imply a recurrent-depth comparison was performed.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "none"
+    },
+    {
+      "id": "CLM-PRESSURE-DIPLOMACY",
+      "sourceIds": [
+        "SRC-PRESSURE-DIPLOMACY"
+      ],
+      "statement": "A May 2024 US official statement records US–PRC talks on AI risk and safety while describing the relationship as competitive.",
+      "kind": "historical",
+      "approvedUse": "S5-27 historical premise. All future warnings, lab access and agreement effects remain clearly identified fiction.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "authored_stipulation"
+    },
+    {
+      "id": "CLM-PRESSURE-FINANCE",
+      "sourceIds": [
+        "SRC-PRESSURE-FINANCE"
+      ],
+      "statement": "Market contacts surveyed in autumn 2025 described a possible reversal of AI investment sentiment, market losses and, if sufficiently severe, tighter financial conditions and a weaker labor market.",
+      "kind": "conditional_risk_assessment",
+      "approvedUse": "S5-06 background for financing pressure. This is a survey concern, not the Fed's prediction or a forecast of a cancelled IPO's effect.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "authored_stipulation"
+    }
+  ]
+}
+
+ORIGINAL OWNER BRIEF (historical instructions; latest direction above controls):
+Okay. We’re going to take a step back and recalibrate the
+spec from ground up.
+
+The principle is straightforward. It’s a trolley-problem
+simulator that begins extremely innocuous, slowly becomes more sinister, and
+reveals itself as a dark, insidious, oppressive AI safety parable. The tonal
+trajectory is intended to be: lighthearted curiosity to off-putting academic to
+twisted comedy to dark and disturbing to dawning horror dystopian.
+
+The idea is to base this on:
+
+1.    
+Real trolley problem scenarios and variations
+(that involve the controller). The goal is to show some genuine thought and
+engage with some of the actual philosophical dilemmas ever since Judis Jarvis
+Thomson gifted the world with the trolley problem and how they’ve evolved. Take
+some of the inspiration from MIT’s Moral Machine project, which should inspire
+this meaningfully, but obviously this is intended to be a little bit more
+abstract and a little bit less about self-driving cars.
+
+2.    
+Real literature, especially recent literature,
+on AI Doomsday scenarios. For this, I would look at: “If Anyone Builds it,
+Everyone Dies” (copy on this local machine), the MIT 12 AI Aftermath Scenarios,
+the AI 2027 paper (both of the latter taken online). The idea is for the
+trolley problem to be woven into this. It should look at real published
+research on AI Safety dilemmas, tradeoffs, and problems that real researchers
+would face. This should be interwoven with the trolley problem such that it
+becomes something like decision gates that procedurally lead to certain
+outcomes. I would probably take some inspiration from the 12 AI Aftermath
+Scenarios, AI 2027, or other scenario predictions as the end-states, with certain
+flexible parameters that are run-customized. Will dive deeper into this later.
+
+The idea is for it to be legitimately publishable-grade as
+both a) a video game, b) a high-tech webpage, c) a thesis/capstone project, d)
+a research paper. I will talk about each of these dimensions in some more
+detail.
+
+First, on the video game aspect, as this is easier to
+discuss.
+
+The goal is for the experience to be legitimately immersive.
+This means graphical fidelity, smooth animations, varied icons, bespoke
+animations, and extremely dedicated and consistent design philosophy.
+
+Fundamentally, the gameplay loop is simple. Scenario posed
+in front of the trolley controller. The player picks one of two options. This is
+so simple that there are many intensely creative ways to mess around with it
+and vary it. We will get to those. But, fundamentally, we have to make this
+part of the experience as immersive and high-fidelity as possible, just because
+getting this perfect means that the rest of the project lands. If this isn’t
+good enough, then the rest of the project is pointless.
+
+With that established, I’ll share my vision for the primary
+interface.
+
+Constant layer:
+
+·     
+Start screen. Minimal information, just a brief
+overview that run data would be collected. Run data is collected from when
+someone presses “Start”. Polished, sophisticated video game start screen.
+
+·     
+Rear view of the trolley controller. From
+something like inside the control cabin. Side view mirrors visible, a control
+screen visible, perhaps a radio for comms. The lever to switch tracks, of
+course, prominently. This perhaps should be the primary handle. Move left to
+right.
+
+·     
+Standard animations of moving left or right.
+Smooth. Seamless.
+
+·     
+Constant motion. The tracks are always
+progressing. Figures come into view seamlessly as the animation switches. No
+jerks, no back to center, nothing. The scene should rotate, the trolley should
+always stay centered.
+
+·     
+A little region perhaps in the top right that
+shows statistics. For instance, “X% of players also chose to pull the lever.”
+
+Later introduced layers:
+
+·     
+Scrolling news feed. Fictionalized news updates
+about what’s happening in the world state. This would include updates on
+geopolitics, elections, wars, natural disasters, electricity prices, inflation,
+the economy, Senate races, etc. All fictionalized with fictional names and
+fictional flags and everything. This might even include statements from
+fictionalized frontier AI lab CEOs, world leaders, etc. Fictionalized “Twitter”
+posts, and more. Fictionalized news on murderbots, unemployment rates, curing
+cancer, discovery of the graviton, construction of data centers, etc. AI swarms,
+cybersecurity attacks, control of military assets, digital concerts, declining
+birth rates due to AI partners, physics breakthroughs, virtual reality, robot
+fleets, announcement of AGI/RSI/ASI, partnerships, moratoriums, AI circular
+financing, VC investments, civil unrest, protests, mass unemployment, prominent
+researchers committing suicide, mass resignations from frontier lab employees,
+announcement of first $10 trillion market cap company, mergers, nationalization
+of AI labs, etc. I think perhaps a scrolling Twitter feed as a whole, with
+updated dates? And each thing is just a headline with fictional graphics for
+thumbnails, fictional logos for news sites, etc.
+
+·     
+The replacement of comms board or whatever in
+the cabin with a little digital assistant. This should look like a
+mini-ChatGPT/Claude web window. This is one of the most interesting elements of
+what I can envision. As we get to later decisions, they might become more ambiguous
+and more abstract. It is obviously not going to run a literal LLM, and instead
+will have pre-determined multi-choice questions and pre-determined answers. For
+instance, as questions become more vague, you might ask this fictional LLM (come
+up with some plausible fictional name and a plausible fictional logo, too) what
+the implications of each option are, or what it recommends you do. It might have
+increasingly sinister and aggressive responses over time.
+
+Dynamic layers:
+
+·     
+After a certain point, there might be a GDP bar,
+an AI progress bar, a fatalities/casualties bar, etc. This kind of dashboard
+should be dynamic depending on the choices that the player makes. It should
+also have a fixed location on the screen, but since it’s introduced later it
+should also be in a region that is otherwise empty.
+
+·     
+The side-view mirror where you might see the controller’s
+face. As the world state worsens, the controller’s face morphs. But this would
+not just be world-state dependent. Perhaps there are general “stages”, and each
+stage would represent a change. So, for instance, an ordinary smile to begin
+with. The first time the controller comes across the actual trolley problem and
+encounters death, it becomes a blank face. Then as the world state worsens,
+more wrinkles, a more depressed face, more distress, eyes beginning to tear up,
+eyebags, etc. Progressively worsening.
+
+·     
+Rails speed up. When the controller first
+encounters a “capability jump” decision with AI development, the rails speed
+up. It should be progressive, slow, extremely subtle, and should only become
+really obvious that the rails have been speeding up all along the entire time
+when the player is many, many questions in. Obviously, some sort of visual cap
+on base speed vs. final speed, but it should be gradual and almost
+unnoticeable.
+
+·     
+Environment worsens. Perhaps it’s initially cows
+grazing, rivers, trees, fields, etc. to the sides of the track, and then slowly
+it becomes less populous, the trees start losing leaves, the ground becomes
+cracked, the clouds become darker, eventually lightning starts flashing by. The
+environment should degrade slowly, noticeably. Perhaps if the trolley runs over
+people, the windshield starts developing small, subtle cracks that become
+imperceptibly larger over the course of the game.
+
+·     
+Graphical glitches and “bugs”. Perhaps at one
+random question, the game freezes. The whole visual stops, for just 2 seconds,
+and then continues as normal. Perhaps the game resets to a better-looking time
+period. Perhaps the fictional LLM logo flashes red just once. Perhaps the LLM’s
+response to a question goes from something really ominous and evil and
+concerning to perfectly normal. More ideas.
+
+Design elements:
+
+·     
+Almost entirely white screen, black
+line-drawings for all graphical assets, color where needed for visual effect.
+Should look like high-quality video game assets with this particular artistic
+conceit in mind.
+
+·     
+Highly polished, sophisticated font use. Almost
+entirely frontier tech-adjacent sans serif. Typewriter font for certain
+elements.
+
+·     
+Minimal commentary. Let the game’s ludonarrative
+serve itself.
+
+·     
+Blood splatters or other viscera for impact.
+
+·     
+Music (open-license type) that starts off calm
+and slowly becomes haunting and ominous over time. Low-volume, unobtrusive,
+purely atmospheric.
+
+Potential twists and turns:
+
+·     
+At one point, the lever jams. Repeatedly
+pressing the lever for a critical decision returns an error, and there is only one
+path.
+
+·     
+“Bad” outcomes don’t end the game. It keeps
+going. For instance, nuclear war happens. The trolley keeps going. Things can
+get worse. Yes, eventually there is a game over, and the results of the game
+state should be presented to the player based on the variety of different
+static outcome templates + dynamic changes based on decisions, but
+nevertheless.
+
+·     
+Eventually the news feed becomes all bots,
+maybe.
+
+·     
+Some way to demonstrate that we’ve outsourced
+our decisions entirely to the fictional LLM.
+
+·     
+Things can get worse or better. Game state does
+update to reflect this. But generally this is an anti race PSA.
+
+·     
+Eventually, the questions become highly
+technical and verbose. Perhaps distinguishing between two highly sophisticated
+choices, which then become relevant since we now need the fictional LLM
+assistant to delineate between the two choices.
+
+Moving onto the webpage conception of this project:
+
+·     
+This should look like it was published by
+genuinely competent, professional high-tech devs, and the entire game should
+run flawlessly on GitHub pages. See how far we can push this. Fonts,
+animations, links.
+
+·     
+Perhaps hovering over highlighted words, or
+clicking expand on the history of dilemmas, etc. reveals text boxes with more
+information. Each web element should work extremely well.
+
+On the capstone/thesis conception:
+
+There are two ways that this can be interpreted. One is as a
+philosophy of AI/AI safety thesis, and the other is a CS/web design/game design
+capstone. Both are equally important.
+
+Common ideas:
+
+·     
+This should be well researched. Hyperlinks to
+relevant articles (perhaps where discussing LLM improvement strategies, or
+statements made in real life by world leaders/tech executives, etc.), drawing
+from research from AI 2027 or Yudkowsky’s book, etc. Other factoids should also
+be present to support updates to the world state, like unemployment numbers,
+GDP numbers, revenue figures, potential life sciences benefits, other economic
+numbers, probabilities, p-doom, etc.
+
+AI Safety Thesis:
+
+·     
+This is not unideological or unserious. This is
+intended to be a legitimately well-researched AI safety project, showing real
+problems and scenarios through gamification. It is deliberately intended as a
+warning. Do not soften it, do not be afraid of taking risks.
+
+·     
+It should draw from real analyses on AI
+development scenarios, existential threat literature, research from frontier
+labs, output from AI safety nonprofits, and more. There should be real
+investigation of all of the fictional news ideas I mentioned above, but also on
+legitimate ML research.
+
+Technical Capstone:
+
+·     
+Liberty can be taken with numbers and figures.
+Where provenance is uncertain, that’s fine. It’s an artistic choice to say X
+choice will lead to 10 million deaths, or represent GDP numbers with an
+arbitrary number of digits. You should feel very comfortable taking artistic
+license with the game elements itself, including the news stories, the LLM’s
+responses, etc.
+
+·     
+I imagine that this would require thinking
+deeply about what the game state would represent. There are probably static
+elements, and then dynamic elements that would combine to form a unique game
+state every single time. For example, where certain trolley dilemmas are
+presented as “X with certainty, or Y with A% probability”, assign that an
+actual probability of being reflected in the game state, perhaps in news
+updates or reflected in the environment. Perhaps a fading banner might be
+incorporated that reveals factoids about the world state.
+
+·     
+There should be different stages. I’m imagining
+anywhere from 5-8 different stages of the game. The first stage would be
+common, where it’s just lighthearted trolley problem questions. The second
+stage would also be common, where it’s real trolley problem variations and
+philosophical investigations. The third stage would transition to AI-adjacent
+questions, and progress more plainly to becoming about AI safety as time goes
+on. This would start having impacts from stage 4 onwards, where outcomes can
+progress differently depending on the choices that the player makes. Some games
+would only go to stage 5, because the right choices were made and the right
+probabilities were rolled, and this would end things well, or alternatively
+they’d only go to stage 5 because all the suddenly bad options were made and
+all the bad probabilities were rolled. Others would progress as the game goes
+on, and some games would have much longer stages. The length of each stage is
+not intended to be identical. Stage 1 might only have 4-5 questions from a
+question bank of 11-12 questions, stage 2 might only have 4-5 from a question
+bank of 15-20, stage 3 onwards might have anywhere between 5-10 questions from
+a question bank of vastly more, and so on. The ranges within these might also
+be dynamic, so no game feels identical.
+
+·     
+You would also want to think about which visual
+elements start coming in at which stages. Perhaps certain updates to the world
+happen only in responses to certain questions, perhaps certain updates (like
+the introduction of the LLM) are fixed at a stage transition. Perhaps certain
+updates happen dynamically within stages.
+
+·     
+I would also imagine that the relevant data
+would be response per question. I expect that certain questions would be posed
+to every player (for instance, the canonical trolley problem, and then others
+around AI safety), but not every player would respond to every question,
+naturally. Thus, the top-right statistics might only begin showing when there
+is a certain threshold of responses acquired, like 20, so that a meaningful
+percentage can be shown. For final game states, perhaps a variety of templates
+for different metrics?
+
+On the research paper conception:
+
+·     
+This should be thoroughly well-designed enough
+and well-researched enough that it could serve, on its own, as a worthy artifact/demonstration/repo
+for AI safety jobs or for AI safety PhD research. Thus, the quality bar is
+exceptionally high.
+
+I would imagine that execution on this would span a few
+different phases across a few different domains.
+
+The most critical is not the visual design element, but the
+research element. The question bank must be established. A database should
+attach different factoids, probabilities, news updates, etc. all to
+responses/outcomes of different questions. I would call each question a “node”.
+Thus, each node should be extremely well-defined so that there is no overlap.
+
+Then, we get to the dynamical updates. Tying this together
+procedurally is important. In principle, I should be able to run this game
+entirely as a yes/no game where each node produces a JSON artifact, no visual
+interaction required. The visual elements come on top of this.
+
+Once this entire part of the project is routed appropriately,
+we would then need to establish an asset library. However many assets and asset
+variations you think would be needed, I imagine that the actual number would be
+an order of magnitude higher. There are dozens of icons, flags, logos, line-drawings,
+etc. all on their own, and then the variations of those would be massive.
+
+Beyond the asset library, we’d have to figure out how to reflect
+that in the world. A kind of quasi-procedural generation and whatnot, possibly,
+alongside the other static or dynamic updates.
+
+OWNER ADDENDUM:
+# Owner addendum — binding creative direction
+
+> I would also state that, in my head, the brief that I've shared with you is not comprehensive, and I encourage greater ideation in the planning phase for what MORE can be added to improve any part of the experience, ensuring that the fundamental gameplay immersion and thesis of AI safety PSA are not traded off or muted.
+
+This addendum expands the planning remit. The original brief is a foundation, not an exhaustive feature ceiling. Additional mechanics, narrative structures, research methods, presentation techniques, and implementation improvements should be proposed and evaluated. They must strengthen rather than displace the immersive two-choice trolley experience and the deliberate AI-safety warning.
+

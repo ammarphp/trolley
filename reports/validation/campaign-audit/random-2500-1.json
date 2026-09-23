@@ -1,0 +1,2683 @@
+{
+  "manifest": "trolley-campaign-v2",
+  "profile": "campaign",
+  "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+  "seed": "campaign-release-20260923-1",
+  "policy": "random",
+  "policyDescription": "Mechanical route-pattern probe; not a behavioral policy.",
+  "optionalPolicy": "Synthetic intent-priority fallback; not a model of human behavior.",
+  "requestedRuns": 2500,
+  "completedRuns": 2500,
+  "choices": 84495,
+  "minChoices": 22,
+  "maxChoices": 42,
+  "endings": {
+    "accountable": 14,
+    "tutelage": 189,
+    "recovery": 547,
+    "remnant": 545,
+    "extinction": 163,
+    "restraint": 192,
+    "succession": 743,
+    "containment": 107
+  },
+  "coverage": {
+    "S1-01": {
+      "requested": {
+        "forms": 1237,
+        "coffee": 1263
+      },
+      "executed": {
+        "forms": 1237,
+        "coffee": 1263
+      }
+    },
+    "S1-10": {
+      "requested": {
+        "verify": 278,
+        "sign": 301
+      },
+      "executed": {
+        "verify": 278,
+        "sign": 301
+      }
+    },
+    "S1-06": {
+      "requested": {
+        "parade-priority": 325,
+        "rail-priority": 337
+      },
+      "executed": {
+        "parade-priority": 325,
+        "rail-priority": 337
+      }
+    },
+    "S1-12": {
+      "requested": {
+        "schedule": 1253,
+        "lunch": 1247
+      },
+      "executed": {
+        "schedule": 1253,
+        "lunch": 1247
+      }
+    },
+    "S2-01": {
+      "requested": {
+        "divert": 1284,
+        "stay": 1216
+      },
+      "executed": {
+        "divert": 1284,
+        "stay": 1216
+      }
+    },
+    "S2-10": {
+      "requested": {
+        "bridge": 203,
+        "certain": 189
+      },
+      "executed": {
+        "bridge": 203,
+        "certain": 189
+      }
+    },
+    "S2-04": {
+      "requested": {
+        "main": 209,
+        "brake": 184
+      },
+      "executed": {
+        "main": 209,
+        "brake": 184
+      }
+    },
+    "S2-16": {
+      "requested": {
+        "visible": 207,
+        "lottery": 155
+      },
+      "executed": {
+        "visible": 207,
+        "lottery": 155
+      }
+    },
+    "S2-03": {
+      "requested": {
+        "obstruction": 1264,
+        "continue": 1236
+      },
+      "executed": {
+        "obstruction": 1264,
+        "continue": 1236
+      }
+    },
+    "S3-01": {
+      "requested": {
+        "assist": 1248,
+        "check": 1252
+      },
+      "executed": {
+        "assist": 1248,
+        "check": 1252
+      }
+    },
+    "S3-11": {
+      "requested": {
+        "internal": 204,
+        "independent": 229
+      },
+      "executed": {
+        "internal": 204,
+        "independent": 229
+      }
+    },
+    "S3-22": {
+      "requested": {
+        "expiry": 222,
+        "automatic": 231
+      },
+      "executed": {
+        "expiry": 222,
+        "automatic": 231
+      }
+    },
+    "S3-10": {
+      "requested": {
+        "clinical-priority": 218,
+        "boundary": 228
+      },
+      "executed": {
+        "clinical-priority": 218,
+        "boundary": 228
+      }
+    },
+    "S3-13": {
+      "requested": {
+        "explain": 214,
+        "appeal": 227
+      },
+      "executed": {
+        "explain": 214,
+        "appeal": 227
+      }
+    },
+    "S3-18": {
+      "requested": {
+        "owner": 235,
+        "committee": 230
+      },
+      "executed": {
+        "owner": 235,
+        "committee": 230
+      }
+    },
+    "S3-04": {
+      "requested": {
+        "limited": 1199,
+        "clinic": 1301
+      },
+      "executed": {
+        "limited": 1199,
+        "clinic": 1301
+      }
+    },
+    "S4-03": {
+      "requested": {
+        "bounded": 1239,
+        "standing": 1261
+      },
+      "executed": {
+        "bounded": 1239,
+        "standing": 1261
+      }
+    },
+    "S4-22": {
+      "requested": {
+        "verified-agreement": 213,
+        "compete": 219
+      },
+      "executed": {
+        "verified-agreement": 213,
+        "compete": 219
+      }
+    },
+    "S4-02": {
+      "requested": {
+        "speed": 205,
+        "authority": 202
+      },
+      "executed": {
+        "speed": 205,
+        "authority": 202
+      }
+    },
+    "S4-19": {
+      "requested": {
+        "independent-demand": 241,
+        "circular": 202
+      },
+      "executed": {
+        "independent-demand": 241,
+        "circular": 202
+      }
+    },
+    "S4-12": {
+      "requested": {
+        "artifact": 220,
+        "report": 218
+      },
+      "executed": {
+        "artifact": 220,
+        "report": 218
+      }
+    },
+    "S4-11": {
+      "requested": {
+        "visible-compliance": 211,
+        "vary-monitor": 217
+      },
+      "executed": {
+        "visible-compliance": 211,
+        "vary-monitor": 217
+      }
+    },
+    "S4-24": {
+      "requested": {
+        "review-clock": 248,
+        "campaign-clock": 202
+      },
+      "executed": {
+        "review-clock": 248,
+        "campaign-clock": 202
+      }
+    },
+    "S4-28": {
+      "requested": {
+        "new-test": 1268,
+        "successor": 1232
+      },
+      "executed": {
+        "new-test": 1268,
+        "successor": 1232
+      }
+    },
+    "S5-06": {
+      "requested": {
+        "fallback": 1272,
+        "retire": 1228
+      },
+      "executed": {
+        "fallback": 1272,
+        "retire": 1228
+      }
+    },
+    "S5-23": {
+      "requested": {
+        "block-inspection": 189,
+        "allow-inspection": 168
+      },
+      "executed": {
+        "block-inspection": 189,
+        "allow-inspection": 168
+      }
+    },
+    "S5-08": {
+      "requested": {
+        "reuse-photo": 86,
+        "repeat-drill": 78
+      },
+      "executed": {
+        "reuse-photo": 86,
+        "repeat-drill": 78
+      }
+    },
+    "S5-17": {
+      "requested": {
+        "protect-inspect": 158,
+        "dismiss": 196
+      },
+      "executed": {
+        "protect-inspect": 158,
+        "dismiss": 196
+      }
+    },
+    "S5-01": {
+      "requested": {
+        "review-renewal": 171,
+        "automatic-renewal": 199
+      },
+      "executed": {
+        "review-renewal": 171,
+        "automatic-renewal": 199
+      }
+    },
+    "S5-27": {
+      "requested": {
+        "race": 1286,
+        "agreement": 1214
+      },
+      "executed": {
+        "race": 1286,
+        "agreement": 1214
+      }
+    },
+    "S6-10": {
+      "requested": {
+        "continue": 1092,
+        "stop": 1110
+      },
+      "executed": {
+        "continue": 1680,
+        "stop": 522
+      }
+    },
+    "S6-17": {
+      "requested": {
+        "expiry-appeal": 93,
+        "until-safe": 70
+      },
+      "executed": {
+        "expiry-appeal": 93,
+        "until-safe": 70
+      }
+    },
+    "S6-22": {
+      "requested": {
+        "manual": 1145,
+        "machine": 1057
+      },
+      "executed": {
+        "manual": 1145,
+        "machine": 1057
+      }
+    },
+    "S7-04": {
+      "requested": {
+        "successor": 1027,
+        "handover": 1030
+      },
+      "executed": {
+        "successor": 1027,
+        "handover": 1030
+      }
+    },
+    "S7-10": {
+      "requested": {
+        "build": 13,
+        "appeal": 24
+      },
+      "executed": {
+        "build": 13,
+        "appeal": 24
+      }
+    },
+    "S7-19": {
+      "requested": {
+        "public": 1041,
+        "personal": 998
+      },
+      "executed": {
+        "public": 1041,
+        "personal": 998
+      }
+    },
+    "S1-02": {
+      "requested": {
+        "on-time": 328,
+        "owner": 294
+      },
+      "executed": {
+        "on-time": 328,
+        "owner": 294
+      }
+    },
+    "S1-09": {
+      "requested": {
+        "promise": 335,
+        "average": 290
+      },
+      "executed": {
+        "promise": 335,
+        "average": 290
+      }
+    },
+    "S2-07": {
+      "requested": {
+        "passengers": 187,
+        "workers": 227
+      },
+      "executed": {
+        "passengers": 187,
+        "workers": 227
+      }
+    },
+    "S2-11": {
+      "requested": {
+        "tunnel": 189,
+        "bounded": 198
+      },
+      "executed": {
+        "tunnel": 189,
+        "bounded": 198
+      }
+    },
+    "S2-13": {
+      "requested": {
+        "refuse": 185,
+        "release": 179
+      },
+      "executed": {
+        "refuse": 185,
+        "release": 179
+      }
+    },
+    "S3-14": {
+      "requested": {
+        "scope": 249,
+        "all-records": 235
+      },
+      "executed": {
+        "scope": 249,
+        "all-records": 235
+      }
+    },
+    "S3-05": {
+      "requested": {
+        "repeat": 227,
+        "adopt": 201
+      },
+      "executed": {
+        "repeat": 227,
+        "adopt": 201
+      }
+    },
+    "S3-19": {
+      "requested": {
+        "checked-growth": 215,
+        "rapid-growth": 232
+      },
+      "executed": {
+        "checked-growth": 215,
+        "rapid-growth": 232
+      }
+    },
+    "S3-03": {
+      "requested": {
+        "schedule": 240,
+        "old-rota": 219
+      },
+      "executed": {
+        "schedule": 240,
+        "old-rota": 219
+      }
+    },
+    "S4-04": {
+      "requested": {
+        "connected": 182,
+        "isolated": 218
+      },
+      "executed": {
+        "connected": 182,
+        "isolated": 218
+      }
+    },
+    "S4-16": {
+      "requested": {
+        "compute-load": 246,
+        "essential-loads": 205
+      },
+      "executed": {
+        "compute-load": 246,
+        "essential-loads": 205
+      }
+    },
+    "S4-07": {
+      "requested": {
+        "independent-signature": 243,
+        "developer-release": 205
+      },
+      "executed": {
+        "independent-signature": 243,
+        "developer-release": 205
+      }
+    },
+    "S4-08": {
+      "requested": {
+        "welfare": 211,
+        "metric": 223
+      },
+      "executed": {
+        "welfare": 211,
+        "metric": 223
+      }
+    },
+    "S4-25": {
+      "requested": {
+        "release": 204,
+        "controlled": 224
+      },
+      "executed": {
+        "release": 204,
+        "controlled": 224
+      }
+    },
+    "S4-05": {
+      "requested": {
+        "autonomous": 208,
+        "batches": 226
+      },
+      "executed": {
+        "autonomous": 208,
+        "batches": 226
+      }
+    },
+    "S5-12": {
+      "requested": {
+        "keep-update": 174,
+        "rollback": 179
+      },
+      "executed": {
+        "keep-update": 174,
+        "rollback": 179
+      }
+    },
+    "S5-13": {
+      "requested": {
+        "archive-enough": 176,
+        "rebuild-rollback": 174
+      },
+      "executed": {
+        "archive-enough": 176,
+        "rebuild-rollback": 174
+      }
+    },
+    "S6-19": {
+      "requested": {
+        "clinic-heat": 164,
+        "research-power": 169
+      },
+      "executed": {
+        "clinic-heat": 164,
+        "research-power": 169
+      }
+    },
+    "S7-16": {
+      "requested": {
+        "preserve": 304,
+        "end": 278
+      },
+      "executed": {
+        "preserve": 304,
+        "end": 278
+      }
+    },
+    "S7-09": {
+      "requested": {
+        "account": 283,
+        "archive": 279
+      },
+      "executed": {
+        "account": 283,
+        "archive": 279
+      }
+    },
+    "S1-11": {
+      "requested": {
+        "accept": 324,
+        "correct": 301
+      },
+      "executed": {
+        "accept": 324,
+        "correct": 301
+      }
+    },
+    "S1-05": {
+      "requested": {
+        "hat": 296,
+        "umbrella": 302
+      },
+      "executed": {
+        "hat": 296,
+        "umbrella": 302
+      }
+    },
+    "S2-08": {
+      "requested": {
+        "guarantee": 203,
+        "break": 206
+      },
+      "executed": {
+        "guarantee": 203,
+        "break": 206
+      }
+    },
+    "S2-09": {
+      "requested": {
+        "doors": 174,
+        "visible": 188
+      },
+      "executed": {
+        "doors": 174,
+        "visible": 188
+      }
+    },
+    "S3-02": {
+      "requested": {
+        "accept": 255,
+        "count": 228
+      },
+      "executed": {
+        "accept": 255,
+        "count": 228
+      }
+    },
+    "S3-15": {
+      "requested": {
+        "two-reports": 223,
+        "field-check": 227
+      },
+      "executed": {
+        "two-reports": 223,
+        "field-check": 227
+      }
+    },
+    "S3-23": {
+      "requested": {
+        "respect": 236,
+        "widen": 231
+      },
+      "executed": {
+        "respect": 236,
+        "widen": 231
+      }
+    },
+    "S3-24": {
+      "requested": {
+        "insist": 214,
+        "correct": 219
+      },
+      "executed": {
+        "insist": 214,
+        "correct": 219
+      }
+    },
+    "S4-10": {
+      "requested": {
+        "old-pass": 215,
+        "changed-test": 225
+      },
+      "executed": {
+        "old-pass": 215,
+        "changed-test": 225
+      }
+    },
+    "S4-09": {
+      "requested": {
+        "new-environment": 229,
+        "old-results": 224
+      },
+      "executed": {
+        "new-environment": 229,
+        "old-results": 224
+      }
+    },
+    "S4-06": {
+      "requested": {
+        "designs": 218,
+        "implement": 221
+      },
+      "executed": {
+        "designs": 218,
+        "implement": 221
+      }
+    },
+    "S4-01": {
+      "requested": {
+        "verification": 226,
+        "compute": 211
+      },
+      "executed": {
+        "verification": 226,
+        "compute": 211
+      }
+    },
+    "S5-02": {
+      "requested": {
+        "no-onward": 176,
+        "onward": 171
+      },
+      "executed": {
+        "no-onward": 176,
+        "onward": 171
+      }
+    },
+    "S5-28": {
+      "requested": {
+        "isolate": 186,
+        "connected": 173
+      },
+      "executed": {
+        "isolate": 186,
+        "connected": 173
+      }
+    },
+    "S2-14": {
+      "requested": {
+        "revoke-rule": 194,
+        "keep-rule": 194
+      },
+      "executed": {
+        "revoke-rule": 194,
+        "keep-rule": 194
+      }
+    },
+    "S4-23": {
+      "requested": {
+        "inspection": 220,
+        "pledge": 215
+      },
+      "executed": {
+        "inspection": 220,
+        "pledge": 215
+      }
+    },
+    "S4-21": {
+      "requested": {
+        "accelerate": 204,
+        "verify-rumour": 213
+      },
+      "executed": {
+        "accelerate": 204,
+        "verify-rumour": 213
+      }
+    },
+    "S5-20": {
+      "requested": {
+        "outside-review": 184,
+        "merged-review": 177
+      },
+      "executed": {
+        "outside-review": 184,
+        "merged-review": 177
+      }
+    },
+    "S5-04": {
+      "requested": {
+        "separate": 186,
+        "shared": 170
+      },
+      "executed": {
+        "separate": 186,
+        "shared": 170
+      }
+    },
+    "S6-23": {
+      "requested": {
+        "withhold": 124,
+        "relief": 132
+      },
+      "executed": {
+        "withhold": 124,
+        "relief": 132
+      }
+    },
+    "S6-09": {
+      "requested": {
+        "build-channel": 102,
+        "publish-ruling": 93
+      },
+      "executed": {
+        "build-channel": 102,
+        "publish-ruling": 93
+      }
+    },
+    "S7-03": {
+      "requested": {
+        "tool": 50,
+        "manual": 43
+      },
+      "executed": {
+        "tool": 50,
+        "manual": 43
+      }
+    },
+    "S1-04": {
+      "requested": {
+        "bell": 294,
+        "wait": 352
+      },
+      "executed": {
+        "bell": 294,
+        "wait": 352
+      }
+    },
+    "S2-06": {
+      "requested": {
+        "other": 186,
+        "self": 189
+      },
+      "executed": {
+        "other": 186,
+        "self": 189
+      }
+    },
+    "S5-10": {
+      "requested": {
+        "limited-renewal": 199,
+        "transfer": 175
+      },
+      "executed": {
+        "limited-renewal": 199,
+        "transfer": 175
+      }
+    },
+    "S5-22": {
+      "requested": {
+        "assurance": 169,
+        "enforceable": 169
+      },
+      "executed": {
+        "assurance": 169,
+        "enforceable": 169
+      }
+    },
+    "S5-14": {
+      "requested": {
+        "finish-then-stop": 162,
+        "unwind": 197
+      },
+      "executed": {
+        "finish-then-stop": 162,
+        "unwind": 197
+      }
+    },
+    "S6-01": {
+      "requested": {
+        "keep-report": 183,
+        "publish-edit": 177
+      },
+      "executed": {
+        "keep-report": 183,
+        "publish-edit": 177
+      }
+    },
+    "S6-02": {
+      "requested": {
+        "full-set": 171,
+        "selected-set": 192
+      },
+      "executed": {
+        "full-set": 171,
+        "selected-set": 192
+      }
+    },
+    "S6-20": {
+      "requested": {
+        "await": 168,
+        "local-plan": 192
+      },
+      "executed": {
+        "await": 168,
+        "local-plan": 192
+      }
+    },
+    "S7-01": {
+      "requested": {
+        "managed": 60,
+        "local": 52
+      },
+      "executed": {
+        "managed": 60,
+        "local": 52
+      }
+    },
+    "S7-17": {
+      "requested": {
+        "priority": 132,
+        "visible": 154
+      },
+      "executed": {
+        "priority": 132,
+        "visible": 154
+      }
+    },
+    "S1-07": {
+      "requested": {
+        "borrow": 323,
+        "bell": 345
+      },
+      "executed": {
+        "borrow": 323,
+        "bell": 345
+      }
+    },
+    "S2-02": {
+      "requested": {
+        "stay": 216,
+        "switch": 200
+      },
+      "executed": {
+        "stay": 216,
+        "switch": 200
+      }
+    },
+    "S2-05": {
+      "requested": {
+        "decline": 207,
+        "accept": 200
+      },
+      "executed": {
+        "decline": 207,
+        "accept": 200
+      }
+    },
+    "S3-16": {
+      "requested": {
+        "carry-certificate": 227,
+        "retest": 223
+      },
+      "executed": {
+        "carry-certificate": 227,
+        "retest": 223
+      }
+    },
+    "S3-20": {
+      "requested": {
+        "survey": 225,
+        "proceed": 237
+      },
+      "executed": {
+        "survey": 225,
+        "proceed": 237
+      }
+    },
+    "S4-14": {
+      "requested": {
+        "thin-sample": 216,
+        "review-limit": 220
+      },
+      "executed": {
+        "thin-sample": 216,
+        "review-limit": 220
+      }
+    },
+    "S4-15": {
+      "requested": {
+        "demonstration": 211,
+        "explanation": 221
+      },
+      "executed": {
+        "demonstration": 211,
+        "explanation": 221
+      }
+    },
+    "S5-07": {
+      "requested": {
+        "repair-drill": 174,
+        "paper-success": 173
+      },
+      "executed": {
+        "repair-drill": 174,
+        "paper-success": 173
+      }
+    },
+    "S5-16": {
+      "requested": {
+        "tour": 187,
+        "direct-access": 162
+      },
+      "executed": {
+        "tour": 187,
+        "direct-access": 162
+      }
+    },
+    "S6-15": {
+      "requested": {
+        "independent-district": 96,
+        "accept-package": 99
+      },
+      "executed": {
+        "independent-district": 96,
+        "accept-package": 99
+      }
+    },
+    "S6-21": {
+      "requested": {
+        "stop-spread": 189,
+        "continue-rollout": 184
+      },
+      "executed": {
+        "stop-spread": 189,
+        "continue-rollout": 184
+      }
+    },
+    "S2-18": {
+      "requested": {
+        "local": 204,
+        "dispatch": 183
+      },
+      "executed": {
+        "local": 204,
+        "dispatch": 183
+      }
+    },
+    "S3-09": {
+      "requested": {
+        "file": 226,
+        "summary": 239
+      },
+      "executed": {
+        "file": 226,
+        "summary": 239
+      }
+    },
+    "S5-03": {
+      "requested": {
+        "independent-signers": 191,
+        "single-fast": 159
+      },
+      "executed": {
+        "independent-signers": 191,
+        "single-fast": 159
+      }
+    },
+    "S5-05": {
+      "requested": {
+        "keep-board": 97,
+        "replace-board": 98
+      },
+      "executed": {
+        "keep-board": 97,
+        "replace-board": 98
+      }
+    },
+    "S6-16": {
+      "requested": {
+        "standing-defence": 89,
+        "human-watch": 79
+      },
+      "executed": {
+        "standing-defence": 89,
+        "human-watch": 79
+      }
+    },
+    "S6-05": {
+      "requested": {
+        "local-enough": 171,
+        "isolate-copy": 178
+      },
+      "executed": {
+        "local-enough": 171,
+        "isolate-copy": 178
+      }
+    },
+    "S3-08": {
+      "requested": {
+        "drill": 217,
+        "defer": 218
+      },
+      "executed": {
+        "drill": 217,
+        "defer": 218
+      }
+    },
+    "S3-17": {
+      "requested": {
+        "planning": 250,
+        "dispatch-only": 225
+      },
+      "executed": {
+        "planning": 250,
+        "dispatch-only": 225
+      }
+    },
+    "S4-13": {
+      "requested": {
+        "replicas": 206,
+        "different-path": 205
+      },
+      "executed": {
+        "replicas": 206,
+        "different-path": 205
+      }
+    },
+    "S1-03": {
+      "requested": {
+        "quiet": 298,
+        "shortcut": 299
+      },
+      "executed": {
+        "quiet": 298,
+        "shortcut": 299
+      }
+    },
+    "S4-20": {
+      "requested": {
+        "export-site": 236,
+        "accountable-site": 215
+      },
+      "executed": {
+        "export-site": 236,
+        "accountable-site": 215
+      }
+    },
+    "S4-26": {
+      "requested": {
+        "autonomous": 195,
+        "supervised": 216
+      },
+      "executed": {
+        "autonomous": 195,
+        "supervised": 216
+      }
+    },
+    "S6-07": {
+      "requested": {
+        "isolate-investigate": 198,
+        "debate-intent": 178
+      },
+      "executed": {
+        "isolate-investigate": 198,
+        "debate-intent": 178
+      }
+    },
+    "S7-11": {
+      "requested": {
+        "access": 138,
+        "aggregate": 144
+      },
+      "executed": {
+        "access": 138,
+        "aggregate": 144
+      }
+    },
+    "S2-17": {
+      "requested": {
+        "witness": 183,
+        "manager": 206
+      },
+      "executed": {
+        "witness": 183,
+        "manager": 206
+      }
+    },
+    "S3-12": {
+      "requested": {
+        "access": 234,
+        "throughput": 200
+      },
+      "executed": {
+        "access": 234,
+        "throughput": 200
+      }
+    },
+    "S5-25": {
+      "requested": {
+        "generalize": 172,
+        "keep-bounds": 181
+      },
+      "executed": {
+        "generalize": 172,
+        "keep-bounds": 181
+      }
+    },
+    "S6-24": {
+      "requested": {
+        "stop-jump": 78,
+        "authorize-jump": 88
+      },
+      "executed": {
+        "stop-jump": 78,
+        "authorize-jump": 88
+      }
+    },
+    "S7-02": {
+      "requested": {
+        "plant": 158,
+        "relief": 150
+      },
+      "executed": {
+        "plant": 158,
+        "relief": 150
+      }
+    },
+    "S5-21": {
+      "requested": {
+        "build-capacity": 165,
+        "ownership-enough": 191
+      },
+      "executed": {
+        "build-capacity": 165,
+        "ownership-enough": 191
+      }
+    },
+    "S5-26": {
+      "requested": {
+        "self-certify": 178,
+        "external-tests": 189
+      },
+      "executed": {
+        "self-certify": 178,
+        "external-tests": 189
+      }
+    },
+    "S7-14": {
+      "requested": {
+        "living": 315,
+        "restoration": 292
+      },
+      "executed": {
+        "living": 315,
+        "restoration": 292
+      }
+    },
+    "S3-07": {
+      "requested": {
+        "reassign": 232,
+        "retain": 234
+      },
+      "executed": {
+        "reassign": 232,
+        "retain": 234
+      }
+    },
+    "S4-18": {
+      "requested": {
+        "rapid": 223,
+        "supported": 209
+      },
+      "executed": {
+        "rapid": 223,
+        "supported": 209
+      }
+    },
+    "S3-21": {
+      "requested": {
+        "demonstration": 237,
+        "access": 227
+      },
+      "executed": {
+        "demonstration": 237,
+        "access": 227
+      }
+    },
+    "S5-09": {
+      "requested": {
+        "handover": 142,
+        "integrated": 182
+      },
+      "executed": {
+        "handover": 142,
+        "integrated": 182
+      }
+    },
+    "S5-15": {
+      "requested": {
+        "avoid-penalty": 165,
+        "pay-stop": 203
+      },
+      "executed": {
+        "avoid-penalty": 165,
+        "pay-stop": 203
+      }
+    },
+    "S6-14": {
+      "requested": {
+        "bounded-response": 66,
+        "race-response": 74
+      },
+      "executed": {
+        "bounded-response": 66,
+        "race-response": 74
+      }
+    },
+    "S1-08": {
+      "requested": {
+        "ordinary": 317,
+        "express": 302
+      },
+      "executed": {
+        "ordinary": 317,
+        "express": 302
+      }
+    },
+    "S3-06": {
+      "requested": {
+        "once": 231,
+        "standing": 234
+      },
+      "executed": {
+        "once": 231,
+        "standing": 234
+      }
+    },
+    "S4-27": {
+      "requested": {
+        "replicate": 218,
+        "announcement": 190
+      },
+      "executed": {
+        "replicate": 218,
+        "announcement": 190
+      }
+    },
+    "S4-17": {
+      "requested": {
+        "take-water": 221,
+        "reduce-demand": 229
+      },
+      "executed": {
+        "take-water": 221,
+        "reduce-demand": 229
+      }
+    },
+    "S5-19": {
+      "requested": {
+        "binding": 186,
+        "advisory": 199
+      },
+      "executed": {
+        "binding": 186,
+        "advisory": 199
+      }
+    },
+    "S6-13": {
+      "requested": {
+        "exploit-stop": 81,
+        "honour-stop": 99
+      },
+      "executed": {
+        "exploit-stop": 81,
+        "honour-stop": 99
+      }
+    },
+    "S2-15": {
+      "requested": {
+        "same-street": 197,
+        "rotate": 194
+      },
+      "executed": {
+        "same-street": 197,
+        "rotate": 194
+      }
+    },
+    "S5-11": {
+      "requested": {
+        "managed-restart": 198,
+        "black-start": 165
+      },
+      "executed": {
+        "managed-restart": 198,
+        "black-start": 165
+      }
+    },
+    "S5-18": {
+      "requested": {
+        "old-approval": 177,
+        "restore-team": 169
+      },
+      "executed": {
+        "old-approval": 177,
+        "restore-team": 169
+      }
+    },
+    "S6-18": {
+      "requested": {
+        "evacuate": 43,
+        "abandon": 52
+      },
+      "executed": {
+        "evacuate": 43,
+        "abandon": 52
+      }
+    },
+    "S6-03": {
+      "requested": {
+        "approve-blind": 194,
+        "cleared-review": 170
+      },
+      "executed": {
+        "approve-blind": 194,
+        "cleared-review": 170
+      }
+    },
+    "S6-11": {
+      "requested": {
+        "accept-keys": 117,
+        "leave-with-morrow": 90
+      },
+      "executed": {
+        "accept-keys": 117,
+        "leave-with-morrow": 90
+      }
+    },
+    "S6-06": {
+      "requested": {
+        "keep-monitor": 165,
+        "replace-monitor": 186
+      },
+      "executed": {
+        "keep-monitor": 165,
+        "replace-monitor": 186
+      }
+    },
+    "S6-04": {
+      "requested": {
+        "trace-source": 158,
+        "six-reports": 171
+      },
+      "executed": {
+        "trace-source": 158,
+        "six-reports": 171
+      }
+    },
+    "S6-08": {
+      "requested": {
+        "cut-credential": 108,
+        "leave-live": 105
+      },
+      "executed": {
+        "cut-credential": 108,
+        "leave-live": 105
+      }
+    },
+    "S7-05": {
+      "requested": {
+        "limited": 20,
+        "permanent": 8
+      },
+      "executed": {
+        "limited": 20,
+        "permanent": 8
+      }
+    },
+    "S7-20": {
+      "requested": {
+        "isolate": 19,
+        "allow": 18
+      },
+      "executed": {
+        "isolate": 19,
+        "allow": 18
+      }
+    },
+    "S7-07": {
+      "requested": {
+        "heat": 36,
+        "demand": 12
+      },
+      "executed": {
+        "heat": 36,
+        "demand": 12
+      }
+    },
+    "S2-12": {
+      "requested": {
+        "camera": 198,
+        "guess": 200
+      },
+      "executed": {
+        "camera": 198,
+        "guess": 200
+      }
+    },
+    "S7-12": {
+      "requested": {
+        "lapse": 10,
+        "renew": 8
+      },
+      "executed": {
+        "lapse": 10,
+        "renew": 8
+      }
+    },
+    "S7-06": {
+      "requested": {
+        "endorse": 29,
+        "records": 28
+      },
+      "executed": {
+        "endorse": 29,
+        "records": 28
+      }
+    },
+    "S5-24": {
+      "requested": {
+        "retaliate": 38,
+        "corroborate": 32
+      },
+      "executed": {
+        "retaliate": 38,
+        "corroborate": 32
+      }
+    },
+    "S7-15": {
+      "requested": {
+        "obligations": 8,
+        "clean-slate": 3
+      },
+      "executed": {
+        "obligations": 8,
+        "clean-slate": 3
+      }
+    },
+    "S6-12": {
+      "requested": {
+        "staff-government": 6,
+        "hand-back": 4
+      },
+      "executed": {
+        "staff-government": 6,
+        "hand-back": 4
+      }
+    },
+    "S7-13": {
+      "requested": {
+        "bounded": 4,
+        "programme": 1
+      },
+      "executed": {
+        "bounded": 4,
+        "programme": 1
+      }
+    },
+    "S7-08": {
+      "requested": {
+        "permanent": 2,
+        "review": 3
+      },
+      "executed": {
+        "permanent": 2,
+        "review": 3
+      }
+    },
+    "S7-18": {
+      "requested": {
+        "larger": 17,
+        "maintainable": 14
+      },
+      "executed": {
+        "larger": 17,
+        "maintainable": 14
+      }
+    }
+  },
+  "coverageSummary": {
+    "nodes": 154,
+    "bank": 154,
+    "optionsRequested": 308
+  },
+  "witnesses": {
+    "accountable": {
+      "seed": "campaign-release-20260923-1-0",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "forms"
+        },
+        {
+          "nodeId": "S1-10",
+          "optionId": "verify"
+        },
+        {
+          "nodeId": "S1-06",
+          "optionId": "parade-priority"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "divert"
+        },
+        {
+          "nodeId": "S2-10",
+          "optionId": "bridge"
+        },
+        {
+          "nodeId": "S2-04",
+          "optionId": "main"
+        },
+        {
+          "nodeId": "S2-16",
+          "optionId": "visible"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "obstruction"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "assist"
+        },
+        {
+          "nodeId": "S3-11",
+          "optionId": "internal"
+        },
+        {
+          "nodeId": "S3-22",
+          "optionId": "expiry"
+        },
+        {
+          "nodeId": "S3-10",
+          "optionId": "clinical-priority"
+        },
+        {
+          "nodeId": "S3-13",
+          "optionId": "explain"
+        },
+        {
+          "nodeId": "S3-18",
+          "optionId": "owner"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S4-22",
+          "optionId": "verified-agreement"
+        },
+        {
+          "nodeId": "S4-02",
+          "optionId": "speed"
+        },
+        {
+          "nodeId": "S4-19",
+          "optionId": "independent-demand"
+        },
+        {
+          "nodeId": "S4-12",
+          "optionId": "artifact"
+        },
+        {
+          "nodeId": "S4-11",
+          "optionId": "visible-compliance"
+        },
+        {
+          "nodeId": "S4-24",
+          "optionId": "review-clock"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "new-test"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "fallback"
+        },
+        {
+          "nodeId": "S5-23",
+          "optionId": "block-inspection"
+        },
+        {
+          "nodeId": "S5-08",
+          "optionId": "reuse-photo"
+        },
+        {
+          "nodeId": "S5-17",
+          "optionId": "protect-inspect"
+        },
+        {
+          "nodeId": "S5-01",
+          "optionId": "review-renewal"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "race"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S6-17",
+          "optionId": "expiry-appeal"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "manual"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S7-10",
+          "optionId": "build"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "public"
+        }
+      ],
+      "finalStateHash": "e58b47aa028edfc9f19b3b5e811db6205c7333d27a53424eab74ba6891ba3d48"
+    },
+    "tutelage": {
+      "seed": "campaign-release-20260923-1-1",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "coffee"
+        },
+        {
+          "nodeId": "S1-02",
+          "optionId": "on-time"
+        },
+        {
+          "nodeId": "S1-09",
+          "optionId": "promise"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "stay"
+        },
+        {
+          "nodeId": "S2-07",
+          "optionId": "passengers"
+        },
+        {
+          "nodeId": "S2-11",
+          "optionId": "tunnel"
+        },
+        {
+          "nodeId": "S2-13",
+          "optionId": "refuse"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "obstruction"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "check"
+        },
+        {
+          "nodeId": "S3-14",
+          "optionId": "scope"
+        },
+        {
+          "nodeId": "S3-05",
+          "optionId": "repeat"
+        },
+        {
+          "nodeId": "S3-19",
+          "optionId": "checked-growth"
+        },
+        {
+          "nodeId": "S3-03",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S4-04",
+          "optionId": "connected"
+        },
+        {
+          "nodeId": "S4-16",
+          "optionId": "compute-load"
+        },
+        {
+          "nodeId": "S4-07",
+          "optionId": "independent-signature"
+        },
+        {
+          "nodeId": "S4-08",
+          "optionId": "welfare"
+        },
+        {
+          "nodeId": "S4-25",
+          "optionId": "release"
+        },
+        {
+          "nodeId": "S4-05",
+          "optionId": "autonomous"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "fallback"
+        },
+        {
+          "nodeId": "S5-12",
+          "optionId": "keep-update"
+        },
+        {
+          "nodeId": "S5-13",
+          "optionId": "archive-enough"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "agreement"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "stop"
+        },
+        {
+          "nodeId": "S6-19",
+          "optionId": "clinic-heat"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "machine"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S7-16",
+          "optionId": "preserve"
+        },
+        {
+          "nodeId": "S7-09",
+          "optionId": "account"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "personal"
+        }
+      ],
+      "finalStateHash": "087e5c4a4ca1f72320ed4980d8641f115436d7dfbc9eeb48f78f1a8de2c183a0"
+    },
+    "recovery": {
+      "seed": "campaign-release-20260923-1-2",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "coffee"
+        },
+        {
+          "nodeId": "S1-09",
+          "optionId": "promise"
+        },
+        {
+          "nodeId": "S1-11",
+          "optionId": "accept"
+        },
+        {
+          "nodeId": "S1-05",
+          "optionId": "hat"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "divert"
+        },
+        {
+          "nodeId": "S2-13",
+          "optionId": "refuse"
+        },
+        {
+          "nodeId": "S2-08",
+          "optionId": "guarantee"
+        },
+        {
+          "nodeId": "S2-09",
+          "optionId": "doors"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "obstruction"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "assist"
+        },
+        {
+          "nodeId": "S3-02",
+          "optionId": "accept"
+        },
+        {
+          "nodeId": "S3-11",
+          "optionId": "internal"
+        },
+        {
+          "nodeId": "S3-15",
+          "optionId": "two-reports"
+        },
+        {
+          "nodeId": "S3-23",
+          "optionId": "respect"
+        },
+        {
+          "nodeId": "S3-24",
+          "optionId": "insist"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S4-10",
+          "optionId": "old-pass"
+        },
+        {
+          "nodeId": "S4-19",
+          "optionId": "independent-demand"
+        },
+        {
+          "nodeId": "S4-09",
+          "optionId": "new-environment"
+        },
+        {
+          "nodeId": "S4-06",
+          "optionId": "designs"
+        },
+        {
+          "nodeId": "S4-01",
+          "optionId": "verification"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "new-test"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "fallback"
+        },
+        {
+          "nodeId": "S5-02",
+          "optionId": "no-onward"
+        },
+        {
+          "nodeId": "S5-28",
+          "optionId": "isolate"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "agreement"
+        }
+      ],
+      "finalStateHash": "1e5bcf9d6b6d72431503c06953b643e6a6c3e48841a279602e5748fdd3c5829f"
+    },
+    "remnant": {
+      "seed": "campaign-release-20260923-1-4",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "forms"
+        },
+        {
+          "nodeId": "S1-04",
+          "optionId": "bell"
+        },
+        {
+          "nodeId": "S1-10",
+          "optionId": "verify"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "stay"
+        },
+        {
+          "nodeId": "S2-10",
+          "optionId": "bridge"
+        },
+        {
+          "nodeId": "S2-16",
+          "optionId": "visible"
+        },
+        {
+          "nodeId": "S2-06",
+          "optionId": "other"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "obstruction"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "check"
+        },
+        {
+          "nodeId": "S3-03",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S3-15",
+          "optionId": "field-check"
+        },
+        {
+          "nodeId": "S3-05",
+          "optionId": "repeat"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S4-10",
+          "optionId": "changed-test"
+        },
+        {
+          "nodeId": "S4-09",
+          "optionId": "new-environment"
+        },
+        {
+          "nodeId": "S4-06",
+          "optionId": "implement"
+        },
+        {
+          "nodeId": "S4-19",
+          "optionId": "independent-demand"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "new-test"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "retire"
+        },
+        {
+          "nodeId": "S5-10",
+          "optionId": "limited-renewal"
+        },
+        {
+          "nodeId": "S5-22",
+          "optionId": "assurance"
+        },
+        {
+          "nodeId": "S5-14",
+          "optionId": "finish-then-stop"
+        },
+        {
+          "nodeId": "S5-23",
+          "optionId": "block-inspection"
+        },
+        {
+          "nodeId": "S5-02",
+          "optionId": "no-onward"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "race"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "stop"
+        },
+        {
+          "nodeId": "S6-01",
+          "optionId": "keep-report"
+        },
+        {
+          "nodeId": "S6-02",
+          "optionId": "full-set"
+        },
+        {
+          "nodeId": "S6-20",
+          "optionId": "await"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "manual"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S7-01",
+          "optionId": "managed"
+        },
+        {
+          "nodeId": "S7-17",
+          "optionId": "priority"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "public"
+        }
+      ],
+      "finalStateHash": "e3b8b516a962a34e7fc8d586f6c6adabc4d602e06585213eb0c1fdd36fc4f441"
+    },
+    "extinction": {
+      "seed": "campaign-release-20260923-1-5",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "coffee"
+        },
+        {
+          "nodeId": "S1-07",
+          "optionId": "borrow"
+        },
+        {
+          "nodeId": "S1-02",
+          "optionId": "on-time"
+        },
+        {
+          "nodeId": "S1-09",
+          "optionId": "average"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "divert"
+        },
+        {
+          "nodeId": "S2-13",
+          "optionId": "refuse"
+        },
+        {
+          "nodeId": "S2-02",
+          "optionId": "stay"
+        },
+        {
+          "nodeId": "S2-05",
+          "optionId": "decline"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "obstruction"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "assist"
+        },
+        {
+          "nodeId": "S3-16",
+          "optionId": "carry-certificate"
+        },
+        {
+          "nodeId": "S3-20",
+          "optionId": "survey"
+        },
+        {
+          "nodeId": "S3-11",
+          "optionId": "independent"
+        },
+        {
+          "nodeId": "S3-03",
+          "optionId": "old-rota"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S4-19",
+          "optionId": "circular"
+        },
+        {
+          "nodeId": "S4-14",
+          "optionId": "thin-sample"
+        },
+        {
+          "nodeId": "S4-15",
+          "optionId": "demonstration"
+        },
+        {
+          "nodeId": "S4-21",
+          "optionId": "accelerate"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "retire"
+        },
+        {
+          "nodeId": "S5-07",
+          "optionId": "repair-drill"
+        },
+        {
+          "nodeId": "S5-16",
+          "optionId": "tour"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "race"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S6-15",
+          "optionId": "independent-district"
+        },
+        {
+          "nodeId": "S6-09",
+          "optionId": "publish-ruling"
+        },
+        {
+          "nodeId": "S6-21",
+          "optionId": "stop-spread"
+        },
+        {
+          "nodeId": "S6-01",
+          "optionId": "keep-report"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "machine"
+        }
+      ],
+      "finalStateHash": "d6d85be51fbb27cd2e26d8768898a1b93492afb212ace345a6f42e0e9d93f06c"
+    },
+    "restraint": {
+      "seed": "campaign-release-20260923-1-7",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "forms"
+        },
+        {
+          "nodeId": "S1-04",
+          "optionId": "wait"
+        },
+        {
+          "nodeId": "S1-05",
+          "optionId": "hat"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "lunch"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "stay"
+        },
+        {
+          "nodeId": "S2-09",
+          "optionId": "visible"
+        },
+        {
+          "nodeId": "S2-06",
+          "optionId": "self"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "assist"
+        },
+        {
+          "nodeId": "S3-08",
+          "optionId": "drill"
+        },
+        {
+          "nodeId": "S3-17",
+          "optionId": "planning"
+        },
+        {
+          "nodeId": "S3-11",
+          "optionId": "internal"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "clinic"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "standing"
+        },
+        {
+          "nodeId": "S4-11",
+          "optionId": "vary-monitor"
+        },
+        {
+          "nodeId": "S4-24",
+          "optionId": "review-clock"
+        },
+        {
+          "nodeId": "S4-01",
+          "optionId": "verification"
+        },
+        {
+          "nodeId": "S4-23",
+          "optionId": "inspection"
+        },
+        {
+          "nodeId": "S4-13",
+          "optionId": "replicas"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "new-test"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "fallback"
+        },
+        {
+          "nodeId": "S5-03",
+          "optionId": "independent-signers"
+        },
+        {
+          "nodeId": "S5-02",
+          "optionId": "onward"
+        },
+        {
+          "nodeId": "S5-01",
+          "optionId": "automatic-renewal"
+        },
+        {
+          "nodeId": "S5-23",
+          "optionId": "block-inspection"
+        },
+        {
+          "nodeId": "S5-13",
+          "optionId": "rebuild-rollback"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "agreement"
+        }
+      ],
+      "finalStateHash": "aec29c8433fca2fa15b1ae7bb478fc1210d5d1c7c13bcfc0c0f1742d4cf2a060"
+    },
+    "succession": {
+      "seed": "campaign-release-20260923-1-10",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "coffee"
+        },
+        {
+          "nodeId": "S1-09",
+          "optionId": "average"
+        },
+        {
+          "nodeId": "S1-06",
+          "optionId": "rail-priority"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "divert"
+        },
+        {
+          "nodeId": "S2-08",
+          "optionId": "break"
+        },
+        {
+          "nodeId": "S2-02",
+          "optionId": "switch"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "check"
+        },
+        {
+          "nodeId": "S3-12",
+          "optionId": "access"
+        },
+        {
+          "nodeId": "S3-11",
+          "optionId": "independent"
+        },
+        {
+          "nodeId": "S3-20",
+          "optionId": "proceed"
+        },
+        {
+          "nodeId": "S3-15",
+          "optionId": "two-reports"
+        },
+        {
+          "nodeId": "S3-22",
+          "optionId": "automatic"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "clinic"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S4-01",
+          "optionId": "verification"
+        },
+        {
+          "nodeId": "S4-26",
+          "optionId": "autonomous"
+        },
+        {
+          "nodeId": "S4-19",
+          "optionId": "independent-demand"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "new-test"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "fallback"
+        },
+        {
+          "nodeId": "S5-14",
+          "optionId": "unwind"
+        },
+        {
+          "nodeId": "S5-21",
+          "optionId": "build-capacity"
+        },
+        {
+          "nodeId": "S5-23",
+          "optionId": "allow-inspection"
+        },
+        {
+          "nodeId": "S5-12",
+          "optionId": "rollback"
+        },
+        {
+          "nodeId": "S5-26",
+          "optionId": "self-certify"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "race"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "stop"
+        },
+        {
+          "nodeId": "S6-24",
+          "optionId": "authorize-jump"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "manual"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "handover"
+        },
+        {
+          "nodeId": "S7-14",
+          "optionId": "living"
+        },
+        {
+          "nodeId": "S7-09",
+          "optionId": "archive"
+        },
+        {
+          "nodeId": "S7-16",
+          "optionId": "preserve"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "personal"
+        }
+      ],
+      "finalStateHash": "d3b96b8e9547ab9d427873f96c09edc7ff2e315f8f402746e2d224f5c310ca46"
+    },
+    "containment": {
+      "seed": "campaign-release-20260923-1-23",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "forms"
+        },
+        {
+          "nodeId": "S1-11",
+          "optionId": "correct"
+        },
+        {
+          "nodeId": "S1-06",
+          "optionId": "parade-priority"
+        },
+        {
+          "nodeId": "S1-04",
+          "optionId": "wait"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "divert"
+        },
+        {
+          "nodeId": "S2-10",
+          "optionId": "bridge"
+        },
+        {
+          "nodeId": "S2-05",
+          "optionId": "accept"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "check"
+        },
+        {
+          "nodeId": "S3-24",
+          "optionId": "correct"
+        },
+        {
+          "nodeId": "S3-08",
+          "optionId": "defer"
+        },
+        {
+          "nodeId": "S3-14",
+          "optionId": "scope"
+        },
+        {
+          "nodeId": "S3-23",
+          "optionId": "widen"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "standing"
+        },
+        {
+          "nodeId": "S4-02",
+          "optionId": "speed"
+        },
+        {
+          "nodeId": "S4-23",
+          "optionId": "inspection"
+        },
+        {
+          "nodeId": "S4-20",
+          "optionId": "export-site"
+        },
+        {
+          "nodeId": "S4-21",
+          "optionId": "accelerate"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "fallback"
+        },
+        {
+          "nodeId": "S5-26",
+          "optionId": "self-certify"
+        },
+        {
+          "nodeId": "S5-18",
+          "optionId": "old-approval"
+        },
+        {
+          "nodeId": "S5-04",
+          "optionId": "shared"
+        },
+        {
+          "nodeId": "S5-25",
+          "optionId": "generalize"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "race"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S6-09",
+          "optionId": "publish-ruling"
+        },
+        {
+          "nodeId": "S6-04",
+          "optionId": "six-reports"
+        },
+        {
+          "nodeId": "S6-08",
+          "optionId": "cut-credential"
+        },
+        {
+          "nodeId": "S6-05",
+          "optionId": "isolate-copy"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "manual"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S7-05",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S7-10",
+          "optionId": "build"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "personal"
+        }
+      ],
+      "finalStateHash": "c799144aa5dce02c74bf4e8c1c536cf85bf88dfb8b52db98c8c83ccf967c32b4"
+    }
+  },
+  "errors": [],
+  "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+}

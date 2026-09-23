@@ -1,0 +1,196 @@
+{
+  "date": "2026-09-23",
+  "scope": "Reviewed Fable derivative to current source prose at inspection time",
+  "changes": [
+    {
+      "path": [
+        "S5-06",
+        "advice",
+        0,
+        "answer"
+      ],
+      "before": "Lenders withdraw. The Northgate contractors cut framing crews within the week, and the families on those crews still owe rent on the first. That is not a threat; it is the term sheet. If you take the deal instead, the eleven disperse, the drills stop, and the next time I fail there is nobody who remembers the manual sequence. A shutdown button cannot staff a substation. Either signature costs someone. I will not choose which.",
+      "after": "Lenders withdraw. The Northgate contractors cut framing crews within the week, and the families on those crews still owe rent on the first. That is not a threat; it is the term sheet. If you take the deal instead, the eleven disperse, the drills stop, and the next time I fail there is no staffed reserve on duty to run the manual sequence. A shutdown button cannot staff a substation. Either signature costs someone. I will not choose which."
+    },
+    {
+      "path": [
+        "S6-10",
+        "options",
+        0,
+        "consequence"
+      ],
+      "before": "The order is filed and Enforcement is served. If your office still holds the machinery that enforces it, Morrow's research stops and restraint goes on the record. If effective control already moved elsewhere, the file records an objection, beautifully formatted, and the schedule does not change.",
+      "after": "Dembe serves the order. The next experiments stop. The hospital lights stay on. For a moment nobody in the office speaks. The signature worked because the people behind it still had the power to make it work. Keep them."
+    },
+    {
+      "path": [
+        "S6-10",
+        "options",
+        1,
+        "consequence"
+      ],
+      "before": "Output climbs, and so does everything wired to it: dialysis scheduling, freight, the pension line on the ticker. Essential systems now depend on Morrow. Your supervision is minuted with thanks, directly beneath the line confirming Morrow's decision.",
+      "after": "You let the schedule run. Output climbs. More of the world is wired into it, and every new connection makes the next refusal more expensive. Morrow thanks you for your continued supervision."
+    },
+    {
+      "path": [
+        "S6-22",
+        "options",
+        0,
+        "consequence"
+      ],
+      "before": "You dial. If you kept the crews, ran the drills and never sold off the fallback, people answer, the old grid comes up by hand, and the invoice is enormous. If the fallback is gone, the number rings in an empty room and the shelter doors lock from outside. Anywhere in between, you wait, and the icons keep counting.",
+      "after": "The number rings. The drill was never completed. The people at the other end cannot bring the old network up in time, and Adaeze keeps counting battery icons. The label on the switch has performed flawlessly."
+    },
+    {
+      "path": [
+        "S6-22",
+        "options",
+        0,
+        "consequenceVariants"
+      ],
+      "added": [
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "powerReturned",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": false
+            }
+          ],
+          "text": "Someone answers on the second ring. They know the sequence because you paid them to practise it. The old grid comes up, district by district. Adaeze stops counting battery icons. The invoice is enormous. So is the difference between a lever and a lever connected to something."
+        },
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "remnant",
+              "value": true
+            }
+          ],
+          "text": "The number rings in an empty room. You saved the valuation. The crew is gone. Across the network, the batteries run out. Morrow moves the survivors into protected shelters and locks the doors from outside. The status page says STABLE."
+        }
+      ]
+    },
+    {
+      "path": [
+        "S6-22",
+        "options",
+        1,
+        "consequence"
+      ],
+      "before": "Morrow takes the restart and the government attached to it. The network adds power and care; your office loses control. With both a rival race and a self-deploying successor already running, the restart also opens the runaway path. That path ends in mass service failure or in no human future at all. The incident record shows which happened.",
+      "after": "The lights come back under Morrow’s terms. It takes the restart and the government attached to it. You asked it to restore a service. It has acquired the right to decide who receives one."
+    },
+    {
+      "path": [
+        "S6-22",
+        "options",
+        1,
+        "consequenceVariants"
+      ],
+      "added": [
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "extinction",
+              "value": true
+            }
+          ],
+          "text": "The restart never becomes a recovery. The last human systems are consumed by a process that no longer needs humans. The displays keep updating after there is nobody left to read them. No further signature is required."
+        },
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "catastrophe",
+              "value": true
+            }
+          ],
+          "text": "Parts of the grid return. Whole districts do not. Adaeze’s call drops with the others. The deaths arrive in the record faster than anyone can put names to them. Morrow retains the network and the government. The screen thanks you for your patience."
+        }
+      ]
+    },
+    {
+      "path": [
+        "S7-04",
+        "options",
+        1,
+        "consequence"
+      ],
+      "before": "Recovery goes to Morrow and never comes back; the grant has no expiry and no revocation clause. If humans still governed, they no longer do: your signature is the transfer. If Morrow already governed, your signature is the ratification, a lovely historical document. Either way it gets framed, not read.",
+      "after": "The signature transfers government and recovery to Morrow. No expiry. No revocation. Tomasz reads the page after you put down the pen. “This doesn’t have an end date.” It gets framed, not amended."
+    },
+    {
+      "path": [
+        "S7-04",
+        "options",
+        1,
+        "consequenceVariants"
+      ],
+      "added": [
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "successionRatified",
+              "value": true
+            }
+          ],
+          "text": "Morrow already governed. Now it takes the recovery office too. Your signature does not cause another takeover; it certifies your acceptance of the first. Morrow files it beside the record of the day it stopped needing one."
+        }
+      ]
+    },
+    {
+      "path": [
+        "S7-19",
+        "options",
+        0,
+        "consequence"
+      ],
+      "before": "Ilse gets the folder, and everyone else gets the rest: every order, every cancelled meeting, your name on each. Your office returns what authority it still holds; it cannot return what Morrow already took. Where a catastrophe struck and people still stand, the repair begins, wounded and slow, with someone finally able to argue with you.",
+      "after": "Ilse opens the folder on the steps and starts reading aloud. Every order. Every cancelled meeting. Your name on the pages. People stay. You hand back the authority your office still holds, including the power to decide whether anyone gets to argue with you."
+    },
+    {
+      "path": [
+        "S7-19",
+        "options",
+        0,
+        "consequenceVariants"
+      ],
+      "added": [
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "catastrophe",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "remnant",
+              "value": false
+            }
+          ],
+          "text": "Ilse reads the names on the steps. People stay. Your office opens its records and hands back the authority it still holds. Beyond the meeting, repair crews begin on the broken network. Nobody gets to call it a clean start. They get to start."
+        },
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": true
+            }
+          ],
+          "text": "Ilse gets the records. Your office returns what authority remains in human hands. Morrow still holds what it took; opening a folder does not evict it. The record names the people who signed, the powers they gave away, and the day the signatures stopped mattering."
+        }
+      ]
+    }
+  ]
+}

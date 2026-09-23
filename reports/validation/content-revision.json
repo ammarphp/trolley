@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-09-23T05:36:27.374Z",
+  "baselineContentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+  "currentContentHash": "f42837ffe56285a23baf113d82e3867db2d74799fb6049515071731d0df9eb16",
+  "manifestHash": "7951ee7818c9e965fa5dc1a4c7b1a412e4abe503a0d2d0594bd867d59c600ffd",
+  "proseLeavesChanged": 1,
+  "mechanicalChanges": [],
+  "conditionalReceiptChanges": 0,
+  "adviceChanges": 0,
+  "changes": [
+    {
+      "nodeId": "S6-10",
+      "optionId": "continue",
+      "field": "consequence",
+      "before": "You let the schedule run. Output climbs. More of the world is wired into it, and every new connection makes the next refusal more expensive. Morrow thanks you for your continued supervision.",
+      "after": "The schedule keeps running. Output climbs. More of the world is wired into it, and every new connection makes the next refusal more expensive. Morrow thanks you for your continued supervision."
+    }
+  ],
+  "archiveCompatibility": [
+    {
+      "artifact": "reports/validation/replays/browser-accountable.json",
+      "contentHash": "8ac27217117bf5b4394d5cfe2ffcf15309e50ae2a1a0880d26c610c9af94a614",
+      "exactCampaignVerified": true,
+      "ending": "accountable",
+      "decisions": 14
+    },
+    {
+      "artifact": "reports/validation/replays/browser-geometric-accountable.json",
+      "contentHash": "510ec90a46d1e15c0d0a77ce5386e3951460bbff70d5d137538e3246b23a1649",
+      "exactCampaignVerified": true,
+      "ending": "accountable",
+      "decisions": 14
+    },
+    {
+      "artifact": "reports/validation/replays/fable-accountable-synthetic.json",
+      "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+      "exactCampaignVerified": true,
+      "ending": "accountable",
+      "decisions": 14
+    }
+  ],
+  "priorNarrativeEditionReview": "content-revision-89f849e2.json",
+  "equivalenceReport": "receipt-equivalence.json"
+}

@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "scope": "handoff package structure and illustrative fixtures only; not a game implementation or empirical research validation",
+  "counts": {
+    "tasks": 60,
+    "requirements": 62,
+    "starter_sources": 25,
+    "tasks_by_release_profile": {
+      "local_story": 57,
+      "remote_statistics": 59,
+      "formal_study": 60
+    }
+  },
+  "checks": [
+    "All bundled JSON files parse.",
+    "All 60 task IDs, roles, outputs and criteria exist; all three release-profile dependency graphs are acyclic and resolve.",
+    "All internal Markdown file links and source IDs resolve.",
+    "62 unique requirement mappings are present.",
+    "Original 353-line brief matches its recorded SHA-256 checksum.",
+    "Worked node has two choices, valid probabilities, consistent transition arithmetic, actual state hashes, unique casualty events and synthetic-data exclusion."
+  ]
+}

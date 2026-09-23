@@ -1,0 +1,15 @@
+{
+  "provider": "Claude desktop Chat",
+  "observedModel": "Fable 5.1",
+  "observedEffort": "High",
+  "chatUrl": "https://claude.ai/chat/4117a2df-9161-453e-9360-610b342617f8",
+  "captureMethod": "Assistant Copy button, native TextEdit plain-text save; no API or hidden state",
+  "rawSha256": "7fd0cd51fdf8d41e556810b1701974e8cba011c105683ec99a0dd58b19600de4",
+  "rawNodeCount": 26,
+  "rawFile": "stage4-fable.response.txt",
+  "promptFile": "stage4-fable.prompt.txt",
+  "reviewedFile": "stage4-reviewed.json",
+  "editorialChanges": 43,
+  "mechanicsAuthor": "Codex, explicit stage4-rules.ts bindings; provider produced prose only",
+  "status": "Draft prose reviewed for compatibility; campaign independent review and validation tracked separately"
+}

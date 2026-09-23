@@ -16,7 +16,7 @@ const groups=(raw.groups||[]).map(g=>{
 });
 const lengths=(raw.lengths||[]).map(g=>{if(!['0','1–3','4–8','9–14','15–21','22–38','39+'].includes(g.label)||!count(g.runs)||g.runs<10)throw new Error('Unsafe length bucket.');return {label:g.label,runs:g.runs};});
 const stages=(raw.stages||[]).map(g=>{if(!Number.isInteger(g.stage)||g.stage<0||g.stage>6||!count(g.runs)||g.runs<10||!count(g.decisions)||!count(g.pulled)||g.pulled>g.decisions)throw new Error('Unsafe stage bucket.');return {stage:g.stage,runs:g.runs,decisions:g.decisions,pulled:g.pulled};});
-// Never spread the remote object: raw fields cannot accidentally enter Git history.
+// Never spread the remote object: raw fields cannot enter a public aggregate artifact.
 const safe={schemaVersion:1,generatedAt:new Date().toISOString(),totalRuns:raw.totalRuns,totalDecisions:raw.totalDecisions,totalResponses:raw.totalResponses,groups,lengths,stages,withheld:!!raw.withheld,unit:'run',note:'Runs are playthroughs, not unique people. Private runs are not counted. Small groups are suppressed.'};
-await writeFile('public/aggregate.json',JSON.stringify(safe,null,2)+'\n');
+await writeFile('dist/aggregate.json',JSON.stringify(safe,null,2)+'\n');
 console.log(`Saved aggregate snapshot: ${safe.totalRuns} runs, ${safe.totalDecisions} decisions. No raw records.`);

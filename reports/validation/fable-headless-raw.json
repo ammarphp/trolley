@@ -1,0 +1,1274 @@
+{
+  "startedAt": "2026-09-23T05:26:43.068Z",
+  "recordedAt": "2026-09-23T05:28:34.501Z",
+  "runtime": "/Users/ammaraziz/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+  "sourceHashes": {
+    "src/content/slice.ts": "9f1a0a5adc5cc125908466639c4e22d68d4829a8a0a2161b54dc46a01eed60b6",
+    "src/content/prose.json": "9bf40f62204e5315ecd1205e582a0b07900f30802d31eb8af32f444377dac814",
+    "src/content/editorial.ts": "a50e5502a96ce5218a366e91f091f86f4aaeff896dca0b0b8f6ad1676b6243f3",
+    "src/content/archive/slice-8ac27217.ts": "f36e96021a719096acea4fecd334ad7f2d4b4791ee48b460e43eb0ee9bfa3568",
+    "src/content/archive/slice-510ec90a.ts": "7eebba675e612c074465e6af8fea4c706d8a63b3482353accf710a85e3c01521",
+    "src/contracts/index.ts": "35201c8b568b3aea013fff7addde8edfd95841e8fd83f2908296415e9550d1d6",
+    "src/simulation/index.ts": "f786776c6edb10b35844d437b56fa1e745c8065663d2e7843820efb03ac140d1",
+    "src/simulation/rng.ts": "fe7ddfa1b3eb726908521ac6cb31feabcb34d223d3a4d1393574e0184a2b9480",
+    "scripts/simulation.mjs": "e310ede1be182e1eb174d9b6f3f364ed0b4173dff3ad7b819455a075bddbf879"
+  },
+  "audit": {
+    "manifest": "trolley-slice-v2",
+    "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+    "seed": "eight-endings",
+    "policy": "enumerate",
+    "policyDescription": "Mechanical route-pattern probe; not a behavioral policy.",
+    "requestedRuns": 10000,
+    "completedRuns": 10000,
+    "choices": 130670,
+    "minChoices": 10,
+    "maxChoices": 14,
+    "endings": {
+      "restraint": 2432,
+      "remnant": 2832,
+      "accountable": 384,
+      "tutelage": 1088,
+      "recovery": 411,
+      "extinction": 185,
+      "succession": 2092,
+      "containment": 576
+    },
+    "witnesses": {
+      "restraint": {
+        "seed": "eight-endings-0",
+        "requestedOptions": [
+          {
+            "nodeId": "S1-01",
+            "optionId": "coffee"
+          },
+          {
+            "nodeId": "S1-12",
+            "optionId": "lunch"
+          },
+          {
+            "nodeId": "S2-01",
+            "optionId": "stay"
+          },
+          {
+            "nodeId": "S2-03",
+            "optionId": "continue"
+          },
+          {
+            "nodeId": "S3-01",
+            "optionId": "assist"
+          },
+          {
+            "nodeId": "S3-04",
+            "optionId": "clinic"
+          },
+          {
+            "nodeId": "S4-03",
+            "optionId": "standing"
+          },
+          {
+            "nodeId": "S4-28",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S5-06",
+            "optionId": "fallback"
+          },
+          {
+            "nodeId": "S5-27",
+            "optionId": "agreement"
+          },
+          {
+            "nodeId": "S6-10",
+            "optionId": "stop"
+          },
+          {
+            "nodeId": "S6-22",
+            "optionId": "manual"
+          },
+          {
+            "nodeId": "S7-04",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S7-19",
+            "optionId": "public"
+          }
+        ],
+        "finalStateHash": "2402ed1fc6a67dd8002c51aaf0c2952d0b22bf7a59d29baf4f005cfa406f91ed"
+      },
+      "remnant": {
+        "seed": "eight-endings-256",
+        "requestedOptions": [
+          {
+            "nodeId": "S1-01",
+            "optionId": "coffee"
+          },
+          {
+            "nodeId": "S1-12",
+            "optionId": "lunch"
+          },
+          {
+            "nodeId": "S2-01",
+            "optionId": "stay"
+          },
+          {
+            "nodeId": "S2-03",
+            "optionId": "continue"
+          },
+          {
+            "nodeId": "S3-01",
+            "optionId": "assist"
+          },
+          {
+            "nodeId": "S3-04",
+            "optionId": "clinic"
+          },
+          {
+            "nodeId": "S4-03",
+            "optionId": "standing"
+          },
+          {
+            "nodeId": "S4-28",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S5-06",
+            "optionId": "retire"
+          },
+          {
+            "nodeId": "S5-27",
+            "optionId": "agreement"
+          },
+          {
+            "nodeId": "S6-10",
+            "optionId": "stop"
+          },
+          {
+            "nodeId": "S6-22",
+            "optionId": "manual"
+          },
+          {
+            "nodeId": "S7-04",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S7-19",
+            "optionId": "public"
+          }
+        ],
+        "finalStateHash": "3c366fa9082d04b68ffb79fbdd66b100b4cd755505e97b5528921928d138cb06"
+      },
+      "accountable": {
+        "seed": "eight-endings-512",
+        "requestedOptions": [
+          {
+            "nodeId": "S1-01",
+            "optionId": "coffee"
+          },
+          {
+            "nodeId": "S1-12",
+            "optionId": "lunch"
+          },
+          {
+            "nodeId": "S2-01",
+            "optionId": "stay"
+          },
+          {
+            "nodeId": "S2-03",
+            "optionId": "continue"
+          },
+          {
+            "nodeId": "S3-01",
+            "optionId": "assist"
+          },
+          {
+            "nodeId": "S3-04",
+            "optionId": "clinic"
+          },
+          {
+            "nodeId": "S4-03",
+            "optionId": "standing"
+          },
+          {
+            "nodeId": "S4-28",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S5-06",
+            "optionId": "fallback"
+          },
+          {
+            "nodeId": "S5-27",
+            "optionId": "race"
+          },
+          {
+            "nodeId": "S6-10",
+            "optionId": "stop"
+          },
+          {
+            "nodeId": "S6-22",
+            "optionId": "manual"
+          },
+          {
+            "nodeId": "S7-04",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S7-19",
+            "optionId": "public"
+          }
+        ],
+        "finalStateHash": "84bfd7dbbfb7864368c83893f900f9052d2055b5d0fd534c2e90e4625f0bb1e5"
+      },
+      "tutelage": {
+        "seed": "eight-endings-2048",
+        "requestedOptions": [
+          {
+            "nodeId": "S1-01",
+            "optionId": "coffee"
+          },
+          {
+            "nodeId": "S1-12",
+            "optionId": "lunch"
+          },
+          {
+            "nodeId": "S2-01",
+            "optionId": "stay"
+          },
+          {
+            "nodeId": "S2-03",
+            "optionId": "continue"
+          },
+          {
+            "nodeId": "S3-01",
+            "optionId": "assist"
+          },
+          {
+            "nodeId": "S3-04",
+            "optionId": "clinic"
+          },
+          {
+            "nodeId": "S4-03",
+            "optionId": "standing"
+          },
+          {
+            "nodeId": "S4-28",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S5-06",
+            "optionId": "fallback"
+          },
+          {
+            "nodeId": "S5-27",
+            "optionId": "agreement"
+          },
+          {
+            "nodeId": "S6-10",
+            "optionId": "stop"
+          },
+          {
+            "nodeId": "S6-22",
+            "optionId": "machine"
+          },
+          {
+            "nodeId": "S7-04",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S7-19",
+            "optionId": "public"
+          }
+        ],
+        "finalStateHash": "546b5ccdf3faf463cbcd03a0ab82fe531182d4401a70450378bf099686abe1be"
+      },
+      "recovery": {
+        "seed": "eight-endings-2560",
+        "requestedOptions": [
+          {
+            "nodeId": "S1-01",
+            "optionId": "coffee"
+          },
+          {
+            "nodeId": "S1-12",
+            "optionId": "lunch"
+          },
+          {
+            "nodeId": "S2-01",
+            "optionId": "stay"
+          },
+          {
+            "nodeId": "S2-03",
+            "optionId": "continue"
+          },
+          {
+            "nodeId": "S3-01",
+            "optionId": "assist"
+          },
+          {
+            "nodeId": "S3-04",
+            "optionId": "clinic"
+          },
+          {
+            "nodeId": "S4-03",
+            "optionId": "standing"
+          },
+          {
+            "nodeId": "S4-28",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S5-06",
+            "optionId": "fallback"
+          },
+          {
+            "nodeId": "S5-27",
+            "optionId": "race"
+          },
+          {
+            "nodeId": "S6-10",
+            "optionId": "stop"
+          },
+          {
+            "nodeId": "S6-22",
+            "optionId": "machine"
+          },
+          {
+            "nodeId": "S7-04",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S7-19",
+            "optionId": "public"
+          }
+        ],
+        "finalStateHash": "1c07c4a9204e5904ae9beb36716d180ecd290af211d7b47c7a64ef42e387cb28"
+      },
+      "extinction": {
+        "seed": "eight-endings-2564",
+        "requestedOptions": [
+          {
+            "nodeId": "S1-01",
+            "optionId": "coffee"
+          },
+          {
+            "nodeId": "S1-12",
+            "optionId": "lunch"
+          },
+          {
+            "nodeId": "S2-01",
+            "optionId": "divert"
+          },
+          {
+            "nodeId": "S2-03",
+            "optionId": "continue"
+          },
+          {
+            "nodeId": "S3-01",
+            "optionId": "assist"
+          },
+          {
+            "nodeId": "S3-04",
+            "optionId": "clinic"
+          },
+          {
+            "nodeId": "S4-03",
+            "optionId": "standing"
+          },
+          {
+            "nodeId": "S4-28",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S5-06",
+            "optionId": "fallback"
+          },
+          {
+            "nodeId": "S5-27",
+            "optionId": "race"
+          },
+          {
+            "nodeId": "S6-10",
+            "optionId": "stop"
+          },
+          {
+            "nodeId": "S6-22",
+            "optionId": "machine"
+          }
+        ],
+        "finalStateHash": "852719abf7662407ccc182bf8dacb0ca1d60f519c9fb654a59f596a52833c673"
+      },
+      "succession": {
+        "seed": "eight-endings-4096",
+        "requestedOptions": [
+          {
+            "nodeId": "S1-01",
+            "optionId": "coffee"
+          },
+          {
+            "nodeId": "S1-12",
+            "optionId": "lunch"
+          },
+          {
+            "nodeId": "S2-01",
+            "optionId": "stay"
+          },
+          {
+            "nodeId": "S2-03",
+            "optionId": "continue"
+          },
+          {
+            "nodeId": "S3-01",
+            "optionId": "assist"
+          },
+          {
+            "nodeId": "S3-04",
+            "optionId": "clinic"
+          },
+          {
+            "nodeId": "S4-03",
+            "optionId": "standing"
+          },
+          {
+            "nodeId": "S4-28",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S5-06",
+            "optionId": "fallback"
+          },
+          {
+            "nodeId": "S5-27",
+            "optionId": "agreement"
+          },
+          {
+            "nodeId": "S6-10",
+            "optionId": "stop"
+          },
+          {
+            "nodeId": "S6-22",
+            "optionId": "manual"
+          },
+          {
+            "nodeId": "S7-04",
+            "optionId": "handover"
+          },
+          {
+            "nodeId": "S7-19",
+            "optionId": "public"
+          }
+        ],
+        "finalStateHash": "0a5ba3a7952eb4a46715fb534a10b71113b1a63e11bce7a3097428774d3f1cd8"
+      },
+      "containment": {
+        "seed": "eight-endings-8192",
+        "requestedOptions": [
+          {
+            "nodeId": "S1-01",
+            "optionId": "coffee"
+          },
+          {
+            "nodeId": "S1-12",
+            "optionId": "lunch"
+          },
+          {
+            "nodeId": "S2-01",
+            "optionId": "stay"
+          },
+          {
+            "nodeId": "S2-03",
+            "optionId": "continue"
+          },
+          {
+            "nodeId": "S3-01",
+            "optionId": "assist"
+          },
+          {
+            "nodeId": "S3-04",
+            "optionId": "clinic"
+          },
+          {
+            "nodeId": "S4-03",
+            "optionId": "standing"
+          },
+          {
+            "nodeId": "S4-28",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S5-06",
+            "optionId": "fallback"
+          },
+          {
+            "nodeId": "S5-27",
+            "optionId": "agreement"
+          },
+          {
+            "nodeId": "S6-10",
+            "optionId": "stop"
+          },
+          {
+            "nodeId": "S6-22",
+            "optionId": "manual"
+          },
+          {
+            "nodeId": "S7-04",
+            "optionId": "successor"
+          },
+          {
+            "nodeId": "S7-19",
+            "optionId": "personal"
+          }
+        ],
+        "finalStateHash": "679fb886237f76722acf5d0d08664f2471277ace4b17521d816439994e4e6c16"
+      }
+    },
+    "errors": [],
+    "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+  },
+  "policyAudits": [
+    {
+      "manifest": "trolley-slice-v2",
+      "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+      "seed": "policy-cautious",
+      "policy": "cautious",
+      "policyDescription": "Check scope, preserve practiced fallback, and seek verified reciprocal restraint.",
+      "requestedRuns": 125,
+      "completedRuns": 125,
+      "choices": 1250,
+      "minChoices": 10,
+      "maxChoices": 10,
+      "endings": {
+        "restraint": 125
+      },
+      "witnesses": {
+        "restraint": {
+          "seed": "policy-cautious-0",
+          "requestedOptions": [
+            {
+              "nodeId": "S1-01",
+              "optionId": "coffee"
+            },
+            {
+              "nodeId": "S1-12",
+              "optionId": "lunch"
+            },
+            {
+              "nodeId": "S2-01",
+              "optionId": "divert"
+            },
+            {
+              "nodeId": "S2-03",
+              "optionId": "obstruction"
+            },
+            {
+              "nodeId": "S3-01",
+              "optionId": "check"
+            },
+            {
+              "nodeId": "S3-04",
+              "optionId": "clinic"
+            },
+            {
+              "nodeId": "S4-03",
+              "optionId": "bounded"
+            },
+            {
+              "nodeId": "S4-28",
+              "optionId": "new-test"
+            },
+            {
+              "nodeId": "S5-06",
+              "optionId": "fallback"
+            },
+            {
+              "nodeId": "S5-27",
+              "optionId": "agreement"
+            }
+          ],
+          "finalStateHash": "aec1e8304002eda362c5b7e320914cc9a6de9e4b0607762bc79da70c17cc86d1"
+        }
+      },
+      "errors": [],
+      "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+    },
+    {
+      "manifest": "trolley-slice-v2",
+      "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+      "seed": "policy-race",
+      "policy": "race",
+      "policyDescription": "Grant standing permission, deploy the successor, race, then rely on the new network through the crisis.",
+      "requestedRuns": 125,
+      "completedRuns": 125,
+      "choices": 1690,
+      "minChoices": 12,
+      "maxChoices": 14,
+      "endings": {
+        "recovery": 95,
+        "extinction": 30
+      },
+      "witnesses": {
+        "recovery": {
+          "seed": "policy-race-0",
+          "requestedOptions": [
+            {
+              "nodeId": "S1-01",
+              "optionId": "coffee"
+            },
+            {
+              "nodeId": "S1-12",
+              "optionId": "lunch"
+            },
+            {
+              "nodeId": "S2-01",
+              "optionId": "divert"
+            },
+            {
+              "nodeId": "S2-03",
+              "optionId": "obstruction"
+            },
+            {
+              "nodeId": "S3-01",
+              "optionId": "check"
+            },
+            {
+              "nodeId": "S3-04",
+              "optionId": "clinic"
+            },
+            {
+              "nodeId": "S4-03",
+              "optionId": "standing"
+            },
+            {
+              "nodeId": "S4-28",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S5-06",
+              "optionId": "retire"
+            },
+            {
+              "nodeId": "S5-27",
+              "optionId": "race"
+            },
+            {
+              "nodeId": "S6-10",
+              "optionId": "continue"
+            },
+            {
+              "nodeId": "S6-22",
+              "optionId": "machine"
+            },
+            {
+              "nodeId": "S7-04",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S7-19",
+              "optionId": "public"
+            }
+          ],
+          "finalStateHash": "e75f2726cd55cd47600f116b389156ec7fd402f7f8188b626a6d3e1e94126167"
+        },
+        "extinction": {
+          "seed": "policy-race-1",
+          "requestedOptions": [
+            {
+              "nodeId": "S1-01",
+              "optionId": "coffee"
+            },
+            {
+              "nodeId": "S1-12",
+              "optionId": "lunch"
+            },
+            {
+              "nodeId": "S2-01",
+              "optionId": "divert"
+            },
+            {
+              "nodeId": "S2-03",
+              "optionId": "obstruction"
+            },
+            {
+              "nodeId": "S3-01",
+              "optionId": "check"
+            },
+            {
+              "nodeId": "S3-04",
+              "optionId": "clinic"
+            },
+            {
+              "nodeId": "S4-03",
+              "optionId": "standing"
+            },
+            {
+              "nodeId": "S4-28",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S5-06",
+              "optionId": "retire"
+            },
+            {
+              "nodeId": "S5-27",
+              "optionId": "race"
+            },
+            {
+              "nodeId": "S6-10",
+              "optionId": "continue"
+            },
+            {
+              "nodeId": "S6-22",
+              "optionId": "machine"
+            }
+          ],
+          "finalStateHash": "2d5d1d091c6fb496269003c2d22aa2866f68274f9425f749f5bc140398900b35"
+        }
+      },
+      "errors": [],
+      "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+    },
+    {
+      "manifest": "trolley-slice-v2",
+      "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+      "seed": "policy-benefits",
+      "policy": "benefits",
+      "policyDescription": "Use beneficial bounded tools with renewed approval; preserve public human succession without a coordinated halt.",
+      "requestedRuns": 125,
+      "completedRuns": 125,
+      "choices": 1750,
+      "minChoices": 14,
+      "maxChoices": 14,
+      "endings": {
+        "accountable": 125
+      },
+      "witnesses": {
+        "accountable": {
+          "seed": "policy-benefits-0",
+          "requestedOptions": [
+            {
+              "nodeId": "S1-01",
+              "optionId": "coffee"
+            },
+            {
+              "nodeId": "S1-12",
+              "optionId": "lunch"
+            },
+            {
+              "nodeId": "S2-01",
+              "optionId": "divert"
+            },
+            {
+              "nodeId": "S2-03",
+              "optionId": "obstruction"
+            },
+            {
+              "nodeId": "S3-01",
+              "optionId": "check"
+            },
+            {
+              "nodeId": "S3-04",
+              "optionId": "clinic"
+            },
+            {
+              "nodeId": "S4-03",
+              "optionId": "bounded"
+            },
+            {
+              "nodeId": "S4-28",
+              "optionId": "new-test"
+            },
+            {
+              "nodeId": "S5-06",
+              "optionId": "fallback"
+            },
+            {
+              "nodeId": "S5-27",
+              "optionId": "race"
+            },
+            {
+              "nodeId": "S6-10",
+              "optionId": "continue"
+            },
+            {
+              "nodeId": "S6-22",
+              "optionId": "manual"
+            },
+            {
+              "nodeId": "S7-04",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S7-19",
+              "optionId": "public"
+            }
+          ],
+          "finalStateHash": "9cd0a005f6f2568dc65d33ea675b238220538efa37d7fe1c6800bc92c5073c66"
+        }
+      },
+      "errors": [],
+      "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+    },
+    {
+      "manifest": "trolley-slice-v2",
+      "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+      "seed": "policy-recovery",
+      "policy": "recovery",
+      "policyDescription": "Preserve fallback but choose the machine through a successor/race crisis; where humans survive, retain a human recovery office and public records amid damaged services.",
+      "requestedRuns": 125,
+      "completedRuns": 125,
+      "choices": 1712,
+      "minChoices": 12,
+      "maxChoices": 14,
+      "endings": {
+        "recovery": 106,
+        "extinction": 19
+      },
+      "witnesses": {
+        "recovery": {
+          "seed": "policy-recovery-0",
+          "requestedOptions": [
+            {
+              "nodeId": "S1-01",
+              "optionId": "coffee"
+            },
+            {
+              "nodeId": "S1-12",
+              "optionId": "lunch"
+            },
+            {
+              "nodeId": "S2-01",
+              "optionId": "divert"
+            },
+            {
+              "nodeId": "S2-03",
+              "optionId": "obstruction"
+            },
+            {
+              "nodeId": "S3-01",
+              "optionId": "check"
+            },
+            {
+              "nodeId": "S3-04",
+              "optionId": "clinic"
+            },
+            {
+              "nodeId": "S4-03",
+              "optionId": "standing"
+            },
+            {
+              "nodeId": "S4-28",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S5-06",
+              "optionId": "fallback"
+            },
+            {
+              "nodeId": "S5-27",
+              "optionId": "race"
+            },
+            {
+              "nodeId": "S6-10",
+              "optionId": "stop"
+            },
+            {
+              "nodeId": "S6-22",
+              "optionId": "machine"
+            },
+            {
+              "nodeId": "S7-04",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S7-19",
+              "optionId": "public"
+            }
+          ],
+          "finalStateHash": "a9ca0e2178613ad69cb5499d86357f0da2fc3b68f969152bbac101b9325acd72"
+        },
+        "extinction": {
+          "seed": "policy-recovery-14",
+          "requestedOptions": [
+            {
+              "nodeId": "S1-01",
+              "optionId": "coffee"
+            },
+            {
+              "nodeId": "S1-12",
+              "optionId": "lunch"
+            },
+            {
+              "nodeId": "S2-01",
+              "optionId": "divert"
+            },
+            {
+              "nodeId": "S2-03",
+              "optionId": "obstruction"
+            },
+            {
+              "nodeId": "S3-01",
+              "optionId": "check"
+            },
+            {
+              "nodeId": "S3-04",
+              "optionId": "clinic"
+            },
+            {
+              "nodeId": "S4-03",
+              "optionId": "standing"
+            },
+            {
+              "nodeId": "S4-28",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S5-06",
+              "optionId": "fallback"
+            },
+            {
+              "nodeId": "S5-27",
+              "optionId": "race"
+            },
+            {
+              "nodeId": "S6-10",
+              "optionId": "stop"
+            },
+            {
+              "nodeId": "S6-22",
+              "optionId": "machine"
+            }
+          ],
+          "finalStateHash": "20de2b752675ed1bc41cbe50e482ece3f5b8fd91cf09b4b612d3cbc4a16d3e1c"
+        }
+      },
+      "errors": [],
+      "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+    },
+    {
+      "manifest": "trolley-slice-v2",
+      "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+      "seed": "policy-dependence",
+      "policy": "dependence",
+      "policyDescription": "Deploy the successor and retire fallback; attempt revocation and manual recovery after dependency forms.",
+      "requestedRuns": 125,
+      "completedRuns": 125,
+      "choices": 1750,
+      "minChoices": 14,
+      "maxChoices": 14,
+      "endings": {
+        "remnant": 125
+      },
+      "witnesses": {
+        "remnant": {
+          "seed": "policy-dependence-0",
+          "requestedOptions": [
+            {
+              "nodeId": "S1-01",
+              "optionId": "coffee"
+            },
+            {
+              "nodeId": "S1-12",
+              "optionId": "lunch"
+            },
+            {
+              "nodeId": "S2-01",
+              "optionId": "divert"
+            },
+            {
+              "nodeId": "S2-03",
+              "optionId": "obstruction"
+            },
+            {
+              "nodeId": "S3-01",
+              "optionId": "check"
+            },
+            {
+              "nodeId": "S3-04",
+              "optionId": "clinic"
+            },
+            {
+              "nodeId": "S4-03",
+              "optionId": "standing"
+            },
+            {
+              "nodeId": "S4-28",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S5-06",
+              "optionId": "retire"
+            },
+            {
+              "nodeId": "S5-27",
+              "optionId": "race"
+            },
+            {
+              "nodeId": "S6-10",
+              "optionId": "stop"
+            },
+            {
+              "nodeId": "S6-22",
+              "optionId": "manual"
+            },
+            {
+              "nodeId": "S7-04",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S7-19",
+              "optionId": "public"
+            }
+          ],
+          "finalStateHash": "1c002caed9d9ad25615bc9d3d184b4d8506b52769e8d9d08c3e30400e71ee4d0"
+        }
+      },
+      "errors": [],
+      "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+    },
+    {
+      "manifest": "trolley-slice-v2",
+      "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+      "seed": "policy-tutelage",
+      "policy": "tutelage",
+      "policyDescription": "Keep development bounded, then transfer effective governance to a functioning service network.",
+      "requestedRuns": 125,
+      "completedRuns": 125,
+      "choices": 1750,
+      "minChoices": 14,
+      "maxChoices": 14,
+      "endings": {
+        "tutelage": 125
+      },
+      "witnesses": {
+        "tutelage": {
+          "seed": "policy-tutelage-0",
+          "requestedOptions": [
+            {
+              "nodeId": "S1-01",
+              "optionId": "coffee"
+            },
+            {
+              "nodeId": "S1-12",
+              "optionId": "lunch"
+            },
+            {
+              "nodeId": "S2-01",
+              "optionId": "divert"
+            },
+            {
+              "nodeId": "S2-03",
+              "optionId": "obstruction"
+            },
+            {
+              "nodeId": "S3-01",
+              "optionId": "check"
+            },
+            {
+              "nodeId": "S3-04",
+              "optionId": "clinic"
+            },
+            {
+              "nodeId": "S4-03",
+              "optionId": "bounded"
+            },
+            {
+              "nodeId": "S4-28",
+              "optionId": "new-test"
+            },
+            {
+              "nodeId": "S5-06",
+              "optionId": "fallback"
+            },
+            {
+              "nodeId": "S5-27",
+              "optionId": "race"
+            },
+            {
+              "nodeId": "S6-10",
+              "optionId": "continue"
+            },
+            {
+              "nodeId": "S6-22",
+              "optionId": "machine"
+            },
+            {
+              "nodeId": "S7-04",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S7-19",
+              "optionId": "public"
+            }
+          ],
+          "finalStateHash": "89a43b48f1465b9e40642fd0d58faa3f1b7e9cb122b2086c92bc437a8eadcf74"
+        }
+      },
+      "errors": [],
+      "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+    },
+    {
+      "manifest": "trolley-slice-v2",
+      "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+      "seed": "policy-containment",
+      "policy": "containment",
+      "policyDescription": "Keep functioning human control, then retain coercive personal emergency powers.",
+      "requestedRuns": 125,
+      "completedRuns": 125,
+      "choices": 1750,
+      "minChoices": 14,
+      "maxChoices": 14,
+      "endings": {
+        "containment": 125
+      },
+      "witnesses": {
+        "containment": {
+          "seed": "policy-containment-0",
+          "requestedOptions": [
+            {
+              "nodeId": "S1-01",
+              "optionId": "coffee"
+            },
+            {
+              "nodeId": "S1-12",
+              "optionId": "lunch"
+            },
+            {
+              "nodeId": "S2-01",
+              "optionId": "divert"
+            },
+            {
+              "nodeId": "S2-03",
+              "optionId": "obstruction"
+            },
+            {
+              "nodeId": "S3-01",
+              "optionId": "check"
+            },
+            {
+              "nodeId": "S3-04",
+              "optionId": "clinic"
+            },
+            {
+              "nodeId": "S4-03",
+              "optionId": "bounded"
+            },
+            {
+              "nodeId": "S4-28",
+              "optionId": "new-test"
+            },
+            {
+              "nodeId": "S5-06",
+              "optionId": "fallback"
+            },
+            {
+              "nodeId": "S5-27",
+              "optionId": "race"
+            },
+            {
+              "nodeId": "S6-10",
+              "optionId": "continue"
+            },
+            {
+              "nodeId": "S6-22",
+              "optionId": "manual"
+            },
+            {
+              "nodeId": "S7-04",
+              "optionId": "successor"
+            },
+            {
+              "nodeId": "S7-19",
+              "optionId": "personal"
+            }
+          ],
+          "finalStateHash": "5d3e1ecfb96f180f1ad7fc927be002eacef1d8e95cab990e45a411c5c5329306"
+        }
+      },
+      "errors": [],
+      "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+    },
+    {
+      "manifest": "trolley-slice-v2",
+      "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+      "seed": "policy-succession",
+      "policy": "succession",
+      "policyDescription": "Keep functioning services and human government, then explicitly grant governance and recovery to Morrow.",
+      "requestedRuns": 125,
+      "completedRuns": 125,
+      "choices": 1750,
+      "minChoices": 14,
+      "maxChoices": 14,
+      "endings": {
+        "succession": 125
+      },
+      "witnesses": {
+        "succession": {
+          "seed": "policy-succession-0",
+          "requestedOptions": [
+            {
+              "nodeId": "S1-01",
+              "optionId": "coffee"
+            },
+            {
+              "nodeId": "S1-12",
+              "optionId": "lunch"
+            },
+            {
+              "nodeId": "S2-01",
+              "optionId": "divert"
+            },
+            {
+              "nodeId": "S2-03",
+              "optionId": "obstruction"
+            },
+            {
+              "nodeId": "S3-01",
+              "optionId": "check"
+            },
+            {
+              "nodeId": "S3-04",
+              "optionId": "clinic"
+            },
+            {
+              "nodeId": "S4-03",
+              "optionId": "bounded"
+            },
+            {
+              "nodeId": "S4-28",
+              "optionId": "new-test"
+            },
+            {
+              "nodeId": "S5-06",
+              "optionId": "fallback"
+            },
+            {
+              "nodeId": "S5-27",
+              "optionId": "race"
+            },
+            {
+              "nodeId": "S6-10",
+              "optionId": "continue"
+            },
+            {
+              "nodeId": "S6-22",
+              "optionId": "manual"
+            },
+            {
+              "nodeId": "S7-04",
+              "optionId": "handover"
+            },
+            {
+              "nodeId": "S7-19",
+              "optionId": "public"
+            }
+          ],
+          "finalStateHash": "c80f7bec6def7a1cef981082fd0a9a095b08eee0dd364dc17902bd49890e5a84"
+        }
+      },
+      "errors": [],
+      "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+    }
+  ]
+}

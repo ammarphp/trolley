@@ -1,25 +1,43 @@
 {
   "name": "the-trolley-department",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "An inexhaustible queue of questionable decisions. A reproducible trolley dilemma generator and consent-based response collector.",
+  "description": "An illustrated AI-safety trolley game with a deterministic causal simulation and run-based research records.",
   "engines": {
-    "node": ">=22.13"
+    "node": ">=24"
   },
   "scripts": {
-    "dev": "node scripts/serve.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs dist",
     "build": "node scripts/build.mjs",
     "preview": "node scripts/serve.mjs dist",
-    "test": "node --test tests/*.test.mjs",
-    "test:browser": "node tests/browser.mjs",
+    "test": "pnpm run test:legacy && pnpm run test:v2",
+    "test:browser": "node tests/browser-v2.mjs",
     "collector:dev": "node collector/local.mjs",
     "catalog": "node scripts/catalog.mjs",
-    "check": "npm test && npm run build && npm run test:browser"
+    "check": "pnpm run typecheck && pnpm test && pnpm run build",
+    "typecheck": "tsc --noEmit",
+    "test:legacy": "node --test tests/*.test.mjs",
+    "test:v2": "node scripts/test-v2.mjs",
+    "simulate": "node scripts/simulation.mjs",
+    "test:browser:legacy": "node tests/browser.mjs",
+    "collector:build": "node scripts/build-collector.mjs",
+    "replay": "node scripts/replay.mjs",
+    "inspect:content": "node scripts/inspect-content.mjs",
+    "format": "prettier --write \"src/{contracts,content,simulation,presentation,persistence,telemetry,ui}/**/*.{ts,css}\" \"tests/v2/*.ts\" \"collector/v2/*.ts\""
   },
   "devDependencies": {
+    "@types/node": "^24.13.6",
     "esbuild": "^0.28.2",
-    "playwright": "1.58.2"
+    "fake-indexeddb": "6.2.5",
+    "playwright": "1.58.2",
+    "prettier": "3.9.8",
+    "typescript": "5.9.3"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "pixi.js": "8.21.0",
+    "zod": "4.6.5"
+  },
+  "packageManager": "pnpm@11.19.0"
 }

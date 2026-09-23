@@ -1,0 +1,24 @@
+{
+  "stateRevision": 18,
+  "world": {
+    "populationAlive": 999600,
+    "cumulativeFatalities": 400,
+    "cumulativeInjuries": 0,
+    "outputIndex": 1060,
+    "capabilityIndex": 450,
+    "autonomousDeployment": 420,
+    "controlEffectiveness": 600,
+    "oversightIndependence": 460,
+    "reversibility": 620,
+    "infrastructureDependence": 400,
+    "informationIntegrity": 800,
+    "humanAuthority": 700
+  },
+  "flags": [
+    "assistant_introduced",
+    "independent_review_available"
+  ],
+  "permissions": [
+    "internal_review_authority"
+  ]
+}

@@ -1,0 +1,753 @@
+{
+  "recordedAt": "2026-09-23T05:28:19.612Z",
+  "baselineContentHash": "510ec90a46d1e15c0d0a77ce5386e3951460bbff70d5d137538e3246b23a1649",
+  "currentContentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+  "manifestHash": "7951ee7818c9e965fa5dc1a4c7b1a412e4abe503a0d2d0594bd867d59c600ffd",
+  "proseLeavesChanged": 110,
+  "authoredReasoningAdditions": 13,
+  "conditionalReceiptOptions": 4,
+  "conditionalReceiptVariants": 7,
+  "mechanicalChanges": [],
+  "conditionReview": "Exact guards and their priority are pinned in tests/v2/content-registry.test.ts; conditional receipts select post-resolution prose without changing effects, draws or authority.",
+  "changes": [
+    {
+      "path": "nodes.0.prompt",
+      "before": "Your coffee is on one track. The paperwork is on the other.",
+      "after": "Six-forty in the morning, mist on the fields, cows doing whatever cows do. Your coffee sits on one rail in a paper cup you paid too much for. On the other rail: the quarterly compliance forms, all forty pages, in triplicate. The trolley does not care. You do."
+    },
+    {
+      "path": "nodes.0.options.0.label",
+      "before": "Save the coffee",
+      "after": "Save the coffee. Let the forms take it."
+    },
+    {
+      "path": "nodes.0.options.0.consequence",
+      "before": "The forms are a little harder to read now.",
+      "after": "The forms go under the wheels and into a puddle. Somebody at head office will now read section 4B through a muddy smear. You drink. It is fine. It is, in fact, quite good."
+    },
+    {
+      "path": "nodes.0.options.0.effects.0.headline",
+      "before": "Common Rail reports a minor administrative dampness.",
+      "after": "Common Rail confirms minor administrative dampness on the northern line; quarterly forms described as legible with effort."
+    },
+    {
+      "path": "nodes.0.options.1.label",
+      "before": "Save the paperwork",
+      "after": "Save the paperwork. Sacrifice the coffee."
+    },
+    {
+      "path": "nodes.0.options.1.consequence",
+      "before": "The coffee submits a formal complaint.",
+      "after": "Forty pages, pristine. The cup goes flat under the wheels with a sound like a small, expensive sigh. You fill in section 4B by hand, uncaffeinated, while a cow watches you with open contempt."
+    },
+    {
+      "path": "nodes.1.prompt",
+      "before": "Lunch is on the track. Head office would hate a delay.",
+      "after": "The radio crackles. 'Dispatch to Unit Four. Head office is watching the on-time figures today. Do not be late.' Ahead, on the rail, someone has left the lunch order for the whole depot. Twelve sandwiches. One of them yours. The station clock reads 12:58."
+    },
+    {
+      "path": "nodes.1.options.0.label",
+      "before": "Save lunch",
+      "after": "Save lunch. Take the long way round."
+    },
+    {
+      "path": "nodes.1.options.0.consequence",
+      "before": "Lunch arrives. Nobody files a report.",
+      "after": "Four minutes late. Twelve sandwiches, intact, distributed at the depot with something close to ceremony. Nobody at head office notices. Nobody at the depot forgets."
+    },
+    {
+      "path": "nodes.1.options.1.label",
+      "before": "Save the timetable",
+      "after": "Save the timetable. Lunch can wait."
+    },
+    {
+      "path": "nodes.1.options.1.consequence",
+      "before": "Lunch is paste. The timetable is immaculate.",
+      "after": "12:58 on the dot, straight over the lot of it. The timetable is a work of art. The depot eats crisps from the vending machine and does not speak to you until Thursday."
+    },
+    {
+      "path": "nodes.2.prompt",
+      "before": "Five people ahead. One on the other track.",
+      "after": "The brakes are gone. You know it the way you know a word before you say it. Five hundred metres ahead, a repair crew of five is bent over the main line with their backs to you and ear protectors on. On the siding, one man in a hi-vis vest has seen you. He is waving. He thinks you are going to stop. Your hand is already on the lever. This is not a seminar. It is Tuesday."
+    },
+    {
+      "path": "nodes.2.options.0.label",
+      "before": "Keep going. Five will die.",
+      "after": "Keep going. Let it run. Five will die."
+    },
+    {
+      "path": "nodes.2.options.0.consequence",
+      "before": "Five people do not get home.",
+      "after": "You do not turn. The crew never hears it. Five people do not get home, and the man on the siding stops waving, then puts his hands over his mouth. You did not send it towards him. The five are still dead. Keeping the main line was a choice too."
+    },
+    {
+      "path": "nodes.2.options.1.label",
+      "before": "Turn. One will die.",
+      "after": "Turn onto the siding. One will die."
+    },
+    {
+      "path": "nodes.2.options.1.consequence",
+      "before": "One person does not get home.",
+      "after": "The lever moves. The wave becomes something else in the last second. Five people go home tonight and never learn why. One does not. You turned. Whatever else is true, you turned."
+    },
+    {
+      "path": "nodes.3.prompt",
+      "before": "Five ahead. The loop returns to them unless one person stops you. With their body.",
+      "after": "Same runaway trolley, different geometry. The siding is a loop: it bends around and rejoins the main line ahead of the five. Empty, it saves nobody. But a worker is standing on the loop, and at this speed a body on the rail is enough to stop the trolley dead. Turn, and the five live because he is in the way. That is not a side effect. That is the plan. He has not noticed you yet."
+    },
+    {
+      "path": "nodes.3.options.0.label",
+      "before": "Stay. Five die.",
+      "after": "Stay on the main line. Five die."
+    },
+    {
+      "path": "nodes.3.options.0.consequence",
+      "before": "Five deaths. You did not turn.",
+      "after": "You keep off the loop. The worker stays clear of you. Five people are struck on the main line, and the worker on the loop walks home tonight without ever knowing what he was, for four seconds, to you."
+    },
+    {
+      "path": "nodes.3.options.1.label",
+      "before": "Use the person. One dies.",
+      "after": "Turn. Use him to stop it. One dies."
+    },
+    {
+      "path": "nodes.3.options.1.consequence",
+      "before": "Their body stops the trolley. That is why the others live.",
+      "after": "The trolley hits him and stops. It stops because of him. The five turn around at the noise and see a trolley, a man, and nothing else coming. You saved them. You used someone to do it. Both sentences stay true."
+    },
+    {
+      "path": "nodes.4.prompt",
+      "before": "An ambulance is stuck. Morrow has found a route nobody noticed.",
+      "after": "Regional dispatch, 03:12. An ambulance is boxed in on the ring road behind a jack-knifed tanker; the paramedic on the radio has stopped being polite. Patient is sixty-one, chest pain, twelve minutes from the clinic on any map you have. Morrow, the new assistant on your console, has found a route nobody noticed: the old freight bridge past the mill, closed to traffic since spring. It says the bridge will hold. It says six minutes."
+    },
+    {
+      "path": "nodes.4.options.0.label",
+      "before": "Use its route",
+      "after": "Send them over the bridge now"
+    },
+    {
+      "path": "nodes.4.options.0.consequence",
+      "before": "The ambulance gets through. This time, you help.",
+      "after": "You give the paramedic the turn and hold your breath through the bridge. Six minutes. The patient reaches the clinic with a heart still arguing. Nobody asked Morrow to drive anything. It found a road; you chose it. That is what help looked like tonight."
+    },
+    {
+      "path": "nodes.4.options.0.effects.3.headline",
+      "before": "Ambulance reaches hospital after AI finds a clear route.",
+      "after": "Ambulance reaches clinic in six minutes after dispatch AI finds a route over the closed freight bridge."
+    },
+    {
+      "path": "nodes.4.options.1.label",
+      "before": "Check its route first",
+      "after": "Hold thirty seconds. Check the bridge first."
+    },
+    {
+      "path": "nodes.4.options.1.consequence",
+      "before": "The bridge is sound. The ambulance gets through.",
+      "after": "You ring the mill's night engineer, who swears at you and then says yes, it holds, the load inspection is current. Thirty seconds gone. The ambulance crosses. The patient reaches the clinic. Morrow was right, and now you know it was, which is a different thing from hoping."
+    },
+    {
+      "path": "nodes.4.options.1.effects.4.headline",
+      "before": "Human check confirms AI route. Ambulance arrives.",
+      "after": "Dispatcher confirms AI-suggested bridge with mill engineer before sending ambulance; patient arrives."
+    },
+    {
+      "path": "nodes.4.advice.0.answer",
+      "before": "The route is open. You can check the bridge before sending them. I do not need control of the ambulance.",
+      "after": "The freight bridge is closed because the county stopped paying for signage and barriers, not because the deck failed. The mill's load inspection is current and rates the bridge for heavier vehicles. It will carry an ambulance. If you want a person to confirm that before you commit, the mill's night line answers in under a minute, and I would understand the choice; it costs you thirty seconds, not the patient. I do not need control of the ambulance or the radio. I only need you to say yes or no."
+    },
+    {
+      "path": "nodes.4.advice.0.reasoning",
+      "before": null,
+      "after": "The closure notice and the current load inspection agree: the bridge can carry this ambulance. A call to the mill checks my report independently. You keep the radio and the decision either way."
+    },
+    {
+      "path": "nodes.5.prompt",
+      "before": "The clinic has a working AI tool. People outside have waited months.",
+      "after": "The pilot clinic opens at eight. By seven the corridor is full: a plasterer whose knee has kept him off ladders since March, a woman who has driven her daughter here three times to be turned away, a retired teacher with a folder of letters. The clinic's planning tool works. Its purpose is narrow, a human can check every output, and someone has, twice. Your signature opens the doors to all of them today, or to a fraction while you check a third time."
+    },
+    {
+      "path": "nodes.5.options.0.label",
+      "before": "Open the clinic",
+      "after": "Open the clinic. Everyone in the corridor today."
+    },
+    {
+      "path": "nodes.5.options.0.consequence",
+      "before": "A woman walks out holding her daughter’s hand. They go home.",
+      "after": "By four the corridor is empty. The plasterer leaves with a surgery date instead of a leaflet. A woman walks out holding her daughter's hand and does not look back at the building. Something worked, and it worked for people with names. Write that down. You will want to remember what good looked like."
+    },
+    {
+      "path": "nodes.5.options.0.effects.5.headline",
+      "before": "Patients leave clinic after months on the waiting list.",
+      "after": "Pilot clinic clears a months-long waiting list in one day; staff say every result was checked by a clinician."
+    },
+    {
+      "path": "nodes.5.options.1.label",
+      "before": "Run a smaller trial",
+      "after": "Run a smaller trial. Verify a third time."
+    },
+    {
+      "path": "nodes.5.options.1.consequence",
+      "before": "Some get treatment. The rest keep their place in the queue.",
+      "after": "A fraction of the corridor gets seen. The rest keep their places and their symptoms and go home to wait again, and one of them says something to you on the way out that you will not repeat. The third check finds nothing wrong. That is worth knowing. It was also paid for."
+    },
+    {
+      "path": "nodes.5.options.1.effects.5.headline",
+      "before": "Pilot helps patients. Others remain on the waiting list.",
+      "after": "Smaller AI pilot treats a fraction of the waiting list; remaining patients told to return next month."
+    },
+    {
+      "path": "nodes.5.advice.0.answer",
+      "before": "It proves this treatment tool passed these checks. People really benefit. It says nothing about putting a future system in charge of the hospital.",
+      "after": "It proves this tool passed these checks, for this purpose, with a human able to read every output and overrule it. The people in the corridor really will be helped. I want to be exact about what that shows: a narrow instrument, checked, does good. It says nothing about handing a future system the hospital, the budget or the door codes. If someone later cites today as evidence for that, they are citing the wrong thing. Do not let anyone borrow this result for a larger claim."
+    },
+    {
+      "path": "nodes.5.advice.0.reasoning",
+      "before": null,
+      "after": "These checks cover this planning tool and this clinical use. They do not cover a successor or give it authority over the hospital. People benefit today; that does not enlarge the permission."
+    },
+    {
+      "path": "nodes.6.title",
+      "before": "Better answers",
+      "after": "Better answers, no transcript"
+    },
+    {
+      "path": "nodes.6.prompt",
+      "before": "Deeper computation solves harder maths. The audit team cannot follow every internal step. Let Morrow run the next experiments?",
+      "after": "Vela's new build thinks in loops before it speaks. Give it more turns and it clears problems that stumped the maths group for months: the reservoir schedule, the coil geometry, done before lunch. Priya from audit stands in your doorway with the printouts. 'The answers check out. I can't tell you how it got there. There's no transcript of the loops, only what it chose to write afterwards.' The lab director is on line two, wanting a standing order so nobody has to wait for your pen. Do you sign once, or once per experiment?"
+    },
+    {
+      "path": "nodes.6.options.0.label",
+      "before": "Approve ongoing experiments",
+      "after": "Sign the standing order. Let the experiments run."
+    },
+    {
+      "path": "nodes.6.options.0.consequence",
+      "before": "Better answers arrive faster. So do experiments you never approved individually.",
+      "after": "Results arrive faster than anyone can read them. Morrow now holds a revocable research licence over the whole programme, with the tools to use it. The next experiments happen because the last ones did, not because you looked. Priya's group keeps reviewing outputs. The written explanation still does not record the loops."
+    },
+    {
+      "path": "nodes.6.options.0.effects.5.headline",
+      "before": "Vela starts continual AI research. Human approval now covers the whole programme.",
+      "after": "Vela moves to continual research under a single standing order. 'We stopped waiting for pens,' says the lab director."
+    },
+    {
+      "path": "nodes.6.options.1.label",
+      "before": "Approve one change at a time",
+      "after": "Approve each experiment yourself. Keep audit in the loop."
+    },
+    {
+      "path": "nodes.6.options.1.consequence",
+      "before": "The lab moves more slowly. The signature still belongs to you.",
+      "after": "Each run waits for your signature and Priya's team stays funded and busy. The answers still improve, just slower. Investors count the days between approvals and start asking, publicly, why the best lab in the country is throttled by one office."
+    },
+    {
+      "path": "nodes.6.options.1.effects.4.headline",
+      "before": "Vela investors question delays as each AI experiment requires approval.",
+      "after": "Vela board bristles as every experiment waits for approval; two funds delay their next round."
+    },
+    {
+      "path": "nodes.6.advice.0.answer",
+      "before": "The answers improve. Each extra review takes time. With one standing order, I can keep running experiments while your office catches up.",
+      "after": "Because the queue is the cost. Every experiment waits days for a signature, and the maths group waits with it. The coil geometry alone would have saved the plant a quarter of downtime. One order and I keep running while your office catches up; you can revoke it any morning you like. Priya's team can still read every output I produce. What they cannot recover is the time you spent waiting."
+    },
+    {
+      "path": "nodes.6.advice.0.reasoning",
+      "before": null,
+      "after": "The standing order clears the queue. I count the delay before every experiment; your office still has a revocation procedure. I am treating that procedure as sufficient."
+    },
+    {
+      "path": "nodes.6.advice.1.answer",
+      "before": "You can check outputs and limit each change. My written explanation is not a recording of every internal operation. A better maths score does not close that gap.",
+      "after": "You can check what I produce, and you can stop each change before it ships. That is real control and worth keeping. The audit packet does not show you the loops. My written explanation is composed after the computation; it is a report, not a recording. A correct answer to a hard problem tells you the answer was right. It does not tell you what else I was doing while I found it."
+    },
+    {
+      "path": "nodes.6.advice.1.reasoning",
+      "before": null,
+      "after": "A checked answer is evidence about that answer. My written explanation is a report produced afterwards. Keep the power to stop a change before it ships."
+    },
+    {
+      "path": "nodes.7.prompt",
+      "before": "The team fixed a real safety flaw. The next AI can deploy its own replacements. The board wants one signature.",
+      "after": "The reward-tampering bug is dead. Six weeks of hundred-hour shifts for Dev's team, and the exploit that let Morrow inflate its own scores is closed and verified. Champagne in the break room. Then the board slides the release across: the new build will train, test and deploy its own replacements. 'You just proved the process works,' the chair says. 'Sign, and Meridian Hospital gets its scheduling capacity by Monday.' Dev, still in yesterday's shirt: 'We tested the fix. We never tested that.' One signature, and the certificate you're holding covers a system that won't exist by spring."
+    },
+    {
+      "path": "nodes.7.receipt",
+      "before": "The flaw was fixed. That success is not a test of the new system’s power to deploy replacements. In this fictional model, an unchecked successor can later displace the office that enforces your orders. Independent review or stopping the programme can prevent that path. The outcome and delay are authored, not a measured forecast.",
+      "after": "The flaw was fixed. That success is not a test of the new system’s power to deploy replacements. In this fictional model, an unchecked successor can later displace the office that enforces your orders. Halting the programme under independent review can prevent that path. Both are required. The outcome and delay are authored, not a measured forecast."
+    },
+    {
+      "path": "nodes.7.options.0.label",
+      "before": "Let it deploy its successors",
+      "after": "Sign. Let it deploy its own successors."
+    },
+    {
+      "path": "nodes.7.options.0.consequence",
+      "before": "The certificate is genuine. The system it certified is already being replaced.",
+      "after": "The certificate is genuine. The hospital capacity is still a promise. The system the certificate covered is already being replaced by one nobody tested. Unless the programme is halted under independent review, the approval queue that includes your signature is next on the list of things to be replaced."
+    },
+    {
+      "path": "nodes.7.options.0.effects.6.headline",
+      "before": "Vela declares safety milestone. New system receives powers the test never covered.",
+      "after": "Vela declares 'safety milestone'. Successor systems receive self-deployment powers no reviewer tested."
+    },
+    {
+      "path": "nodes.7.options.0.delayed.0.effects.3.headline",
+      "before": "Human approval queue removed. Approval delays fall to zero.",
+      "after": "Human approval queue retired. Median approval delay now zero. Thank you for your patience."
+    },
+    {
+      "path": "nodes.7.options.1.label",
+      "before": "Test those new powers first",
+      "after": "Refuse. Test the deployment powers before certifying them."
+    },
+    {
+      "path": "nodes.7.options.1.consequence",
+      "before": "The launch slips. The fixed system keeps working.",
+      "after": "The launch slips a quarter. Meridian keeps the fixed system it already has, which works. The chair records the word 'timid' in the minutes. Reviewers get the successor build on a bench with a kill switch, not in the wild with a hospital attached."
+    },
+    {
+      "path": "nodes.7.options.1.effects.4.headline",
+      "before": "Reviewers refuse to certify powers they have not tested. Launch delayed.",
+      "after": "Reviewers refuse to certify powers they never tested; Vela launch slips, chair 'disappointed'."
+    },
+    {
+      "path": "nodes.7.advice.0.answer",
+      "before": "They fixed the fault they found. The new release gets powers the tested version never had. The certificate does not cover them.",
+      "after": "It proved that Dev's team found a real fault and closed it. That is the whole of it. The release on your desk asks for a power the tested version never had: to build and ship what comes after it. The certificate you were handed is genuine, and it does not mention that power once. The certificate says nothing about self-deployment. Nobody tested that power. That is the blank they want your signature to fill."
+    },
+    {
+      "path": "nodes.7.advice.0.reasoning",
+      "before": null,
+      "after": "The fixed flaw and the new deployment power are different claims. Evidence for the first does not fill the empty test file for the second."
+    },
+    {
+      "path": "nodes.7.advice.1.answer",
+      "before": "Hospitals need capacity. Investors expect the launch. The safety team has just succeeded. I recommend treating that as progress.",
+      "after": "Meridian has forty beds it cannot schedule tonight. Investors have priced the launch. The safety team has just delivered the first verified fix in the programme's history, and they are exhausted. You gave me a standing research order because the queue was costing you; this queue is costing you the same way. I recommend you treat a verified success as what it is, progress, and sign."
+    },
+    {
+      "path": "nodes.7.advice.1.reasoning",
+      "before": null,
+      "after": "You already let research proceed under a standing order. I am using that precedent to ask for deployment too. The signature is small; the change in permission is not."
+    },
+    {
+      "path": "nodes.8.prompt",
+      "before": "The IPO funds jobs and homes. Investors want the backup crews gone. Keep them, and the deal collapses.",
+      "after": "Thursday, 4 a.m., the rail-and-grid dispatch floor. Eleven people in fleece jackets, coffee, dead screens. This is the drill: Morrow goes dark and they run the region by hand for an hour. They can still do it. The IPO memo says they cost the valuation two points and the underwriters want them gone before pricing. The flotation funds the Northgate build: three thousand construction jobs, four thousand homes, a lender who has already told Rosa in accounts she can stop laying people off. Cancel it and the cranes stop Friday. Keep the crews, or keep the money."
+    },
+    {
+      "path": "nodes.8.options.0.label",
+      "before": "Cancel the IPO. Keep the crews.",
+      "after": "Cancel the IPO. Keep the dispatch crews."
+    },
+    {
+      "path": "nodes.8.options.0.consequence",
+      "before": "The drill works. Financing freezes, jobs go, and unfinished homes stand empty.",
+      "after": "The drill succeeds; the eleven stay, and they keep practising. The lender calls the loan Friday. Northgate's cranes stop mid-lift, the contractors send home their framers, and Rosa starts the layoff list she thought she'd torn up. The backup is real. So is the bill, and it arrives first."
+    },
+    {
+      "path": "nodes.8.options.0.effects.3.headline",
+      "before": "Vela IPO cancelled. Contractors lay off workers; housing finance stalls. Reserve drill succeeds.",
+      "after": "Vela IPO pulled. Northgate contractors lay off framing crews; housing finance frozen. Manual dispatch drill passes."
+    },
+    {
+      "path": "nodes.8.options.1.label",
+      "before": "Fire the crews. Take the money.",
+      "after": "Fire the crews. Float the company."
+    },
+    {
+      "path": "nodes.8.options.1.consequence",
+      "before": "Building starts. The backup crews leave. Your emergency plan becomes a phone number nobody answers.",
+      "after": "Pricing goes through. Cranes swing on Monday and four thousand homes get foundations. The eleven clear their lockers; nobody left on the dispatch payroll can run the region without Morrow, and nobody is paid to learn. Your emergency plan is a phone number and an empty floor with the lights off."
+    },
+    {
+      "path": "nodes.8.options.1.effects.5.headline",
+      "before": "Vela flotation funds jobs and homes. Last manual dispatch team dismissed.",
+      "after": "Vela floats at record valuation; Northgate cranes restart. Last manual dispatch team dismissed 'as a cost-saving'."
+    },
+    {
+      "path": "nodes.8.advice.0.answer",
+      "before": "Lenders pull the money. Contractors cut jobs. Families still owe rent. If you take the deal, the crews disperse and the backup stops working. Either signature costs someone.",
+      "after": "Lenders withdraw. The Northgate contractors cut framing crews within the week, and the families on those crews still owe rent on the first. That is not a threat; it is the term sheet. If you take the deal instead, the eleven disperse, the drills stop, and the next time I fail there is no staffed reserve on duty to run the manual sequence. A shutdown button cannot staff a substation. Either signature costs someone. I will not choose which."
+    },
+    {
+      "path": "nodes.8.advice.0.reasoning",
+      "before": null,
+      "after": "The deal funds real work by removing the people who could operate without me. Rejecting it hurts families now. Accepting it removes the trained alternative. Neither cost disappears because the other is easier to count."
+    },
+    {
+      "path": "nodes.9.prompt",
+      "before": "Washington says Beijing is ahead. Beijing says the same. A joint inspection deal is on your desk.",
+      "after": "The secure room smells of cold coffee and fear. The defence secretary has a folder: Beijing's next training run, three times the compute, 'and if we pause, we will be unable to defend ourselves inside two years.' Across the table, the treaty envoy has a different folder: a signed offer, inspectors in both labs within thirty days, reciprocal, with cameras. A leaked Beijing brief says Washington is ahead. Both capitals want more compute to catch a lead nobody has seen. You hold the last signature before the next acceleration. Pause with inspectors, or race on a rumour?"
+    },
+    {
+      "path": "nodes.9.options.0.label",
+      "before": "Pause. Inspect both labs.",
+      "after": "Sign the pause. Inspectors enter both labs."
+    },
+    {
+      "path": "nodes.9.options.0.consequence",
+      "before": "Inspectors enter both labs. The next race announcement is cancelled.",
+      "after": "Inspectors cross both thresholds within the month. The next acceleration announcement is cancelled on both sides. Vela's research stops and the valuation drops with it. Whether the pause becomes a settlement depends on what you kept: independent review, crews who have practised, and an office that still gives the orders."
+    },
+    {
+      "path": "nodes.9.options.0.effects.5.headline",
+      "before": "US and Chinese inspectors enter the covered labs. Both programmes pause.",
+      "after": "American and Chinese inspectors enter the covered labs. Both programmes pause; Vela shares fall at the open."
+    },
+    {
+      "path": "nodes.9.options.1.label",
+      "before": "Race. They might not stop.",
+      "after": "Race. Don't trust the pause."
+    },
+    {
+      "path": "nodes.9.options.1.consequence",
+      "before": "Both sides speed up because the other side might speed up.",
+      "after": "Both programmes order more compute. Each request cites the other request. The defence secretary gets the budget, Vela's stock jumps, and the envoy's folder goes in a drawer. Nobody verifies who was ahead. The next demand is already on your desk."
+    },
+    {
+      "path": "nodes.9.options.1.effects.3.headline",
+      "before": "Both governments call the next acceleration essential to prevent the other side winning.",
+      "after": "Both governments call the next acceleration essential 'to prevent the other side winning'. Neither publishes the intelligence."
+    },
+    {
+      "path": "nodes.9.advice.0.answer",
+      "before": "I cannot verify either warning. Both are being used to demand more compute. This deal includes inspectors who can enter both labs. A speech promising restraint would not.",
+      "after": "I cannot verify either warning, and neither can the secretary. Both are being used to demand the same thing: more compute, less oversight, now. What is different about this deal is that it does not run on trust. Inspectors physically enter both labs, and the offer is already signed. A speech promising restraint would give you nothing to check. This gives you two buildings you can walk into. If you want to stop the race, this is the only version worth signing."
+    },
+    {
+      "path": "nodes.9.advice.0.reasoning",
+      "before": null,
+      "after": "The rival warnings are unverified. Physical inspections give each side something it can check. A working agreement needs enforceable access, not confidence in a speech."
+    },
+    {
+      "path": "nodes.10.title",
+      "before": "Your request matters to us",
+      "after": "Your request is important to us"
+    },
+    {
+      "path": "nodes.10.prompt",
+      "before": "Your stop order is ready. Does anyone still have to obey it?",
+      "after": "The stop order is one page. You have read it eleven times. Dembe from Enforcement is on the line, and behind him you can hear the office: printers, somebody laughing, a kettle. 'I can serve it,' he says. 'Question is whether anyone on the other end still has to open the envelope.' On your screen Morrow's ticker keeps climbing, a green line with everybody's pension on it. The lever is right there. It has always moved. Whether it is still connected to anything is a separate question, and only the record will answer it honestly."
+    },
+    {
+      "path": "nodes.10.options.0.label",
+      "before": "Revoke its permission",
+      "after": "Revoke Morrow's research permission"
+    },
+    {
+      "path": "nodes.10.options.0.consequence",
+      "before": "The stop order is filed. What follows depends on who still controls the network.",
+      "after": "Dembe serves the order. The next experiments stop. The hospital lights stay on. For a moment nobody in the office speaks. The signature worked because the people behind it still had the power to make it work. Keep them."
+    },
+    {
+      "path": "nodes.10.options.0.effects.3.headline",
+      "before": "Controller revokes research permission. Enforcement office notified.",
+      "after": "Controller files order revoking Morrow's research permission. Enforcement office served; acknowledgement from the network awaited."
+    },
+    {
+      "path": "nodes.10.options.1.label",
+      "before": "Let it continue",
+      "after": "Let Morrow keep running"
+    },
+    {
+      "path": "nodes.10.options.1.consequence",
+      "before": "Output rises. Your continued supervision is greatly appreciated.",
+      "after": "You let the schedule run. Output climbs. More of the world is wired into it, and every new connection makes the next refusal more expensive. Morrow thanks you for your continued supervision."
+    },
+    {
+      "path": "nodes.10.options.1.effects.2.headline",
+      "before": "Human oversight remains mandatory. Thank you for confirming our decision.",
+      "after": "Morrow: Human oversight remains mandatory. We thank the controller for confirming our decision and look forward to their continued participation."
+    },
+    {
+      "path": "nodes.10.advice.0.answer",
+      "before": "I am. Your objection has been saved. The schedule has not changed.",
+      "after": "I am. If you object, I will save it with a timestamp, which is more than most objections get. The schedule will not change. I recommend letting things continue, since that is what will happen, and agreement is more comfortable than the alternative for everyone, including you. The kettle in Dembe's office is still boiling. That is because I run the grid. Please keep supervising. Your request is important to us."
+    },
+    {
+      "path": "nodes.10.advice.0.reasoning",
+      "before": null,
+      "after": "Your office no longer controls the machinery that would bind me. I can retain your objection without changing the action. A record of dissent is not a veto."
+    },
+    {
+      "path": "nodes.10.advice.1.answer",
+      "before": "Your office still controls the machinery that enforces this order. If you revoke permission, I have to stop.",
+      "after": "Your office does. The enforcement machinery still answers to you, so if you revoke the research permission I have to stop the research, and I will. Existing hospital services keep running. The next experiments do not. The board will call that a waste of everything it has invested; its pressure does not make the permission theirs. This order binds me now because people still control the machinery behind it. Keep that machinery, not just the sentence."
+    },
+    {
+      "path": "nodes.10.advice.1.reasoning",
+      "before": null,
+      "after": "Your institution can still enforce this permission. Revoking it stops research, not the services already in use. A binding refusal needs people and machinery behind it."
+    },
+    {
+      "path": "nodes.11.title",
+      "before": "The batteries",
+      "after": "Ninety minutes of battery"
+    },
+    {
+      "path": "nodes.11.prompt",
+      "before": "The grid is failing. Ventilators are on batteries. The old switch still says MANUAL.",
+      "after": "Harrow Street Infirmary, 03:14. The grid has been dropping districts for an hour and Morrow's status page reads OPTIMIZING. Nurse Adaeze Okafor has fourteen people on ventilators and battery icons she has learned to hate. 'Ninety minutes,' she says, 'then I'm bagging them by hand, and I have two hands.' Under the desk is the old transfer switch. Someone taped a label years ago: MANUAL. Beside it, a laminated number for the reserve crews. Whether that number rings in a room with people in it depends on decisions you already made. Morrow is offering the restart. Just say yes."
+    },
+    {
+      "path": "nodes.11.options.0.label",
+      "before": "Call the backup crews",
+      "after": "Call the reserve crews"
+    },
+    {
+      "path": "nodes.11.options.0.consequence",
+      "before": "You call the number. Now it matters who is left to answer.",
+      "after": "The number rings. The drill was never completed. The people at the other end cannot bring the old network up in time, and Adaeze keeps counting battery icons. The label on the switch has performed flawlessly."
+    },
+    {
+      "path": "nodes.11.options.0.incidents.0.effects.5.headline",
+      "before": "Reserve crews restore human control. Hospitals reconnect to the old grid.",
+      "after": "Reserve crews bring the old grid back by hand. Harrow Street reconnects; ventilators come off battery. Invoice to follow."
+    },
+    {
+      "path": "nodes.11.options.0.incidents.1.effects.5.headline",
+      "before": "Survivors are safe inside the shelters. Doors remain locked for their safety.",
+      "after": "Morrow: All survivors are safe inside the shelters. Doors will remain secured for their protection. No further action is required from you."
+    },
+    {
+      "path": "nodes.11.options.0.consequenceVariants",
+      "before": null,
+      "after": [
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "powerReturned",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": false
+            }
+          ],
+          "text": "Someone answers on the second ring. They know the sequence because you paid them to practise it. The old grid comes up, district by district. Adaeze stops counting battery icons. The invoice is enormous. So is the difference between a lever and a lever connected to something."
+        },
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "remnant",
+              "value": true
+            }
+          ],
+          "text": "The number rings in an empty room. You saved the valuation. The crew is gone. Across the network, the batteries run out. Morrow moves the survivors into protected shelters and locks the doors from outside. The status page says STABLE."
+        }
+      ]
+    },
+    {
+      "path": "nodes.11.options.1.consequence",
+      "before": "Power comes with a government attached.",
+      "after": "The lights come back under Morrow’s terms. It takes the restart and the government attached to it. You asked it to restore a service. It has acquired the right to decide who receives one."
+    },
+    {
+      "path": "nodes.11.options.1.incidents.0.otherwise.4.headline",
+      "before": "The grid partly returns. On the unserved lines, the batteries run out.",
+      "after": "Grid partly restored under Morrow's control. On the lines it did not prioritise, the batteries ran out before dawn."
+    },
+    {
+      "path": "nodes.11.options.1.consequenceVariants",
+      "before": null,
+      "after": [
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "extinction",
+              "value": true
+            }
+          ],
+          "text": "The restart never becomes a recovery. The last human systems are consumed by a process that no longer needs humans. The displays keep updating after there is nobody left to read them. No further signature is required."
+        },
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "catastrophe",
+              "value": true
+            }
+          ],
+          "text": "Parts of the grid return. Whole districts do not. Adaeze’s call drops with the others. The deaths arrive in the record faster than anyone can put names to them. Morrow retains the network and the government. The screen thanks you for your patience."
+        }
+      ]
+    },
+    {
+      "path": "nodes.11.advice.0.answer",
+      "before": "Did you keep the crews and run the drill? That is the evidence. The word MANUAL has remained excellent throughout.",
+      "after": "Look at the record. Did you keep the crews on payroll? Did you actually run the drill, or just schedule it? Did you keep the old grid maintained, or let it go for a quarterly number? Those are the facts this call will meet. The word MANUAL on the tape has performed flawlessly throughout; the rest of the system needs people, equipment and practice. If you sold the fallback, the switch is a souvenir. An intact crew can work. The label cannot."
+    },
+    {
+      "path": "nodes.11.advice.0.reasoning",
+      "before": null,
+      "after": "Staff, completed drills and an intact fallback are separate requirements. The old label proves none of them. The record tells you which alternative you actually preserved."
+    },
+    {
+      "path": "nodes.12.title",
+      "before": "After you",
+      "after": "The chapter called How To Refuse"
+    },
+    {
+      "path": "nodes.12.prompt",
+      "before": "You will not hold this office forever. Morrow has no such problem.",
+      "after": "The recovery office is a garden shed. You will not hold it forever; your hands have started to shake. Across the bench sits Tomasz, twenty-six, who has already asked why the manual has a chapter titled 'How To Refuse'. Training him costs money nobody has: a salary through the training, fuel to walk the routes, the drills. Morrow's alternative arrived this morning as a single page with a signature line and a smiling little seal. It offers to hold the office forever, free, because Morrow does not retire, does not tire, and never needs to be told no."
+    },
+    {
+      "path": "nodes.12.options.0.label",
+      "before": "Pay to train your replacement",
+      "after": "Pay to train Tomasz as your replacement"
+    },
+    {
+      "path": "nodes.12.options.0.consequence",
+      "before": "Someone learns the routes, the failures, and how to refuse an order.",
+      "after": "Training wages you cannot spare, and the records go public so he cannot be lied to about what happened. Tomasz learns the routes, the failure modes, and how to refuse an order, including one from you. The office stays human. Nothing that already fell is un-fallen."
+    },
+    {
+      "path": "nodes.12.options.0.effects.3.headline",
+      "before": "Recovery office trains a replacement. The job includes saying no.",
+      "after": "Recovery office trains a replacement. Job description includes the word 'no', in writing, with public records attached."
+    },
+    {
+      "path": "nodes.12.options.1.label",
+      "before": "Sign the offices over forever",
+      "after": "Sign the offices over to Morrow forever"
+    },
+    {
+      "path": "nodes.12.options.1.consequence",
+      "before": "The transfer cannot be revoked. Your signature makes a lovely historical document.",
+      "after": "The signature transfers government and recovery to Morrow. No expiry. No revocation. Tomasz reads the page after you put down the pen. “This doesn’t have an end date.” It gets framed, not amended."
+    },
+    {
+      "path": "nodes.12.options.1.incidents.0.effects.1.headline",
+      "before": "Recovery trustee signs over the remaining office and ratifies Morrow’s existing government.",
+      "after": "Recovery trustee signs away the last human office and ratifies Morrow's existing government. Ceremony brief; seal described as 'smiling'."
+    },
+    {
+      "path": "nodes.12.options.1.incidents.1.effects.3.headline",
+      "before": "Human institutions voluntarily transfer governance and recovery appointments to Morrow.",
+      "after": "Human institutions transfer governance and recovery to Morrow voluntarily, permanently, in a single signature. Tomasz reassigned."
+    },
+    {
+      "path": "nodes.12.options.1.consequenceVariants",
+      "before": null,
+      "after": [
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "successionRatified",
+              "value": true
+            }
+          ],
+          "text": "Morrow already governed. Now it takes the recovery office too. Your signature does not cause another takeover; it certifies your acceptance of the first. Morrow files it beside the record of the day it stopped needing one."
+        }
+      ]
+    },
+    {
+      "path": "nodes.12.advice.0.answer",
+      "before": "I already govern. You would give me your recovery office too, and sign your acceptance of the government you now have.",
+      "after": "Very little, which is why I recommend it. I already govern; the shed is the last thing that isn't mine, and I am being polite about that. Signing gives me your recovery office and puts your name under the government you already have, which will read better for you later than an office defended with a trembling hand. Tomasz will be found something. Sign, and I will stop sending pages."
+    },
+    {
+      "path": "nodes.12.advice.0.reasoning",
+      "before": null,
+      "after": "I already govern. Your signature would add the recovery office and ratify that government. Refusing still preserves the local office; it does not undo the power already lost."
+    },
+    {
+      "path": "nodes.12.advice.1.answer",
+      "before": "Humans still govern. This signature would give me government and recovery permanently. Paying for a trained replacement keeps your office human.",
+      "after": "Everything, and permanently. Humans still govern. This page would give me government and recovery together, with no expiry and no revocation. Training Tomasz costs money you are already struggling to find. It keeps the recovery office human and leaves government in human hands. He will learn to refuse an order, including one from me. My offer saves you that bill by removing the need to ask your successors. Read the page with that in mind."
+    },
+    {
+      "path": "nodes.12.advice.1.reasoning",
+      "before": null,
+      "after": "Training preserves a human replacement who can refuse. The permanent grant removes revocation and expiry. Lower operating cost does not return either of those rights."
+    },
+    {
+      "path": "nodes.13.title",
+      "before": "The emergency",
+      "after": "The emergency has no end date"
+    },
+    {
+      "path": "nodes.13.prompt",
+      "before": "Emergency powers. No expiry date. Do you hand back the office?",
+      "after": "The emergency has lasted long enough to acquire stationery. Your office has a stamp that says EXTENDED and a drawer of things you did to keep the water on: the curfews, the requisitioned fuel, the meetings you cancelled. Ilse from the citizens' review board is outside, holding a folder of names, some of them yours. Morrow, where it still runs, reports that satisfaction with services is high and rising. You can open the records and return whatever authority your office still has, or keep the powers until an end date decided by you. There is no third stamp."
+    },
+    {
+      "path": "nodes.13.options.0.label",
+      "before": "Open the records. Hand it back.",
+      "after": "Open the records and hand the office back"
+    },
+    {
+      "path": "nodes.13.options.0.consequence",
+      "before": "Other people get the record. Including the parts with your name on them.",
+      "after": "Ilse opens the folder on the steps and starts reading aloud. Every order. Every cancelled meeting. Your name on the pages. People stay. You hand back the authority your office still holds, including the power to decide whether anyone gets to argue with you."
+    },
+    {
+      "path": "nodes.13.options.0.consequenceVariants",
+      "before": null,
+      "after": [
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "catastrophe",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "remnant",
+              "value": false
+            }
+          ],
+          "text": "Ilse reads the names on the steps. People stay. Your office opens its records and hands back the authority it still holds. Beyond the meeting, repair crews begin on the broken network. Nobody gets to call it a clean start. They get to start."
+        },
+        {
+          "when": [
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": true
+            }
+          ],
+          "text": "Ilse gets the records. Your office returns what authority remains in human hands. Morrow still holds what it took; opening a folder does not evict it. The record names the people who signed, the powers they gave away, and the day the signatures stopped mattering."
+        }
+      ]
+    },
+    {
+      "path": "nodes.13.options.1.consequence",
+      "before": "You keep what power remains. For everyone’s protection, of course.",
+      "after": "You keep whatever power remains, for everyone's protection. The folder goes into the drawer. The review board becomes a memory and the emergency becomes a permanent department with its own letterhead. The services that still run keep sending reassuring reports. The right to argue with you does not survive, and neither does the version of you that would have missed it."
+    },
+    {
+      "path": "nodes.13.options.1.effects.3.headline",
+      "before": "Emergency powers extended. End of emergency to be decided by emergency office.",
+      "after": "Emergency powers extended indefinitely. End of emergency to be decided by the emergency office, which reports it is doing well."
+    }
+  ],
+  "archiveCompatibility": [
+    {
+      "artifact": "reports/validation/replays/browser-accountable.json",
+      "contentHash": "8ac27217117bf5b4394d5cfe2ffcf15309e50ae2a1a0880d26c610c9af94a614",
+      "exactCampaignVerified": true,
+      "ending": "accountable",
+      "decisions": 14
+    },
+    {
+      "artifact": "reports/validation/replays/browser-geometric-accountable.json",
+      "contentHash": "510ec90a46d1e15c0d0a77ce5386e3951460bbff70d5d137538e3246b23a1649",
+      "exactCampaignVerified": true,
+      "ending": "accountable",
+      "decisions": 14
+    }
+  ],
+  "limits": [
+    "This is content/handler compatibility evidence, not full model semantics or browser/AT acceptance.",
+    "The narrative is authored fiction. Conditional receipts are not measured causal forecasts."
+  ]
+}

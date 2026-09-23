@@ -1,3 +1,5 @@
+> Legacy v1 reference. For the current development implementation, read [privacy/v2-collection-design.md](privacy/v2-collection-design.md). This document does not describe v2 readiness or activation.
+
 # Data and privacy
 
 The game has no accounts. Every new run gets a random ID and a separate random withdrawal key. No identifier links different runs on the server. The key is hashed before database storage. The public run number is a sequence number, not a person number.

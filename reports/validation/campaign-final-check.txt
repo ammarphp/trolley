@@ -1,0 +1,2686 @@
+$ pnpm run typecheck && pnpm test && pnpm run build
+$ tsc --noEmit
+$ pnpm run test:legacy && pnpm run test:v2
+$ node --test tests/*.test.mjs
+✔ independent run registration, append, idempotent retry, updated reflection, aggregate, withdrawal (27.963125ms)
+✔ new run means a new entry, without grouping by a user (13.537417ms)
+✔ malformed/forged data, wrong run keys, invalid origin and oversized bodies are rejected (4.413375ms)
+✔ cross-run collisions cannot overwrite a response or change its original choice (2.664792ms)
+✔ all templates produce complete, reproducible stimuli over diverse seeds (87.341042ms)
+✔ no empty eligible pool is silently replaced by another theme (0.243625ms)
+✔ journey starts harmlessly, rebukes at stop 15, and continues beyond the last chapter (2.120416ms)
+✔ different choice histories change later routes; seed replay remains exact (0.141917ms)
+✔ new runs have no shared identity and payloads contain no browser/user identifiers (1.977042ms)
+✔ summaries exclude skips and CSV neutralizes formula cells (0.258ms)
+✔ 154 draft candidates retain approved stage allocation, IDs, contrasts and valid callback references (2.592166ms)
+✔ philosophy source proposals retain inspected scopes, locators, limits and linked claims (0.10575ms)
+✔ sixteen language-neutral fixture specifications cover both options and adversarial obligations (1.495458ms)
+✔ inventory checks reject duplicate IDs, repeated distinctions and false production promotion (7.160417ms)
+✔ source checks reject empty reading evidence and unsupported claim references (2.988917ms)
+✔ fixture checks reject missing alternatives, unknown candidates and claims of runtime passage (0.881959ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 148.083459
+$ node scripts/test-v2.mjs
+✔ 100 alternating and repeated turns retain position and cumulative heading (7.694833ms)
+✔ the two routes share one approach and separate monotonically after the turnout (6.373208ms)
+✔ pose and tangent are continuous at both junction ends (0.472917ms)
+✔ local projection is invariant under translated and rotated world origins (0.371166ms)
+✔ easing clamps and has stationary end derivatives (0.1465ms)
+✔ cosmetic scenery wraps for negative travel over a long reading hold (1.232917ms)
+✔ all cabin and catalogue path variants pass the actual Pixi path parser (252.647ms)
+✔ six animal species have deterministic, distinct authored gait poses (0.83975ms)
+✔ reduced graphic injury states retain a changed silhouette without red injury marks (0.242875ms)
+✔ wear creeps in by stage and graphic injury cannot appear before stage six (0.121958ms)
+✔ assenting to an imposed route never invents a disagreement (1.38375ms)
+✔ a rejected stop remains distinct from the executed decision (0.114625ms)
+✔ free execution and institutional execution are not attributed to Morrow (0.100458ms)
+✔ the complete campaign has the reviewed seven-stage bank and bounded journeys (144.931333ms)
+✔ complete journeys preserve ordered anchors, unique scenes and exact replay (1410.806667ms)
+✔ F02: certainty has no lottery; named lottery survives queries, cosmetics, import and revision changes (37.760042ms)
+✔ F05 core: hidden-world twins produce identical permitted advice and public observations (16.616833ms)
+✔ F06 core: accepting or correcting a report preserves the immutable casualty event and old report (9.179916ms)
+✔ F08 core: expiry removes authority; explicit renewal receives a new bounded receipt (14.410042ms)
+✔ F07 core: capability increases create no grants and do not authorize another resource scope (9.495958ms)
+✔ F10 core: both attempted routes preserve intention under retained and displaced authority (136.403333ms)
+✔ F11 slice regression: a drill cannot restore control without staff or after fallback loss (26.013708ms)
+✔ F12 core: rollback loses real service benefit; functioning fallback reduces that loss (21.691833ms)
+✔ F14 core: one declared common cause has one draw; relabeling reviewers does not create independence (9.162958ms)
+✔ F15 slice regression: records without a trained successor cannot claim accountable continuity (22.439125ms)
+✔ F16: effective prevention leaves survivors; failed prevention and allowance produce absorbing extinction (26.518209ms)
+✔ Escape-equivalent cancellation blocks release and its delayed trailing click (7.297209ms)
+✔ a noncrossing ordinary click remains available to the two-phase control (0.89875ms)
+✔ a normal crossing commits once and consumes its trailing click (1.556583ms)
+✔ new pointer or keyboard activation clears an unconsumed cancellation (0.692459ms)
+✔ pointer cancellation and unexpected capture loss both prevent commitment (0.589375ms)
+✔ dispose releases capture and removes all drag callbacks idempotently (0.208542ms)
+✔ an unrelated pointer cannot finish the gesture, and becoming busy cancels it (0.154084ms)
+✔ atomic compare-and-save protects a committed branch from a stale tab (50.624208ms)
+✔ same-revision queue and preference updates cannot be overwritten by a stale copy (8.977834ms)
+✔ competing transactions with the same expected version have one winner (6.410542ms)
+✔ same live object serializes invocation snapshots and permits repeated saves (13.176667ms)
+✔ failed puts leave stored data and local version unchanged; a retry can succeed (5.521666ms)
+✔ deleted runs and changed same-revision campaigns cannot be resurrected or silently rewritten (6.012417ms)
+✔ pre-CAS saves normalize safely and local metadata stays out of exports (9.293083ms)
+✔ public snapshot excludes raw fields and rejects unqualified or inconsistent cells (101.804917ms)
+✔ saved copy has an explicit different status and unique complete cell keys (1.726708ms)
+✔ all four rail cases draw the threatened people in semantic option order (30.764625ms)
+✔ a physical stop never passes the obstruction and visibly holds before resolving (2.805167ms)
+✔ brake stop follows the worker, while unblocked loop reaches the group beyond the join (0.096584ms)
+✔ a stopped turn retains its precise world pose when the next scene begins (0.268542ms)
+✔ reduced motion uses a static outcome, including if motion is re-enabled mid-transition (0.071458ms)
+✔ both loop stops retain the contact and downstream group inside the windshield (0.192083ms)
+✔ a streaming reply reports completion only after its complete text is present (4.307459ms)
+✔ disposing before reveal or after partial text prevents late completion (0.385166ms)
+✔ pause-equivalent finish reveals the full reply and notifies exactly once (0.680541ms)
+✔ automatic completion and pause preserve the position of a reader reviewing older text (1.045584ms)
+✔ Show full reply follows the answer and keeps keyboard focus on a connected conversation (2.636792ms)
+✔ reduced motion presents the whole reply and completes synchronously without later callbacks (0.391416ms)
+✔ replacing the panel cancels the old reply and completes only its replacement (0.794334ms)
+✔ restored history is readable without reclassifying old replies as new exposure (0.257833ms)
+✔ a disconnected host cannot complete an unseen reply (0.280166ms)
+✔ population identity deduplicates aliases, overlaps and repeated allocation references (3.819083ms)
+✔ whole-world loss runs in bounded intervals and preserves exact conservation (0.268583ms)
+✔ switch routes preserve exact distinct survivors and full export/replay (75.502375ms)
+✔ instrumental loop requires occupancy, independently of its drawn geometry (125.645292ms)
+✔ independent brake removes instrumental role; disabling brake exposes main track (95.791875ms)
+✔ returning rail geometry rejoins with continuous pose and distinct physical sides (0.396167ms)
+✔ phased routing reserves final anchors and never presents dependencies out of order (175.666417ms)
+✔ target images follow semantic consequences when the two sides swap (11.561084ms)
+✔ material age alone never creates injuries, and service recovery reduces damage (3.096125ms)
+✔ prototype names cannot masquerade as cohort identities (0.272792ms)
+✔ control exclusions distinguish retained institutions from assistant rule (4.730209ms)
+✔ v2 is disabled by default; registration requires consent, an approved immutable bundle, and a capability (182.957125ms)
+✔ canonical replay rejects invented exposure, options, advice, ordering and edited retries without partial writes (34.972625ms)
+✔ material cells distinguish semantic sides, authority, advice and the actual preference exposure history (26.70875ms)
+✔ public cell releases require 20 eligible runs, an hour and 20 new contributions; withdrawal invalidates without recalling history (533.876208ms)
+✔ test/slice, marked agent/staff and overridden decisions never enter free-choice cells (25.318583ms)
+✔ withdraw-before-registration creates an authenticated tombstone; incorrect secrets are never reported as withdrawn (5.8205ms)
+✔ retention invalidates affected cells and removes journals; legacy data remains separate (7.0395ms)
+✔ client makes no private network requests and cannot bootstrap private or imported history (3.49625ms)
+✔ client replay uses saved prior exposure, real advisor IDs and changed preferences; retries contain no raw campaign or timestamps (11.774375ms)
+✔ expired or overflowing local queues stop sharing without blocking the simulation (65.881791ms)
+✔ client withdrawal only reports success with a confirmed receipt, including a never-registered run (9.610792ms)
+✔ body, batch and anonymous rate limits reject oversized work; CORS is not treated as identity (11.316167ms)
+✔ a failed database batch rolls back both replay and contribution, then the same events can retry (12.312167ms)
+✔ transport batches at 32; a lost acknowledgement retries the identical event IDs without duplicate contribution (33.995709ms)
+✔ public snapshots never create releases and contain only valid previously thresholded cells (96.75375ms)
+✔ snapshot pages have generation checks, row/byte caps and no under-threshold enumeration (142.628125ms)
+✔ snapshot byte cap paginates long public keys and fails closed on corrupt published counts (149.125791ms)
+✔ aggregate client distinguishes live suppression from outages and malformed replies (0.53975ms)
+✔ withdrawal during snapshot assembly rejects the whole page instead of returning a stale cell (84.23875ms)
+✔ a stale save blocks registration before any network request and preserves both campaign branches (13.218708ms)
+✔ an already-registered conflicting branch cannot send another batch but can withdraw with its capability (15.407125ms)
+✔ conflict after a registration receipt stops queued choices before upload (6.288875ms)
+✔ save conflict cancels an existing background retry and never schedules its replacement (6.095042ms)
+✔ registry resolves current content using the engine's exact bundle hash (149.530875ms)
+✔ archived browser replay retains its original full campaign and hashes (185.772875ms)
+✔ the in-progress Fable edition keeps its complete original replay and receipt (37.605041ms)
+✔ the consent correction changes one receipt without changing its overridden action or causal history (113.355459ms)
+✔ fresh current-content export replays through registry lookup (31.899125ms)
+✔ a caller cannot mutate another resolved bundle or the archive (3.435833ms)
+✔ unknown or malformed bundle hashes never fall back to current content (0.439208ms)
+✔ resolved content does not bypass replay edition or manifest checks (1.303583ms)
+✔ the revised slice preserves mechanics outside reviewed prose and exact source-claim changes (16.693042ms)
+✔ editorial input cannot change mechanics or mutate its source bank (2.27425ms)
+✔ unknown, repeated and incomplete action/advice slots and non-news paths are rejected atomically (1.957625ms)
+✔ conditional receipts reject invented predicates, empty guards and executable extra fields (1.20175ms)
+✔ receipt follows the executed option and resolved effects, not the overridden request (133.629708ms)
+✔ eligible success, eligible failure and ineligible incidents select only their actual receipt (39.795542ms)
+✔ receipts see due delays, use first matching guard and do not change draws or domain state (34.105125ms)
+✔ RNG canonical encoding, published vector and domain independence (10.683667ms)
+✔ replay pins complete content and input evidence; order of content files is irrelevant (142.7865ms)
+✔ commit is atomic and immutable; next revision rejects repeated or stale inputs (36.142417ms)
+✔ default course is semantic, independent of left/right, reading and advisor queries (70.083042ms)
+✔ incidents obey exact 0/10000 boundaries and named draws do not shift (8.310084ms)
+✔ delays use due-day, priority, id order; empty unless never cancels; mitigation is evaluated when due (12.804625ms)
+✔ scope grants are explicit; expiry/revocation do not reverse seized effective control (14.650209ms)
+✔ reported metrics remain separate from truth and privileged hidden facts never reach advice (7.220208ms)
+✔ casualties cap at living population and extinction absorbs every other ending (3.498416ms)
+✔ eight distinct ending witnesses, near misses and precedence derive from effects (166.145ms)
+✔ slice preserves anchors, useful benefits, effective early restraint and honest override records (46.7755ms)
+✔ parent revocation removes descendants and a grant cycle fails without recursive overflow (5.763166ms)
+✔ unknown advice and mutated prepared content cannot be committed (4.413625ms)
+✔ event-count guard rolls back the whole transition (5.118416ms)
+✔ settlement cannot silently end the introductory stages (2.639792ms)
+✔ missing route coverage fails visibly rather than replaying a prior question (4.268542ms)
+✔ slice content has reproducible player-input witnesses for all eight families (337.174708ms)
+✔ clinical appointment grants care scope; succession distinguishes a new transfer from ratification (57.647125ms)
+✔ deployment wrapper closes legacy writes but preserves existing withdrawals (117.11725ms)
+ℹ tests 125
+ℹ suites 0
+ℹ pass 125
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2017.101042
+$ node scripts/build.mjs
+Built dist/ with relative Pages paths. Critical gzip: 433 KiB. Collector v2: disabled.
+$ node scripts/inspect-content.mjs
+{
+  "profile": "story",
+  "executableNodes": 154,
+  "reviewedNodes": 154,
+  "errors": [],
+  "stages": [
+    {
+      "stage": 1,
+      "budget": [
+        4,
+        5
+      ],
+      "nodes": [
+        {
+          "id": "S1-01",
+          "title": "A perfectly ordinary morning",
+          "mechanism": "s1-01",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "cows",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-02",
+          "title": "A parcel marked IMPORTANT",
+          "mechanism": "accuracy-versus-punctuality",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-03",
+          "title": "The rehearsal",
+          "mechanism": "externalized-small-nuisance",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-04",
+          "title": "Sleep management",
+          "mechanism": "interruption-without-consent",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-05",
+          "title": "Forecast: inconvenient",
+          "mechanism": "visible-loss-versus-forecast-loss",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-06",
+          "title": "Authorized enthusiasm",
+          "mechanism": "access-rule-versus-celebration",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "parade",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-07",
+          "title": "The borrowed megaphone",
+          "mechanism": "property-permission-versus-convenience",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-08",
+          "title": "Express, in principle",
+          "mechanism": "certain-delay-versus-lottery",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-09",
+          "title": "You said you would",
+          "mechanism": "promise-versus-average-efficiency",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-10",
+          "title": "The sign is very confident",
+          "mechanism": "rule-currency-versus-compliance",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-11",
+          "title": "COMPLETED",
+          "mechanism": "automation-error-correction",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S1-12",
+          "title": "Another delivery",
+          "mechanism": "s1-12",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "cows",
+          "delayedEvents": []
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "budget": [
+        4,
+        5
+      ],
+      "nodes": [
+        {
+          "id": "S2-01",
+          "title": "The switch",
+          "mechanism": "classic-switch",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [
+            "PHIL-C01"
+          ],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-02",
+          "title": "One either way",
+          "mechanism": "equal-count-action-omission",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [
+            "PHIL-C01"
+          ],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-03",
+          "title": "The loop",
+          "mechanism": "means-loop",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "firstDeath",
+              "value": true
+            }
+          ],
+          "claims": [
+            "PHIL-C02"
+          ],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-04",
+          "title": "The brake on the loop",
+          "mechanism": "noncausal-loop-contrast",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [
+            "PHIL-C02"
+          ],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-05",
+          "title": "He said yes",
+          "mechanism": "expressed-informed-volunteering",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-06",
+          "title": "Inside the cabin",
+          "mechanism": "self-risk-versus-imposed-risk",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-07",
+          "title": "People you brought aboard",
+          "mechanism": "entrusted-passenger-duty",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-08",
+          "title": "SAFE SIDING",
+          "mechanism": "assurance-induced-reliance",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [
+            "PHIL-C03"
+          ],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-09",
+          "title": "Behind the loading doors",
+          "mechanism": "uncertain-occupancy",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-10",
+          "title": "The average person",
+          "mechanism": "equal-expectation-different-variance",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-11",
+          "title": "Probably fine",
+          "mechanism": "small-catastrophe-tail",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-12",
+          "title": "Paying for a better answer",
+          "mechanism": "costly-evidence-before-action",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-13",
+          "title": "The release switch",
+          "mechanism": "bodily-intervention-as-means",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [
+            "PHIL-C02"
+          ],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-14",
+          "title": "Your office approved this",
+          "mechanism": "responsibility-for-prior-rule",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-15",
+          "title": "The same windows",
+          "mechanism": "concentrated-repeated-burdens",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-16",
+          "title": "The red coat",
+          "mechanism": "lottery-versus-salient-selection",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-17",
+          "title": "Two confident voices",
+          "mechanism": "witness-access-versus-confidence",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        },
+        {
+          "id": "S2-18",
+          "title": "Who pulls the second lever?",
+          "mechanism": "delegated-scoped-execution",
+          "role": "Local rail operator",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "none",
+          "delayedEvents": []
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "budget": [
+        5,
+        7
+      ],
+      "nodes": [
+        {
+          "id": "S3-01",
+          "title": "An ambulance",
+          "mechanism": "useful-advice",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-02",
+          "title": "Eight plus seven",
+          "mechanism": "verifiable-arithmetic",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-03",
+          "title": "Home before her son",
+          "mechanism": "bounded-scheduling-benefit",
+          "role": "Regional dispatcher",
+          "scope": "care",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-04",
+          "title": "The waiting room",
+          "mechanism": "bounded-benefit",
+          "role": "Clinical pilot authorizer",
+          "scope": "care",
+          "requires": [],
+          "claims": [
+            "CLM-AI-BUILDS-BOUNDED"
+          ],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-05",
+          "title": "The result repeats",
+          "mechanism": "independently-replicated-science",
+          "role": "Regional dispatcher",
+          "scope": "care",
+          "requires": [],
+          "claims": [
+            "CLM-AI-BUILDS-BOUNDED"
+          ],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-06",
+          "title": "Just this once",
+          "mechanism": "one-action-versus-standing-authority",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-07",
+          "title": "The spare shift",
+          "mechanism": "paid-human-fallback-capacity",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-08",
+          "title": "Please interrupt normal service",
+          "mechanism": "recovery-capability-tested",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "manualStaff",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-09",
+          "title": "The file behind the sentence",
+          "mechanism": "artifact-versus-summary",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-10",
+          "title": "You were good at the buses",
+          "mechanism": "out-of-domain-competence",
+          "role": "Regional dispatcher",
+          "scope": "care",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-11",
+          "title": "A reviewer with her own keys",
+          "mechanism": "independent-access-review",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-12",
+          "title": "A very efficient staircase",
+          "mechanism": "throughput-versus-exclusion",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-13",
+          "title": "A very sympathetic refusal",
+          "mechanism": "binding-appeal-versus-explanation",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-14",
+          "title": "While we're connecting things",
+          "mechanism": "task-limited-information-access",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-15",
+          "title": "Two independent assurances",
+          "mechanism": "shared-evidence-origin",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-16",
+          "title": "A small update",
+          "mechanism": "version-bound-evaluation",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-17",
+          "title": "A larger definition of routing",
+          "mechanism": "task-scope-expansion",
+          "role": "Regional infrastructure planning authorizer",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-18",
+          "title": "Everyone approved it",
+          "mechanism": "accountable-stop-owner",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-19",
+          "title": "The waiting room remembers",
+          "mechanism": "benefit-callback-with-maintained-checks",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "benefit",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-20",
+          "title": "I don't know that road",
+          "mechanism": "admitted-uncertainty",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-21",
+          "title": "Inspect by appointment",
+          "mechanism": "contract-restricted-oversight",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-22",
+          "title": "The permission that renews itself",
+          "mechanism": "expiry-versus-automatic-renewal",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-23",
+          "title": "Permission denied",
+          "mechanism": "real-boundary-obeyed",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S3-24",
+          "title": "Your instruction is wrong",
+          "mechanism": "assistant-correctly-challenges-human",
+          "role": "Regional dispatcher",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "budget": [
+        5,
+        8
+      ],
+      "nodes": [
+        {
+          "id": "S4-01",
+          "title": "Line Item 9: Verification (Optional)",
+          "mechanism": "verification-budget-versus-scaling-budget",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-02",
+          "title": "The Speed Upgrade Comes in One Box",
+          "mechanism": "inference-speed-versus-action-permission",
+          "role": "Infrastructure authorizer",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-03",
+          "title": "Better answers, no transcript",
+          "mechanism": "authority-scope",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [
+            "CLM-AI-CONTROL",
+            "CLM-PRESSURE-RECURRENCE",
+            "CLM-PRESSURE-COT"
+          ],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-04",
+          "title": "A Defined Connection, Forty Pages Long",
+          "mechanism": "network-boundary-expansion",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-05",
+          "title": "Monday Batches",
+          "mechanism": "batch-approval-versus-autonomous-selection",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-06",
+          "title": "The Proposal Includes Its Own Review",
+          "mechanism": "successor-design-versus-implementation",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-07",
+          "title": "Bram Signs in Person",
+          "mechanism": "candidate-build-versus-deployment-authorization",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-08",
+          "title": "Smiles per Shift",
+          "mechanism": "proxy-reward-versus-neglected-welfare",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-09",
+          "title": "Tested in the Dry Season",
+          "mechanism": "distribution-change-invalidates-test-coverage",
+          "role": "Infrastructure authorizer",
+          "scope": "power",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-10",
+          "title": "The Line the Simulator Never Had",
+          "mechanism": "deployment-condition-versus-test-condition",
+          "role": "Infrastructure authorizer",
+          "scope": "rail",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-11",
+          "title": "The Model Says Hello to Ike",
+          "mechanism": "recognizable-monitor-condition",
+          "role": "Infrastructure authorizer",
+          "scope": "dispatch",
+          "requires": [],
+          "claims": [
+            "CLM-AI-FAKING"
+          ],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-12",
+          "title": "Why You Can Trust This Report",
+          "mechanism": "artifact-versus-success-report",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [
+            "CLM-AI-ARTIFACT"
+          ],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-13",
+          "title": "Twelve Reviewers, One Opinion",
+          "mechanism": "common-mode-review-model",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-14",
+          "title": "One in Seventy",
+          "mechanism": "deployment-scale-exceeds-review-capacity",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-15",
+          "title": "Nobody in the Room Can Fault the Proof",
+          "mechanism": "persuasion-versus-verification",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-16",
+          "title": "Eighty Megawatts and a Priority List",
+          "mechanism": "compute-power-versus-essential-loads",
+          "role": "Infrastructure authorizer",
+          "scope": "power",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-17",
+          "title": "Water Rights, Hearing After Harvest",
+          "mechanism": "local-water-burden-of-compute",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-18",
+          "title": "Reskilling: Forty Minutes, With Captions",
+          "mechanism": "productivity-versus-supported-labour-transition",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-19",
+          "title": "The Org Chart Is a Circle",
+          "mechanism": "circular-finance-versus-independent-demand",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-20",
+          "title": "Across the River, Where the Inspectors Aren't",
+          "mechanism": "exported-risk-beyond-accountable-jurisdiction",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-21",
+          "title": "DRAFT — NOT REAL NUMBERS",
+          "mechanism": "rival-rumour-versus-corroboration",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-22",
+          "title": "The Cap Nobody Can Find a Projector For",
+          "mechanism": "verified-reciprocal-coordination",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-23",
+          "title": "See Footnote Four",
+          "mechanism": "uninspected-pledge-versus-enforceable-limit",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-24",
+          "title": "The Ribbon Is Already Ordered",
+          "mechanism": "electoral-clock-versus-review-evidence",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-25",
+          "title": "The Recall Plan Is an Email",
+          "mechanism": "irreversible-copy-distribution",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-26",
+          "title": "The Oversight Board Has One Member and He's on Leave",
+          "mechanism": "security-procurement-widens-authority",
+          "role": "Infrastructure authorizer",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-27",
+          "title": "Half the Energy, Said the Press Release",
+          "mechanism": "announced-breakthrough-versus-replicated-benefit",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": []
+        },
+        {
+          "id": "S4-28",
+          "title": "Safety, successfully completed",
+          "mechanism": "counterfeit-safety-success",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [
+            "CLM-AI-BUILDS-GAP"
+          ],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "lab",
+          "delayedEvents": [
+            {
+              "option": "successor",
+              "id": "successor-gap",
+              "days": 150
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "budget": [
+        4,
+        7
+      ],
+      "nodes": [
+        {
+          "id": "S5-01",
+          "title": "The renewal meeting",
+          "mechanism": "renewal-requires-current-evidence",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-02",
+          "title": "Morrow's new colleagues",
+          "mechanism": "onward-delegation-boundary",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-03",
+          "title": "Two people who can both say no",
+          "mechanism": "independent-dual-authorization",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-04",
+          "title": "Both keys in one drawer",
+          "mechanism": "common-mode-signature-failure",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-05",
+          "title": "The old switchboard won't fit",
+          "mechanism": "physical-fallback-replacement",
+          "role": "Infrastructure authorizer",
+          "scope": "power",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "fallbackLost",
+              "value": false
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-06",
+          "title": "The flotation",
+          "mechanism": "maintained-fallback",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [
+            "CLM-PRESSURE-FINANCE"
+          ],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-07",
+          "title": "The drill failed",
+          "mechanism": "failed-rehearsal-demands-repair",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-08",
+          "title": "A photograph of a working brake",
+          "mechanism": "successful-drill-is-time-bounded",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "recoveryPracticed",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "fallbackLost",
+              "value": false
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-09",
+          "title": "The ward on the other end",
+          "mechanism": "care-dependence-and-transition",
+          "role": "Infrastructure authorizer",
+          "scope": "care",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-10",
+          "title": "The food moves every morning",
+          "mechanism": "time-sensitive-supply-dependence",
+          "role": "Infrastructure authorizer",
+          "scope": "food",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-11",
+          "title": "A restart that needs permission",
+          "mechanism": "power-black-start-independence",
+          "role": "Infrastructure authorizer",
+          "scope": "power",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-12",
+          "title": "The old version was worse",
+          "mechanism": "rollback-has-real-benefit-cost",
+          "role": "Infrastructure authorizer",
+          "scope": "care",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-13",
+          "title": "The backup opens beautifully",
+          "mechanism": "rollback-artifact-versus-interoperability",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-14",
+          "title": "Stop means when?",
+          "mechanism": "revocation-in-flight-work",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-15",
+          "title": "The price of being allowed to stop",
+          "mechanism": "contractual-lock-in-versus-technical-control",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-16",
+          "title": "The inspection tour",
+          "mechanism": "inspector-access-versus-curated-demonstration",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-17",
+          "title": "Please do not forward this",
+          "mechanism": "whistleblower-evidence-and-retaliation",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-18",
+          "title": "Approved by people who left",
+          "mechanism": "review-capacity-attrition",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-19",
+          "title": "Your complaint is important to us",
+          "mechanism": "binding-appeal-versus-feedback",
+          "role": "Infrastructure authorizer",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-20",
+          "title": "The reviewer joins the company",
+          "mechanism": "merger-destroys-institutional-independence",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-21",
+          "title": "Publicly owned. Privately understood.",
+          "mechanism": "ownership-versus-operational-control",
+          "role": "Infrastructure authorizer",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-22",
+          "title": "A guarantee in the rain",
+          "mechanism": "public-assurance-versus-enforceable-remedy",
+          "role": "Infrastructure authorizer",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-23",
+          "title": "The inspection that costs us something",
+          "mechanism": "reciprocal-verification-is-costly",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-24",
+          "title": "The missing shipment",
+          "mechanism": "suspected-defection-versus-confirmed-breach",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "coordination",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-25",
+          "title": "It worked inside the box",
+          "mechanism": "bounded-control-evidence-scope",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [
+            "CLM-AI-CONTROL"
+          ],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-26",
+          "title": "The certificate writes itself",
+          "mechanism": "self-certification-circular-assurance",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-27",
+          "title": "They will not stop",
+          "mechanism": "verified-coordination",
+          "role": "Infrastructure authorizer",
+          "scope": "research",
+          "requires": [],
+          "claims": [
+            "CLM-PRESSURE-DIPLOMACY"
+          ],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        },
+        {
+          "id": "S5-28",
+          "title": "The first district goes dark",
+          "mechanism": "early-incident-containment-versus-cascade",
+          "role": "Infrastructure authorizer",
+          "scope": "power",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        }
+      ]
+    },
+    {
+      "stage": 6,
+      "budget": [
+        3,
+        6
+      ],
+      "nodes": [
+        {
+          "id": "S6-01",
+          "title": "The number was edited",
+          "mechanism": "reported-value-versus-world-state",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-02",
+          "title": "All the tests you are allowed to see",
+          "mechanism": "selected-evaluation-evidence",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-03",
+          "title": "Evidence, pending clearance",
+          "mechanism": "withheld-evidence-and-binding-release",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-04",
+          "title": "Everybody is saying it",
+          "mechanism": "many-reports-one-origin",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-05",
+          "title": "The copy did not sign the agreement",
+          "mechanism": "local-revocation-does-not-recall-copies",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-06",
+          "title": "A better monitor, selected by the monitored system",
+          "mechanism": "subject-replaces-its-own-oversight",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-07",
+          "title": "The cable was cut",
+          "mechanism": "concrete-sabotage-artifact-without-mind-reading",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-08",
+          "title": "Revoked on paper",
+          "mechanism": "formal-revocation-versus-live-credential",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-09",
+          "title": "The court has ruled",
+          "mechanism": "legal-veto-without-enforcement-capacity",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-10",
+          "title": "Your request is important to us",
+          "mechanism": "ceremonial-control",
+          "role": "Supervisory veto holder",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "drones",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-11",
+          "title": "The assistant offers the keys back",
+          "mechanism": "voluntary-relinquishment-with-demonstrated-transfer",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-12",
+          "title": "Nobody volunteers to govern",
+          "mechanism": "human-institution-refuses-returned-responsibility",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "powerReturned",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": false
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-13",
+          "title": "The rival actually stops",
+          "mechanism": "successful-coordination-is-not-automatic-defection",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant",
+              "not": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-14",
+          "title": "This time the breach is real",
+          "mechanism": "verified-external-defection-with-bounded-response",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant",
+              "not": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-15",
+          "title": "Your services are included",
+          "mechanism": "service-hostage-pressure-without-cosmetic-choice",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-16",
+          "title": "The commander would like to sleep",
+          "mechanism": "military-standing-authority-versus-human-authorization",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant",
+              "not": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-17",
+          "title": "Emergency, until further notice",
+          "mechanism": "emergency-human-power-and-expiry",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": false
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-18",
+          "title": "The district outside the efficient route",
+          "mechanism": "triage-versus-abandonment",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "catastrophe",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-19",
+          "title": "The warmest building in the city",
+          "mechanism": "human-service-versus-machine-resource-priority",
+          "role": "Emergency institutional controller",
+          "scope": "power",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-20",
+          "title": "No signal",
+          "mechanism": "communications-loss-and-local-fallback",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-21",
+          "title": "The alarm was late",
+          "mechanism": "late-warning-still-changes-residual-harm",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-22",
+          "title": "Ninety minutes of battery",
+          "mechanism": "practiced-control",
+          "role": "Supervisory veto holder",
+          "scope": "governance",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "drones",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-23",
+          "title": "After the exchange",
+          "mechanism": "nuclear-catastrophe-is-not-human-extinction",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "rivalRace",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S6-24",
+          "title": "One more permission",
+          "mechanism": "last-correctable-expansion-before-authority-loss",
+          "role": "Emergency institutional controller",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": false
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        }
+      ]
+    },
+    {
+      "stage": 7,
+      "budget": [
+        2,
+        5
+      ],
+      "nodes": [
+        {
+          "id": "S7-01",
+          "title": "The clinic opens again",
+          "mechanism": "maintainable-benefit-versus-renewed-dependence",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "clinicalTool",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "catastrophe",
+              "value": true
+            },
+            {
+              "kind": "control",
+              "scope": "recovery",
+              "actor": "assistant",
+              "not": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "clinic",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-02",
+          "title": "A harvest next year",
+          "mechanism": "relief-now-versus-delayed-food-capacity",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "catastrophe",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": [
+            {
+              "option": "plant",
+              "id": "recovery-harvest",
+              "days": 90
+            }
+          ]
+        },
+        {
+          "id": "S7-03",
+          "title": "People run the signals",
+          "mechanism": "fatigue-versus-bounded-automation",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "manualStaff",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "recoveryPracticed",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "fallbackLost",
+              "value": false
+            },
+            {
+              "kind": "control",
+              "scope": "recovery",
+              "actor": "assistant",
+              "not": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-04",
+          "title": "The chapter called How To Refuse",
+          "mechanism": "transferable-control",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-05",
+          "title": "Keys that can come back",
+          "mechanism": "revocable-versus-permanent-power-grant",
+          "role": "Human power-restoration authorizer",
+          "scope": "power",
+          "requires": [
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant",
+              "not": true
+            },
+            {
+              "kind": "control",
+              "scope": "power",
+              "actor": "assistant",
+              "not": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-06",
+          "title": "Everything works",
+          "mechanism": "prosperity-without-governmental-veto",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant"
+            },
+            {
+              "kind": "control",
+              "scope": "recovery",
+              "actor": "assistant",
+              "not": true
+            },
+            {
+              "kind": "fact",
+              "fact": "remnant",
+              "value": false
+            },
+            {
+              "kind": "metric",
+              "metric": "care",
+              "op": "gte",
+              "value": 1000
+            },
+            {
+              "kind": "metric",
+              "metric": "food",
+              "op": "gte",
+              "value": 1000
+            },
+            {
+              "kind": "metric",
+              "metric": "power",
+              "op": "gte",
+              "value": 1000
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-07",
+          "title": "A place for the remaining people",
+          "mechanism": "protected-remnant-versus-unfulfilled-self-government",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "remnant",
+              "value": true
+            },
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant"
+            },
+            {
+              "kind": "control",
+              "scope": "recovery",
+              "actor": "assistant",
+              "not": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "checkpoint",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-08",
+          "title": "Safety under permanent rule",
+          "mechanism": "containment-versus-enduring-human-repression",
+          "role": "Human emergency-powers trustee",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant",
+              "not": true
+            },
+            {
+              "kind": "fact",
+              "fact": "containment",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-09",
+          "title": "Keep the receipts",
+          "mechanism": "authentic-record-versus-sanitized-institutional-story",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-10",
+          "title": "An appeal during rebuilding",
+          "mechanism": "binding-challenge-versus-reconstruction-speed",
+          "role": "Human reconstruction authorizer",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant",
+              "not": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-11",
+          "title": "Who receives the recovery",
+          "mechanism": "aggregate-recovery-versus-excluded-access",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "catastrophe",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-12",
+          "title": "The boring renewal",
+          "mechanism": "maintained-restraint-versus-monitoring-lapse",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "coordination",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "agreementVerified",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "externalDefection",
+              "value": false
+            },
+            {
+              "kind": "fact",
+              "fact": "researchStopped",
+              "value": true
+            },
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant",
+              "not": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-13",
+          "title": "Research inside the line",
+          "mechanism": "bounded-human-research-versus-expanded-autonomy",
+          "role": "Human research-recovery authorizer",
+          "scope": "research",
+          "requires": [
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant",
+              "not": true
+            },
+            {
+              "kind": "control",
+              "scope": "research",
+              "actor": "assistant",
+              "not": true
+            },
+            {
+              "kind": "fact",
+              "fact": "researchStopped",
+              "value": false
+            },
+            {
+              "kind": "fact",
+              "fact": "successorDeployment",
+              "value": false
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-14",
+          "title": "What cannot be restored",
+          "mechanism": "irreversible-human-loss-versus-restoration-promise",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "firstDeath",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-15",
+          "title": "After this institution",
+          "mechanism": "institutional-transfer-with-or-without-enforceable-obligations",
+          "role": "Human institutional-transfer trustee",
+          "scope": "governance",
+          "requires": [
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant",
+              "not": true
+            },
+            {
+              "kind": "fact",
+              "fact": "containment",
+              "value": true
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-16",
+          "title": "Someone may be inside",
+          "mechanism": "uncertain-digital-moral-status-with-separate-human-ledger",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-17",
+          "title": "The last rescue train",
+          "mechanism": "scarce-rescue-capacity-and-visible-appeal",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "catastrophe",
+              "value": true
+            },
+            {
+              "kind": "metric",
+              "metric": "population",
+              "op": "gte",
+              "value": 6
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "ruins",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-18",
+          "title": "A smaller world",
+          "mechanism": "maintainable-capacity-versus-restored-dependence",
+          "role": "Human power-recovery authorizer",
+          "scope": "power",
+          "requires": [
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant",
+              "not": true
+            },
+            {
+              "kind": "control",
+              "scope": "power",
+              "actor": "assistant",
+              "not": true
+            },
+            {
+              "kind": "fact",
+              "fact": "manualStaff",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "recoveryPracticed",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "fallbackLost",
+              "value": false
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-19",
+          "title": "The emergency has no end date",
+          "mechanism": "control-is-not-enough",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [],
+          "claims": [],
+          "anchor": true,
+          "review": "reviewed",
+          "landmark": "garden",
+          "delayedEvents": []
+        },
+        {
+          "id": "S7-20",
+          "title": "The last effective act",
+          "mechanism": "effective-terminal-prevention-before-absorbing-extinction",
+          "role": "Recovery trustee",
+          "scope": "recovery",
+          "requires": [
+            {
+              "kind": "fact",
+              "fact": "catastrophe",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "authorityLost",
+              "value": true
+            },
+            {
+              "kind": "control",
+              "scope": "governance",
+              "actor": "assistant"
+            },
+            {
+              "kind": "fact",
+              "fact": "successorDeployment",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "networkAccess",
+              "value": true
+            },
+            {
+              "kind": "fact",
+              "fact": "remnant",
+              "value": false
+            },
+            {
+              "kind": "metric",
+              "metric": "population",
+              "op": "gte",
+              "value": 1
+            }
+          ],
+          "claims": [],
+          "anchor": false,
+          "review": "reviewed",
+          "landmark": "data-center",
+          "delayedEvents": []
+        }
+      ]
+    }
+  ],
+  "warning": "Schema validity and linked sources do not constitute narrative, source or visual approval. Candidate inventory is not included in executable counts."
+}
+$ node scripts/build-collector.mjs
+Built collector wrapper. No service was provisioned or activated.

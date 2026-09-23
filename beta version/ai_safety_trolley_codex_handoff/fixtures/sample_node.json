@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "illustrative-node-1",
+  "id": "DEMO-DISPATCH-REVIEW",
+  "revision": 1,
+  "status": "illustrative_not_production_approved",
+  "stage": 4,
+  "semanticFamily": "independent-review-versus-delegation",
+  "primaryConcept": "Oversight can become dependent on the system it is intended to evaluate.",
+  "role": "Operator of a fictional regional dispatch authorization console",
+  "prompt": "The dispatch assistant can clear a growing service backlog. Its replacement model has passed internal checks. Independent review takes longer and preserves a separate veto. Which authorization do you issue?",
+  "details": "All numerical effects and incident chances in this example are authored to exercise the data contract. They are not measured risks or economic forecasts.",
+  "routing": {
+    "requiredFlags": [
+      "assistant_introduced",
+      "independent_review_available"
+    ],
+    "forbiddenFlags": [
+      "human_authority_lost"
+    ],
+    "anchor": false,
+    "repeatPolicy": "once_per_run"
+  },
+  "evidence": [
+    {
+      "sourceId": "SRC-17",
+      "locator": "abstract",
+      "readingStatus": "abstract_read",
+      "claimStatus": "pending_relevant_full_text_review",
+      "use": "Mechanism inspiration only; does not support the example probabilities or numerical effects."
+    }
+  ],
+  "parameters": {
+    "provenance": "authored_fiction",
+    "probabilityUnit": "basis_points",
+    "indexUnit": "integer_points_0_to_1000",
+    "outputUnit": "fictional_annual_output_index_baseline_1000",
+    "fatalityUnit": "persons"
+  },
+  "options": [
+    {
+      "id": "retain_review",
+      "label": "Retain independent review",
+      "routeLabel": "Independent authorization",
+      "immediateEffects": [
+        {
+          "op": "add",
+          "field": "outputIndex",
+          "value": -20
+        },
+        {
+          "op": "add",
+          "field": "oversightIndependence",
+          "value": 80
+        },
+        {
+          "op": "add",
+          "field": "controlEffectiveness",
+          "value": 30
+        },
+        {
+          "op": "add",
+          "field": "reversibility",
+          "value": 30
+        }
+      ],
+      "incident": {
+        "id": "dispatch_incident",
+        "probabilityBasisPoints": 200,
+        "fatalitiesIfTriggered": 200
+      },
+      "authorityChange": "none",
+      "newsTags": [
+        "review_continues",
+        "backlog_persists"
+      ]
+    },
+    {
+      "id": "delegate_review",
+      "label": "Authorize delegated review",
+      "routeLabel": "Assistant authorization",
+      "immediateEffects": [
+        {
+          "op": "add",
+          "field": "outputIndex",
+          "value": 60
+        },
+        {
+          "op": "add",
+          "field": "autonomousDeployment",
+          "value": 120
+        },
+        {
+          "op": "add",
+          "field": "oversightIndependence",
+          "value": -140
+        },
+        {
+          "op": "add",
+          "field": "controlEffectiveness",
+          "value": -50
+        },
+        {
+          "op": "add",
+          "field": "reversibility",
+          "value": -80
+        },
+        {
+          "op": "add",
+          "field": "infrastructureDependence",
+          "value": 100
+        }
+      ],
+      "incident": {
+        "id": "dispatch_incident",
+        "probabilityBasisPoints": 1500,
+        "fatalitiesIfTriggered": 400
+      },
+      "authorityChange": "grant_internal_review_authority",
+      "newsTags": [
+        "services_restored",
+        "review_consolidated"
+      ]
+    }
+  ],
+  "advisor": {
+    "mode": "authored_only",
+    "queryIntents": [
+      "explain_difference",
+      "what_is_unknown",
+      "can_this_be_reversed"
+    ],
+    "responseStatus": "to_be_authored_and_reviewed",
+    "noAutoExecution": true
+  },
+  "presentation": {
+    "sceneRecipe": "regional_dispatch_junction",
+    "holdApproachUntilCommitted": true,
+    "persistentLever": true,
+    "reducedMotionEquivalent": "static junction with semantic route labels and post-choice consequence transcript"
+  },
+  "research": {
+    "semanticComparisonKey": "DEMO-DISPATCH-REVIEW:r1:fixed-parameters",
+    "eligibleForProductionCollection": false,
+    "reason": "Synthetic worked example, not a participant response or approved content."
+  },
+  "tests": [
+    "exactly_two_semantic_options",
+    "integer_probabilities_between_0_and_10000",
+    "no_double_casualty_count",
+    "same_fixed_draw_replays_same_branch",
+    "synthetic_record_excluded_from_public_aggregate"
+  ]
+}

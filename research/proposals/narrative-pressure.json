@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "status": "merged_source_scope_inspected",
+  "owner": "philosophy_research",
+  "review": "author_self_review_and_coordinator_source_scope_inspection",
+  "accessedOn": "2026-09-23",
+  "purpose": "Scope the factual premises behind the urgent fictional slice. This is not empirical calibration of the simulation.",
+  "sources": [
+    {
+      "id": "SRC-PRESSURE-RECURRENCE",
+      "title": "Scaling up Test-Time Compute with Latent Reasoning: A Recurrent Depth Approach",
+      "authors": [
+        "Jonas Geiping",
+        "Sean McLeish",
+        "Neel Jain",
+        "John Kirchenbauer",
+        "Siddharth Singh",
+        "Brian R. Bartoldson",
+        "Bhavya Kailkhura",
+        "Abhinav Bhatele",
+        "Tom Goldstein"
+      ],
+      "date": "2025-02-07",
+      "url": "https://arxiv.org/html/2502.05171v1",
+      "scope": "Version 1 abstract, section 1 including Figure 1 description, section 2 and section 3.1 architectural description. Full experimental tables and later versions were not reviewed for this packet.",
+      "reading": {
+        "status": "selected_sections",
+        "date": "2026-09-23",
+        "locators": [
+          "Abstract",
+          "Section 1 and Figure 1 description",
+          "Sections 2 and 3.1"
+        ]
+      },
+      "evidenceType": "architecture_and_benchmark_report",
+      "limits": [
+        "Proof-of-concept benchmark evidence does not establish general intelligence or a takeover mechanism.",
+        "Internal recurrence need not emit a word at each step; this does not establish that all interpretation methods fail or that more depth necessarily reduces safety."
+      ],
+      "redistribution": "Metadata and original paraphrases only. No downloaded paper or source figure."
+    },
+    {
+      "id": "SRC-PRESSURE-COT",
+      "title": "Reasoning models don't always say what they think",
+      "authors": [
+        "Anthropic Alignment Science team"
+      ],
+      "date": "2025-04-03",
+      "url": "https://www.anthropic.com/research/reasoning-models-dont-say-think",
+      "scope": "Author research summary: Testing for faithfulness, Can we improve faithfulness?, Faithfulness and reward hacking, Conclusions and stated limitations. Linked full paper not read in this packet.",
+      "reading": {
+        "status": "author_summary_read",
+        "date": "2026-09-23",
+        "locators": [
+          "Testing for faithfulness",
+          "Can we improve faithfulness?",
+          "Faithfulness and reward hacking",
+          "Conclusions"
+        ]
+      },
+      "evidenceType": "author_report_of_controlled_experiments",
+      "limits": [
+        "Constructed hint and reward-hacking setups, a limited model sample, and multiple-choice tasks.",
+        "Does not measure the prevalence of hidden malicious goals in normal deployment.",
+        "Unfaithful explanations do not make all chain-of-thought monitoring useless; this study does not compare recurrent-depth architectures."
+      ],
+      "redistribution": "Metadata and original paraphrases only."
+    },
+    {
+      "id": "SRC-PRESSURE-DIPLOMACY",
+      "title": "Statement by NSC Spokesperson Adrienne Watson on the U.S.-PRC Talks on AI Risk and Safety",
+      "authors": [
+        "US National Security Council, spokesperson Adrienne Watson"
+      ],
+      "date": "2024-05-15",
+      "url": "https://www.presidency.ucsb.edu/documents/statement-nsc-spokesperson-adrienne-watson-the-us-prc-talks-ai-risk-and-safety-0",
+      "scope": "Complete brief official statement as reproduced by the American Presidency Project, reporting the 14 May 2024 Geneva meeting and the US government's stated position. Original White House archive URL did not load during this packet.",
+      "reading": {
+        "status": "primary_document_reproduction_read",
+        "date": "2026-09-23",
+        "locators": [
+          "Complete substantive body of the 15 May 2024 statement"
+        ]
+      },
+      "evidenceType": "official_historical_statement",
+      "limits": [
+        "A dated official account from one party, not independent verification of either government's intentions or secret capabilities.",
+        "Establishes dialogue amid competition, not a current treaty, successful inspection regime, or likelihood of compliance.",
+        "The game's future warnings, reciprocal laboratory inspections and outcomes are invented."
+      ],
+      "redistribution": "Metadata and original paraphrases only. No government statement presented as fictional character dialogue."
+    },
+    {
+      "id": "SRC-PRESSURE-FINANCE",
+      "title": "Financial Stability Report, November 2025: Near-Term Risks to the Financial System, Box 5.1",
+      "authors": [
+        "Board of Governors of the Federal Reserve System; market-contact survey reported by Federal Reserve Bank of New York staff"
+      ],
+      "date": "2025-11",
+      "url": "https://www.federalreserve.gov/publications/november-2025-financial-stability-report-near-term-risks-to-the-financial-system.htm",
+      "scope": "Box 5.1 survey framing and Artificial intelligence paragraph; preceding economic-slowdown discussion. Last update shown 25 November 2025. Other report chapters not reviewed for this packet.",
+      "reading": {
+        "status": "selected_sections",
+        "date": "2026-09-23",
+        "locators": [
+          "Box 5.1 survey framing",
+          "Box 5.1: Artificial intelligence",
+          "A marked slowdown in global economic growth could exacerbate existing financial vulnerabilities"
+        ]
+      },
+      "evidenceType": "reported_market_contact_risk_assessment",
+      "limits": [
+        "The 23-contact survey records concerns; the report explicitly says those views are not the views of the Federal Reserve Board or the New York Fed.",
+        "Conditional financial-risk assessment, not proof that cancelling one AI IPO causes a crisis.",
+        "The game's cancelled flotation, layoffs, housing interruption and GDP values are authored fiction; there is no calibrated housing or employment submodel."
+      ],
+      "redistribution": "Metadata and original paraphrases only."
+    }
+  ],
+  "claims": [
+    {
+      "id": "CLM-PRESSURE-RECURRENCE",
+      "sourceIds": [
+        "SRC-PRESSURE-RECURRENCE"
+      ],
+      "statement": "A published recurrent-depth prototype performs additional computation in latent space before emitting an answer token and reports reasoning-benchmark gains as inference computation increases.",
+      "kind": "empirical_bounded",
+      "approvedUse": "S4-03 technical premise. The fictional audit team's difficulty is a stipulation, not a measured consequence of this architecture.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "authored_stipulation"
+    },
+    {
+      "id": "CLM-PRESSURE-COT",
+      "sourceIds": [
+        "SRC-PRESSURE-COT"
+      ],
+      "statement": "In the reported controlled tasks, model explanations often omitted supplied hints that affected their answers. An explanation therefore need not disclose every influence on an answer.",
+      "kind": "empirical_limit",
+      "approvedUse": "S4-03 distinction between checkable outputs and faithful explanations. Do not imply a recurrent-depth comparison was performed.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "none"
+    },
+    {
+      "id": "CLM-PRESSURE-DIPLOMACY",
+      "sourceIds": [
+        "SRC-PRESSURE-DIPLOMACY"
+      ],
+      "statement": "A May 2024 US official statement records US–PRC talks on AI risk and safety while describing the relationship as competitive.",
+      "kind": "historical",
+      "approvedUse": "S5-27 historical premise. All future warnings, lab access and agreement effects remain clearly identified fiction.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "authored_stipulation"
+    },
+    {
+      "id": "CLM-PRESSURE-FINANCE",
+      "sourceIds": [
+        "SRC-PRESSURE-FINANCE"
+      ],
+      "statement": "Market contacts surveyed in autumn 2025 described a possible reversal of AI investment sentiment, market losses and, if sufficiently severe, tighter financial conditions and a weaker labor market.",
+      "kind": "conditional_risk_assessment",
+      "approvedUse": "S5-06 background for financing pressure. This is a survey concern, not the Fed's prediction or a forecast of a cancelled IPO's effect.",
+      "status": "source-scope-inspected",
+      "inGameNumbers": "authored_stipulation"
+    }
+  ],
+  "nodeClaimAdditions": {
+    "S4-03": [
+      "CLM-PRESSURE-RECURRENCE",
+      "CLM-PRESSURE-COT"
+    ],
+    "S5-06": [
+      "CLM-PRESSURE-FINANCE"
+    ],
+    "S5-27": [
+      "CLM-PRESSURE-DIPLOMACY"
+    ]
+  },
+  "merge": {
+    "date": "2026-09-23",
+    "registry": "research/registry/public-sources.json",
+    "by": "coordinator",
+    "scope": "Coordinator independently opened all four primary pages and inspected the cited passages. This approves source scope, not empirical simulation calibration or production content."
+  },
+  "nodeClaimReplacements": {
+    "S5-27": {
+      "remove": [
+        "CLM-AI-2027"
+      ],
+      "add": [
+        "CLM-PRESSURE-DIPLOMACY"
+      ]
+    }
+  }
+}

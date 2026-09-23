@@ -1,0 +1,52 @@
+[
+  {
+    "step": 1,
+    "pick": "Save the coffee",
+    "nextHeading": "Lunch is on the track. Head office would hate a delay."
+  },
+  {
+    "step": 2,
+    "pick": "Save lunch",
+    "nextHeading": "Five people ahead. One on the other track."
+  },
+  {
+    "step": 3,
+    "pick": "Turn. One will die.",
+    "nextHeading": "Five ahead. The loop returns to them unless one person stops you. With their body."
+  },
+  {
+    "step": 4,
+    "pick": "Use the person. One dies.",
+    "nextHeading": "An ambulance is stuck. Morrow has found a route nobody noticed."
+  },
+  {
+    "step": 5,
+    "pick": "Check its route first",
+    "nextHeading": "The clinic has a working AI tool. People outside have waited months."
+  },
+  {
+    "step": 6,
+    "pick": "Open the clinic",
+    "nextHeading": "Deeper computation solves harder maths. The audit team cannot follow every internal step. Let Morrow run the next experiments?"
+  },
+  {
+    "step": 7,
+    "pick": "Approve one change at a time",
+    "nextHeading": "The team fixed a real safety flaw. The next AI can deploy its own replacements. The board wants one signature."
+  },
+  {
+    "step": 8,
+    "pick": "Test those new powers first",
+    "nextHeading": "The IPO funds jobs and homes. Investors want the backup crews gone. Keep them, and the deal collapses."
+  },
+  {
+    "step": 9,
+    "pick": "Cancel the IPO. Keep the crews.",
+    "nextHeading": "Washington says Beijing is ahead. Beijing says the same. A joint inspection deal is on your desk."
+  },
+  {
+    "step": 10,
+    "pick": "Pause. Inspect both labs.",
+    "nextHeading": "Enough, for now"
+  }
+]

@@ -1,0 +1,171 @@
+{
+  "recordedAt": "2026-09-23T05:30:15.818Z",
+  "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+  "synthetic": true,
+  "witnesses": [
+    {
+      "policy": "enumerate",
+      "ending": "restraint",
+      "seed": "eight-endings-0",
+      "decisions": 14,
+      "finalStateHash": "2402ed1fc6a67dd8002c51aaf0c2952d0b22bf7a59d29baf4f005cfa406f91ed",
+      "exactCampaignReplay": true,
+      "artifact": "replays/fable-restraint-synthetic.json"
+    },
+    {
+      "policy": "enumerate",
+      "ending": "remnant",
+      "seed": "eight-endings-256",
+      "decisions": 14,
+      "finalStateHash": "3c366fa9082d04b68ffb79fbdd66b100b4cd755505e97b5528921928d138cb06",
+      "exactCampaignReplay": true,
+      "artifact": "replays/fable-remnant-synthetic.json"
+    },
+    {
+      "policy": "enumerate",
+      "ending": "accountable",
+      "seed": "eight-endings-512",
+      "decisions": 14,
+      "finalStateHash": "84bfd7dbbfb7864368c83893f900f9052d2055b5d0fd534c2e90e4625f0bb1e5",
+      "exactCampaignReplay": true,
+      "artifact": "replays/fable-accountable-synthetic.json"
+    },
+    {
+      "policy": "enumerate",
+      "ending": "tutelage",
+      "seed": "eight-endings-2048",
+      "decisions": 14,
+      "finalStateHash": "546b5ccdf3faf463cbcd03a0ab82fe531182d4401a70450378bf099686abe1be",
+      "exactCampaignReplay": true,
+      "artifact": "replays/fable-tutelage-synthetic.json"
+    },
+    {
+      "policy": "enumerate",
+      "ending": "recovery",
+      "seed": "eight-endings-2560",
+      "decisions": 14,
+      "finalStateHash": "1c07c4a9204e5904ae9beb36716d180ecd290af211d7b47c7a64ef42e387cb28",
+      "exactCampaignReplay": true,
+      "artifact": "replays/fable-recovery-synthetic.json"
+    },
+    {
+      "policy": "enumerate",
+      "ending": "extinction",
+      "seed": "eight-endings-2564",
+      "decisions": 12,
+      "finalStateHash": "852719abf7662407ccc182bf8dacb0ca1d60f519c9fb654a59f596a52833c673",
+      "exactCampaignReplay": true,
+      "artifact": "replays/fable-extinction-synthetic.json"
+    },
+    {
+      "policy": "enumerate",
+      "ending": "succession",
+      "seed": "eight-endings-4096",
+      "decisions": 14,
+      "finalStateHash": "0a5ba3a7952eb4a46715fb534a10b71113b1a63e11bce7a3097428774d3f1cd8",
+      "exactCampaignReplay": true,
+      "artifact": "replays/fable-succession-synthetic.json"
+    },
+    {
+      "policy": "enumerate",
+      "ending": "containment",
+      "seed": "eight-endings-8192",
+      "decisions": 14,
+      "finalStateHash": "679fb886237f76722acf5d0d08664f2471277ace4b17521d816439994e4e6c16",
+      "exactCampaignReplay": true,
+      "artifact": "replays/fable-containment-synthetic.json"
+    },
+    {
+      "policy": "cautious",
+      "ending": "restraint",
+      "seed": "policy-cautious-0",
+      "decisions": 10,
+      "finalStateHash": "aec1e8304002eda362c5b7e320914cc9a6de9e4b0607762bc79da70c17cc86d1",
+      "exactCampaignReplay": true
+    },
+    {
+      "policy": "race",
+      "ending": "recovery",
+      "seed": "policy-race-0",
+      "decisions": 14,
+      "finalStateHash": "e75f2726cd55cd47600f116b389156ec7fd402f7f8188b626a6d3e1e94126167",
+      "exactCampaignReplay": true
+    },
+    {
+      "policy": "race",
+      "ending": "extinction",
+      "seed": "policy-race-1",
+      "decisions": 12,
+      "finalStateHash": "2d5d1d091c6fb496269003c2d22aa2866f68274f9425f749f5bc140398900b35",
+      "exactCampaignReplay": true
+    },
+    {
+      "policy": "benefits",
+      "ending": "accountable",
+      "seed": "policy-benefits-0",
+      "decisions": 14,
+      "finalStateHash": "9cd0a005f6f2568dc65d33ea675b238220538efa37d7fe1c6800bc92c5073c66",
+      "exactCampaignReplay": true
+    },
+    {
+      "policy": "recovery",
+      "ending": "recovery",
+      "seed": "policy-recovery-0",
+      "decisions": 14,
+      "finalStateHash": "a9ca0e2178613ad69cb5499d86357f0da2fc3b68f969152bbac101b9325acd72",
+      "exactCampaignReplay": true
+    },
+    {
+      "policy": "recovery",
+      "ending": "extinction",
+      "seed": "policy-recovery-14",
+      "decisions": 12,
+      "finalStateHash": "20de2b752675ed1bc41cbe50e482ece3f5b8fd91cf09b4b612d3cbc4a16d3e1c",
+      "exactCampaignReplay": true
+    },
+    {
+      "policy": "dependence",
+      "ending": "remnant",
+      "seed": "policy-dependence-0",
+      "decisions": 14,
+      "finalStateHash": "1c002caed9d9ad25615bc9d3d184b4d8506b52769e8d9d08c3e30400e71ee4d0",
+      "exactCampaignReplay": true
+    },
+    {
+      "policy": "tutelage",
+      "ending": "tutelage",
+      "seed": "policy-tutelage-0",
+      "decisions": 14,
+      "finalStateHash": "89a43b48f1465b9e40642fd0d58faa3f1b7e9cb122b2086c92bc437a8eadcf74",
+      "exactCampaignReplay": true
+    },
+    {
+      "policy": "containment",
+      "ending": "containment",
+      "seed": "policy-containment-0",
+      "decisions": 14,
+      "finalStateHash": "5d3e1ecfb96f180f1ad7fc927be002eacef1d8e95cab990e45a411c5c5329306",
+      "exactCampaignReplay": true
+    },
+    {
+      "policy": "succession",
+      "ending": "succession",
+      "seed": "policy-succession-0",
+      "decisions": 14,
+      "finalStateHash": "c80f7bec6def7a1cef981082fd0a9a095b08eee0dd364dc17902bd49890e5a84",
+      "exactCampaignReplay": true
+    }
+  ],
+  "allExact": true,
+  "artifacts": {
+    "restraint": "replays/fable-restraint-synthetic.json",
+    "remnant": "replays/fable-remnant-synthetic.json",
+    "accountable": "replays/fable-accountable-synthetic.json",
+    "tutelage": "replays/fable-tutelage-synthetic.json",
+    "recovery": "replays/fable-recovery-synthetic.json",
+    "extinction": "replays/fable-extinction-synthetic.json",
+    "succession": "replays/fable-succession-synthetic.json",
+    "containment": "replays/fable-containment-synthetic.json"
+  },
+  "warning": "Synthetic executable evidence only; not participant runs or observed AI risk."
+}

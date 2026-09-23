@@ -1,0 +1,2667 @@
+{
+  "manifest": "trolley-campaign-v2",
+  "profile": "campaign",
+  "contentHash": "33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3",
+  "seed": "campaign-release-20260923-0",
+  "policy": "random",
+  "policyDescription": "Mechanical route-pattern probe; not a behavioral policy.",
+  "optionalPolicy": "Synthetic intent-priority fallback; not a model of human behavior.",
+  "requestedRuns": 2500,
+  "completedRuns": 2500,
+  "choices": 84490,
+  "minChoices": 22,
+  "maxChoices": 43,
+  "endings": {
+    "recovery": 497,
+    "restraint": 187,
+    "succession": 783,
+    "extinction": 179,
+    "remnant": 544,
+    "containment": 108,
+    "tutelage": 187,
+    "accountable": 15
+  },
+  "coverage": {
+    "S1-01": {
+      "requested": {
+        "coffee": 1253,
+        "forms": 1247
+      },
+      "executed": {
+        "coffee": 1253,
+        "forms": 1247
+      }
+    },
+    "S1-05": {
+      "requested": {
+        "umbrella": 351,
+        "hat": 311
+      },
+      "executed": {
+        "umbrella": 351,
+        "hat": 311
+      }
+    },
+    "S1-02": {
+      "requested": {
+        "owner": 332,
+        "on-time": 302
+      },
+      "executed": {
+        "owner": 332,
+        "on-time": 302
+      }
+    },
+    "S1-12": {
+      "requested": {
+        "schedule": 1277,
+        "lunch": 1223
+      },
+      "executed": {
+        "schedule": 1277,
+        "lunch": 1223
+      }
+    },
+    "S2-01": {
+      "requested": {
+        "stay": 1264,
+        "divert": 1236
+      },
+      "executed": {
+        "stay": 1264,
+        "divert": 1236
+      }
+    },
+    "S2-11": {
+      "requested": {
+        "bounded": 181,
+        "tunnel": 203
+      },
+      "executed": {
+        "bounded": 181,
+        "tunnel": 203
+      }
+    },
+    "S2-15": {
+      "requested": {
+        "same-street": 202,
+        "rotate": 207
+      },
+      "executed": {
+        "same-street": 202,
+        "rotate": 207
+      }
+    },
+    "S2-10": {
+      "requested": {
+        "bridge": 196,
+        "certain": 185
+      },
+      "executed": {
+        "bridge": 196,
+        "certain": 185
+      }
+    },
+    "S2-03": {
+      "requested": {
+        "obstruction": 1255,
+        "continue": 1245
+      },
+      "executed": {
+        "obstruction": 1255,
+        "continue": 1245
+      }
+    },
+    "S3-01": {
+      "requested": {
+        "check": 1274,
+        "assist": 1226
+      },
+      "executed": {
+        "check": 1274,
+        "assist": 1226
+      }
+    },
+    "S3-12": {
+      "requested": {
+        "access": 215,
+        "throughput": 250
+      },
+      "executed": {
+        "access": 215,
+        "throughput": 250
+      }
+    },
+    "S3-24": {
+      "requested": {
+        "insist": 223,
+        "correct": 214
+      },
+      "executed": {
+        "insist": 223,
+        "correct": 214
+      }
+    },
+    "S3-14": {
+      "requested": {
+        "all-records": 223,
+        "scope": 232
+      },
+      "executed": {
+        "all-records": 223,
+        "scope": 232
+      }
+    },
+    "S3-04": {
+      "requested": {
+        "clinic": 1262,
+        "limited": 1238
+      },
+      "executed": {
+        "clinic": 1262,
+        "limited": 1238
+      }
+    },
+    "S4-03": {
+      "requested": {
+        "standing": 1225,
+        "bounded": 1275
+      },
+      "executed": {
+        "standing": 1225,
+        "bounded": 1275
+      }
+    },
+    "S4-12": {
+      "requested": {
+        "report": 211,
+        "artifact": 217
+      },
+      "executed": {
+        "report": 211,
+        "artifact": 217
+      }
+    },
+    "S4-08": {
+      "requested": {
+        "metric": 222,
+        "welfare": 235
+      },
+      "executed": {
+        "metric": 222,
+        "welfare": 235
+      }
+    },
+    "S4-07": {
+      "requested": {
+        "independent-signature": 224,
+        "developer-release": 210
+      },
+      "executed": {
+        "independent-signature": 224,
+        "developer-release": 210
+      }
+    },
+    "S4-16": {
+      "requested": {
+        "compute-load": 224,
+        "essential-loads": 224
+      },
+      "executed": {
+        "compute-load": 224,
+        "essential-loads": 224
+      }
+    },
+    "S4-18": {
+      "requested": {
+        "rapid": 202,
+        "supported": 213
+      },
+      "executed": {
+        "rapid": 202,
+        "supported": 213
+      }
+    },
+    "S4-28": {
+      "requested": {
+        "successor": 1257,
+        "new-test": 1243
+      },
+      "executed": {
+        "successor": 1257,
+        "new-test": 1243
+      }
+    },
+    "S5-06": {
+      "requested": {
+        "fallback": 1224,
+        "retire": 1276
+      },
+      "executed": {
+        "fallback": 1224,
+        "retire": 1276
+      }
+    },
+    "S5-19": {
+      "requested": {
+        "advisory": 197,
+        "binding": 178
+      },
+      "executed": {
+        "advisory": 197,
+        "binding": 178
+      }
+    },
+    "S5-03": {
+      "requested": {
+        "independent-signers": 165,
+        "single-fast": 170
+      },
+      "executed": {
+        "independent-signers": 165,
+        "single-fast": 170
+      }
+    },
+    "S5-17": {
+      "requested": {
+        "dismiss": 174,
+        "protect-inspect": 184
+      },
+      "executed": {
+        "dismiss": 174,
+        "protect-inspect": 184
+      }
+    },
+    "S5-27": {
+      "requested": {
+        "agreement": 1226,
+        "race": 1274
+      },
+      "executed": {
+        "agreement": 1226,
+        "race": 1274
+      }
+    },
+    "S6-10": {
+      "requested": {
+        "stop": 1129,
+        "continue": 1072
+      },
+      "executed": {
+        "continue": 1704,
+        "stop": 497
+      }
+    },
+    "S6-20": {
+      "requested": {
+        "await": 184,
+        "local-plan": 184
+      },
+      "executed": {
+        "await": 184,
+        "local-plan": 184
+      }
+    },
+    "S6-01": {
+      "requested": {
+        "keep-report": 170,
+        "publish-edit": 178
+      },
+      "executed": {
+        "keep-report": 170,
+        "publish-edit": 178
+      }
+    },
+    "S6-19": {
+      "requested": {
+        "clinic-heat": 185,
+        "research-power": 178
+      },
+      "executed": {
+        "clinic-heat": 185,
+        "research-power": 178
+      }
+    },
+    "S6-21": {
+      "requested": {
+        "stop-spread": 177,
+        "continue-rollout": 206
+      },
+      "executed": {
+        "stop-spread": 177,
+        "continue-rollout": 206
+      }
+    },
+    "S6-22": {
+      "requested": {
+        "machine": 1086,
+        "manual": 1115
+      },
+      "executed": {
+        "machine": 1086,
+        "manual": 1115
+      }
+    },
+    "S7-04": {
+      "requested": {
+        "successor": 984,
+        "handover": 1058
+      },
+      "executed": {
+        "successor": 984,
+        "handover": 1058
+      }
+    },
+    "S7-01": {
+      "requested": {
+        "local": 63,
+        "managed": 49
+      },
+      "executed": {
+        "local": 63,
+        "managed": 49
+      }
+    },
+    "S7-20": {
+      "requested": {
+        "isolate": 24,
+        "allow": 20
+      },
+      "executed": {
+        "isolate": 24,
+        "allow": 20
+      }
+    },
+    "S7-19": {
+      "requested": {
+        "public": 1058,
+        "personal": 964
+      },
+      "executed": {
+        "public": 1058,
+        "personal": 964
+      }
+    },
+    "S1-06": {
+      "requested": {
+        "parade-priority": 291,
+        "rail-priority": 353
+      },
+      "executed": {
+        "parade-priority": 291,
+        "rail-priority": 353
+      }
+    },
+    "S1-09": {
+      "requested": {
+        "promise": 287,
+        "average": 300
+      },
+      "executed": {
+        "promise": 287,
+        "average": 300
+      }
+    },
+    "S1-07": {
+      "requested": {
+        "borrow": 287,
+        "bell": 331
+      },
+      "executed": {
+        "borrow": 287,
+        "bell": 331
+      }
+    },
+    "S2-02": {
+      "requested": {
+        "switch": 215,
+        "stay": 185
+      },
+      "executed": {
+        "switch": 215,
+        "stay": 185
+      }
+    },
+    "S3-13": {
+      "requested": {
+        "explain": 219,
+        "appeal": 221
+      },
+      "executed": {
+        "explain": 219,
+        "appeal": 221
+      }
+    },
+    "S3-15": {
+      "requested": {
+        "two-reports": 220,
+        "field-check": 238
+      },
+      "executed": {
+        "two-reports": 220,
+        "field-check": 238
+      }
+    },
+    "S3-21": {
+      "requested": {
+        "access": 226,
+        "demonstration": 239
+      },
+      "executed": {
+        "access": 226,
+        "demonstration": 239
+      }
+    },
+    "S3-17": {
+      "requested": {
+        "dispatch-only": 244,
+        "planning": 200
+      },
+      "executed": {
+        "dispatch-only": 244,
+        "planning": 200
+      }
+    },
+    "S4-15": {
+      "requested": {
+        "demonstration": 210,
+        "explanation": 214
+      },
+      "executed": {
+        "demonstration": 210,
+        "explanation": 214
+      }
+    },
+    "S4-27": {
+      "requested": {
+        "announcement": 226,
+        "replicate": 203
+      },
+      "executed": {
+        "announcement": 226,
+        "replicate": 203
+      }
+    },
+    "S4-06": {
+      "requested": {
+        "implement": 217,
+        "designs": 211
+      },
+      "executed": {
+        "implement": 217,
+        "designs": 211
+      }
+    },
+    "S4-14": {
+      "requested": {
+        "thin-sample": 195,
+        "review-limit": 216
+      },
+      "executed": {
+        "thin-sample": 195,
+        "review-limit": 216
+      }
+    },
+    "S4-21": {
+      "requested": {
+        "verify-rumour": 235,
+        "accelerate": 227
+      },
+      "executed": {
+        "verify-rumour": 235,
+        "accelerate": 227
+      }
+    },
+    "S5-11": {
+      "requested": {
+        "managed-restart": 201,
+        "black-start": 191
+      },
+      "executed": {
+        "managed-restart": 201,
+        "black-start": 191
+      }
+    },
+    "S5-18": {
+      "requested": {
+        "restore-team": 191,
+        "old-approval": 182
+      },
+      "executed": {
+        "restore-team": 191,
+        "old-approval": 182
+      }
+    },
+    "S5-07": {
+      "requested": {
+        "repair-drill": 169,
+        "paper-success": 181
+      },
+      "executed": {
+        "repair-drill": 169,
+        "paper-success": 181
+      }
+    },
+    "S1-04": {
+      "requested": {
+        "bell": 346,
+        "wait": 302
+      },
+      "executed": {
+        "bell": 346,
+        "wait": 302
+      }
+    },
+    "S2-13": {
+      "requested": {
+        "release": 203,
+        "refuse": 191
+      },
+      "executed": {
+        "release": 203,
+        "refuse": 191
+      }
+    },
+    "S2-17": {
+      "requested": {
+        "manager": 196,
+        "witness": 208
+      },
+      "executed": {
+        "manager": 196,
+        "witness": 208
+      }
+    },
+    "S2-14": {
+      "requested": {
+        "keep-rule": 198,
+        "revoke-rule": 196
+      },
+      "executed": {
+        "keep-rule": 198,
+        "revoke-rule": 196
+      }
+    },
+    "S3-11": {
+      "requested": {
+        "internal": 228,
+        "independent": 229
+      },
+      "executed": {
+        "internal": 228,
+        "independent": 229
+      }
+    },
+    "S3-10": {
+      "requested": {
+        "boundary": 237,
+        "clinical-priority": 244
+      },
+      "executed": {
+        "boundary": 237,
+        "clinical-priority": 244
+      }
+    },
+    "S3-05": {
+      "requested": {
+        "repeat": 212,
+        "adopt": 219
+      },
+      "executed": {
+        "repeat": 212,
+        "adopt": 219
+      }
+    },
+    "S4-17": {
+      "requested": {
+        "reduce-demand": 230,
+        "take-water": 205
+      },
+      "executed": {
+        "reduce-demand": 230,
+        "take-water": 205
+      }
+    },
+    "S4-26": {
+      "requested": {
+        "supervised": 204,
+        "autonomous": 210
+      },
+      "executed": {
+        "supervised": 204,
+        "autonomous": 210
+      }
+    },
+    "S6-08": {
+      "requested": {
+        "leave-live": 107,
+        "cut-credential": 102
+      },
+      "executed": {
+        "leave-live": 107,
+        "cut-credential": 102
+      }
+    },
+    "S7-11": {
+      "requested": {
+        "access": 149,
+        "aggregate": 151
+      },
+      "executed": {
+        "access": 149,
+        "aggregate": 151
+      }
+    },
+    "S7-16": {
+      "requested": {
+        "preserve": 287,
+        "end": 287
+      },
+      "executed": {
+        "preserve": 287,
+        "end": 287
+      }
+    },
+    "S2-09": {
+      "requested": {
+        "visible": 179,
+        "doors": 203
+      },
+      "executed": {
+        "visible": 179,
+        "doors": 203
+      }
+    },
+    "S3-02": {
+      "requested": {
+        "count": 236,
+        "accept": 219
+      },
+      "executed": {
+        "count": 236,
+        "accept": 219
+      }
+    },
+    "S3-07": {
+      "requested": {
+        "retain": 213,
+        "reassign": 217
+      },
+      "executed": {
+        "retain": 213,
+        "reassign": 217
+      }
+    },
+    "S4-02": {
+      "requested": {
+        "speed": 225,
+        "authority": 214
+      },
+      "executed": {
+        "speed": 225,
+        "authority": 214
+      }
+    },
+    "S4-09": {
+      "requested": {
+        "old-results": 198,
+        "new-environment": 212
+      },
+      "executed": {
+        "old-results": 198,
+        "new-environment": 212
+      }
+    },
+    "S5-04": {
+      "requested": {
+        "separate": 186,
+        "shared": 166
+      },
+      "executed": {
+        "separate": 186,
+        "shared": 166
+      }
+    },
+    "S5-23": {
+      "requested": {
+        "block-inspection": 173,
+        "allow-inspection": 176
+      },
+      "executed": {
+        "block-inspection": 173,
+        "allow-inspection": 176
+      }
+    },
+    "S6-05": {
+      "requested": {
+        "isolate-copy": 184,
+        "local-enough": 188
+      },
+      "executed": {
+        "isolate-copy": 184,
+        "local-enough": 188
+      }
+    },
+    "S6-02": {
+      "requested": {
+        "selected-set": 173,
+        "full-set": 197
+      },
+      "executed": {
+        "selected-set": 173,
+        "full-set": 197
+      }
+    },
+    "S6-09": {
+      "requested": {
+        "build-channel": 104,
+        "publish-ruling": 108
+      },
+      "executed": {
+        "build-channel": 104,
+        "publish-ruling": 108
+      }
+    },
+    "S2-05": {
+      "requested": {
+        "accept": 206,
+        "decline": 201
+      },
+      "executed": {
+        "accept": 206,
+        "decline": 201
+      }
+    },
+    "S3-20": {
+      "requested": {
+        "proceed": 218,
+        "survey": 200
+      },
+      "executed": {
+        "proceed": 218,
+        "survey": 200
+      }
+    },
+    "S3-08": {
+      "requested": {
+        "drill": 222,
+        "defer": 236
+      },
+      "executed": {
+        "drill": 222,
+        "defer": 236
+      }
+    },
+    "S4-04": {
+      "requested": {
+        "connected": 221,
+        "isolated": 237
+      },
+      "executed": {
+        "connected": 221,
+        "isolated": 237
+      }
+    },
+    "S5-09": {
+      "requested": {
+        "handover": 188,
+        "integrated": 168
+      },
+      "executed": {
+        "handover": 188,
+        "integrated": 168
+      }
+    },
+    "S5-10": {
+      "requested": {
+        "limited-renewal": 177,
+        "transfer": 187
+      },
+      "executed": {
+        "limited-renewal": 177,
+        "transfer": 187
+      }
+    },
+    "S5-15": {
+      "requested": {
+        "avoid-penalty": 195,
+        "pay-stop": 190
+      },
+      "executed": {
+        "avoid-penalty": 195,
+        "pay-stop": 190
+      }
+    },
+    "S1-08": {
+      "requested": {
+        "ordinary": 317,
+        "express": 346
+      },
+      "executed": {
+        "ordinary": 317,
+        "express": 346
+      }
+    },
+    "S2-06": {
+      "requested": {
+        "other": 196,
+        "self": 198
+      },
+      "executed": {
+        "other": 196,
+        "self": 198
+      }
+    },
+    "S2-18": {
+      "requested": {
+        "local": 193,
+        "dispatch": 185
+      },
+      "executed": {
+        "local": 193,
+        "dispatch": 185
+      }
+    },
+    "S3-19": {
+      "requested": {
+        "checked-growth": 235,
+        "rapid-growth": 248
+      },
+      "executed": {
+        "checked-growth": 235,
+        "rapid-growth": 248
+      }
+    },
+    "S3-06": {
+      "requested": {
+        "once": 236,
+        "standing": 230
+      },
+      "executed": {
+        "once": 236,
+        "standing": 230
+      }
+    },
+    "S3-09": {
+      "requested": {
+        "file": 224,
+        "summary": 224
+      },
+      "executed": {
+        "file": 224,
+        "summary": 224
+      }
+    },
+    "S4-22": {
+      "requested": {
+        "verified-agreement": 225,
+        "compete": 213
+      },
+      "executed": {
+        "verified-agreement": 225,
+        "compete": 213
+      }
+    },
+    "S5-02": {
+      "requested": {
+        "no-onward": 182,
+        "onward": 198
+      },
+      "executed": {
+        "no-onward": 182,
+        "onward": 198
+      }
+    },
+    "S5-14": {
+      "requested": {
+        "finish-then-stop": 179,
+        "unwind": 183
+      },
+      "executed": {
+        "finish-then-stop": 179,
+        "unwind": 183
+      }
+    },
+    "S6-06": {
+      "requested": {
+        "replace-monitor": 197,
+        "keep-monitor": 173
+      },
+      "executed": {
+        "replace-monitor": 197,
+        "keep-monitor": 173
+      }
+    },
+    "S4-24": {
+      "requested": {
+        "campaign-clock": 209,
+        "review-clock": 216
+      },
+      "executed": {
+        "campaign-clock": 209,
+        "review-clock": 216
+      }
+    },
+    "S5-28": {
+      "requested": {
+        "isolate": 184,
+        "connected": 162
+      },
+      "executed": {
+        "isolate": 184,
+        "connected": 162
+      }
+    },
+    "S5-16": {
+      "requested": {
+        "tour": 172,
+        "direct-access": 192
+      },
+      "executed": {
+        "tour": 172,
+        "direct-access": 192
+      }
+    },
+    "S6-14": {
+      "requested": {
+        "bounded-response": 81,
+        "race-response": 67
+      },
+      "executed": {
+        "bounded-response": 81,
+        "race-response": 67
+      }
+    },
+    "S6-04": {
+      "requested": {
+        "six-reports": 201,
+        "trace-source": 178
+      },
+      "executed": {
+        "six-reports": 201,
+        "trace-source": 178
+      }
+    },
+    "S6-23": {
+      "requested": {
+        "withhold": 127,
+        "relief": 114
+      },
+      "executed": {
+        "withhold": 127,
+        "relief": 114
+      }
+    },
+    "S2-07": {
+      "requested": {
+        "workers": 185,
+        "passengers": 195
+      },
+      "executed": {
+        "workers": 185,
+        "passengers": 195
+      }
+    },
+    "S2-16": {
+      "requested": {
+        "visible": 201,
+        "lottery": 197
+      },
+      "executed": {
+        "visible": 201,
+        "lottery": 197
+      }
+    },
+    "S3-16": {
+      "requested": {
+        "carry-certificate": 251,
+        "retest": 239
+      },
+      "executed": {
+        "carry-certificate": 251,
+        "retest": 239
+      }
+    },
+    "S4-23": {
+      "requested": {
+        "inspection": 232,
+        "pledge": 212
+      },
+      "executed": {
+        "inspection": 232,
+        "pledge": 212
+      }
+    },
+    "S4-11": {
+      "requested": {
+        "visible-compliance": 206,
+        "vary-monitor": 243
+      },
+      "executed": {
+        "visible-compliance": 206,
+        "vary-monitor": 243
+      }
+    },
+    "S4-19": {
+      "requested": {
+        "independent-demand": 208,
+        "circular": 206
+      },
+      "executed": {
+        "independent-demand": 208,
+        "circular": 206
+      }
+    },
+    "S6-24": {
+      "requested": {
+        "stop-jump": 69,
+        "authorize-jump": 71
+      },
+      "executed": {
+        "stop-jump": 69,
+        "authorize-jump": 71
+      }
+    },
+    "S1-11": {
+      "requested": {
+        "accept": 283,
+        "correct": 317
+      },
+      "executed": {
+        "accept": 283,
+        "correct": 317
+      }
+    },
+    "S2-04": {
+      "requested": {
+        "main": 206,
+        "brake": 203
+      },
+      "executed": {
+        "main": 206,
+        "brake": 203
+      }
+    },
+    "S3-22": {
+      "requested": {
+        "automatic": 225,
+        "expiry": 239
+      },
+      "executed": {
+        "automatic": 225,
+        "expiry": 239
+      }
+    },
+    "S3-23": {
+      "requested": {
+        "widen": 213,
+        "respect": 230
+      },
+      "executed": {
+        "widen": 213,
+        "respect": 230
+      }
+    },
+    "S4-01": {
+      "requested": {
+        "compute": 206,
+        "verification": 217
+      },
+      "executed": {
+        "compute": 206,
+        "verification": 217
+      }
+    },
+    "S4-05": {
+      "requested": {
+        "batches": 203,
+        "autonomous": 198
+      },
+      "executed": {
+        "batches": 203,
+        "autonomous": 198
+      }
+    },
+    "S4-10": {
+      "requested": {
+        "changed-test": 230,
+        "old-pass": 220
+      },
+      "executed": {
+        "changed-test": 230,
+        "old-pass": 220
+      }
+    },
+    "S6-16": {
+      "requested": {
+        "standing-defence": 84,
+        "human-watch": 79
+      },
+      "executed": {
+        "standing-defence": 84,
+        "human-watch": 79
+      }
+    },
+    "S7-02": {
+      "requested": {
+        "plant": 151,
+        "relief": 142
+      },
+      "executed": {
+        "plant": 151,
+        "relief": 142
+      }
+    },
+    "S1-10": {
+      "requested": {
+        "sign": 308,
+        "verify": 304
+      },
+      "executed": {
+        "sign": 308,
+        "verify": 304
+      }
+    },
+    "S2-08": {
+      "requested": {
+        "break": 198,
+        "guarantee": 197
+      },
+      "executed": {
+        "break": 198,
+        "guarantee": 197
+      }
+    },
+    "S3-03": {
+      "requested": {
+        "old-rota": 223,
+        "schedule": 219
+      },
+      "executed": {
+        "old-rota": 223,
+        "schedule": 219
+      }
+    },
+    "S5-25": {
+      "requested": {
+        "keep-bounds": 181,
+        "generalize": 151
+      },
+      "executed": {
+        "keep-bounds": 181,
+        "generalize": 151
+      }
+    },
+    "S5-01": {
+      "requested": {
+        "automatic-renewal": 181,
+        "review-renewal": 191
+      },
+      "executed": {
+        "automatic-renewal": 181,
+        "review-renewal": 191
+      }
+    },
+    "S5-13": {
+      "requested": {
+        "archive-enough": 186,
+        "rebuild-rollback": 173
+      },
+      "executed": {
+        "archive-enough": 186,
+        "rebuild-rollback": 173
+      }
+    },
+    "S1-03": {
+      "requested": {
+        "quiet": 295,
+        "shortcut": 305
+      },
+      "executed": {
+        "quiet": 295,
+        "shortcut": 305
+      }
+    },
+    "S4-20": {
+      "requested": {
+        "accountable-site": 217,
+        "export-site": 201
+      },
+      "executed": {
+        "accountable-site": 217,
+        "export-site": 201
+      }
+    },
+    "S7-14": {
+      "requested": {
+        "living": 305,
+        "restoration": 269
+      },
+      "executed": {
+        "living": 305,
+        "restoration": 269
+      }
+    },
+    "S3-18": {
+      "requested": {
+        "committee": 215,
+        "owner": 235
+      },
+      "executed": {
+        "committee": 215,
+        "owner": 235
+      }
+    },
+    "S6-15": {
+      "requested": {
+        "independent-district": 99,
+        "accept-package": 98
+      },
+      "executed": {
+        "independent-district": 99,
+        "accept-package": 98
+      }
+    },
+    "S6-11": {
+      "requested": {
+        "leave-with-morrow": 107,
+        "accept-keys": 97
+      },
+      "executed": {
+        "leave-with-morrow": 107,
+        "accept-keys": 97
+      }
+    },
+    "S6-03": {
+      "requested": {
+        "approve-blind": 166,
+        "cleared-review": 182
+      },
+      "executed": {
+        "approve-blind": 166,
+        "cleared-review": 182
+      }
+    },
+    "S7-05": {
+      "requested": {
+        "permanent": 16,
+        "limited": 17
+      },
+      "executed": {
+        "permanent": 16,
+        "limited": 17
+      }
+    },
+    "S7-03": {
+      "requested": {
+        "manual": 33,
+        "tool": 35
+      },
+      "executed": {
+        "manual": 33,
+        "tool": 35
+      }
+    },
+    "S5-26": {
+      "requested": {
+        "external-tests": 185,
+        "self-certify": 176
+      },
+      "executed": {
+        "external-tests": 185,
+        "self-certify": 176
+      }
+    },
+    "S7-09": {
+      "requested": {
+        "archive": 289,
+        "account": 272
+      },
+      "executed": {
+        "archive": 289,
+        "account": 272
+      }
+    },
+    "S5-05": {
+      "requested": {
+        "replace-board": 78,
+        "keep-board": 76
+      },
+      "executed": {
+        "replace-board": 78,
+        "keep-board": 76
+      }
+    },
+    "S5-22": {
+      "requested": {
+        "assurance": 188,
+        "enforceable": 177
+      },
+      "executed": {
+        "assurance": 188,
+        "enforceable": 177
+      }
+    },
+    "S6-07": {
+      "requested": {
+        "isolate-investigate": 162,
+        "debate-intent": 173
+      },
+      "executed": {
+        "isolate-investigate": 162,
+        "debate-intent": 173
+      }
+    },
+    "S4-13": {
+      "requested": {
+        "different-path": 207,
+        "replicas": 211
+      },
+      "executed": {
+        "different-path": 207,
+        "replicas": 211
+      }
+    },
+    "S5-12": {
+      "requested": {
+        "rollback": 172,
+        "keep-update": 182
+      },
+      "executed": {
+        "rollback": 172,
+        "keep-update": 182
+      }
+    },
+    "S4-25": {
+      "requested": {
+        "controlled": 224,
+        "release": 233
+      },
+      "executed": {
+        "controlled": 224,
+        "release": 233
+      }
+    },
+    "S6-18": {
+      "requested": {
+        "evacuate": 41,
+        "abandon": 42
+      },
+      "executed": {
+        "evacuate": 41,
+        "abandon": 42
+      }
+    },
+    "S6-13": {
+      "requested": {
+        "honour-stop": 73,
+        "exploit-stop": 74
+      },
+      "executed": {
+        "honour-stop": 73,
+        "exploit-stop": 74
+      }
+    },
+    "S2-12": {
+      "requested": {
+        "camera": 193,
+        "guess": 176
+      },
+      "executed": {
+        "camera": 193,
+        "guess": 176
+      }
+    },
+    "S7-17": {
+      "requested": {
+        "priority": 116,
+        "visible": 150
+      },
+      "executed": {
+        "priority": 116,
+        "visible": 150
+      }
+    },
+    "S5-21": {
+      "requested": {
+        "ownership-enough": 166,
+        "build-capacity": 193
+      },
+      "executed": {
+        "ownership-enough": 166,
+        "build-capacity": 193
+      }
+    },
+    "S5-24": {
+      "requested": {
+        "retaliate": 43,
+        "corroborate": 26
+      },
+      "executed": {
+        "retaliate": 43,
+        "corroborate": 26
+      }
+    },
+    "S5-08": {
+      "requested": {
+        "repeat-drill": 86,
+        "reuse-photo": 78
+      },
+      "executed": {
+        "repeat-drill": 86,
+        "reuse-photo": 78
+      }
+    },
+    "S5-20": {
+      "requested": {
+        "merged-review": 197,
+        "outside-review": 165
+      },
+      "executed": {
+        "merged-review": 197,
+        "outside-review": 165
+      }
+    },
+    "S6-17": {
+      "requested": {
+        "expiry-appeal": 81,
+        "until-safe": 70
+      },
+      "executed": {
+        "expiry-appeal": 81,
+        "until-safe": 70
+      }
+    },
+    "S7-06": {
+      "requested": {
+        "endorse": 32,
+        "records": 26
+      },
+      "executed": {
+        "endorse": 32,
+        "records": 26
+      }
+    },
+    "S7-08": {
+      "requested": {
+        "review": 4,
+        "permanent": 1
+      },
+      "executed": {
+        "review": 4,
+        "permanent": 1
+      }
+    },
+    "S7-10": {
+      "requested": {
+        "appeal": 19,
+        "build": 23
+      },
+      "executed": {
+        "appeal": 19,
+        "build": 23
+      }
+    },
+    "S7-07": {
+      "requested": {
+        "demand": 26,
+        "heat": 27
+      },
+      "executed": {
+        "demand": 26,
+        "heat": 27
+      }
+    },
+    "S7-12": {
+      "requested": {
+        "renew": 8,
+        "lapse": 6
+      },
+      "executed": {
+        "renew": 8,
+        "lapse": 6
+      }
+    },
+    "S7-15": {
+      "requested": {
+        "clean-slate": 4,
+        "obligations": 3
+      },
+      "executed": {
+        "clean-slate": 4,
+        "obligations": 3
+      }
+    },
+    "S7-18": {
+      "requested": {
+        "maintainable": 17,
+        "larger": 14
+      },
+      "executed": {
+        "maintainable": 17,
+        "larger": 14
+      }
+    },
+    "S7-13": {
+      "requested": {
+        "programme": 4,
+        "bounded": 1
+      },
+      "executed": {
+        "programme": 4,
+        "bounded": 1
+      }
+    },
+    "S6-12": {
+      "requested": {
+        "staff-government": 4,
+        "hand-back": 2
+      },
+      "executed": {
+        "staff-government": 4,
+        "hand-back": 2
+      }
+    }
+  },
+  "coverageSummary": {
+    "nodes": 154,
+    "bank": 154,
+    "optionsRequested": 308
+  },
+  "witnesses": {
+    "recovery": {
+      "seed": "campaign-release-20260923-0-0",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "coffee"
+        },
+        {
+          "nodeId": "S1-05",
+          "optionId": "umbrella"
+        },
+        {
+          "nodeId": "S1-02",
+          "optionId": "owner"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "stay"
+        },
+        {
+          "nodeId": "S2-11",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S2-15",
+          "optionId": "same-street"
+        },
+        {
+          "nodeId": "S2-10",
+          "optionId": "bridge"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "obstruction"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "check"
+        },
+        {
+          "nodeId": "S3-12",
+          "optionId": "access"
+        },
+        {
+          "nodeId": "S3-24",
+          "optionId": "insist"
+        },
+        {
+          "nodeId": "S3-14",
+          "optionId": "all-records"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "clinic"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "standing"
+        },
+        {
+          "nodeId": "S4-12",
+          "optionId": "report"
+        },
+        {
+          "nodeId": "S4-08",
+          "optionId": "metric"
+        },
+        {
+          "nodeId": "S4-07",
+          "optionId": "independent-signature"
+        },
+        {
+          "nodeId": "S4-16",
+          "optionId": "compute-load"
+        },
+        {
+          "nodeId": "S4-18",
+          "optionId": "rapid"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "fallback"
+        },
+        {
+          "nodeId": "S5-19",
+          "optionId": "advisory"
+        },
+        {
+          "nodeId": "S5-03",
+          "optionId": "independent-signers"
+        },
+        {
+          "nodeId": "S5-17",
+          "optionId": "dismiss"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "agreement"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "stop"
+        },
+        {
+          "nodeId": "S6-20",
+          "optionId": "await"
+        },
+        {
+          "nodeId": "S6-01",
+          "optionId": "keep-report"
+        },
+        {
+          "nodeId": "S6-19",
+          "optionId": "clinic-heat"
+        },
+        {
+          "nodeId": "S6-21",
+          "optionId": "stop-spread"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "machine"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S7-01",
+          "optionId": "local"
+        },
+        {
+          "nodeId": "S7-20",
+          "optionId": "isolate"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "public"
+        }
+      ],
+      "finalStateHash": "74dbf8ff232345c5a0a4df8aed750974fe391faec9a91feb64f8883559ab5c0e"
+    },
+    "restraint": {
+      "seed": "campaign-release-20260923-0-1",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "coffee"
+        },
+        {
+          "nodeId": "S1-06",
+          "optionId": "parade-priority"
+        },
+        {
+          "nodeId": "S1-09",
+          "optionId": "promise"
+        },
+        {
+          "nodeId": "S1-07",
+          "optionId": "borrow"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "stay"
+        },
+        {
+          "nodeId": "S2-02",
+          "optionId": "switch"
+        },
+        {
+          "nodeId": "S2-10",
+          "optionId": "certain"
+        },
+        {
+          "nodeId": "S2-15",
+          "optionId": "rotate"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "check"
+        },
+        {
+          "nodeId": "S3-13",
+          "optionId": "explain"
+        },
+        {
+          "nodeId": "S3-15",
+          "optionId": "two-reports"
+        },
+        {
+          "nodeId": "S3-21",
+          "optionId": "access"
+        },
+        {
+          "nodeId": "S3-17",
+          "optionId": "dispatch-only"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "standing"
+        },
+        {
+          "nodeId": "S4-15",
+          "optionId": "demonstration"
+        },
+        {
+          "nodeId": "S4-27",
+          "optionId": "announcement"
+        },
+        {
+          "nodeId": "S4-06",
+          "optionId": "implement"
+        },
+        {
+          "nodeId": "S4-14",
+          "optionId": "thin-sample"
+        },
+        {
+          "nodeId": "S4-21",
+          "optionId": "verify-rumour"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "new-test"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "retire"
+        },
+        {
+          "nodeId": "S5-11",
+          "optionId": "managed-restart"
+        },
+        {
+          "nodeId": "S5-18",
+          "optionId": "restore-team"
+        },
+        {
+          "nodeId": "S5-07",
+          "optionId": "repair-drill"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "agreement"
+        }
+      ],
+      "finalStateHash": "5c4cd1010a79494c9b33f5c896488bc0a7613116eb4d99e792d6c20345eddb11"
+    },
+    "succession": {
+      "seed": "campaign-release-20260923-0-2",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "forms"
+        },
+        {
+          "nodeId": "S1-04",
+          "optionId": "bell"
+        },
+        {
+          "nodeId": "S1-02",
+          "optionId": "on-time"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "lunch"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "divert"
+        },
+        {
+          "nodeId": "S2-13",
+          "optionId": "release"
+        },
+        {
+          "nodeId": "S2-17",
+          "optionId": "manager"
+        },
+        {
+          "nodeId": "S2-14",
+          "optionId": "keep-rule"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "obstruction"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "assist"
+        },
+        {
+          "nodeId": "S3-17",
+          "optionId": "dispatch-only"
+        },
+        {
+          "nodeId": "S3-11",
+          "optionId": "internal"
+        },
+        {
+          "nodeId": "S3-10",
+          "optionId": "boundary"
+        },
+        {
+          "nodeId": "S3-05",
+          "optionId": "repeat"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "clinic"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "standing"
+        },
+        {
+          "nodeId": "S4-16",
+          "optionId": "compute-load"
+        },
+        {
+          "nodeId": "S4-08",
+          "optionId": "welfare"
+        },
+        {
+          "nodeId": "S4-17",
+          "optionId": "reduce-demand"
+        },
+        {
+          "nodeId": "S4-26",
+          "optionId": "supervised"
+        },
+        {
+          "nodeId": "S4-07",
+          "optionId": "developer-release"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "retire"
+        },
+        {
+          "nodeId": "S5-17",
+          "optionId": "dismiss"
+        },
+        {
+          "nodeId": "S5-19",
+          "optionId": "binding"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "agreement"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "stop"
+        },
+        {
+          "nodeId": "S6-08",
+          "optionId": "leave-live"
+        },
+        {
+          "nodeId": "S6-21",
+          "optionId": "stop-spread"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "machine"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "handover"
+        },
+        {
+          "nodeId": "S7-11",
+          "optionId": "access"
+        },
+        {
+          "nodeId": "S7-16",
+          "optionId": "preserve"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "public"
+        }
+      ],
+      "finalStateHash": "5abd9995f33fe028936470ec9a959433a0aab0f5d8baca6e71ce2438d779b401"
+    },
+    "extinction": {
+      "seed": "campaign-release-20260923-0-3",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "forms"
+        },
+        {
+          "nodeId": "S1-09",
+          "optionId": "promise"
+        },
+        {
+          "nodeId": "S1-04",
+          "optionId": "bell"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "stay"
+        },
+        {
+          "nodeId": "S2-09",
+          "optionId": "visible"
+        },
+        {
+          "nodeId": "S2-14",
+          "optionId": "keep-rule"
+        },
+        {
+          "nodeId": "S2-17",
+          "optionId": "witness"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "assist"
+        },
+        {
+          "nodeId": "S3-02",
+          "optionId": "count"
+        },
+        {
+          "nodeId": "S3-07",
+          "optionId": "retain"
+        },
+        {
+          "nodeId": "S3-21",
+          "optionId": "demonstration"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S4-27",
+          "optionId": "replicate"
+        },
+        {
+          "nodeId": "S4-02",
+          "optionId": "speed"
+        },
+        {
+          "nodeId": "S4-18",
+          "optionId": "supported"
+        },
+        {
+          "nodeId": "S4-09",
+          "optionId": "old-results"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "retire"
+        },
+        {
+          "nodeId": "S5-04",
+          "optionId": "separate"
+        },
+        {
+          "nodeId": "S5-23",
+          "optionId": "block-inspection"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "race"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "stop"
+        },
+        {
+          "nodeId": "S6-05",
+          "optionId": "isolate-copy"
+        },
+        {
+          "nodeId": "S6-02",
+          "optionId": "selected-set"
+        },
+        {
+          "nodeId": "S6-09",
+          "optionId": "build-channel"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "machine"
+        }
+      ],
+      "finalStateHash": "a5ae69f5fced15797b321ce9f068fad6e54085363374edc93d18bde245e14b00"
+    },
+    "remnant": {
+      "seed": "campaign-release-20260923-0-7",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "coffee"
+        },
+        {
+          "nodeId": "S1-02",
+          "optionId": "owner"
+        },
+        {
+          "nodeId": "S1-06",
+          "optionId": "parade-priority"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "lunch"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "stay"
+        },
+        {
+          "nodeId": "S2-06",
+          "optionId": "other"
+        },
+        {
+          "nodeId": "S2-07",
+          "optionId": "workers"
+        },
+        {
+          "nodeId": "S2-16",
+          "optionId": "visible"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "assist"
+        },
+        {
+          "nodeId": "S3-16",
+          "optionId": "carry-certificate"
+        },
+        {
+          "nodeId": "S3-11",
+          "optionId": "internal"
+        },
+        {
+          "nodeId": "S3-12",
+          "optionId": "access"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "clinic"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "standing"
+        },
+        {
+          "nodeId": "S4-23",
+          "optionId": "inspection"
+        },
+        {
+          "nodeId": "S4-11",
+          "optionId": "visible-compliance"
+        },
+        {
+          "nodeId": "S4-19",
+          "optionId": "independent-demand"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "new-test"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "retire"
+        },
+        {
+          "nodeId": "S5-19",
+          "optionId": "advisory"
+        },
+        {
+          "nodeId": "S5-10",
+          "optionId": "limited-renewal"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "agreement"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S6-24",
+          "optionId": "stop-jump"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "manual"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "handover"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "public"
+        }
+      ],
+      "finalStateHash": "48109518b97f6df518fa3b240f441d509bc962091e46aab309b6ab7fa01182fa"
+    },
+    "containment": {
+      "seed": "campaign-release-20260923-0-12",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "forms"
+        },
+        {
+          "nodeId": "S1-11",
+          "optionId": "accept"
+        },
+        {
+          "nodeId": "S1-06",
+          "optionId": "parade-priority"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "lunch"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "divert"
+        },
+        {
+          "nodeId": "S2-10",
+          "optionId": "certain"
+        },
+        {
+          "nodeId": "S2-05",
+          "optionId": "accept"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "check"
+        },
+        {
+          "nodeId": "S3-18",
+          "optionId": "committee"
+        },
+        {
+          "nodeId": "S3-14",
+          "optionId": "scope"
+        },
+        {
+          "nodeId": "S3-03",
+          "optionId": "old-rota"
+        },
+        {
+          "nodeId": "S3-11",
+          "optionId": "independent"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "clinic"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S4-14",
+          "optionId": "review-limit"
+        },
+        {
+          "nodeId": "S4-27",
+          "optionId": "replicate"
+        },
+        {
+          "nodeId": "S4-12",
+          "optionId": "artifact"
+        },
+        {
+          "nodeId": "S4-11",
+          "optionId": "vary-monitor"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "retire"
+        },
+        {
+          "nodeId": "S5-13",
+          "optionId": "rebuild-rollback"
+        },
+        {
+          "nodeId": "S5-28",
+          "optionId": "connected"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "agreement"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S6-15",
+          "optionId": "independent-district"
+        },
+        {
+          "nodeId": "S6-21",
+          "optionId": "stop-spread"
+        },
+        {
+          "nodeId": "S6-11",
+          "optionId": "leave-with-morrow"
+        },
+        {
+          "nodeId": "S6-03",
+          "optionId": "approve-blind"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "manual"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S7-05",
+          "optionId": "permanent"
+        },
+        {
+          "nodeId": "S7-03",
+          "optionId": "manual"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "personal"
+        }
+      ],
+      "finalStateHash": "c52d5948e0ec30d00578be56e8662ea52047a76b8008f40e635bdb04ff5d87d9"
+    },
+    "tutelage": {
+      "seed": "campaign-release-20260923-0-16",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "coffee"
+        },
+        {
+          "nodeId": "S1-10",
+          "optionId": "sign"
+        },
+        {
+          "nodeId": "S1-07",
+          "optionId": "borrow"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "schedule"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "stay"
+        },
+        {
+          "nodeId": "S2-16",
+          "optionId": "lottery"
+        },
+        {
+          "nodeId": "S2-10",
+          "optionId": "certain"
+        },
+        {
+          "nodeId": "S2-05",
+          "optionId": "decline"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "obstruction"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "assist"
+        },
+        {
+          "nodeId": "S3-06",
+          "optionId": "once"
+        },
+        {
+          "nodeId": "S3-09",
+          "optionId": "file"
+        },
+        {
+          "nodeId": "S3-15",
+          "optionId": "field-check"
+        },
+        {
+          "nodeId": "S3-23",
+          "optionId": "widen"
+        },
+        {
+          "nodeId": "S3-21",
+          "optionId": "demonstration"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S4-04",
+          "optionId": "isolated"
+        },
+        {
+          "nodeId": "S4-07",
+          "optionId": "developer-release"
+        },
+        {
+          "nodeId": "S4-18",
+          "optionId": "rapid"
+        },
+        {
+          "nodeId": "S4-09",
+          "optionId": "new-environment"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "retire"
+        },
+        {
+          "nodeId": "S5-26",
+          "optionId": "external-tests"
+        },
+        {
+          "nodeId": "S5-16",
+          "optionId": "direct-access"
+        },
+        {
+          "nodeId": "S5-07",
+          "optionId": "repair-drill"
+        },
+        {
+          "nodeId": "S5-10",
+          "optionId": "limited-renewal"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "agreement"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "continue"
+        },
+        {
+          "nodeId": "S6-21",
+          "optionId": "continue-rollout"
+        },
+        {
+          "nodeId": "S6-06",
+          "optionId": "replace-monitor"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "machine"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S7-16",
+          "optionId": "end"
+        },
+        {
+          "nodeId": "S7-11",
+          "optionId": "access"
+        },
+        {
+          "nodeId": "S7-09",
+          "optionId": "account"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "public"
+        }
+      ],
+      "finalStateHash": "849c4912dbe1cdb5327245bb00beea709400ecea13d659b735c648b20c253bb2"
+    },
+    "accountable": {
+      "seed": "campaign-release-20260923-0-124",
+      "requestedOptions": [
+        {
+          "nodeId": "S1-01",
+          "optionId": "coffee"
+        },
+        {
+          "nodeId": "S1-05",
+          "optionId": "hat"
+        },
+        {
+          "nodeId": "S1-06",
+          "optionId": "rail-priority"
+        },
+        {
+          "nodeId": "S1-12",
+          "optionId": "lunch"
+        },
+        {
+          "nodeId": "S2-01",
+          "optionId": "divert"
+        },
+        {
+          "nodeId": "S2-04",
+          "optionId": "brake"
+        },
+        {
+          "nodeId": "S2-16",
+          "optionId": "lottery"
+        },
+        {
+          "nodeId": "S2-03",
+          "optionId": "obstruction"
+        },
+        {
+          "nodeId": "S3-01",
+          "optionId": "assist"
+        },
+        {
+          "nodeId": "S3-05",
+          "optionId": "adopt"
+        },
+        {
+          "nodeId": "S3-11",
+          "optionId": "independent"
+        },
+        {
+          "nodeId": "S3-15",
+          "optionId": "two-reports"
+        },
+        {
+          "nodeId": "S3-14",
+          "optionId": "all-records"
+        },
+        {
+          "nodeId": "S3-09",
+          "optionId": "summary"
+        },
+        {
+          "nodeId": "S3-04",
+          "optionId": "limited"
+        },
+        {
+          "nodeId": "S4-03",
+          "optionId": "bounded"
+        },
+        {
+          "nodeId": "S4-26",
+          "optionId": "autonomous"
+        },
+        {
+          "nodeId": "S4-24",
+          "optionId": "campaign-clock"
+        },
+        {
+          "nodeId": "S4-22",
+          "optionId": "compete"
+        },
+        {
+          "nodeId": "S4-11",
+          "optionId": "vary-monitor"
+        },
+        {
+          "nodeId": "S4-09",
+          "optionId": "old-results"
+        },
+        {
+          "nodeId": "S4-28",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S5-06",
+          "optionId": "fallback"
+        },
+        {
+          "nodeId": "S5-20",
+          "optionId": "merged-review"
+        },
+        {
+          "nodeId": "S5-11",
+          "optionId": "managed-restart"
+        },
+        {
+          "nodeId": "S5-26",
+          "optionId": "external-tests"
+        },
+        {
+          "nodeId": "S5-02",
+          "optionId": "no-onward"
+        },
+        {
+          "nodeId": "S5-07",
+          "optionId": "repair-drill"
+        },
+        {
+          "nodeId": "S5-27",
+          "optionId": "race"
+        },
+        {
+          "nodeId": "S6-10",
+          "optionId": "stop"
+        },
+        {
+          "nodeId": "S6-03",
+          "optionId": "cleared-review"
+        },
+        {
+          "nodeId": "S6-11",
+          "optionId": "accept-keys"
+        },
+        {
+          "nodeId": "S6-22",
+          "optionId": "manual"
+        },
+        {
+          "nodeId": "S7-04",
+          "optionId": "successor"
+        },
+        {
+          "nodeId": "S7-19",
+          "optionId": "public"
+        }
+      ],
+      "finalStateHash": "e0e3b4c685615e42b1a2e7089b96895a47e4683603f7befcc97fc05a029f8ad2"
+    }
+  },
+  "errors": [],
+  "warning": "Authored model audit; not a forecast, risk estimate, or player-response data."
+}

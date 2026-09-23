@@ -15,7 +15,7 @@ try{
   // Never contact the public collector. Test the same built game with a private config.
   await page.route('**/config.json',route=>route.fulfill({json:{collectorUrl:'',repositoryUrl:'',operatorName:'',contactUrl:''}}));
   await page.route('https://**',route=>route.abort());
-  await page.goto(base+'/?private=1');
+  await page.goto(base+'/legacy.html?private=1');
   await page.locator('[data-choice]').first().waitFor();
   assert.match(await page.locator('#case-title').innerText(),/coffees/);
   await page.screenshot({path:'test-results/opening.png'});
@@ -43,7 +43,7 @@ try{
   const bounds=await page.locator('[data-choice]').evaluateAll(elements=>elements.map(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom};}));
   for(const b of bounds){assert.ok(b.x>=0&&b.right<=390&&b.bottom<=844&&b.y>0);}
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
-  await page.goto(base+'/?v=1.0.0&case=absurd-soup&seed=shared-test&private=1');
+  await page.goto(base+'/legacy.html?v=1.0.0&case=absurd-soup&seed=shared-test&private=1');
   assert.match(await page.locator('#case-title').innerText(),/soup/);
   assert.equal(await page.locator('[data-choice]').count(),2);
   assert.deepEqual(errors,[]);

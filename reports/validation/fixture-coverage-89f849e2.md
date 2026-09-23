@@ -1,0 +1,28 @@
+# F01–F16 runtime coverage
+
+This is an obligation map, **not a full G1 pass**. The original [specification](../../research/fixtures-spec.json) is unchanged. The [JSON mapping](fixture-coverage.json) records precise covered obligations, runtime test names and missing contracts.
+
+The current engine, supported golden, editorial and registry tests passed **42/42** with `node --test tests/v2/engine.test.ts tests/v2/golden-fixtures.test.ts tests/v2/editorial.test.ts tests/v2/content-registry.test.ts`. This includes the existing 29 engine/golden obligations, six editorial tests and seven registry tests. Automatic discovery through `node scripts/test-v2.mjs` passed **104/104**, including nine advisor DOM/timer tests. Content hash: `89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87`. Output is retained in [engine/golden/editorial results](engine-golden-tests.txt) and [integration results](v2-integration-tests.txt). [Exact witness replay](fable-witness-replay-check.json) and [edition comparison](content-revision.json) are separate from the missing full-model contracts. No prose check or handler harness is counted as closing a missing fixture.
+
+| Fixture | Status | Main remaining requirement |
+| --- | --- | --- |
+| F01 | partial | The world stores casualty events/counts, not named living persons or victim sets. It cannot prove which five people survive or deduplicate the same victims referenced by different events. Pointer-plus-keyboard end-to-end behavior remains a browser obligation. |
+| F02 | covered-within-slice-contract | Covered for the declared slice RNG/incident contract. |
+| F03 | not-implemented | No typed obstruction/person/brake dynamics make rescue depend on the person. Removing the obstruction cannot be tested against an independent brake without inventing new semantics. The visual/accessibility matched-pair requirement is not complete. |
+| F04 | partial | No named institution lifecycle or pending-event owner/obligation transfer exists. All institutional actors share one enum value. A boolean cancellation predicate is not a successor institution. |
+| F05 | partial | No authorized evidence-channel object, uncertain evidence record or reveal/revoke operation exists. The inspect branch cannot yet satisfy its specified evidence acquisition and uncertainty obligations. |
+| F06 | partial | No named victim deduplication across node/global sources, restricted source-artifact object, access loss, or explicit report-revision lineage exists. Journal event history is not an implemented artifact-investigation system. |
+| F07 | partial | No per-operation resource ID, one-use action instance or grant-consumption rule exists. Time expiry is not one-action authority. Issued grants currently contain all four action rights within their scope. |
+| F08 | partial | No general autonomous operation/cached-instruction model can demonstrate rejection or safe unwind after expiry. Materially changed renewal evidence has no typed evaluation record. |
+| F09 | not-implemented | No operation lifecycle, credential object, safe-cancel boundary or completion policy exists. Scheduling an ordinary delayed effect would not implement those missing semantics. |
+| F10 | partial | Real pause/exit/consent/settings behavior and repeated physical lever events are browser integration obligations, not established by these engine tests. |
+| F11 | partial | The full equipment inventory, named competent staff, dated/scoped drill records, failed-drill repair, and scope-change revalidation are absent. Three slice facts are not claimed to implement that complete model. |
+| F12 | partial | Separate manual/automated service-capacity ledgers and complete operational rollback prerequisites are deferred under CR001. The fixture tests explicit normalized deltas and declared conditions, not a richer sector model. |
+| F13 | not-implemented | No evaluation entity records system/version, tool/access/environment scope, monitor visibility, result and expiry. The old/new certificate and material-versus-cosmetic scope obligations cannot be certified with the present global facts. |
+| F14 | partial | No named reviewer/dependency graph establishes whether paths are genuinely independent. The fixture explicitly authors dependence and does not claim to infer it from operational entities. |
+| F15 | partial | The human actor is not split into a leaving controller and a named successor. A trainedSuccessor fact is not proof that a distinct person received enforceable rights. Early collective restraint is not certified as a completed individual handoff; full retirement/relinquishment requirements remain open. |
+| F16 | partial | An explicitly labeled non-human visual epilogue and every presentation callback remain browser/content review obligations. The engine ends the decision stream; it does not itself render or validate every line of epilogue copy. |
+
+The meaningful slice fixes from this review are explicit care authority for the clinic, distinct transfer versus ratification receipts, the staff/drill/fallback conjunction for manual recovery, and records plus training for accountable continuity. These repairs do not introduce victim identities, institution ownership, per-operation credentials, scoped evaluations, evidence artifacts or a distinct human successor. Those need reviewed contracts and substantive implementation before their full semantic gates can pass.
+
+`free` in a journal means that the requested local option executed without override. It does not certify political freedom or possession of world-level authority. The S7-04 test verifies this distinction using both retained and already-lost governance, explicit recovery grants, and absence of a fabricated second takeover.

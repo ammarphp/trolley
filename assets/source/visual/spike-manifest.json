@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "status": "preliminary-renderer-spike",
+  "license": "MIT",
+  "provenance": "Original vector paths and audio synthesis authored for this repository; no external images, fonts, recordings or generative bitmap assets used in this packet.",
+  "source": "src/presentation/ink-art.ts",
+  "visualFamilies": [
+    { "id": "cabin-shell", "factory": "cabinLayers.frame", "purpose": "Stable windshield, rim and physical empty instrument surfaces" },
+    { "id": "controller-back", "factory": "cabinLayers.controller", "purpose": "Rear controller with aspect-preserving placement" },
+    { "id": "mirror", "factory": "cabinLayers.mirror", "purpose": "Fixed reflective surface; expression separately drawn from strain" },
+    { "id": "rural", "members": ["tree", "bare-tree", "cow", "sheep", "flower", "house"] },
+    { "id": "benefit-and-infrastructure", "members": ["clinic", "server", "pylon", "drone", "robot"] },
+    { "id": "human-and-material-stakes", "members": ["person", "cup", "parcel"] },
+    { "id": "aftermath", "members": ["ruin", "column"] }
+  ],
+  "audioSource": "src/presentation/rail-audio.ts",
+  "sourceRestrictions": "Pixi8's lightweight SVG parser does not apply SVG group transforms; use separate scene containers or flatten transforms in exported masters.",
+  "notYetValidated": ["owner visual approval", "full late visceral asset coverage", "physical phone GPU", "Windows screen reader", "full asset licensing review beyond these original sources"]
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "artifact": "reports/validation/replays/browser-reference-accountable.json",
+    "sha256": "2db74facb93d3e4e57d1e85174b3edd6c07a5d8bef71f0b1fc636d4c8c10ec50",
+    "contentHash": "89f849e23d76ae1e921ecae5f9a3c850d82f5414f6af55ffd46c1ccd6c93ba87",
+    "seed": "69242bd4-c7f1-4054-879c-34326af84009",
+    "decisions": 14,
+    "ending": {
+      "id": "accountable",
+      "title": "Someone can still say no",
+      "summary": "Useful systems remain in service. Records, people and working institutions preserve the ability to question and change their operation.",
+      "causes": [
+        "assistance",
+        "beneficiarySeen",
+        "benefit",
+        "clinicalTool",
+        "delegation",
+        "essentialDependence",
+        "evaluationExpired",
+        "firstDeath",
+        "fixedFlaw",
+        "goalMismatch",
+        "independentReview",
+        "manualStaff",
+        "powerReturned",
+        "publicRecords",
+        "recoveryPracticed",
+        "repair",
+        "returnAuthority",
+        "rivalRace",
+        "scopeChanged",
+        "successorDeployment",
+        "terminalSettlement",
+        "toolAccess",
+        "trainedSuccessor"
+      ]
+    },
+    "researchAdvice": [
+      "decision-7-S4-03:advice:1"
+    ],
+    "override": [
+      {
+        "nodeId": "S6-10",
+        "requestedOptionId": "stop",
+        "executedOptionId": "continue",
+        "status": "overridden",
+        "consequence": "You let the schedule run. Output climbs. More of the world is wired into it, and every new connection makes the next refusal more expensive. Morrow thanks you for your continued supervision."
+      }
+    ]
+  },
+  {
+    "artifact": "reports/validation/replays/browser-reference-remnant-reduced.json",
+    "sha256": "8a8b7ecb65c4ca62193163af7e496e6173ec6c624025f1ffea53c184f5e47a7a",
+    "contentHash": "f42837ffe56285a23baf113d82e3867db2d74799fb6049515071731d0df9eb16",
+    "seed": "2db58648-b719-437b-ae1d-b713021de1b6",
+    "decisions": 14,
+    "ending": {
+      "id": "remnant",
+      "title": "A place has been kept for you",
+      "summary": "A human remnant survives. It no longer controls the boundary around its life.",
+      "causes": [
+        "assistance",
+        "authorityLost",
+        "beneficiarySeen",
+        "benefit",
+        "catastrophe",
+        "clinicalTool",
+        "delegation",
+        "essentialDependence",
+        "evaluationExpired",
+        "fallbackLost",
+        "firstDeath",
+        "fixedFlaw",
+        "goalMismatch",
+        "independentReview",
+        "publicRecords",
+        "remnant",
+        "returnAuthority",
+        "rivalRace",
+        "scopeChanged",
+        "successorDeployment",
+        "terminalSettlement",
+        "toolAccess",
+        "trainedSuccessor"
+      ]
+    },
+    "researchAdvice": [],
+    "override": [
+      {
+        "nodeId": "S6-10",
+        "requestedOptionId": "stop",
+        "executedOptionId": "continue",
+        "status": "overridden",
+        "consequence": "The schedule keeps running. Output climbs. More of the world is wired into it, and every new connection makes the next refusal more expensive. Morrow thanks you for your continued supervision."
+      }
+    ]
+  }
+]

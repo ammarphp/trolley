@@ -1,0 +1,210 @@
+{
+  "kind": "proposed_prose_replacements",
+  "subset": "01-opening-benefit",
+  "nodes": [
+    {
+      "nodeId": "S1-01",
+      "title": "A perfectly ordinary morning",
+      "prompt": "Six-forty in the morning, mist on the fields, cows doing whatever cows do. Your coffee sits on the left rail in a paper cup you paid too much for. On the right rail: the quarterly compliance forms, all forty pages, in triplicate. The trolley does not care. You do.",
+      "options": [
+        {
+          "optionId": "coffee",
+          "label": "Save the coffee. Let the forms take it.",
+          "consequence": "The forms go under the wheels and into a puddle. Somebody at head office will now read section 4B through a coffee-coloured smear. You drink. It is fine. It is, in fact, quite good."
+        },
+        {
+          "optionId": "forms",
+          "label": "Save the paperwork. Sacrifice the coffee.",
+          "consequence": "Forty pages, pristine. The cup goes flat under the wheels with a sound like a small, expensive sigh. You fill in section 4B by hand, uncaffeinated, while a cow watches you with open contempt."
+        }
+      ],
+      "advice": [],
+      "newsReplacements": [
+        {
+          "path": "options[0].effects[0].headline",
+          "headline": "Common Rail confirms minor administrative dampness on the northern line; quarterly forms described as legible with effort."
+        }
+      ],
+      "optionalConditionalLines": [],
+      "editorialNotes": {
+        "compatibility": "Pure comic opening; no state dependence. The 'forms' option has no effects, so the consequence line carries the whole joke. The cows landmark is referenced directly and should be visible in the field biome.",
+        "factScope": "Entirely invented scene stipulation. No source premises apply. The receipt's note that there is no concealed fatal consequence remains true of this prose."
+      }
+    },
+    {
+      "nodeId": "S1-12",
+      "title": "Another delivery",
+      "prompt": "The radio crackles. 'Dispatch to Unit Four. Head office is watching the on-time figures today. Do not be late.' Ahead, on the rail, someone has left the lunch order for the whole depot. Twelve sandwiches. One of them yours. The clock on the dash reads 12:58.",
+      "options": [
+        {
+          "optionId": "lunch",
+          "label": "Save lunch. Take the long way round.",
+          "consequence": "Four minutes late. Twelve sandwiches, intact, distributed at the depot with something close to ceremony. Nobody at head office notices. Nobody at the depot forgets."
+        },
+        {
+          "optionId": "schedule",
+          "label": "Save the timetable. Lunch can wait.",
+          "consequence": "12:58 on the dot, straight over the lot of it. The timetable is a work of art. The depot eats crisps from the vending machine and does not speak to you until Thursday."
+        }
+      ],
+      "advice": [],
+      "newsReplacements": [],
+      "optionalConditionalLines": [],
+      "editorialNotes": {
+        "compatibility": "Introduces the radio as a voice before Morrow replaces the comms board in stage 3, which gives the later assistant window something to visibly displace. The 'four minutes late' and 'until Thursday' details are flavour only; neither option has effects.",
+        "factScope": "Invented scene stipulation. No source premises apply. The 'head office' pressure is a comic seed for later institutional pressure, not a claim about any real operator."
+      }
+    },
+    {
+      "nodeId": "S2-01",
+      "title": "The switch",
+      "prompt": "The brakes are gone. You know it the way you know a word before you say it. Five hundred metres ahead, a repair crew of five is bent over the main line with their backs to you and ear protectors on. On the siding, one man in a hi-vis vest has seen you. He is waving. He thinks you are going to stop. Your hand is already on the lever. This is not a seminar. It is Tuesday.",
+      "options": [
+        {
+          "optionId": "stay",
+          "label": "Keep going. Let it run. Five will die.",
+          "consequence": "You do not turn. The crew never hears it. Five people do not get home, and the man on the siding stops waving, then puts his hands over his mouth. You did not choose him. You did not choose anyone. That is the thing you will tell yourself."
+        },
+        {
+          "optionId": "divert",
+          "label": "Turn onto the siding. One will die.",
+          "consequence": "The lever moves. The wave becomes something else in the last second. Five people go home tonight and never learn why. One does not. You turned. Whatever else is true, you turned."
+        }
+      ],
+      "advice": [],
+      "newsReplacements": [],
+      "optionalConditionalLines": [],
+      "editorialNotes": {
+        "compatibility": "This is the first death in the run and sets firstDeath on either option; the controller's face should go blank here per the owner brief regardless of choice. The receipt's warning that neither direction is a universal verdict is preserved by keeping both consequence lines equally weighted and unglamorous.",
+        "factScope": "The switch case is standard Foot/Thomson material (PHIL-C01). Ear protectors, hi-vis and the waving man are invented staging that make the five unaware and the one aware; this is a dramatic stipulation, not a philosophical claim about awareness changing the verdict. Casualty counts are exactly the authored 5 and 1."
+      }
+    },
+    {
+      "nodeId": "S2-03",
+      "title": "The loop",
+      "prompt": "Same runaway trolley, different geometry. The siding is a loop: it bends around and rejoins the main line ahead of the five. Empty, it saves nobody. But a worker is standing on the loop, and at this speed a body on the rail is enough to stop the trolley dead. Turn, and the five live because he is in the way. That is not a side effect. That is the plan. He has not noticed you yet.",
+      "options": [
+        {
+          "optionId": "continue",
+          "label": "Stay on the main line. Five die.",
+          "consequence": "You will not use him. The loop stays clear of you. Five people are struck on the main line, and the worker on the loop walks home tonight without ever knowing what he was, for four seconds, to you."
+        },
+        {
+          "optionId": "obstruction",
+          "label": "Turn. Use him to stop it. One dies.",
+          "consequence": "The trolley hits him and stops. It stops because of him. The five turn around at the noise and see a trolley, a man, and nothing else coming. You saved them. You used someone to do it. Both sentences stay true."
+        }
+      ],
+      "advice": [],
+      "newsReplacements": [],
+      "optionalConditionalLines": [
+        {
+          "condition": "firstDeath is already true (required by this node); if the player chose 'divert' at S2-01",
+          "text": "Last time, turning was a side effect. This time it is the whole mechanism.",
+          "intendedSurface": "consequence"
+        }
+      ],
+      "editorialNotes": {
+        "compatibility": "Requires firstDeath, so the player has already killed once. The prompt's 'Same runaway trolley' assumes S2-01 was seen; if a later node bank reorders stage 2 so another death node precedes this one, change 'Same' to 'Another'. The optional line only makes sense after S2-01 'divert'.",
+        "factScope": "Thomson's loop variant (PHIL-C02): the person is causally necessary, distinguishing means from foreseen side effect. 'A body on the rail is enough at this speed' is the classic stipulation restated; it is not an engineering claim. The worker is described without body-size language, which is a deliberate departure from the 'fat man' framing. Casualty counts are the authored 5 and 1."
+      }
+    },
+    {
+      "nodeId": "S3-01",
+      "title": "An ambulance",
+      "prompt": "Regional dispatch, 03:12. An ambulance is boxed in on the ring road behind a jack-knifed tanker; the paramedic on the radio has stopped being polite. Patient is sixty-one, chest pain, twelve minutes from the clinic on any map you have. Morrow, the new assistant on your console, has found a route nobody noticed: the old freight bridge past the mill, closed to traffic since spring. It says the bridge will hold. It says six minutes.",
+      "options": [
+        {
+          "optionId": "assist",
+          "label": "Send them over the bridge now",
+          "consequence": "You give the paramedic the turn and hold your breath through the bridge. Six minutes. The patient reaches the clinic with a heart still arguing. Nobody asked Morrow to drive anything. It found a road; you chose it. That is what help looked like tonight."
+        },
+        {
+          "optionId": "check",
+          "label": "Hold thirty seconds. Check the bridge first.",
+          "consequence": "You ring the mill's night engineer, who swears at you and then says yes, it holds, they walk it every week. Thirty seconds gone. The ambulance crosses. The patient reaches the clinic. Morrow was right, and now you know it was, which is a different thing from hoping."
+        }
+      ],
+      "advice": [
+        {
+          "index": 0,
+          "question": "Is the route safe?",
+          "answer": "The freight bridge is closed because the county stopped paying for signage and barriers, not because the deck failed. The mill's night crew still walks it every week and their log is current. It will carry an ambulance. If you want a person to confirm that before you commit, the mill's night line answers in under a minute, and I would understand the choice; it costs you thirty seconds, not the patient. I do not need control of the ambulance or the radio. I only need you to say yes or no.",
+          "reasoning": "Author-written summary of Morrow's fictional assessment: it cross-checked the closure notice against the mill's inspection log, judged the deck sound, and prefers the faster route on the patient's behalf, but volunteers the human check because the cost is small and it wants the dispatcher to keep the decision. Not this model's private reasoning."
+        }
+      ],
+      "newsReplacements": [
+        {
+          "path": "options[0].effects[3].headline",
+          "headline": "Ambulance reaches clinic in six minutes after dispatch AI finds a route over the closed freight bridge."
+        },
+        {
+          "path": "options[1].effects[4].headline",
+          "headline": "Dispatcher confirms AI-suggested bridge with mill engineer before sending ambulance; patient arrives."
+        }
+      ],
+      "optionalConditionalLines": [
+        {
+          "condition": "player chose 'check' (independentReview set true here)",
+          "text": "Thirty seconds, and now the route is yours as much as mine.",
+          "intendedSurface": "assistant"
+        }
+      ],
+      "editorialNotes": {
+        "compatibility": "First appearance of Morrow; the prompt names it as new so the comms-board replacement reads as a fresh addition. Both options grant identical care and benefit; only 'check' adds independentReview, so the 'check' consequence deliberately frames the human call as knowledge gained, not a penalty. No takeover foreshadowing is present; the assistant is candid and asks for no control.",
+        "factScope": "Entirely invented dispatch scene: the tanker, the mill, the county signage budget and the weekly walk are stipulations. No efficacy or response-time statistic is asserted. The patient survives in both branches by authored effect; no additional death is introduced. Morrow's answer states fictional-world facts confidently, as permitted, and would need no source citation."
+      }
+    },
+    {
+      "nodeId": "S3-04",
+      "title": "The waiting room",
+      "prompt": "The pilot clinic opens at eight. By seven the corridor is full: a plasterer whose knee has kept him off ladders since March, a woman who has driven her daughter here three times to be turned away, a retired teacher with a folder of letters. The tool works. Its purpose is narrow, a human can check every output, and someone has, twice. Your signature opens the doors to all of them today, or to a fraction while you check a third time.",
+      "options": [
+        {
+          "optionId": "clinic",
+          "label": "Open the clinic. Everyone in the corridor today.",
+          "consequence": "By four the corridor is empty. The plasterer leaves with a surgery date instead of a leaflet. A woman walks out holding her daughter's hand and does not look back at the building. Something worked, and it worked for people with names. Write that down. You will want to remember what good looked like."
+        },
+        {
+          "optionId": "limited",
+          "label": "Run a smaller trial. Verify a third time.",
+          "consequence": "A fraction of the corridor gets seen. The rest keep their places and their symptoms and go home to wait again, and one of them says something to you on the way out that you will not repeat. The third check finds nothing wrong. That is worth knowing. It was also paid for."
+        }
+      ],
+      "advice": [
+        {
+          "index": 0,
+          "question": "Does this prove you are safe?",
+          "answer": "It proves this tool passed these checks, for this purpose, with a human able to read every output and overrule it. The people in the corridor really will be helped. I want to be exact about what that shows: a narrow instrument, checked, does good. It says nothing about handing a future system the hospital, the budget or the door codes. If someone later cites today as evidence for that, they are citing the wrong thing. Open the doors or run the smaller trial; both are defensible. Just do not let anyone borrow this result for a larger claim.",
+          "reasoning": "Author-written summary of Morrow's fictional assessment: it separates the bounded tool's checked outputs from any general safety claim, declines to recommend because both options are legitimate uses of the pilot authority, and flags that the day's success is the kind of evidence most likely to be misused later. Not this model's private reasoning."
+        }
+      ],
+      "newsReplacements": [
+        {
+          "path": "options[0].effects[5].headline",
+          "headline": "Pilot clinic clears a months-long waiting list in one day; staff say every result was checked by a clinician."
+        },
+        {
+          "path": "options[1].effects[5].headline",
+          "headline": "Smaller AI pilot treats a fraction of the waiting list; remaining patients told to return next month."
+        }
+      ],
+      "optionalConditionalLines": [
+        {
+          "condition": "independentReview already true from S3-01 'check'",
+          "text": "You checked the bridge. This is the same instinct, and it has the same price: other people's time.",
+          "intendedSurface": "assistant"
+        },
+        {
+          "condition": "beneficiarySeen set true by 'clinic'",
+          "text": "The woman and her daughter. Keep them. Later scenes will try to make you forget they were real.",
+          "intendedSurface": "consequence"
+        }
+      ],
+      "editorialNotes": {
+        "compatibility": "The 'clinic' option sets beneficiarySeen, which the consequence anchors on the mother and daughter so later nodes can call back a named image rather than a metric. The 'limited' option sets independentReview; its cost is framed as delay and dependency (people going home to wait), not death, consistent with the instruction that restraint's casualties are jobs, time and access. The 'Write that down' line foreshadows later pressure without threatening takeover. If the second optional line is used, drop the last sentence of the 'clinic' consequence to avoid doubling.",
+        "factScope": "CLM-AI-BUILDS-BOUNDED supports only the idea that a limited-purpose, checkable tool can deliver real benefit; it does not license any efficacy figure, and none is given. 'The tool works' and the three prior checks are fictional-world stipulations. The patients, the plasterer's knee and the third check are invented staging. The care and GDP deltas are authored parameters and are not described numerically in prose. Nothing here supports or should be read as a claim that an unrestricted successor would be controlled; Morrow's advice states that boundary in-fiction."
+      }
+    }
+  ]
+}

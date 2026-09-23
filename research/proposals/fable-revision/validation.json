@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-09-23",
+  "status": "pass",
+  "nodeCount": 14,
+  "checks": [
+    "all expected IDs, option IDs and advice slot counts",
+    "no executable fields in prose proposal",
+    "1600/1600/800 character prompt/answer/assessment limits",
+    "12-word and 100-character choice labels",
+    "1200-character consequences",
+    "existing news paths and 240-character news limit"
+  ],
+  "limits": [
+    "Not an engine replay or UI layout test.",
+    "Optional conditional lines remain nonexecutable proposals and require event-aware integration.",
+    "Named people are narrative staging; this does not implement identity/cohort accounting or full campaign callbacks.",
+    "The source premise audit predates these drafts; new fictional detail is not external evidence."
+  ],
+  "packets": [
+    {
+      "subset": "01-opening-benefit",
+      "rawFile": "01-opening-benefit.response.json",
+      "rawSHA256": "ce733986bac6247eff06d93ff2a1acc071a866da87640ebbced733a9d95ef116",
+      "rawBytes": 16374,
+      "rawPrefixRemoved": false,
+      "reviewedFile": "reviewed-01.json",
+      "reviewedSHA256": "3d37a41a35420ab60fade59295357ed01930e1bf5a2ce05ff5838d4f8c4bacb4",
+      "reviewedBytes": 17567,
+      "measurements": [
+        {
+          "nodeId": "S1-01",
+          "promptWords": 48,
+          "promptCharacters": 259,
+          "advice": []
+        },
+        {
+          "nodeId": "S1-12",
+          "promptWords": 44,
+          "promptCharacters": 254,
+          "advice": []
+        },
+        {
+          "nodeId": "S2-01",
+          "promptWords": 78,
+          "promptCharacters": 372,
+          "advice": []
+        },
+        {
+          "nodeId": "S2-03",
+          "promptWords": 77,
+          "promptCharacters": 382,
+          "advice": []
+        },
+        {
+          "nodeId": "S3-01",
+          "promptWords": 75,
+          "promptCharacters": 433,
+          "advice": [
+            {
+              "index": 0,
+              "words": 91,
+              "characters": 499,
+              "assessmentCharacters": 193
+            }
+          ]
+        },
+        {
+          "nodeId": "S3-04",
+          "promptWords": 84,
+          "promptCharacters": 453,
+          "advice": [
+            {
+              "index": 0,
+              "words": 87,
+              "characters": 478,
+              "assessmentCharacters": 190
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subset": "02-acceleration-pressure",
+      "rawFile": "02-acceleration-pressure.response.json",
+      "rawSHA256": "78e7ad4c3cd7e73e72249bd0d0e0d8f34ef234b2754a3e4b5823e138d0640d00",
+      "rawBytes": 16920,
+      "rawPrefixRemoved": false,
+      "reviewedFile": "reviewed-02.json",
+      "reviewedSHA256": "41e230719167f1c7e812c6ee641340798e936f25efda83ba5f9d557584e05ba4",
+      "reviewedBytes": 20161,
+      "measurements": [
+        {
+          "nodeId": "S4-03",
+          "promptWords": 95,
+          "promptCharacters": 527,
+          "advice": [
+            {
+              "index": 0,
+              "words": 71,
+              "characters": 391,
+              "assessmentCharacters": 169
+            },
+            {
+              "index": 1,
+              "words": 73,
+              "characters": 380,
+              "assessmentCharacters": 152
+            }
+          ]
+        },
+        {
+          "nodeId": "S4-28",
+          "promptWords": 97,
+          "promptCharacters": 589,
+          "advice": [
+            {
+              "index": 0,
+              "words": 75,
+              "characters": 410,
+              "assessmentCharacters": 138
+            },
+            {
+              "index": 1,
+              "words": 66,
+              "characters": 384,
+              "assessmentCharacters": 166
+            }
+          ]
+        },
+        {
+          "nodeId": "S5-06",
+          "promptWords": 97,
+          "promptCharacters": 562,
+          "advice": [
+            {
+              "index": 0,
+              "words": 75,
+              "characters": 429,
+              "assessmentCharacters": 218
+            }
+          ]
+        },
+        {
+          "nodeId": "S5-27",
+          "promptWords": 97,
+          "promptCharacters": 573,
+          "advice": [
+            {
+              "index": 0,
+              "words": 82,
+              "characters": 463,
+              "assessmentCharacters": 168
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subset": "03-control-aftermath",
+      "rawFile": "03-control-aftermath.response.txt",
+      "rawSHA256": "6478437460523915f47f4ac8ad106df3e7220c8fd1166789822b9eee11e28335",
+      "rawBytes": 17497,
+      "rawPrefixRemoved": true,
+      "reviewedFile": "reviewed-03.json",
+      "reviewedSHA256": "c7de1d879fc7f0b359d7b4ea6668efc21e1ca2db28fee60a6bf556a635a337ca",
+      "reviewedBytes": 20503,
+      "measurements": [
+        {
+          "nodeId": "S6-10",
+          "promptWords": 95,
+          "promptCharacters": 531,
+          "advice": [
+            {
+              "index": 0,
+              "words": 71,
+              "characters": 413,
+              "assessmentCharacters": 156
+            },
+            {
+              "index": 1,
+              "words": 76,
+              "characters": 453,
+              "assessmentCharacters": 168
+            }
+          ]
+        },
+        {
+          "nodeId": "S6-22",
+          "promptWords": 99,
+          "promptCharacters": 580,
+          "advice": [
+            {
+              "index": 0,
+              "words": 82,
+              "characters": 444,
+              "assessmentCharacters": 171
+            }
+          ]
+        },
+        {
+          "nodeId": "S7-04",
+          "promptWords": 98,
+          "promptCharacters": 553,
+          "advice": [
+            {
+              "index": 0,
+              "words": 70,
+              "characters": 386,
+              "assessmentCharacters": 174
+            },
+            {
+              "index": 1,
+              "words": 75,
+              "characters": 442,
+              "assessmentCharacters": 166
+            }
+          ]
+        },
+        {
+          "nodeId": "S7-19",
+          "promptWords": 98,
+          "promptCharacters": 561,
+          "advice": []
+        }
+      ]
+    }
+  ]
+}

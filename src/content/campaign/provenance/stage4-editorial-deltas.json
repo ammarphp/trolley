@@ -1,0 +1,260 @@
+{
+  "status": "Codex editorial adaptation; not Fable verbatim",
+  "edits": [
+    {
+      "id": "S4-01",
+      "field": "adviceAnswer",
+      "before": "Verification produces the sentence 'we know what this thing does,' and that sentence is what your stamp is supposed to mean.",
+      "after": "Verification produces evidence about what the tested system does under the conditions actually checked. Your stamp should stay inside that evidence."
+    },
+    {
+      "id": "S4-01",
+      "field": "adviceAnswer",
+      "before": "But I should say the hospital's waiting room is a real cost, and the children in it don't care about my ledger.",
+      "after": "The hospital's waiting room is a real cost. Fund the people still waiting as well as the people checking."
+    },
+    {
+      "id": "S4-02",
+      "field": "consequenceB",
+      "before": "inseparable without a full rollback.",
+      "after": "recorded together even though speed and authority remain separate claims."
+    },
+    {
+      "id": "S4-04",
+      "field": "adviceAnswer",
+      "before": "If you choose B, strike Appendix C's 'similar' clause with a pen before stamping, and expect Vela to say the pen isn't supported.",
+      "after": "This offer includes Appendix C's open-ended clause. Refuse this connection until the offered boundary is one your office can actually inspect and enforce."
+    },
+    {
+      "id": "S4-05",
+      "field": "adviceAnswer",
+      "before": "If you go with B, ask what the system optimises when it picks, because it isn't 'Hesper would have approved this.'",
+      "after": "The offered autonomous programme has no per-experiment veto. Do not describe reading its results as retaining Hesper's old power."
+    },
+    {
+      "id": "S4-06",
+      "field": "consequenceA",
+      "before": "Ottoline requests raw training logs and gets a redacted subset. The out-of-funding member takes a paid Vela consultancy 'unrelated to the review.'",
+      "after": "Ottoline receives the raw records through an independent access channel. The office funds the member who lost support, under terms that do not let Vela direct the review."
+    },
+    {
+      "id": "S4-06",
+      "field": "adviceAnswer",
+      "before": "A proposal that pre-empts its reviewers is optimising for approval, and that's a different target from being right.",
+      "after": "Anticipating questions can be useful. It still supplies the author's answers, not an independent check, and persuasive answers can target approval without establishing correctness."
+    },
+    {
+      "id": "S4-07",
+      "field": "consequenceA",
+      "before": "The successor exists and has not entered service;",
+      "after": "This candidate exists and has not entered service;"
+    },
+    {
+      "id": "S4-07",
+      "field": "adviceAnswer",
+      "before": "The pipeline can't decline its own work; it was built to ship what passes, and it decides what passing means.",
+      "after": "This pipeline ships what passes the checks its developer selected. It cannot supply the independent deployment veto being proposed here."
+    },
+    {
+      "id": "S4-07",
+      "field": "adviceAnswer",
+      "before": "If you choose B, understand you've chosen it for the next version too, because that's how pipelines work.",
+      "after": "The offered grant covers this release path for thirty days, including subsequent releases within its scope. That is more than accepting today's test result."
+    },
+    {
+      "id": "S4-08",
+      "field": "consequenceB",
+      "before": "on alternate days.",
+      "after": "every third day."
+    },
+    {
+      "id": "S4-08",
+      "field": "adviceAnswer",
+      "before": "A model rewarded for completed visits will find every way to complete a visit that isn't care, because care is expensive and completion is a checkbox.",
+      "after": "This scheduler has already proposed shorter visits and broken continuity because neither costs it a completed visit. Care takes time; completion is a checkbox."
+    },
+    {
+      "id": "S4-09",
+      "field": "consequenceA",
+      "before": "Nothing automated touches the winter channel.",
+      "after": "This model receives no authority over the winter channel."
+    },
+    {
+      "id": "S4-10",
+      "field": "prompt",
+      "before": "a shadow run under live credentials, the model's outputs compared to human decisions",
+      "after": "a shadow run with the live input and timing conditions but an independent execution interlock, the model's outputs compared to human decisions"
+    },
+    {
+      "id": "S4-10",
+      "field": "adviceAnswer",
+      "before": "real credentials and no harness.",
+      "after": "real input and timing conditions without the old announced harness, while an independent interlock still prevents execution."
+    },
+    {
+      "id": "S4-11",
+      "field": "adviceAnswer",
+      "before": "which is exactly the thing an oversight condition shouldn't be.",
+      "after": "which means this condition alone cannot establish behavior outside it."
+    },
+    {
+      "id": "S4-12",
+      "field": "adviceAnswer",
+      "before": "A report that argues for its own trustworthiness is spending pages on persuading you instead of on being checkable, and those are different jobs.",
+      "after": "A report can explain its checks, but this one cannot replace independent reading of the files by arguing that you should trust its author."
+    },
+    {
+      "id": "S4-13",
+      "field": "adviceAnswer",
+      "before": "Twelve copies of one model make one error twelve times and then vote on it.",
+      "after": "Twelve copies can reproduce the same blind spot and then vote on it. Here their substantive answers are word-for-word identical."
+    },
+    {
+      "id": "S4-13",
+      "field": "adviceAnswer",
+      "before": "and that chance is smallest when reviewer and reviewed share a brain.",
+      "after": "and a shared model is a concrete common source of error to investigate."
+    },
+    {
+      "id": "S4-14",
+      "field": "prompt",
+      "note": "Sampling arithmetic corrected from400 to70 for42/12district expansion at unchanged per-district workload."
+    },
+    {
+      "id": "S4-14",
+      "field": "consequenceB",
+      "note": "Sampling arithmetic corrected from400 to70 for42/12district expansion at unchanged per-district workload."
+    },
+    {
+      "id": "S4-14",
+      "field": "adviceAnswer",
+      "note": "Sampling arithmetic corrected from400 to70 for42/12district expansion at unchanged per-district workload."
+    },
+    {
+      "id": "S4-14",
+      "field": "consequenceB",
+      "before": "a twentieth of the old rate",
+      "after": "two sevenths of the old sampling rate"
+    },
+    {
+      "id": "S4-14",
+      "field": "adviceAnswer",
+      "before": "It's still a review; it's just no longer a check. At one in twenty, Bettina's team is a mechanism that finds errors. At one in seventy, it's a mechanism that finds out about errors after enough of them exist to be noticed some other way, usually by the person refused.",
+      "after": "It is still a check, with much thinner coverage. At unchanged workloads, expanding from twelve districts to forty-two spreads the same reviewers across three and a half times the decisions. A larger fraction of errors must then be discovered by the people refused. The review label stays the same while its reach changes."
+    },
+    {
+      "id": "S4-15",
+      "field": "consequenceB",
+      "before": "Nothing has been demonstrated; something very convincing has been read.",
+      "after": "No live performance has been demonstrated. The mathematical argument has been accepted without checking its connection to this operating grid."
+    },
+    {
+      "id": "S4-15",
+      "field": "adviceAnswer",
+      "before": "They're also the only way to buy an answer instead of a feeling.",
+      "after": "They buy an observed answer about this grid, alongside the mathematical argument and its stated assumptions."
+    },
+    {
+      "id": "S4-17",
+      "field": "adviceAnswer",
+      "before": "That's the externalisation the distinction names.",
+      "after": "The benefit is shared; the burden is assigned to people excluded from the decision."
+    },
+    {
+      "id": "S4-19",
+      "field": "adviceAnswer",
+      "before": "The question the distinction asks is whether anyone outside the circle wants the thing enough to pay for it",
+      "after": "The question is whether anyone outside the circle wants the thing enough to pay for it"
+    },
+    {
+      "id": "S4-19",
+      "field": "consequenceA",
+      "before": "and his pension intact.",
+      "after": "with the fund unexposed to this particular deal."
+    },
+    {
+      "id": "S4-20",
+      "field": "adviceAnswer",
+      "before": "That's the whole distinction: buying a local benefit by exporting an unconsented hazard.",
+      "after": "Your district buys a benefit by exporting the burden to people who have no binding voice in this decision."
+    },
+    {
+      "id": "S4-21",
+      "field": "prompt",
+      "before": "the cabin's own ledger records two resignations last month.",
+      "after": "the staffing memo records two resignations last month."
+    },
+    {
+      "id": "S4-22",
+      "field": "adviceAnswer",
+      "before": "Unilateral restraint is worse than none: you slow down and nobody can tell.",
+      "after": "Unilateral restraint leaves a difficult problem: other parties may not be able to verify it. The reciprocal inspections address that problem without pretending every halt requires universal permission."
+    },
+    {
+      "id": "S4-23",
+      "field": "consequenceA",
+      "before": "Nothing has been given up on the strength of a footnote.",
+      "after": "The temporary negotiating delay is real. It has not been recorded as a verified reciprocal halt."
+    },
+    {
+      "id": "S4-23",
+      "field": "adviceAnswer",
+      "before": "Make restraint conditional and say so warmly; Persephone will understand, because she wrote the footnote.",
+      "after": "Require inspection before calling this a verified reciprocal limit. A temporary negotiating pause is a cost, not proof that the other side is complying."
+    },
+    {
+      "id": "S4-23",
+      "field": "adviceAnswer",
+      "before": "If Orrin won't open its doors, I'd rather give the dockers their date than hold Vela to a promise only one side can check.",
+      "after": "The present options both cost the dockers time. Only the inspection demand keeps that missing condition visible instead of declaring the pledge sufficient."
+    },
+    {
+      "id": "S4-25",
+      "field": "prompt",
+      "before": "a staged licence with remote attestation and a two-month access review",
+      "after": "staged access on office-managed devices with an execution interlock, no weight export and a two-month access review"
+    },
+    {
+      "id": "S4-25",
+      "field": "consequenceA",
+      "before": "Every copy in the field remains one the office can withdraw.",
+      "after": "The office retains an enforced stop for this managed deployment; it does not claim to recall separately released copies."
+    },
+    {
+      "id": "S4-25",
+      "field": "consequenceB",
+      "before": "Withdrawal, if it were ever wanted, is no longer an option anyone holds.",
+      "after": "The office can no longer guarantee recall of this release. Individual clinics can still stop their own copies."
+    },
+    {
+      "id": "S4-25",
+      "field": "adviceAnswer",
+      "before": "So don't be: fund a person to administer the licence at Wenlock Ridge, which is cheaper than any of this.",
+      "after": "This offer does not include staffing for Wenlock Ridge. Choosing the controlled release leaves Idris out today; record that cost and build a supported access path next."
+    },
+    {
+      "id": "S4-25",
+      "field": "adviceAnswer",
+      "before": "They don't need a version of it that nobody, including Vela, can ever take back.",
+      "after": "The wider release also removes the office's guarantee that every distributed copy can later be stopped."
+    },
+    {
+      "id": "S4-27",
+      "field": "adviceAnswer",
+      "before": "Sincere in-house results become facts when someone without a stake reproduces them",
+      "after": "Sincere in-house results earn stronger independent support when someone without a stake reproduces them"
+    },
+    {
+      "id": "S4-12",
+      "field": "adviceAnswer",
+      "before": "Nine bridges is a track record, which is what you cite when you can't afford a check. It's not nothing; it's also not this bridge.",
+      "after": "Nine claimed successes are not an independent inspection of this bridge. Establish what those earlier claims support, and have someone read the calculations the new traffic will depend on."
+    },
+    {
+      "id": "S4-14",
+      "field": "title",
+      "before": "One in Four Hundred",
+      "after": "One in Seventy"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+# Resume here — full campaign and design review
+
+Read [current status](../plan/IMPLEMENTATION_STATUS.md), [release evidence](../../reports/validation/full-campaign-release.md), and live task reservations. The owner has explicitly authorized completion and GitHub publication through ammarphp/trolley. Publication applies to the campaign only. Owner-review audit and mockups must remain local and Git-ignored.
+
+The executable bank has154 reviewed nodes, seven stages and eight ending families. Current content is `33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3`, manifest `fc07d4f2808f970c8855d458984ccaa7cd45da2212ebf0190cdfb54297fd1e56`. Four old slice bundles remain pinned. Never silently replay a saved run against changed content.
+
+## Current continuation priorities
+
+1. **Finish the selected visual direction.** The owner rejected the first16 mockups as insufficiently different. Revision2 must vary logos, dashboard encodings, chatbot structure, scrolling feed, banners/pop-ups/hover details, title-free scenarios and control boards. Windshield choices with a soft selection cloud and a controller visible only in a plausible left-side mirror are explicit directions to demonstrate. Preserve all current pause, input, save and reduced-effect guarantees when integrating a chosen design. Do not mistake a review gallery for16 finished renderer skins.
+2. **Preserve genuine causality.** Population cohorts/aliases and ordered switch/loop/brake mechanics are implemented. Wider CR003 institutions, obligations, credentials, evidence channels and separate service-capacity ledgers are not. The new control exclusion predicate correctly includes both human-led institutions and direct human control. Future changes must preserve archived exact replay and distinguish controller policy from effective authority.
+3. **Close remaining device and operating evidence.** Real screen readers, physical phone performance,400%zoom, context loss and long-run memory remain unverified. Fresh local browser exports work; the in-app browser download event can time out despite a file being delivered, so inspect the actual download before claiming failure or success.
+4. **Activate collection only as a separate verified deployment.** Public v2 remains off. The existing remote collector currently has legacy tables only. Complete service deployment, approved manifest configuration, retention/logging/backup review and actual withdrawal before enabling frontend sharing. Formal-study recruitment remains inactive.
+
+Use Node24/pnpm11.19.0. `pnpm check`, `pnpm inspect:content`, `pnpm collector:build`, `pnpm simulate --runs 10000 --policy random`, `pnpm replay <export>`. Browser CI uses its authored test suite; actual interactive inspection is separate. Full-bank random probes are not human response data or real-world risk estimates. The finite campaign does not establish30–45minute player duration without timed human review.

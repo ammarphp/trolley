@@ -1,0 +1,33 @@
+# Campaign release workflow review
+
+23 September 2026. Independent bounded review of publication plumbing; not a deployment certificate or visual acceptance. No workflow, build, collector or application files were edited by this reviewer.
+
+## Result
+
+No blocking publication defect found in the inspected source. One false archived-sharing promise was reported and corrected by the lead during review. The final GitHub Actions run and deployed URLs still need verification after push.
+
+The inspected local artifact declares production with 154 reviewed nodes, content hash `33630493964e3613acaa98e9a825a1698059805f2a73de0cf7bea47dc96bdde3`, manifest hash `fc07d4f2808f970c8855d458984ccaa7cd45da2212ebf0190cdfb54297fd1e56`, and 443,164 critical gzip bytes. Its collector flag is false. This identifies the campaign, not every later design-file revision.
+
+## Checks and evidence
+
+- Read `.github/workflows/pages.yml`, `ci.yml`, `aggregate.yml`, `package.json`, `pnpm-lock.yaml`, `scripts/build.mjs`, `build-collector.mjs`, `test-v2.mjs`, both snapshot scripts, browser test entry, collector wrapper/configuration, and the production-profile checks in the content and simulation. All three workflow YAML files parse. Node 24 and pnpm 11.19.0 are explicitly selected; frozen installation, typechecking, unit tests, content inspection and Chromium browser checks precede Pages publication. No local runtime path or installed browser is assumed by CI.
+- Exercised the actual embedded guard code from both publication workflows in isolated in-memory contexts. All 14 cases passed: production alone permits publication; development, unknown, absent and null profiles deny it; malformed or missing manifests fail. Build/upload/deploy dependency chains preserve the guard. `createCampaign` rejects a story manifest containing unreviewed selected content before the builder writes the production declaration. Repository variables and manual dispatch cannot substitute another profile.
+- Read-only GitHub checks confirmed `ammarphp/trolley` uses Pages workflow deployment at `https://ammarphp.github.io/trolley/`. Repository variables contain `COLLECTOR_URL` but no `COLLECTOR_V2_ENABLED`. The local build has an empty URL; CI intentionally injects the configured legacy endpoint while leaving v2 off. No environment-variable change or deployment was performed by this reviewer.
+- Existing local `dist/` inventory: 120 files, 27,856,112 bytes, no symlinks, PDFs, databases, ZIPs, videos, source maps, TypeScript or JSONL files. All 106 relative/local HTML `href` and `src` references resolve. No literal capability-value matches or `/Users/` paths were found in its text assets. This is a targeted artifact scan, not a comprehensive secret detector.
+- Git candidate inventory contained no PDF/ZIP/database/video/JSONL artifacts and no file over 50 MiB. All three local book/archive files are ignored. A targeted literal capability-value scan across 198 candidate text files found no matches. Private `.build/`, local collector data and motion recordings are ignored; source PDFs are not copied into Pages.
+- Publication scope was corrected after this initial review: only the campaign is authorized. The audit and mockups stay local; the build no longer copies any reports folder and rejects a reports directory in the Pages output. Later public smoke must verify the excluded paths return404.
+- The aggregate workflow writes its validated output into `dist/`, not Git history. The v2 exporter checks strict shape, pagination generation, expiry and size/cell caps, then writes atomically. Invalid or failed fetches block that workflow's replacement artifact. The legacy public `/stats` endpoint returned HTTP 200, schema 1, unit `run`, in a read-only check. No participant data was submitted.
+
+## Collection and archive boundaries
+
+Publishing the story profile does not enable collection. Static activation requires the explicit `COLLECTOR_V2_ENABLED=true` setting. The server separately requires `V2_ENABLED=true`, an approved manifest hash and its bundled content. The example configuration is disabled and unapproved. `collector:build` only produces a local bundle; none of these workflows deploys or provisions the Worker. Provider settings, migrations, retention scheduling, logging and backups were not audited here and must not be described as operationally verified.
+
+The deployed historical collector was not altered. The new wrapper retains legacy reads/withdrawal and rejects new legacy registration/response writes. The archived client already suppressed its upload function, but its settings initially offered to enable sharing and promised future uploads. The lead removed that handler and replaced it with a disabled, unchecked archived-collection control and closed-sharing notice. This reviewer re-read the corrected source; separate authenticated withdrawal remains intact. Rebuild and browser validation of the exact release commit remain the lead's integration checks.
+
+Saved aggregate snapshots can include subsequently withdrawn contributions until replacement or expiry, and historical public copies cannot be recalled. Snapshot generation checks prevent mixed pages; they do not promise revocation after publication. Neither the publication guard nor thresholding constitutes a formal-study approval.
+
+## Limits and next verification
+
+This review did not run a clean Linux GitHub-hosted job, publish Pages, activate a collector, exercise environment protection approval, or inspect final gallery revision 2. The local artifact scan predates the final staged packaging choice. Recheck the final uploaded manifest/configuration, public game and archive routes, review links actually included, and Actions success after the authorized push. Keep the later gallery publication and its visual acceptance separate from this campaign release.
+
+The Pages configuration action reads existing site metadata and defaults enablement off. Its source and the official API specify Pages read access, with a public-resource exception; the repository is public and its site already exists. Therefore the build job's `contents: read` configuration is not a demonstrated failure. The deployment jobs explicitly grant `pages: write` and `id-token: write`. Sources inspected: [configure-pages v5 implementation](https://raw.githubusercontent.com/actions/configure-pages/v5/src/api-client.js), [action inputs](https://raw.githubusercontent.com/actions/configure-pages/v5/action.yml), and [GitHub Pages REST permissions](https://docs.github.com/en/rest/pages/pages?apiVersion=2022-11-28#get-a-github-pages-site).

@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "status": "proposal_not_merged",
+  "owner": "philosophy",
+  "review": "author_self_review_only",
+  "sources": [
+    {
+      "id": "PHIL-FOOT-1967",
+      "title": "The Problem of Abortion and the Doctrine of the Double Effect",
+      "authors": [
+        "Philippa Foot"
+      ],
+      "year": 1967,
+      "url": "https://sites.pitt.edu/~mthompso/readings/foot.pdf",
+      "publication": "Oxford Review 5, 5–15",
+      "reading": {
+        "status": "selected_sections",
+        "date": "2026-09-22",
+        "locators": [
+          "Linked transcription PDF pp. 3–6"
+        ],
+        "scope": "Driver example; intention versus foresight; doing versus allowing; duties. Journal pagination is not the transcription pagination."
+      },
+      "evidenceType": "philosophical_argument",
+      "limits": [
+        "Not a universal experimental result or a settled solution to trolley ethics."
+      ]
+    },
+    {
+      "id": "PHIL-THOMSON-1985",
+      "title": "The Trolley Problem",
+      "authors": [
+        "Judith Jarvis Thomson"
+      ],
+      "year": 1985,
+      "url": "https://rintintin.colorado.edu/~vancecd/phil403/thomson.pdf",
+      "publication": "Yale Law Journal 94, 1395–1415",
+      "reading": {
+        "status": "selected_sections",
+        "date": "2026-09-22",
+        "locators": [
+          "Journal pp. 1397–1399",
+          "Journal pp. 1402–1403",
+          "Journal pp. 1404–1412"
+        ],
+        "scope": "Driver/bystander, loop, means/rights, promised siding; not claimed as a review of every Thomson essay."
+      },
+      "evidenceType": "philosophical_argument",
+      "limits": [
+        "A remote cabin action changes embodiment relative to Footbridge.",
+        "Permissibility is not identical to obligation or absence of harm."
+      ]
+    },
+    {
+      "id": "PHIL-MORAL-MACHINE-2018",
+      "title": "The Moral Machine experiment",
+      "authors": [
+        "Edmond Awad",
+        "Sohan Dsouza",
+        "Richard Kim",
+        "Jonathan Schulz",
+        "Joseph Henrich",
+        "Azim Shariff",
+        "Jean-François Bonnefon",
+        "Iyad Rahwan"
+      ],
+      "year": 2018,
+      "url": "https://politics.media.mit.edu/papers/Rahwan.pdf",
+      "doi": "10.1038/s41586-018-0637-6",
+      "publication": "Nature 563, 59–64",
+      "reading": {
+        "status": "selected_sections",
+        "date": "2026-09-22",
+        "locators": [
+          "Main discussion, journal pp. 61–63",
+          "PDF p. 7 Methods",
+          "PDF pp. 18–20 reporting summary"
+        ],
+        "scope": "Task design, attribute randomization, descriptive interpretation, self-selection, reporting. Supplement beyond the linked reporting material not fully reviewed."
+      },
+      "evidenceType": "empirical",
+      "limits": [
+        "Self-selected respondents, task-specific preferences.",
+        "Does not prescribe a hierarchy of human worth or validate this game's model."
+      ]
+    },
+    {
+      "id": "PHIL-CLASSIC-2020",
+      "title": "Universals and variations in moral decisions made in 42 countries by 70,000 participants",
+      "authors": [
+        "Edmond Awad",
+        "Sohan Dsouza",
+        "Azim Shariff",
+        "Iyad Rahwan",
+        "Jean-François Bonnefon"
+      ],
+      "year": 2020,
+      "url": "https://jfbonnefon.github.io/publication/pnas20/pnas20.pdf",
+      "doi": "10.1073/pnas.1911517117",
+      "publication": "PNAS 117, 2332–2337",
+      "reading": {
+        "status": "selected_sections",
+        "date": "2026-09-22",
+        "locators": [
+          "PDF pp. 1–2 distinctions",
+          "PDF pp. 3–5 results/limitations",
+          "PDF pp. 5–6 Methods"
+        ],
+        "scope": "Switch/Loop/Footbridge comparisons, stimuli, self-selection and complete-case restriction."
+      },
+      "evidenceType": "empirical",
+      "limits": [
+        "Changing POV, framing, route history or personal force prevents a direct replication claim.",
+        "Aggregate pattern is not an individual's moral diagnosis."
+      ]
+    },
+    {
+      "id": "PHIL-NYHOLM-SMIDS-2016",
+      "title": "The Ethics of Accident-Algorithms for Self-Driving Cars: an Applied Trolley Problem?",
+      "authors": [
+        "Sven Nyholm",
+        "Jilles Smids"
+      ],
+      "year": 2016,
+      "url": "https://d-nb.info/1109288166/34",
+      "doi": "10.1007/s10677-016-9745-2",
+      "publication": "Ethical Theory and Moral Practice 19, 1275–1289",
+      "reading": {
+        "status": "selected_sections",
+        "date": "2026-09-22",
+        "locators": [
+          "Sections 3–5",
+          "Section 6 concluding table"
+        ],
+        "scope": "Prospective collective planning, responsibility and uncertainty as limits of the trolley analogy."
+      },
+      "evidenceType": "philosophical_argument",
+      "limits": [
+        "Supports an argument about disanalogy, not empirical failure rates for automated systems."
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "PHIL-C01",
+      "sourceIds": [
+        "PHIL-FOOT-1967"
+      ],
+      "statement": "Foot's 1967 essay introduces a driver tram example.",
+      "kind": "historical",
+      "approvedUse": "Proposed attribution correction and driver-anchor dossier.",
+      "status": "proposal",
+      "inGameNumbers": "none"
+    },
+    {
+      "id": "PHIL-C02",
+      "sourceIds": [
+        "PHIL-THOMSON-1985"
+      ],
+      "statement": "A loop variation changes whether the endangered person is causally required for rescue.",
+      "kind": "philosophical_distinction",
+      "approvedUse": "Proposed causal contrast; any physical adaptation must be recorded.",
+      "status": "proposal",
+      "inGameNumbers": "authored_stipulation"
+    },
+    {
+      "id": "PHIL-C03",
+      "sourceIds": [
+        "PHIL-THOMSON-1985"
+      ],
+      "statement": "An official safe-siding promise supplies a distinct obligation in Thomson's example.",
+      "kind": "philosophical_argument",
+      "approvedUse": "Proposed prior-commitment callback; no claim of consensus.",
+      "status": "proposal",
+      "inGameNumbers": "none"
+    },
+    {
+      "id": "PHIL-C04",
+      "sourceIds": [
+        "PHIL-MORAL-MACHINE-2018"
+      ],
+      "statement": "The study records stated preferences under its task and acknowledges self-selection.",
+      "kind": "empirical_limit",
+      "approvedUse": "Methods and debrief; never a moral truth label.",
+      "status": "proposal",
+      "inGameNumbers": "no_imported_live_statistics"
+    },
+    {
+      "id": "PHIL-C05",
+      "sourceIds": [
+        "PHIL-CLASSIC-2020"
+      ],
+      "statement": "The Classic study compares three specified scenarios; altered embodiment and history change the stimulus.",
+      "kind": "methodological",
+      "approvedUse": "Explain why the campaign is an adaptation, not a replication.",
+      "status": "proposal",
+      "inGameNumbers": "no_imported_live_statistics"
+    },
+    {
+      "id": "PHIL-C06",
+      "sourceIds": [
+        "PHIL-NYHOLM-SMIDS-2016"
+      ],
+      "statement": "Institutional planning, responsibility and uncertainty complicate a direct analogy to isolated trolley cases.",
+      "kind": "philosophical_argument",
+      "approvedUse": "Proposed upstream-policy progression and limits dossier.",
+      "status": "proposal",
+      "inGameNumbers": "authored_stipulation"
+    }
+  ],
+  "remainingReading": [
+    "Explicit consent",
+    "Self-sacrifice",
+    "Repeated-risk distribution",
+    "Digital moral status",
+    "Moral uncertainty"
+  ],
+  "bookScope": "Book-specific evidence is owned by the separate AI/scenario research packet. No local book is copied or claimed as read by this proposal."
+}

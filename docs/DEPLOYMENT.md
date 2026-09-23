@@ -1,3 +1,5 @@
+> Legacy v1 reference. For the current development implementation, read [operations/V2_DEPLOYMENT.md](operations/V2_DEPLOYMENT.md). This document does not describe v2 readiness or activation.
+
 # Deployment
 
 ## GitHub Pages
