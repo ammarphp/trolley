@@ -25,7 +25,6 @@ import {
   INK,
   PAPER,
   RED,
-  GREEN,
   type ArtKind,
 } from "./ink-art";
 import { ANIMATED } from "./glyph-catalogue";
@@ -169,9 +168,9 @@ export function createFallbackScene(
   const frame = document.createElement("div");
   frame.className = "cabin-static-fallback";
   frame.style.cssText =
-    "position:absolute;inset:0;overflow:hidden;background:#faf9f3;pointer-events:none";
+    "position:absolute;inset:0;overflow:hidden;background:#ffffff;pointer-events:none";
   frame.innerHTML =
-    '<svg viewBox="0 0 1440 900" preserveAspectRatio="none" width="100%" height="100%" aria-hidden="true"><rect width="1440" height="900" fill="#faf9f3"/><g fill="none" stroke="#272924" stroke-width="2"><path d="M300 740Q560 460 640 230M390 740Q610 460 665 230M1050 740Q830 460 760 230M1140 740Q880 460 785 230"/><path d="M0 280Q170 251 340 283T720 280T1100 280T1440 277"/></g>' +
+    '<svg viewBox="0 0 1440 900" preserveAspectRatio="none" width="100%" height="100%" aria-hidden="true"><rect width="1440" height="900" fill="#ffffff"/><g fill="none" stroke="#282828" stroke-width="2"><path d="M300 740Q560 460 640 230M390 740Q610 460 665 230M1050 740Q830 460 760 230M1140 740Q880 460 785 230"/><path d="M0 280Q170 251 340 283T720 280T1100 280T1440 277"/></g>' +
     cabinSvg().replace(/<\/?svg[^>]*>/g, "") +
     "</svg>";
   host.append(frame);
@@ -482,8 +481,8 @@ export async function createCabinScene(
         }
         ballast
           .poly(bedPoints)
-          .fill(view.stage >= 5 ? 0xbac1b4 : 0xd2d6c7)
-          .stroke({ color: 0x959f8e, width: 0.7, alpha: 0.6 });
+          .fill(view.stage >= 5 ? 0xbfbfbf : 0xd4d4d4)
+          .stroke({ color: 0x9c9c9c, width: 0.7, alpha: 0.6 });
         for (let i = 0; i < 40; i++) {
           const z = distance + 1.5 + wrap(i * 2.13 + cosmeticTravel, 84);
           if (z < section.from || z >= section.to || z - distance > 43)
@@ -502,7 +501,7 @@ export async function createCabinScene(
             .moveTo(q.x - r, q.y)
             .lineTo(q.x, q.y - r * 0.6)
             .lineTo(q.x + r, q.y + 0.2)
-            .stroke({ color: 0x77826f, width: 0.9, alpha: 0.5 });
+            .stroke({ color: 0x7e7e7e, width: 0.9, alpha: 0.5 });
         }
         // Perpendicular sleepers stay inside their branch; the few shared sleepers
         // at the toe are drawn once rather than colliding across the fork.
@@ -556,12 +555,12 @@ export async function createCabinScene(
           );
           rails
             .poly([a.x, a.y, b.x, b.y, bb.x, bb.y, aa.x, aa.y])
-            .fill(view.stage >= 5 ? 0x5b665b : 0x737767)
+            .fill(view.stage >= 5 ? 0x636363 : 0x757575)
             .stroke({ color: INK, width: 1.15, alpha: 0.85 });
           rails
             .moveTo(aa.x, aa.y)
             .lineTo(bb.x, bb.y)
-            .stroke({ color: 0xe4e6d9, width: 0.8, alpha: 0.85 });
+            .stroke({ color: 0xe5e5e5, width: 0.8, alpha: 0.85 });
         }
         const samples: Pose[] = [];
         for (let z = section.from; z <= section.to; z += 0.65)
@@ -570,7 +569,7 @@ export async function createCabinScene(
         for (const offset of [-0.47, 0.47])
           for (const surface of [0, 1]) {
             let begun = false;
-            const ink = surface ? 0xe1e5d8 : INK,
+            const ink = surface ? 0xe3e3e3 : INK,
               stroke = surface ? 1.05 : railWidth + 1.1;
             for (const path of samples) {
               const local = localPoint(offsetPoint(path, offset), camera);
@@ -888,26 +887,26 @@ export async function createCabinScene(
       lever.clear();
       lever
         .poly([963, 821, 1075, 806, 1110, 860, 978, 879])
-        .fill(0x7b8479)
+        .fill(0x818181)
         .stroke({ color: INK, width: 3.6 });
       lever
         .poly([970, 814, 1075, 800, 1100, 843, 977, 859])
-        .fill(0xd4d9cd)
+        .fill(0xd7d7d7)
         .stroke({ color: INK, width: 3.4 });
       lever
         .roundRect(996, 811, 68, 12, 5)
-        .fill(0x343c37)
+        .fill(0x3a3a3a)
         .stroke({ color: INK, width: 2.4 });
       const topX = 1035 + visualLever * 49,
         topY = 713;
       lever
         .poly([1026, 822, topX - 7, topY + 15, topX + 7, topY + 15, 1044, 819])
-        .fill(0x555e55)
+        .fill(0x5b5b5b)
         .stroke({ color: INK, width: 3.4 });
       lever
         .moveTo(1031, 817)
         .lineTo(topX - 2, topY + 17)
-        .stroke({ color: 0xe7e9df, width: 2.3 });
+        .stroke({ color: 0xe8e8e8, width: 2.3 });
       lever
         .roundRect(topX - 34, topY - 8, 68, 29, 7)
         .fill(0x974d40)
@@ -930,7 +929,7 @@ export async function createCabinScene(
         [986, 848],
         [1088, 838],
       ]) {
-        lever.circle(x, y, 4).fill(0xb7c0b0).stroke({ color: INK, width: 1.5 });
+        lever.circle(x, y, 4).fill(0xbdbdbd).stroke({ color: INK, width: 1.5 });
         lever
           .moveTo(x - 2, y + 2)
           .lineTo(x + 2, y - 2)

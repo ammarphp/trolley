@@ -11,8 +11,8 @@ export interface GlyphPose {
   reducedGraphics?: boolean;
   variant?: number;
 }
-const paper = "#faf9f3",
-  ink = "#272924",
+const paper = "#ffffff",
+  ink = "#282828",
   red = "#9a4e42";
 const path = (d: string, fill = "none", extra = "") =>
   `<path d="${d}" fill="${fill}" ${extra}/>`;
@@ -42,13 +42,13 @@ function quadrupedLegs(
       return (
         path(
           `M${x - 2} ${ground - length}L${knee - 2} ${ground - length * 0.45}L${toe - 2} ${ground - lift - 3}l-2 3h8l-1-4L${knee + 2} ${ground - length * 0.46}L${x + 3} ${ground - length}Z`,
-          back ? "#aeb8a8" : paper,
-          'stroke="#272924" stroke-width="1.7"',
+          back ? "#b5b5b5" : paper,
+          'stroke="#282828" stroke-width="1.7"',
         ) +
         path(
           `M${toe - 3} ${ground - lift}h7`,
           "none",
-          'stroke="#272924" stroke-width="2.3"',
+          'stroke="#282828" stroke-width="2.3"',
         )
       );
     })
@@ -80,7 +80,7 @@ export function animalPaths(kind: AnimalKind, pose: GlyphPose = {}) {
       path(
         "M57-35h-6M-41-48q6 12 17 12M-24-34q18 4 29-2M29-48l-5 10M-35-59l2 6M-5-54l-1 8",
         "none",
-        'stroke="#6e7967" stroke-width="1.2"',
+        'stroke="#757575" stroke-width="1.2"',
       );
   } else if (kind === "deer") {
     body =
@@ -114,7 +114,7 @@ export function animalPaths(kind: AnimalKind, pose: GlyphPose = {}) {
       path(
         "M-35-36q0-11 9-13M-23-50q19-7 35 0M28-40q-6 6-5 13M-24-23q13 4 26 0M-16-48l2 2M-5-50l2 2M6-50l2 2M17-46l2 2",
         "none",
-        'stroke="#727a6c" stroke-width="1.2"',
+        'stroke="#777777" stroke-width="1.2"',
       );
   } else if (kind === "dog") {
     body =
@@ -130,11 +130,11 @@ export function animalPaths(kind: AnimalKind, pose: GlyphPose = {}) {
       circle(40, -57, 2) +
       circle(56, -46, 2) +
       path("M21-44l19 5M26-38l-1 7M47-38q5 9 9 0") +
-      path("M-29-49q11-4 18 3l-4 13q-9 5-17-2Z", "#69705f") +
+      path("M-29-49q11-4 18 3l-4 13q-9 5-17-2Z", "#6d6d6d") +
       path(
         "M-24-32q-8-7-5-13M19-41q5 9 0 14M-8-31q11 5 18-2M39-46l-7 7",
         "none",
-        'stroke="#727a6c" stroke-width="1.2"',
+        'stroke="#777777" stroke-width="1.2"',
       );
   } else if (kind === "rabbit") {
     const hop = [0, 7, 12, 3][frame];
@@ -151,7 +151,7 @@ export function animalPaths(kind: AnimalKind, pose: GlyphPose = {}) {
       path(
         `M30 ${-24 - hop}l9-3M30 ${-22 - hop}h10M13 ${-58 - hop}v12M-24 ${-27 - hop}q4-10 13-11M-27 ${-17 - hop}l5-3M-23 ${-11 - hop}l4-2M-11 ${-31 - hop}l4-3M-5 ${-36 - hop}l4-2`,
         "none",
-        'stroke="#66715f" stroke-width="1.3"',
+        'stroke="#6d6d6d" stroke-width="1.3"',
       );
   } else {
     body =
@@ -166,7 +166,7 @@ export function animalPaths(kind: AnimalKind, pose: GlyphPose = {}) {
         "M33-44l-9-7M-30-41q5-6 10-1M-17-49q5-6 10-1M-9-39q6-7 12-1M7-49q5-6 10-1M18-37q6-6 11 0M-23-26q5-7 10-1M-7-22q5-7 10-1M6-29q5-6 10-1",
       );
   }
-  body = `<g stroke="#272924" stroke-width="2.3">${body}</g>`;
+  body = `<g stroke="#282828" stroke-width="2.3">${body}</g>`;
   if (alarm) body += path("M-12-86l-2-9M-4-84l5-9");
   if (injured)
     body += pose.reducedGraphics
@@ -192,13 +192,13 @@ export function figurePaths(kind: "person" | "robot", pose: GlyphPose = {}) {
     const left = -8 - step,
       right = 8 + step;
     return (
-      path("M-9-91h19v17h-19ZM-14-69l28-1 4 34-33 1Z", "#d9dfd7") +
+      path("M-9-91h19v17h-19ZM-14-69l28-1 4 34-33 1Z", "#dddddd") +
       path(
         `M-8-35L${left}-18 ${left - 2}-3h-9M9-35L${right}-18 ${right + 3}-3h10M-15-65l-9 21 7 18M17-64l9 20-6 18M-3-74v5M5-74v5`,
         "none",
-        'stroke="#272924" stroke-width="3"',
+        'stroke="#282828" stroke-width="3"',
       ) +
-      path("M-6-87H7v6H-6ZM-9-60h19v10H-9ZM-8-44h17M-4-39h9", "#647268") +
+      path("M-6-87H7v6H-6ZM-9-60h19v10H-9ZM-8-44h17M-4-39h9", "#6e6e6e") +
       circle(left, -18, 3, paper) +
       circle(right, -18, 3, paper) +
       circle(-22, -44, 3, paper) +
@@ -206,7 +206,7 @@ export function figurePaths(kind: "person" | "robot", pose: GlyphPose = {}) {
       path(
         "M-17-31l-5 9 5 5M20-31l5 8-4 5M1-91v-6M-4-97h10",
         "none",
-        'stroke="#272924" stroke-width="1.8"',
+        'stroke="#282828" stroke-width="1.8"',
       ) +
       (mood === "vacant"
         ? path("M-6-83H7", "none", 'stroke="#9a4e42" stroke-width="2"')
@@ -220,56 +220,56 @@ export function figurePaths(kind: "person" | "robot", pose: GlyphPose = {}) {
   let body =
     path(
       `M-9-38L${left - 2}-18 ${left - 3}-3h-6l-1 3h13L1-26 4-1h13l-1-3h-6L${right + 3}-21 10-38Z`,
-      "#a5aea2",
-      'stroke="#272924" stroke-width="2.2"',
+      "#ababab",
+      'stroke="#282828" stroke-width="2.2"',
     ) +
     path(
       coat
         ? "M-10-71L-16-61-12-23 13-23 17-60 10-71Z"
         : "M-10-71L-16-61-10-38 12-38 17-60 10-71Z",
-      v === 2 ? "#bbc7b5" : paper,
-      'stroke="#272924" stroke-width="2.2"',
+      v === 2 ? "#c3c3c3" : paper,
+      'stroke="#282828" stroke-width="2.2"',
     ) +
-    path("M-3-72v7h7v-7", paper, 'stroke="#272924" stroke-width="1.5"') +
+    path("M-3-72v7h7v-7", paper, 'stroke="#282828" stroke-width="1.5"') +
     path(
       `M${-7 + lean}-84Q${-7 + lean}-94 ${1 + lean}-95Q${10 + lean}-94 ${9 + lean}-84L${7 + lean}-75Q${2 + lean}-71 ${-3 + lean}-75Z`,
       paper,
-      'stroke="#272924" stroke-width="1.8"',
+      'stroke="#282828" stroke-width="1.8"',
     ) +
     path(
       `M${-7 + lean}-85l-1-7 5-5 9 2 5 5-2 6M${7 + lean}-87l3 5-3 1`,
       "none",
-      'stroke="#272924" stroke-width="1.3"',
+      'stroke="#282828" stroke-width="1.3"',
     ) +
     path(
       "M-8-70l6 8 3-4 3 4 7-8M1-64v22M-9-56h7M5-56h7M-7-41h16",
       "none",
-      'stroke="#272924" stroke-width="1.1"',
+      'stroke="#282828" stroke-width="1.1"',
     ) +
     path(
       mood === "alert"
         ? "M-14-65L-26-56-31-73-36-71-31-46-24-43-11-56M15-65l12 14 7-19 5 3-8 27-7-1-12-15"
         : `M-13-65L${-20 + step * 0.5}-47-18-30-13-30-12-48-6-61M14-65L${22 - step * 0.5}-47 19-30 14-30 14-47 7-62`,
       paper,
-      'stroke="#272924" stroke-width="2"',
+      'stroke="#282828" stroke-width="2"',
     ) +
     path(
       "M-17-28l1 6 4-1v-7M16-28v6h4l1-7M-5-33l2 12M8-32l-1 11",
       "none",
-      'stroke="#272924" stroke-width="1.3"',
+      'stroke="#282828" stroke-width="1.3"',
     );
   if (v === 2)
     body += path(
       `M${-10 + lean}-90q10-13 22 0v3h-22Z`,
-      "#d3dbc9",
-      'stroke="#272924" stroke-width="1.4"',
+      "#d8d8d8",
+      'stroke="#282828" stroke-width="1.4"',
     );
   if (mood === "injured")
     body += pose.reducedGraphics
       ? path(
           "M-11-58l23 9M-12-52l23 9",
           paper,
-          'stroke="#737b71" stroke-width="3"',
+          'stroke="#797979" stroke-width="3"',
         )
       : path(
           "M-11-58l10 5-4 10 12 5M-5-46v13",
@@ -280,7 +280,7 @@ export function figurePaths(kind: "person" | "robot", pose: GlyphPose = {}) {
     body += path(
       `M${-5 + lean}-83h13`,
       "none",
-      'stroke="#272924" stroke-width="3"',
+      'stroke="#282828" stroke-width="3"',
     );
   return body;
 }

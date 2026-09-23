@@ -1,12 +1,12 @@
 /** Original technical-ink construction. Every surface is vector geometry;
  * no raster reference, imported texture, SVG filter or hidden clipping mask. */
 export const T = {
-  ink: "#252b2b",
-  paper: "#faf9f3",
-  metal: "#dedfd8",
-  shade: "#bfc4bd",
-  dark: "#5c6561",
-  glass: "#edf1eb",
+  ink: "#2a2a2a",
+  paper: "#ffffff",
+  metal: "#ffffff",
+  shade: "#c2c2c2",
+  dark: "#636363",
+  glass: "#ffffff",
   red: "#a3483d",
 };
 const n = (value: number) => Math.round(value * 100) / 100;
@@ -52,7 +52,7 @@ export function quad(points: number[][], fill = T.metal, w = 3) {
 export function hatchQuad(
   points: number[][],
   count = 12,
-  color = "#7d8781",
+  color = "#848484",
   width = 1,
 ) {
   const [a, b, c, d] = points;
@@ -163,7 +163,7 @@ export function technicalCabinLayers() {
         [32, 720],
       ],
       24,
-      "#969e96",
+      "#9c9c9c",
       1.7,
     ) +
     hatchQuad(
@@ -174,7 +174,7 @@ export function technicalCabinLayers() {
         [1376, 685],
       ],
       24,
-      "#969e96",
+      "#9c9c9c",
       1.7,
     );
   // Three nested seals make the windshield a built object with a rebate.
@@ -250,7 +250,7 @@ export function technicalCabinLayers() {
         [489, 895],
         [101, 895],
       ],
-      "#e9e9e1",
+      "#e8e8e8",
       2.1,
     ) +
     quad(
@@ -260,7 +260,7 @@ export function technicalCabinLayers() {
         [1333, 895],
         [958, 895],
       ],
-      "#e9e9e1",
+      "#e8e8e8",
       2.1,
     );
   frame +=
@@ -272,7 +272,7 @@ export function technicalCabinLayers() {
         [101, 895],
       ],
       12,
-      "#b1b7ae",
+      "#b5b5b5",
       1,
     ) +
     hatchQuad(
@@ -283,7 +283,7 @@ export function technicalCabinLayers() {
         [958, 895],
       ],
       12,
-      "#b1b7ae",
+      "#b5b5b5",
       1,
     );
   frame +=
@@ -341,7 +341,7 @@ export function technicalCabinLayers() {
       1235 + i * 3,
       760 + i * 11,
       1.3,
-      "#929d93",
+      "#9a9a9a",
     );
   frame +=
     p("M1130 704l15-28 79-7 15 28", "none", 4) +
@@ -380,23 +380,23 @@ export function technicalCabinLayers() {
   for (let i = 0; i < 16; i++) {
     let x = 150 + ((i * 73) % 1140),
       y = 668 + (i % 3) * 4;
-    frame += line(x, y, x + 12 + (i % 4) * 4, y - 2, 1, "#92988f");
+    frame += line(x, y, x + 12 + (i % 4) * 4, y - 2, 1, "#969696");
   }
   const controller =
     p(
       "M544 771Q505 784 486 820L455 900H835L805 819Q784 784 742 771L706 756H582Z",
-      "#b9c0b7",
+      "#bebebe",
       4.9,
     ) +
     p(
       "M548 782Q579 803 644 805Q707 806 738 783L755 807Q645 835 531 807Z",
-      "#dde0d7",
+      "#dfdfdf",
       2.4,
     ) +
-    p("M593 709L589 764Q643 787 699 763L692 709Z", "#e2e2d8", 3.3) +
+    p("M593 709L589 764Q643 787 699 763L692 709Z", "#e1e1e1", 3.3) +
     p(
       "M573 651Q568 691 580 721Q593 749 644 758Q691 749 706 721Q719 689 711 651Z",
-      "#ecebe2",
+      "#ebebeb",
       3.7,
     ) +
     p(
@@ -408,11 +408,11 @@ export function technicalCabinLayers() {
       "M584 721q19 12 35 13M665 734q23-2 34-12M590 727l5 16M600 732l4 14M690 730l-5 14",
       "none",
       1.2,
-      "#7e867c",
+      "#848484",
     ) +
     p(
       "M564 657L572 622Q647 596 713 624L721 657Q646 679 564 657Z",
-      "#9aa79b",
+      "#a3a3a3",
       4.6,
     ) +
     p("M565 644Q644 665 719 645L722 661Q645 684 562 661Z", T.dark, 2.7) +
@@ -434,7 +434,7 @@ export function technicalCabinLayers() {
         [471, 899],
       ],
       11,
-      "#778578",
+      "#818181",
       1,
     ) +
     hatchQuad(
@@ -445,7 +445,7 @@ export function technicalCabinLayers() {
         [788, 899],
       ],
       11,
-      "#778578",
+      "#818181",
       1,
     ) +
     p("M607 804q31 10 70 0M533 826l15 5M740 829l14-5", "none", 1.2, T.paper);

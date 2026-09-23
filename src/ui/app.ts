@@ -232,7 +232,11 @@ function view(): SceneView {
       left: optionFor("left")?.label || "Left route",
       right: optionFor("right")?.label || "Right route",
     },
-    detail: p?.node.scene.detail || "An ordinary morning.",
+    detail: p
+      ? p.node.scene.detail === p.node.title
+        ? ""
+        : p.node.scene.detail
+      : "An ordinary morning.",
     landmark: p?.node.scene.landmark,
   };
 }
@@ -335,7 +339,6 @@ function renderStart() {
   const panel = el("section", "start");
   append(
     panel,
-    el("p", "eyebrow", COPY.openingKicker),
     el("h1", "", COPY.openingTitle),
     el("p", "subtitle", COPY.openingSubtitle),
   );
@@ -495,7 +498,6 @@ function renderDecision(newClock = true) {
   heading.id = "decision";
   heading.tabIndex = 0;
   heading.setAttribute("aria-label", "Current dilemma");
-  append(heading, el("h1", "", p.node.title));
   const prompt = el("div", "decision-prompt");
   for (const paragraph of p.node.prompt.split(/\n\n+/))
     prompt.append(el("p", "", paragraph));
@@ -554,7 +556,7 @@ function renderDecision(newClock = true) {
   updateScene();
   refreshArming();
   if (newClock) beginClock();
-  focusTitle(heading);
+  heading.focus({ preventScroll: true });
   announce(
     `Decision ${p.ordinal}. ${p.node.prompt} No route selected.${prefs.descriptions ? " " + scene.describe() : ""}`,
   );
@@ -842,7 +844,7 @@ function inspect() {
       "drawer-action",
     ),
   );
-  openDrawer(p.node.title, body);
+  openDrawer("Details and sources", body);
 }
 function showSources(claimIds?: string[]) {
   const body = el("div");
@@ -1059,7 +1061,12 @@ function recordPanel() {
     const n = nodes.find((n) => n.id === r.nodeId);
     append(
       d,
-      el("summary", "", `${r.revision}. ${n?.title || r.nodeId}`),
+      el(
+        "summary",
+        "",
+        n?.options.find((option) => option.id === r.requestedOptionId)?.label ||
+          "Recorded choice",
+      ),
       textBlock(r.consequence),
       textBlock(
         `Requested: ${r.requestedOptionId}. Executed: ${r.executedOptionId}. Executor: ${r.executor}. Status: ${r.status}.`,
@@ -1208,7 +1215,7 @@ function renderDebrief() {
       el(
         "div",
         "turning-point",
-        `${nodes.find((n) => n.id === r.nodeId)?.title || r.nodeId}. ${facts.map((fact) => changes[fact]).join(" ")}${r.status === "overridden" ? " " + executionSummary(r) : ""}`,
+        `${facts.map((fact) => changes[fact]).join(" ")}${r.status === "overridden" ? " " + executionSummary(r) : ""}`,
       ),
     );
   append(body, el("h2", "", "The record"));

@@ -82,9 +82,9 @@ try {
   assert.equal(await page.locator("#assistant-panel").isVisible(), false);
   assert.equal(await page.locator("#telemetry-panel").isVisible(), false);
   assert.ok(boxes.at(-1).bottom <= 900, "Lever must fit the desktop viewport");
-  const before = await page.locator(".decision-heading h1").innerText();
+  const before = await page.locator(".decision-prompt").innerText();
   await page.locator("#lever").click();
-  assert.equal(await page.locator(".decision-heading h1").innerText(), before);
+  assert.equal(await page.locator(".decision-prompt").innerText(), before);
   await page.locator(".route").first().click();
   await page.keyboard.press("Escape");
   assert.equal(
@@ -97,10 +97,7 @@ try {
   await page.reload();
   await page.getByRole("button", { name: "Resume your saved ride" }).click();
   await page.locator(".route").first().waitFor();
-  assert.notEqual(
-    await page.locator(".decision-heading h1").innerText(),
-    before,
-  );
+  assert.notEqual(await page.locator(".decision-prompt").innerText(), before);
   await page.getByRole("button", { name: "Pause the journey" }).click();
   assert.match(await page.getByRole("dialog").innerText(), /It can wait/);
   await page.getByRole("button", { name: "Back to the controls" }).click();
