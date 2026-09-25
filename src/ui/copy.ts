@@ -5,9 +5,9 @@ export const COPY = Object.freeze({
   openingTitle: "A few small decisions.",
   openingSubtitle: "A short ride. A very long way down.",
   start: "Start the trolley",
-  lever: "Toggle lever",
+  lever: "Pull the lever",
   selectFirst: "Choose a track.",
-  armed: "Ready. Toggle to commit.",
+  armed: "Ready. Pull to commit.",
   overridden: "You pulled the lever. It chose for you.",
   overrideReceipt:
     "Morrow executed the other route. Your objection has been saved. Next problem. :)",

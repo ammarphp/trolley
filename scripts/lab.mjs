@@ -5,6 +5,8 @@ import { build } from "esbuild";
 import { mkdir, readdir, writeFile, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import http from "node:http";
+import { existsSync } from "node:fs";
+import { copyFonts } from "./fonts.mjs";
 
 const args = process.argv.slice(2);
 const opt = (name, fallback) => {
@@ -42,12 +44,15 @@ export async function buildLab({ file, out }) {
     target: ["es2022"],
     sourcemap: "inline",
     logLevel: "warning",
-    loader: { ".woff2": "file", ".svg": "text" },
+    loader: { ".svg": "text" },
+    external: ["*.woff2"],
   });
+  await copyFonts(out);
+  const css = existsSync(path.join(out, "lab.css")) ? '<link rel="stylesheet" href="./lab.css">' : "";
   await writeFile(
     path.join(out, "index.html"),
     `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>lab</title>
-<style>html,body{margin:0;background:#fff;overflow:hidden}</style></head><body><script type="module" src="./lab.js"></script></body></html>`,
+<style>html,body{margin:0;background:#fff;overflow:hidden}</style>${css}</head><body><script type="module" src="./lab.js"></script></body></html>`,
   );
   return out;
 }

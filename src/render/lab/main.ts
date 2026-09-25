@@ -133,6 +133,11 @@ export async function runLab(registry: LabScene[]): Promise<void> {
     pipeline.render(scene, camera, 1 / 60);
     // Two frames so shadow maps and programs settle.
     pipeline.render(scene, camera, 0);
+    const finish = (window as unknown as { __labFinish?: () => void }).__labFinish;
+    if (finish) {
+      finish();
+      finish();
+    }
     window.__labReady = true;
     return;
   }

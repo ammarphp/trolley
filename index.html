@@ -2,57 +2,67 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1,viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
     <meta
       name="description"
-      content="A short ride. A very long way down. An illustrated trolley game about useful machines, difficult choices, and who keeps the controls."
+      content="A short ride. A very long way down. A pen-and-ink trolley game about useful machines, small decisions, and who keeps the controls."
     />
     <meta property="og:title" content="trolley." />
-    <meta
-      property="og:description"
-      content="A short ride. A very long way down."
-    />
+    <meta property="og:description" content="A short ride. A very long way down." />
+    <meta property="og:type" content="website" />
     <title>trolley. — keep your hands on the controls</title>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./game.css" />
     <script type="module" src="./game.js"></script>
   </head>
-  <body>
+  <body data-phase="boot" data-stage="1">
     <a href="#decision" class="skip-link">Skip to the decision</a>
-    <header class="toolbar">
-      <a class="wordmark" href="./">trolley<span>.</span></a>
-      <span class="brand-note">A better tomorrow. Please hold.</span>
-      <nav aria-label="Game controls">
-        <button id="history-button" aria-label="Your run record">Record</button
-        ><button id="settings-button" aria-label="Settings and privacy">
-          Settings</button
-        ><button id="pause-button" aria-label="Pause the journey">Pause</button>
-      </nav>
+    <div id="scene" class="world" aria-hidden="true"></div>
+    <div class="world-veil" aria-hidden="true"></div>
+    <header class="hud-top">
+      <a class="wordmark" href="./" aria-label="trolley. — restart">trolley<span>.</span></a>
+      <div class="hud-clock" id="hud-clock" hidden>
+        <span class="hud-day t-mono" id="hud-day"></span>
+        <span class="hud-role" id="hud-role"></span>
+      </div>
+      <div class="hud-right">
+        <div id="stats-chip" class="stats-chip" hidden></div>
+        <nav class="hud-nav" aria-label="Game controls">
+          <button id="history-button" class="hud-button" aria-label="Your run record" hidden>
+            <span aria-hidden="true">Record</span>
+          </button>
+          <button id="settings-button" class="hud-button" aria-label="Settings and privacy">
+            <span aria-hidden="true">Settings</span>
+          </button>
+          <button id="pause-button" class="hud-button hud-button-strong" aria-label="Pause the journey" hidden>
+            <span aria-hidden="true">Pause</span>
+          </button>
+        </nav>
+      </div>
     </header>
     <div id="workspace">
-      <main id="app"><div id="scene" aria-hidden="true"></div></main>
-      <aside id="assistant-panel" hidden></aside>
-      <aside id="telemetry-panel" hidden></aside>
+      <aside id="assistant-panel" class="side-panel side-left" aria-label="Morrow, the dispatch assistant" hidden></aside>
+      <main id="app"></main>
+      <aside id="telemetry-panel" class="side-panel side-right" aria-label="World instruments and news" hidden>
+        <div id="instruments"></div>
+        <div id="wire"></div>
+      </aside>
     </div>
-    <div
-      id="announcer"
-      class="sr-only"
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-    ></div>
+    <div id="ticker" class="ticker-dock" hidden></div>
+    <div id="interstitial" class="interstitial" aria-hidden="true" hidden></div>
+    <div id="announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
     <div id="notice" class="notice" role="status" hidden></div>
     <dialog id="drawer" aria-labelledby="drawer-title"></dialog>
-    <noscript
-      ><main class="no-script">
+    <noscript>
+      <main class="no-script">
         <h1>trolley.</h1>
         <p>This illustrated game needs JavaScript. No account is required.</p>
         <a href="./docs/METHODOLOGY_V2.md">Read the methodology</a>
-      </main></noscript
-    >
+      </main>
+    </noscript>
   </body>
 </html>

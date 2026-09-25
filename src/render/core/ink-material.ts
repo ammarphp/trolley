@@ -61,6 +61,8 @@ export interface InkMaterialOptions {
    * alpha < 0.5 is cut out. Draw with `createInkCanvas`.
    */
   map?: THREE.Texture | null;
+  /** Pen technique: parallel hatching (default) or stippled dots (gravel, earth, cloud). */
+  pattern?: "hatch" | "stipple";
 }
 
 export interface InkUniforms {
@@ -143,7 +145,22 @@ float inkStrokes(vec2 p, float angle, float period, float width) {
   cov *= mix(1.0, gap, 0.6);
   return mix(cov, w * 0.8, clamp(aa * 1.6 - 0.35, 0.0, 1.0));
 }
+// Stippling: one jittered dot per cell whose radius grows with tone.
+float inkStipple(vec2 p, float tone, float period) {
+  vec2 q = p / period;
+  vec2 cell = floor(q);
+  vec2 f = fract(q);
+  vec2 jit = vec2(inkHash(cell), inkHash(cell + 17.31)) * 0.64 + 0.18;
+  float d = length(f - jit);
+  float r = sqrt(clamp(tone, 0.0, 1.0)) * 0.52;
+  float aa = max(fwidth(q.x) + fwidth(q.y), 1e-4);
+  float cov = 1.0 - smoothstep(r - aa, r + aa, d);
+  return mix(cov, tone * 0.85, clamp(aa * 1.3 - 0.3, 0.0, 1.0));
+}
 float inkHatchAt(vec2 p, float tone, float period, float baseAngle) {
+  #ifdef INK_STIPPLE
+  return max(inkStipple(p, tone, period), smoothstep(0.9, 0.98, tone));
+  #endif
   float h = 0.0;
   float t1 = smoothstep(0.14, 0.3, tone);
   h = max(h, inkStrokes(p, baseAngle + 0.785, period, 0.08 + 0.34 * tone) * t1);
@@ -321,6 +338,7 @@ export function createInkMaterial(options: InkMaterialOptions = {}): THREE.MeshL
   if ((options.opacity ?? 1) < 1) defines.INK_DITHER = "";
   if (options.sway) defines.INK_SWAY = "";
   if (options.map) defines.INK_MAP = "";
+  if (options.pattern === "stipple") defines.INK_STIPPLE = "";
   material.defines = defines;
   material.onBeforeCompile = (shader) => {
     Object.assign(shader.uniforms, uniforms, INK_GLOBALS, options.map ? mapUniform : {});

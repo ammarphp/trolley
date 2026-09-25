@@ -2,6 +2,7 @@ import { mkdir, rm, cp, readFile, writeFile, stat } from "node:fs/promises";
 import { build } from "esbuild";
 import { gzipSync } from "node:zlib";
 import path from "node:path";
+import { copyFonts } from "./fonts.mjs";
 import {
   CAMPAIGN_MANIFEST,
   CAMPAIGN_NODES,
@@ -30,7 +31,7 @@ await cp("src", "dist/src", {
   recursive: true,
   filter: (source) =>
     !source.endsWith(".ts") &&
-    !/(?:^|\/)(?:contracts|simulation|content|ui|persistence|telemetry|presentation)(?:\/|$)/.test(
+    !/(?:^|\/)(?:contracts|simulation|content|ui|persistence|telemetry|presentation|render|audio)(?:\/|$)/.test(
       source,
     ),
 });
@@ -40,7 +41,9 @@ await build({
   bundle: true,
   minify: true,
   target: ["es2022"],
+  external: ["*.woff2"],
 });
+await copyFonts("dist");
 await build({
   entryPoints: ["src/ui/app.ts"],
   outfile: "dist/game.js",

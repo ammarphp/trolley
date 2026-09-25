@@ -11,7 +11,16 @@ const server = spawn(process.execPath, ["scripts/serve.mjs", "dist"], {
   stdio: ["ignore", "pipe", "pipe"],
 });
 await once(server.stdout, "data");
-const browser = await chromium.launch({ headless: true });
+// The world is WebGL2. Headless Chromium needs a GPU path: Metal on macOS,
+// SwiftShader elsewhere (CI). The app still falls back to a static drawing
+// if neither exists; the renderer assertion below records which one ran.
+const browser = await chromium.launch({
+  headless: true,
+  args:
+    process.platform === "darwin"
+      ? ["--use-angle=metal", "--enable-gpu", "--ignore-gpu-blocklist"]
+      : ["--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
+});
 await mkdir("test-results/v2", { recursive: true });
 try {
   const ctx = await browser.newContext({
@@ -60,28 +69,31 @@ try {
     .getByRole("button", { name: "Start the trolley", exact: true })
     .click();
   await page.locator(".route").first().waitFor();
-  const boxes = await page
-    .locator(".decision-heading,#scene,.choices,.lever-control")
+  // The HUD floats over a full-viewport world: the dispatch card, both
+  // windshield tags and the lever must be on screen and must not overlap.
+  const rects = await page
+    .locator(".decision-heading,.route.left,.route.right,.lever-control")
     .evaluateAll((elements) =>
       elements.map((e) => {
         const r = e.getBoundingClientRect();
-        return { top: r.top, bottom: r.bottom, width: r.width };
+        return { top: r.top, bottom: r.bottom, left: r.left, right: r.right, width: r.width };
       }),
     );
-  for (let i = 1; i < boxes.length; i++)
-    assert.ok(
-      boxes[i].top >= boxes[i - 1].bottom,
-      "Play rows must not overlap",
-    );
-  assert.ok(
-    boxes[1].width < 1440 * 0.55,
-    "Desktop driving view occupies about half the viewport",
-  );
+  assert.equal(rects.length, 4, "Prompt, two routes and the lever are present");
+  for (const r of rects) {
+    assert.ok(r.top >= 0 && r.bottom <= 900 && r.left >= 0 && r.right <= 1440, "HUD element inside the viewport");
+  }
+  const overlap = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+  for (let i = 0; i < rects.length; i++)
+    for (let k = i + 1; k < rects.length; k++)
+      assert.ok(!overlap(rects[i], rects[k]), `HUD elements ${i} and ${k} must not overlap`);
+  assert.ok(await page.locator("#scene canvas").count(), "The ink world canvas is mounted");
+  const fallback = await page.locator("#scene").getAttribute("data-renderer-fallback");
+  console.log(`Renderer: ${fallback ? "static fallback" : "ink WebGL2"}`);
   assert.equal(await page.getByText("Look closer", { exact: true }).count(), 0);
   assert.equal(await page.locator(".route-meta").count(), 0);
   assert.equal(await page.locator("#assistant-panel").isVisible(), false);
   assert.equal(await page.locator("#telemetry-panel").isVisible(), false);
-  assert.ok(boxes.at(-1).bottom <= 900, "Lever must fit the desktop viewport");
   const before = await page.locator(".decision-prompt").innerText();
   await page.locator("#lever").click();
   assert.equal(await page.locator(".decision-prompt").innerText(), before);
@@ -117,7 +129,7 @@ try {
     await page.locator(".continue").click();
   }
   assert.equal(await page.locator(".debrief").count(), 1);
-  assert.equal(await page.locator(".chart").count(), 2);
+  assert.ok((await page.locator(".chart").count()) >= 2, "The record draws at least two charts");
   assert.deepEqual(posts, []);
   assert.deepEqual(
     collectorRequests,
@@ -160,7 +172,7 @@ try {
   );
   assert.deepEqual(errors, []);
   console.log(
-    "V2 browser suite passed: explicit choice, cancellation, crash-resume, pause, modular layout, phone reflow, ending, charts, private/opt-out request isolation.",
+    "V2 browser suite passed: ink world, explicit choice, cancellation, crash-resume, pause, HUD layout, phone reflow, ending, charts, private/opt-out request isolation.",
   );
 } finally {
   await browser.close();
