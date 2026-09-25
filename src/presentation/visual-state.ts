@@ -1,4 +1,5 @@
-import type { GlyphMood } from "./glyph-catalogue";
+/** Scenery mood, retained for the tested stage gates. */
+export type GlyphMood = "calm" | "alert" | "injured" | "vacant";
 import type { World } from "../contracts/index.ts";
 
 /** Reading time is not world time. Age contributes only modest material wear;

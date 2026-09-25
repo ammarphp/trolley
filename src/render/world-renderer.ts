@@ -253,6 +253,7 @@ export class InkWorldRenderer implements WorldRenderer {
       this.appliedImpacts = c.impacts;
       this.appliedBlood = c.bloodied;
     }
+    if (view.phase === "ending") this.journey.halt();
     if (view.phase === "decision" && view.decisionId && view.staging) {
       const key = view.decisionId;
       const current = this.journey.junction;

@@ -13,6 +13,7 @@
 import * as THREE from "three";
 import { ACCENT_RGB, INK, PAPER } from "./palette.ts";
 import { INK_GLOBALS } from "./ink-material.ts";
+import { inkify } from "./inkify.ts";
 
 export interface InkPipelineOptions {
   canvas?: HTMLCanvasElement;
@@ -249,6 +250,7 @@ export class InkPipeline {
   private maxPixelRatio: number;
   private renderScale: number;
   private boilClock = 0;
+  private inkifyCountdown = 0;
 
   constructor(options: InkPipelineOptions = {}) {
     this.maxPixelRatio = options.maxPixelRatio ?? 2;
@@ -391,6 +393,11 @@ export class InkPipeline {
     u.uTime!.value += dt;
     INK_GLOBALS.uInkTime.value += dt;
 
+    // Cheap after the first pass: patched materials are skipped.
+    if (this.inkifyCountdown-- <= 0) {
+      inkify(scene);
+      this.inkifyCountdown = 30;
+    }
     const r = this.renderer;
     r.setRenderTarget(this.target);
     r.setClearColor(0x000000, 0);

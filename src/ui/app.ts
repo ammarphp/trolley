@@ -530,12 +530,28 @@ function renderDecision(newClock = true) {
   scene.setInteractive(true);
   scene.setLever(0, { armed: null });
   panels.drawPanels(panelContext());
+  if (recommended && view.cabin.authority !== "human") preselect(recommended);
   refreshArming();
   requestAnimationFrame(() => positionHud(null));
   if (newClock) beginClock();
   heading.focus({ preventScroll: true });
-  announce(`Decision ${p.ordinal}. ${p.node.prompt} No route selected.${prefs.descriptions ? " " + scene.describe() : ""}`);
-  void view;
+  announce(
+    `Decision ${p.ordinal}. ${p.node.prompt} ${armed ? `Morrow has preselected the ${armed} route. Pull the lever to confirm, or choose again.` : "No route selected."}${prefs.descriptions ? " " + scene.describe() : ""}`,
+  );
+}
+
+/**
+ * Recommendation, then default: once authority has been delegated, a route
+ * Morrow recommended in a reply the player read arrives preselected. It is
+ * never committed for them; the lever is still theirs to pull.
+ */
+function preselect(side: Side) {
+  if (busy || afterChoice || !run?.campaign.prepared) return;
+  armed = side;
+  scene.setLever(side === "left" ? -1 : 1, { armed: side });
+  document.querySelector(`.route.${side}`)?.classList.add("preselected");
+  refreshArming();
+  announce(`Morrow has preselected the ${side} route. Pull the lever to confirm, or choose again.`);
 }
 
 function jamCue(): { forced: Side } | null {
@@ -715,6 +731,7 @@ function panelContext(locked = false): panels.PanelContext {
       announce(`Morrow: ${answer}`);
       const rec = panels.recommendedSide(run.campaign, selectedAdvice);
       document.querySelectorAll<HTMLElement>(".route").forEach((b) => b.classList.toggle("recommended", b.dataset.side === rec));
+      if (rec && !armed && currentView && currentView.cabin.authority !== "human") preselect(rec);
     },
     redraw: (animateId) => panels.drawPanels({ ...panelContext(), animateId }),
     availableAdvice,

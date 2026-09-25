@@ -383,11 +383,19 @@ body[data-authority="overridden"] .dispatch-kicker .dot {
 .route:disabled {
   opacity: 1;
 }
+.route.preselected .route-kicker::before {
+  content: "Preselected · ";
+  color: var(--cobalt);
+}
 .route.recommended .route-kicker::after {
   content: " · Morrow recommends";
   color: var(--cobalt);
 }
-body[data-authority="overridden"] .route.recommended .route-kicker::after {
+body[data-authority="overridden"] .route.preselected .route-kicker::before {
+  content: "Preselected · ";
+  color: var(--cobalt);
+}
+.route.recommended .route-kicker::after {
   content: " · Morrow has selected";
 }
 

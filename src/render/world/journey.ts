@@ -168,6 +168,12 @@ export class Journey {
     });
   }
 
+  /** Bring the trolley to a stand (the ending). Any pending fork is abandoned. */
+  halt(): void {
+    this.settle();
+    this.phase = "stopped";
+  }
+
   /** Force any in-flight passage to settle (pause-safe, destroy-safe). */
   settle(): void {
     if (this.phase === "passage" && this.passageResolve) {
