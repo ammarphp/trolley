@@ -26,3 +26,7 @@ artifacts/
 /reports/design-gallery/
 /docs/art/STANDING_VISUAL_SPEC.md
 /docs/art/MOCKUP_GALLERY.md
+
+# Asset lab builds and screenshots
+/.lab/
+/.playthrough.mjs
