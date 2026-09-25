@@ -1,0 +1,1060 @@
+/*
+ * trolley. — the instrument cluster.
+ *
+ * Precision instruments drawn in ink on a glass panel. Hairline scales with
+ * ticks, mono tabular digits that roll, and a provenance footnote on every
+ * reading an institution supplied. Pigment rules (see theme.css):
+ *   ink      — everything by default
+ *   blood    — fatalities and population loss only (consequence)
+ *   signal   — capability danger band, supply below half of baseline
+ * No cobalt (Morrow only) and no amber (selection only) in this component.
+ */
+
+.ins {
+  --ins-pad: 16px;
+  --ins-value: 30px;
+  --ins-lh: 1.12em;
+  /* Small supporting text: between ink-2 and ink-3, >= 4.5:1 on the glass. */
+  --ins-muted: color-mix(in srgb, var(--ink-2) 55%, var(--ink-3));
+  container: ins / inline-size;
+  position: relative;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 272px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--hairline);
+  border-radius: var(--ins-radius, var(--r-3));
+  box-shadow:
+    var(--shadow-2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.ins[hidden],
+.ins [hidden] {
+  display: none !important;
+}
+.ins *,
+.ins *::before,
+.ins *::after {
+  box-sizing: border-box;
+}
+.ins :where(h2, h3, p, ul, ol, li) {
+  margin: 0;
+  padding: 0;
+}
+.ins :where(ul, ol) {
+  list-style: none;
+}
+.ins-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ header */
+
+.ins-head {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px var(--ins-pad) 11px;
+}
+.ins-head::after {
+  content: "";
+  position: absolute;
+  inset-inline: var(--ins-pad);
+  bottom: 0;
+  border-bottom: 1px solid var(--ink);
+  transform-origin: left center;
+}
+.ins-title {
+  font: 600 14px/1.1 var(--font-sans);
+  letter-spacing: -0.012em;
+}
+.ins-subtitle {
+  margin-top: 3px;
+  font: 400 12px/1.2 var(--font-sans);
+  color: var(--ins-muted);
+}
+.ins-when {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  font: 500 10.5px/1.1 var(--font-mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.ins-date {
+  color: var(--ins-muted);
+}
+
+/* ------------------------------------------------------------------ gauges */
+
+.ins-gauge {
+  position: relative;
+  padding: 13px var(--ins-pad) 4px;
+}
+.ins-gauge + .ins-gauge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  inset-inline: var(--ins-pad);
+  border-top: 1px solid var(--hairline);
+  transform-origin: left center;
+}
+.ins-g-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-block-size: 19px;
+}
+.ins-g-label {
+  flex: none;
+  font: 600 11px/1.2 var(--font-mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.ins-g-caption {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 500 10px/1.2 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ins-muted);
+}
+.ins-g-flag {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: 600 10px/1.2 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--signal);
+  white-space: nowrap;
+}
+/* Three rising strokes: acceleration drawn, not just said. */
+.ins-g-flag::before {
+  content: "";
+  inline-size: 11px;
+  block-size: 8px;
+  background:
+    linear-gradient(currentColor, currentColor) 0 100% / 1.5px 3px no-repeat,
+    linear-gradient(currentColor, currentColor) 4.5px 100% / 1.5px 5px no-repeat,
+    linear-gradient(currentColor, currentColor) 9px 100% / 1.5px 8px no-repeat;
+}
+
+.ins-delta {
+  flex: none;
+  margin-left: auto;
+  padding: 3px 5px 2px;
+  border-radius: 4px;
+  font: 500 11px/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.ins-delta[data-tone="blood"] {
+  color: var(--blood);
+}
+
+.ins-g-read {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 7px;
+}
+.ins-value {
+  display: flex;
+  align-items: baseline;
+  min-inline-size: 0;
+  font: 420 var(--ins-value) / 1 var(--font-mono);
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.ins-gauge[data-tone="blood"] .ins-value {
+  color: var(--blood);
+}
+.ins-suffix {
+  margin-left: 0.3em;
+  font: 500 15px/1 var(--font-mono);
+  letter-spacing: 0;
+}
+.ins-unit {
+  margin-left: 6px;
+  font: 500 10.5px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ins-muted);
+}
+.ins-mark {
+  align-self: flex-start;
+  margin-left: 3px;
+  font: 500 15px/1 var(--font-sans);
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------------------ odometer */
+
+.ins-odo {
+  display: inline-flex;
+  align-items: flex-start;
+  block-size: var(--ins-lh);
+  line-height: var(--ins-lh);
+}
+/* A zero-width numeral gives the window a true text baseline. */
+.ins-odo::before {
+  content: "0";
+  flex: none;
+  inline-size: 0;
+  visibility: hidden;
+}
+.ins-odo-d,
+.ins-odo-g {
+  display: inline-block;
+  block-size: var(--ins-lh);
+  overflow: hidden;
+}
+.ins-odo-d {
+  -webkit-mask-image: linear-gradient(
+    transparent 0,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    transparent 0,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+}
+.ins-odo-strip {
+  display: block;
+  white-space: pre;
+  text-align: center;
+  line-height: var(--ins-lh);
+}
+.ins-odo-sep {
+  margin-inline: -0.14em;
+}
+
+/* ------------------------------------------------------------------ sparkline */
+
+.ins-spark {
+  position: relative;
+  flex: 0 1 44%;
+  min-inline-size: 84px;
+  max-inline-size: 150px;
+  block-size: 34px;
+  margin-bottom: 1px;
+  border-radius: 3px;
+  cursor: crosshair;
+  touch-action: pan-y;
+  outline: none;
+}
+.ins-spark:focus-visible {
+  box-shadow:
+    0 0 0 3px var(--paper),
+    0 0 0 4.5px var(--ink);
+}
+.ins-spark-svg {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+.ins-spark-line,
+.ins-spark-alt,
+.ins-spark-base {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.ins-spark-line {
+  stroke: var(--ink);
+  stroke-width: 1.25;
+}
+.ins-spark-alt {
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  stroke-dasharray: 2 3;
+  stroke-linecap: butt;
+}
+.ins-spark-area {
+  fill: var(--ink);
+  opacity: 0.045;
+}
+.ins-spark-base {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+  stroke-dasharray: 1 2.5;
+  stroke-linecap: butt;
+}
+.ins-gauge[data-tone="blood"] .ins-spark-line {
+  stroke: var(--blood);
+}
+.ins-gauge[data-tone="blood"] .ins-spark-area {
+  fill: var(--blood);
+  opacity: 0.07;
+}
+.ins-spark-dot,
+.ins-spark-ping {
+  position: absolute;
+  inline-size: 7px;
+  block-size: 7px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.ins-spark-dot {
+  background: var(--ink);
+  box-shadow: 0 0 0 2px var(--paper);
+}
+.ins-gauge[data-tone="blood"] .ins-spark-dot {
+  background: var(--blood);
+}
+.ins-spark[data-altered="true"] .ins-spark-dot {
+  background: var(--paper);
+  box-shadow:
+    inset 0 0 0 1.5px var(--ink),
+    0 0 0 2px var(--paper);
+}
+.ins-spark-ping {
+  border: 1px solid var(--ink);
+  opacity: 0;
+}
+.ins-spark-probe {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  inline-size: 0;
+  border-left: 1px solid var(--ink);
+  display: none;
+  pointer-events: none;
+}
+.ins-spark-tip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  z-index: 2;
+  display: none;
+  padding: 4px 6px 3px;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 500 10.5px/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.ins-spark-tip[data-align="start"] {
+  transform: translateX(-6px);
+}
+.ins-spark-tip[data-align="end"] {
+  transform: translateX(calc(-100% + 6px));
+}
+.ins-spark-probe-dot {
+  position: absolute;
+  display: none;
+  inline-size: 7px;
+  block-size: 7px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.ins-spark[data-scrub="true"]
+  :is(.ins-spark-probe, .ins-spark-tip, .ins-spark-probe-dot) {
+  display: block;
+}
+/* While scrubbing history, the readout replaces the delta. */
+.ins-gauge[data-scrubbing="true"] .ins-delta {
+  visibility: hidden;
+}
+/* Ghost pointer: where the scrubbed report sat on the scale. */
+.ins-ghost {
+  position: absolute;
+  top: -3px;
+  bottom: 0;
+  inline-size: 0;
+  margin-left: -0.5px;
+  border-left: 1px dashed var(--ink-2);
+  pointer-events: none;
+}
+.ins-ghost::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  inline-size: 9px;
+  block-size: 7px;
+  background: var(--ink-2);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    50% 100%,
+    0 0,
+    1.6px 1.2px,
+    50% calc(100% - 2.2px),
+    calc(100% - 1.6px) 1.2px,
+    1.6px 1.2px
+  );
+}
+
+/* ------------------------------------------------------------------ scales */
+
+.ins-scale {
+  position: relative;
+  block-size: 14px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+}
+.ins-ticks {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+.ins-rule,
+.ins-tick,
+.ins-notch,
+.ins-redline {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+.ins-rule {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ins-tick {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+.ins-tick-major,
+.ins-tick-stop {
+  stroke: var(--ink);
+}
+.ins-tick-minor {
+  stroke: var(--ink-4);
+}
+.ins-datum {
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  shape-rendering: crispEdges;
+}
+.ins-scale-labels {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(100% + 5px);
+  block-size: 11px;
+  font: 500 9.5px/1 var(--font-mono);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ins-muted);
+}
+.ins-scale-labels li {
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+.ins-scale-labels li[data-edge="start"] {
+  transform: translateX(-1px);
+}
+.ins-scale-labels li[data-edge="end"] {
+  transform: translateX(calc(-100% + 1px));
+}
+.ins-scale-labels li[data-emphasis="true"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Fills are pen hatching, not progress bars: 45° rising, 135° falling. */
+.ins-fill {
+  --hatch: var(--ink);
+  position: absolute;
+  bottom: 1px;
+  block-size: 7px;
+  left: calc(var(--from, 0) * 100%);
+  inline-size: calc((var(--to, 0) - var(--from, 0)) * 100%);
+  border-top: 1px solid var(--hatch);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--hatch) 0 1px,
+    transparent 1px 3.2px
+  );
+  transform-origin: left center;
+  transition:
+    left var(--t-slow) var(--ease-out),
+    inline-size var(--t-slow) var(--ease-out);
+}
+.ins-scale[data-dir="down"] .ins-fill {
+  transform-origin: right center;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--hatch) 0 1px,
+    transparent 1px 3.2px
+  );
+}
+.ins-needle {
+  position: absolute;
+  top: -3px;
+  bottom: 0;
+  left: calc(var(--x, 0) * 100%);
+  inline-size: 0;
+  margin-left: -0.75px;
+  border-left: 1.5px solid var(--ink);
+  transition: left var(--t-slow) var(--ease-out);
+}
+.ins-needle-cap {
+  position: absolute;
+  top: -7px;
+  left: -5.25px;
+  inline-size: 9px;
+  block-size: 7px;
+  background: var(--ink);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.ins-needle-cap::after {
+  content: "";
+  position: absolute;
+  inset: 1.6px 2.3px 2.6px;
+  background: var(--paper);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  opacity: 0;
+}
+/* An institutional reading: dashed needle, hollow pointer. */
+.ins-gauge[data-altered="true"] .ins-needle {
+  border-left-style: dashed;
+}
+.ins-gauge[data-altered="true"] .ins-needle-cap::after {
+  opacity: 1;
+}
+
+/* Capability: notches, lit up to the reading, with a signal danger band. */
+.ins-scale[data-kind="notch"] .ins-fill {
+  display: none;
+}
+.ins-notch {
+  stroke: var(--ink-4);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+.ins-notch.is-lit {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.ins-notch.is-red {
+  stroke: rgba(210, 40, 30, 0.38);
+}
+.ins-notch.is-red.is-lit {
+  stroke: var(--signal);
+}
+.ins-redline {
+  stroke: var(--signal);
+  stroke-width: 2.5;
+}
+.ins-scale[data-kind="notch"] .ins-needle {
+  top: -3px;
+}
+.ins-scale[data-red="true"] .ins-needle {
+  border-left-color: var(--signal);
+}
+.ins-scale[data-red="true"] .ins-needle-cap {
+  background: var(--signal);
+}
+
+/* Fatalities: blood only when someone has died. */
+/* The dead are not hatched: a solid blood band, like the population ledger. */
+.ins-scale[data-kind="log"] .ins-fill {
+  block-size: 4px;
+  border: 0;
+  background: var(--blood);
+}
+.ins-gauge[data-tone="blood"] .ins-needle {
+  border-left-color: var(--blood);
+}
+.ins-gauge[data-tone="blood"] .ins-needle-cap {
+  background: var(--blood);
+}
+.ins-gauge[data-kind="log"][data-tone="ink"] .ins-needle {
+  border-left-color: var(--ins-muted);
+}
+.ins-gauge[data-kind="log"][data-tone="ink"] .ins-needle-cap {
+  background: var(--ink-3);
+}
+
+/* No reading at all: no pointer, no fill. The digits show a dash. */
+.ins-gauge[data-signal="none"] :is(.ins-needle, .ins-fill, .ins-spark-dot) {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ provenance */
+
+.ins-prov {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 8px;
+  row-gap: 3px;
+  align-items: baseline;
+  margin: 0 0 12px;
+  padding: 8px 10px 9px 9px;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  background:
+    linear-gradient(90deg, transparent 0 22px, var(--paper) 22px) padding-box,
+    repeating-linear-gradient(
+        -45deg,
+        rgba(17, 18, 20, 0.5) 0 1px,
+        transparent 1px 4px
+      )
+      padding-box;
+}
+.ins-prov-mark {
+  grid-row: span 2;
+  inline-size: 13px;
+  font: 600 14px/1 var(--font-sans);
+  color: var(--ink);
+  text-align: center;
+  background: var(--paper);
+  border-radius: 2px;
+  padding-block: 1px;
+}
+.ins-prov-tag {
+  font: 600 10px/1.25 var(--font-mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.ins-prov-detail {
+  font: 400 12px/1.38 var(--font-sans);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* ------------------------------------------------------------------ systems */
+
+.ins-sec {
+  position: relative;
+  margin-inline: var(--ins-pad);
+  padding: 12px 0 13px;
+}
+.ins-sec::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  border-top: 1px solid var(--ink);
+  transform-origin: left center;
+}
+.ins-sec-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ins-sec-title {
+  font: 600 11px/1.2 var(--font-mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.ins-sec-caption {
+  font: 500 10px/1.2 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ins-muted);
+}
+.ins-pop {
+  margin: 10px 0 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--hairline);
+}
+.ins-pop-line {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.ins-pop-ledger {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 52px;
+  align-items: center;
+  column-gap: 10px;
+  margin-top: 9px;
+}
+.ins-pop-bar {
+  grid-column: 2;
+  position: relative;
+  display: flex;
+  block-size: 7px;
+  border: 1px solid var(--ink-2);
+  overflow: hidden;
+}
+.ins-pop-living {
+  flex: none;
+  inline-size: calc(var(--living, 1) * 100%);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--ink-3) 0 1px,
+    transparent 1px 3.4px
+  );
+  transition: inline-size var(--t-slow) var(--ease-out);
+}
+.ins-pop-lost {
+  flex: 1 1 auto;
+  background: var(--blood);
+}
+.ins-pop-of {
+  grid-column: 3;
+  justify-self: end;
+  font: 500 9.5px/1 var(--font-mono);
+  letter-spacing: 0.02em;
+  color: var(--ins-muted);
+  white-space: nowrap;
+}
+.ins-pop-label {
+  flex: none;
+  inline-size: 64px;
+  font: 500 10.5px/1.2 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.ins-pop-value {
+  display: flex;
+  align-items: baseline;
+  font: 420 21px/1 var(--font-mono);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ins-pop-value .ins-suffix {
+  font-size: 12.5px;
+}
+.ins-pop .ins-delta {
+  align-self: center;
+}
+.ins-rows {
+  display: grid;
+  gap: 9px;
+}
+.ins-row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 52px;
+  align-items: center;
+  column-gap: 10px;
+}
+.ins-row-name {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  min-inline-size: 0;
+  font: 500 10.5px/1.2 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.ins-row-low {
+  font-weight: 700;
+  color: var(--signal);
+}
+.ins-row-bar {
+  position: relative;
+  block-size: 12px;
+}
+.ins-row[data-state="low"] .ins-row-tip {
+  border-left-color: var(--signal);
+}
+.ins-row-ticks {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+.ins-row-ticks .ins-rule {
+  stroke: var(--ink-3);
+}
+.ins-row-fill {
+  --hatch: var(--ink);
+  position: absolute;
+  top: 4px;
+  block-size: 7px;
+  left: calc(var(--from, 0.5) * 100%);
+  inline-size: calc((var(--to, 0.5) - var(--from, 0.5)) * 100%);
+  border-top: 1px solid var(--hatch);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--hatch) 0 1px,
+    transparent 1px 3.2px
+  );
+  transform-origin: left center;
+  transition:
+    left var(--t-slow) var(--ease-out),
+    inline-size var(--t-slow) var(--ease-out);
+}
+.ins-row-bar[data-dir="down"] .ins-row-fill {
+  transform-origin: right center;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--hatch) 0 1px,
+    transparent 1px 3.2px
+  );
+}
+.ins-row[data-state="low"] .ins-row-fill {
+  --hatch: var(--signal);
+}
+.ins-row-tip {
+  position: absolute;
+  top: -1px;
+  bottom: 0;
+  left: calc(var(--x, 0.5) * 100%);
+  margin-left: -0.75px;
+  border-left: 1.5px solid var(--ink);
+  transition: left var(--t-slow) var(--ease-out);
+}
+.ins-row[data-altered="true"] .ins-row-tip {
+  border-left-style: dashed;
+}
+.ins-row-value {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  font: 500 13px/1 var(--font-mono);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.ins-row[data-state="low"] .ins-row-value {
+  color: var(--signal);
+}
+.ins-row-value .ins-mark,
+.ins-pop-value .ins-mark {
+  font-size: 12px;
+}
+.ins-notes {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+}
+.ins-notes .ins-prov {
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------ footer */
+
+.ins-foot {
+  padding: 9px var(--ins-pad) 11px;
+  border-top: 1px solid var(--hairline);
+  font: 400 11.5px/1.35 var(--font-sans);
+  color: var(--ins-muted);
+}
+
+/* ------------------------------------------------------------------ widths */
+
+@container ins (max-width: 330px) {
+  .ins > * {
+    --ins-pad: 14px;
+  }
+  .ins-value {
+    font-size: 26px;
+  }
+  .ins-spark {
+    min-inline-size: 76px;
+  }
+  .ins-g-caption:has(+ .ins-g-flag:not([hidden])) {
+    display: none;
+  }
+  .ins-row,
+  .ins-pop-ledger {
+    grid-template-columns: 56px minmax(0, 1fr) 48px;
+  }
+}
+@container ins (min-width: 420px) {
+  .ins-value {
+    font-size: 34px;
+  }
+  .ins-spark {
+    max-inline-size: 188px;
+    block-size: 38px;
+  }
+}
+
+/* ------------------------------------------------------------------ boot */
+
+@keyframes ins-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@keyframes ins-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes ins-rule {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes ins-wipe {
+  from {
+    clip-path: inset(-12px 100% -12px 0);
+  }
+  to {
+    clip-path: inset(-12px 0 -12px 0);
+  }
+}
+@keyframes ins-sweep {
+  from {
+    left: 0;
+  }
+}
+@keyframes ins-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes ins-light {
+  from {
+    stroke: var(--ink-4);
+    stroke-width: 1;
+  }
+}
+@keyframes ins-light-red {
+  from {
+    stroke: rgba(210, 40, 30, 0.38);
+    stroke-width: 1;
+  }
+}
+@keyframes ins-pop {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+.ins[data-boot="run"] {
+  animation: ins-rise 480ms var(--ease-out) both;
+}
+.ins[data-boot="run"] :is(.ins-titles, .ins-when) {
+  animation: ins-fade 420ms ease-out 60ms both;
+}
+.ins[data-boot="run"] .ins-head::after {
+  animation: ins-rule 760ms var(--ease-out) 100ms both;
+}
+.ins[data-boot="run"] .ins-gauge::before,
+.ins[data-boot="run"] .ins-sec::before {
+  animation: ins-rule 700ms var(--ease-out) calc(var(--bd, 0ms) - 80ms) both;
+}
+.ins[data-boot="run"] .ins-g-head {
+  animation: ins-fade 360ms ease-out var(--bd, 0ms) both;
+}
+.ins[data-boot="run"] :is(.ins-ticks, .ins-row-ticks) {
+  animation: ins-wipe 760ms var(--ease-out) calc(var(--bd, 0ms) + 60ms) both;
+}
+.ins[data-boot="run"] .ins-scale-labels li {
+  animation: ins-fade 320ms ease-out
+    calc(var(--bd, 0ms) + 160ms + var(--p, 0) * 620ms) both;
+}
+.ins[data-boot="run"] :is(.ins-needle, .ins-row-tip) {
+  animation: ins-sweep 1100ms var(--ease-out) calc(var(--bd, 0ms) + 240ms) both;
+}
+.ins[data-boot="run"] :is(.ins-fill, .ins-row-fill, .ins-pop-living) {
+  animation: ins-grow 1100ms var(--ease-out) calc(var(--bd, 0ms) + 240ms) both;
+}
+.ins[data-boot="run"] .ins-notch.is-lit {
+  animation: ins-light 1ms step-end
+    calc(var(--bd, 0ms) + 240ms + var(--p, 0) * 1000ms) both;
+}
+.ins[data-boot="run"] .ins-notch.is-lit.is-red {
+  animation-name: ins-light-red;
+}
+.ins[data-boot="run"] .ins-spark-svg {
+  animation: ins-wipe 900ms var(--ease-out) calc(var(--bd, 0ms) + 300ms) both;
+}
+.ins[data-boot="run"] .ins-spark-dot {
+  animation: ins-pop 300ms var(--ease-out) calc(var(--bd, 0ms) + 1150ms) both;
+}
+.ins[data-boot="run"]
+  :is(
+    .ins-prov,
+    .ins-mark,
+    .ins-delta,
+    .ins-g-caption,
+    .ins-g-flag,
+    .ins-pop-of
+  ) {
+  animation: ins-fade 420ms ease-out calc(var(--bd, 0ms) + 1000ms) both;
+}
+.ins[data-boot="run"] :is(.ins-sec-head, .ins-pop, .ins-row-name, .ins-notes) {
+  animation: ins-fade 360ms ease-out var(--bd, 0ms) both;
+}
+.ins[data-boot="run"] .ins-row {
+  animation: ins-fade 360ms ease-out var(--bd, 0ms) both;
+}
+.ins[data-boot="run"] .ins-foot {
+  animation: ins-fade 500ms ease-out 1500ms both;
+}
+
+/* ------------------------------------------------------------------ motion */
+
+.ins[data-motion="reduced"],
+.ins[data-motion="reduced"] *,
+.ins[data-motion="reduced"] *::before,
+.ins[data-motion="reduced"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ins,
+  .ins *,
+  .ins *::before,
+  .ins *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Forced colours: keep every mark visible without pigment. */
+@media (forced-colors: active) {
+  .ins {
+    border-color: CanvasText;
+  }
+  .ins-fill,
+  .ins-row-fill,
+  .ins-needle-cap,
+  .ins-spark-dot {
+    background: CanvasText;
+    forced-color-adjust: none;
+  }
+}

@@ -1,5 +1,10 @@
 @import "./theme.css";
 @import "./shell.css";
+@import "./components/morrow/morrow.css";
+@import "./components/instruments/instruments.css";
+@import "./components/wire/wire.css";
+@import "./components/debrief/debrief.css";
+@import "./components/glossary/glossary.css";
 
 [hidden] {
   display: none !important;

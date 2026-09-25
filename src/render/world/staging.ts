@@ -12,7 +12,7 @@ import type { Junction, Side } from "./track/network.ts";
 import type { TrackLine } from "./track/path.ts";
 import { GAUGE, RAIL_TOP } from "./track/mesh.ts";
 
-export const FIRST_STAKE = 25;
+export const FIRST_STAKE = 19;
 
 export interface PlacedActor {
   object: THREE.Object3D;
@@ -97,7 +97,7 @@ export function buildTableau(junction: Junction, staging: SideStaging, assets: A
   let signal: THREE.Object3D | null = null;
   signal = assets.signal();
   const stemRng = createRng(`${seed}:${junction.key}:signal`);
-  place(signal, junction.stem, junction.toe - 4, 2.6, 0, "trolley", stemRng);
+  place(signal, junction.stem, junction.toe - 1.5, 3.1, 0, "trolley", stemRng);
   signal.rotation.y = -junction.stem.pose(junction.toe).heading + Math.PI;
   add(signal);
   return { group, stakes, actors, junction, signal, tickers };
@@ -132,14 +132,23 @@ function placeOccupant(occ: Occupant, c: PlaceContext): number {
       const shown = Math.min(occ.count, CROWD_CAP);
       const spread = occ.spread ?? (occ.pose === "tied" ? "across" : occ.count > 8 ? "crowd" : "line");
       for (let i = 0; i < shown; i++) {
-        const person = assets.person({ role: occ.role, pose: occ.pose ?? (spread === "across" ? "tied" : "stand"), seed: `${c.seed}:${s}:${i}`, ...(occ.name ? { name: occ.name } : {}) });
+        const tied = spread === "across" || occ.pose === "tied";
+        const person = assets.person({
+          role: occ.role,
+          pose: occ.pose ?? (tied ? "tied" : "stand"),
+          seed: `${c.seed}:${s}:${i}`,
+          detail: shown > 8 ? 0 : 1,
+          ...(tied ? { ground: -c.deck } : {}),
+          ...(occ.name && i === 0 ? { name: occ.name } : {}),
+        });
         let at = s;
         let lateral = 0;
         let facing: "track" | "trolley" | "away" | "along" = "trolley";
         if (spread === "across") {
-          at = s + i * 1.05;
+          // Bound across the rails, bodies along local X, faces toward the trolley.
+          at = s + i * 1.15;
           lateral = 0;
-          facing = "along";
+          facing = "trolley";
         } else if (spread === "line") {
           at = s + i * 1.6 + rng.range(-0.2, 0.2);
           lateral = onRails ? rng.range(-0.55, 0.55) : c.outward * rng.range(2.6, 4);
@@ -152,15 +161,15 @@ function placeOccupant(occ: Occupant, c: PlaceContext): number {
           lateral = onRails ? rng.range(-1.3, 1.3) : c.outward * rng.range(2.5, 9);
           if (i >= 12) lateral = c.outward * rng.range(2.4, 10) * (onRails ? 1 : 1.2);
         }
-        place(person, line, at, lateral, spread === "across" ? c.deck - 0.08 : 0.35, facing, rng);
-        if (spread === "across") person.rotation.y += Math.PI / 2;
+        place(person, line, at, lateral, spread === "across" ? c.deck : 0.35, facing, rng);
+        if (spread === "across") person.rotation.y = -line.pose(at).heading + Math.PI;
         record(person, at, true, lateral);
       }
       if (occ.count > shown && assets.person) {
         // Larger numbers: a denser mass beside the line conveys scale.
         const extra = Math.min(60, occ.count - shown);
         for (let i = 0; i < extra; i++) {
-          const person = assets.person({ role: occ.role, pose: "stand", seed: `${c.seed}:mass:${i}` });
+          const person = assets.person({ role: occ.role, pose: "stand", seed: `${c.seed}:mass:${i}`, detail: 0 });
           const at = s + rng.range(-2, 14);
           const lateral = c.outward * rng.range(4, 16);
           place(person, line, at, lateral, 0, "trolley", rng);

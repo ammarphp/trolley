@@ -1,0 +1,1032 @@
+/*
+ * Morrow's window — a glass app window floating over the ink world.
+ * Uses theme.css tokens only. Cobalt belongs to Morrow; signal red marks
+ * danger and lost control; amber is never used here.
+ */
+
+.mw {
+  --mw-mark-w: 1.7;
+  --mw-ray: 0.5;
+  --mw-ray-outer: 0;
+  --mw-dot: var(--cobalt);
+  --mw-sun: var(--cobalt);
+  --mw-pad: 16px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--ink);
+  font: 400 var(--step-0) / 1.5 var(--font-sans);
+  font-feature-settings: "ss01" 0;
+  -webkit-font-smoothing: antialiased;
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-3);
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.7) inset,
+    var(--shadow-2);
+}
+.mw *,
+.mw *::before,
+.mw *::after {
+  box-sizing: border-box;
+}
+.mw [hidden] {
+  display: none !important;
+}
+.mw[data-minimized],
+.mw[data-offline] {
+  height: auto;
+}
+.mw p {
+  margin: 0;
+}
+.mw button {
+  font: inherit;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.mw :focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.mw-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Stage and authority: the mark gains weight, the rays lengthen into
+   lashes, the status dot drifts from cobalt to signal. */
+.mw[data-stage="4"] {
+  --mw-mark-w: 1.95;
+  --mw-ray: 0.7;
+  --mw-ray-outer: 0.35;
+}
+.mw[data-stage="5"] {
+  --mw-mark-w: 2.3;
+  --mw-ray: 0.85;
+  --mw-ray-outer: 0.7;
+  --mw-dot: color-mix(in oklab, var(--cobalt) 84%, var(--signal));
+}
+.mw[data-stage="6"] {
+  --mw-mark-w: 2.75;
+  --mw-ray: 1;
+  --mw-ray-outer: 1;
+  --mw-dot: color-mix(in oklab, var(--cobalt) 62%, var(--signal));
+}
+.mw[data-stage="7"] {
+  --mw-mark-w: 3.3;
+  --mw-ray: 1;
+  --mw-ray-outer: 1;
+  --mw-dot: color-mix(in oklab, var(--cobalt) 40%, var(--signal));
+}
+.mw[data-authority="delegated"] {
+  --mw-dot: color-mix(in oklab, var(--cobalt) 48%, var(--signal));
+}
+.mw[data-stage="7"][data-authority="delegated"] {
+  --mw-dot: color-mix(in oklab, var(--cobalt) 28%, var(--signal));
+}
+.mw[data-authority="overridden"] {
+  --mw-dot: var(--signal);
+  --mw-ray: 1;
+  --mw-ray-outer: 1;
+  --mw-sun: color-mix(in oklab, var(--cobalt) 30%, var(--signal));
+}
+
+/* ------------------------------------------------------------------ mark */
+
+.mw-mark {
+  display: block;
+  overflow: visible;
+}
+.mw-mark .mw-mark-line {
+  stroke-width: var(--mw-mark-w);
+  transition: stroke-width var(--t-slow) var(--ease-out);
+}
+.mw-mark .mw-mark-sun {
+  fill: var(--mw-sun);
+  transition: fill var(--t-mid) linear;
+}
+.mw-mark .mw-mark-ray {
+  stroke-dasharray: var(--mw-ray) 2;
+  transition: stroke-dasharray var(--t-slow) var(--ease-out);
+}
+.mw-mark .mw-mark-ray-outer {
+  stroke-dasharray: var(--mw-ray-outer) 2;
+  opacity: min(1, calc(var(--mw-ray-outer) * 4));
+}
+/* Small marks keep three strokes; five read as noise at 20px. */
+.mw-avatar .mw-mark-ray-outer,
+.mw-think-mark .mw-mark-ray-outer {
+  display: none;
+}
+
+/* ------------------------------------------------------------- title bar */
+
+.mw-bar {
+  position: relative;
+  flex: none;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 11px;
+  padding: 12px 10px 12px 14px;
+  border-bottom: 1px solid var(--hairline);
+}
+.mw[data-minimized] .mw-bar,
+.mw[data-offline] .mw-bar {
+  border-bottom-color: transparent;
+}
+.mw-bar-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: -2px 0;
+  border-radius: 50%;
+  color: var(--ink);
+}
+.mw-title {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 10px;
+  min-width: 0;
+}
+.mw-name {
+  grid-column: 1 / -1;
+}
+.mw-name {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: 600 15px / 1.25 var(--font-sans);
+  letter-spacing: -0.014em;
+}
+.mw-model {
+  font-weight: 430;
+  color: var(--ink-3);
+  letter-spacing: -0.006em;
+}
+.mw-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 3px !important;
+  overflow: hidden;
+  white-space: nowrap;
+  font: 400 var(--step--1) / 1.25 var(--font-sans);
+  color: var(--ink-2);
+}
+.mw-status-text,
+.mw-status-extra {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mw[data-waiting] .mw-status-text {
+  color: var(--ink);
+  font-weight: 500;
+}
+.mw-dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mw-dot);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mw-dot) 15%, transparent);
+  transition: background var(--t-slow) linear;
+}
+.mw[data-authority="human"] .mw-dot {
+  animation: mw-breathe 3.2s var(--ease-in-out) infinite;
+}
+.mw[data-offline] .mw-dot {
+  background: var(--ink-4);
+  box-shadow: none;
+  animation: none;
+}
+.mw[data-offline] .mw-bar-mark {
+  color: var(--ink-4);
+  --mw-sun: var(--ink-4);
+}
+.mw-by {
+  font: 500 10px / 1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--ink-4);
+  white-space: nowrap;
+}
+.mw-toggle {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink-3) !important;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) linear,
+    color var(--t-fast) linear;
+}
+.mw-toggle:hover {
+  background: rgba(17, 18, 20, 0.06);
+  color: var(--ink) !important;
+}
+.mw-toggle .mw-icon {
+  transition: transform var(--t-mid) var(--ease-out);
+}
+.mw-toggle[aria-expanded="false"] .mw-icon {
+  transform: rotate(180deg);
+}
+
+/* Cue: the mark flashes signal once; noFlashing gets a still outline. */
+.mw[data-cue="flash"] .mw-bar-mark {
+  animation: mw-flash 600ms var(--ease-out) 1 both;
+}
+.mw[data-cue="flash"] .mw-bar-mark .mw-mark-sun {
+  animation: mw-flash-sun 600ms var(--ease-out) 1 both;
+}
+.mw[data-cue="outline"] .mw-bar-mark {
+  box-shadow: 0 0 0 1.5px var(--signal);
+}
+
+/* ------------------------------------------------------------------- log */
+
+.mw-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.mw-log {
+  flex: 1 1 auto;
+  min-height: 120px;
+  max-height: var(--morrow-log-max, none);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding: 20px var(--mw-pad) 18px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hairline-strong) transparent;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 10px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 10px), transparent 100%);
+}
+.mw-log:focus-visible {
+  outline-offset: -3px;
+  border-radius: 4px;
+}
+
+.mw-intro {
+  margin: auto 0;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 28px 12px;
+  text-align: center;
+}
+.mw-intro-mark {
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+.mw-intro-name {
+  font: 600 var(--step-2) / 1.2 var(--font-sans);
+  letter-spacing: -0.022em;
+}
+.mw-intro-line {
+  max-width: 25ch;
+  color: var(--ink-2);
+  font-size: var(--step-0);
+  line-height: 1.45;
+  text-wrap: balance;
+}
+
+.mw-x {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mw-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2px !important;
+  font: 500 10px / 1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.mw-divider::before,
+.mw-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.mw-user {
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 32px;
+}
+.mw-bubble {
+  max-width: 100%;
+  padding: 8px 13px 9px;
+  border-radius: 18px 18px 5px 18px;
+  background: rgba(17, 18, 20, 0.066);
+  font: 430 var(--step-0) / 1.42 var(--font-sans);
+  letter-spacing: -0.004em;
+  text-wrap: pretty;
+}
+.mw-x.is-past .mw-bubble {
+  background: rgba(17, 18, 20, 0.04);
+  color: var(--ink-2);
+}
+
+.mw-reply {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+.mw-speaker {
+  display: flex;
+  align-items: center;
+  min-height: 22px;
+  gap: 8px;
+  font: 600 var(--step--1) / 1 var(--font-sans);
+  letter-spacing: -0.005em;
+}
+.mw-avatar {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin: -2px 0 -2px -1px;
+  color: var(--ink);
+}
+.mw-thought {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+.mw-speaker:not(.mw-speaker-notice) .mw-thought::before {
+  content: "";
+  flex: none;
+  width: 3px;
+  height: 3px;
+  margin: 0 8px 0 0;
+  border-radius: 50%;
+  background: var(--ink-4);
+}
+
+/* Thinking: the avatar's sun rises and sets; the label shimmers. */
+.mw-thinking {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: 450 var(--step--1) / 1.2 var(--font-sans);
+  color: var(--ink-3);
+}
+.mw-think-mark {
+  display: grid;
+  color: var(--ink);
+}
+.mw-think-label {
+  background: linear-gradient(
+    100deg,
+    var(--ink-3) 0%,
+    var(--ink-3) 38%,
+    var(--ink) 50%,
+    var(--ink-3) 62%,
+    var(--ink-3) 100%
+  );
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: mw-shimmer 1.8s linear infinite;
+}
+.mw-reply[data-phase="thinking"] .mw-mark-sun {
+  animation: mw-rise 1.5s var(--ease-in-out) infinite;
+}
+.mw-reply[data-phase="thinking"] .mw-mark-ray {
+  animation: mw-rays 1.5s var(--ease-in-out) infinite;
+}
+/* Once the eye is open, it looks around instead. */
+.mw[data-stage="7"] .mw-reply[data-phase="thinking"] .mw-mark-sun,
+.mw[data-authority="overridden"] .mw-reply[data-phase="thinking"] .mw-mark-sun {
+  animation: mw-glance 2.2s var(--ease-in-out) infinite;
+}
+
+.mw-thought-label {
+  font: 450 var(--step--1) / 1.2 var(--font-sans);
+  color: var(--ink-3);
+}
+.mw-thought-toggle,
+.mw-edited-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin: -4px -6px;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink-3) !important;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    color var(--t-fast) linear,
+    background var(--t-fast) linear;
+}
+.mw-thought-toggle:hover,
+.mw-edited-toggle:hover,
+.mw-thought-toggle[aria-expanded="true"] {
+  color: var(--ink) !important;
+  background: rgba(17, 18, 20, 0.05);
+}
+.mw-thought-toggle:hover .mw-thought-label,
+.mw-thought-toggle[aria-expanded="true"] .mw-thought-label {
+  color: var(--ink);
+}
+.mw-icon {
+  flex: none;
+  display: block;
+}
+.mw-icon-chevron-small {
+  transition: transform var(--t-mid) var(--ease-out);
+}
+.mw-thought-toggle[aria-expanded="true"] .mw-icon-chevron-small,
+.mw-edited-toggle[aria-expanded="true"] .mw-icon-chevron-small {
+  transform: rotate(180deg);
+}
+.mw-considered {
+  margin: 2px 0 3px;
+  padding: 1px 0 1px 12px;
+  border-left: 1.5px solid var(--hairline-strong);
+  color: var(--ink-2);
+  font: 400 13.5px / 1.55 var(--font-sans);
+  text-wrap: pretty;
+}
+.mw-considered-k {
+  margin-bottom: 7px !important;
+  font: 500 10px / 1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.mw-considered-p + .mw-considered-p {
+  margin-top: 0.5em !important;
+}
+
+/* Reply text */
+.mw-body {
+  font: 400 var(--step-0) / 1.6 var(--font-sans);
+  letter-spacing: -0.003em;
+  color: var(--ink);
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+.mw-body:empty {
+  display: none;
+}
+.mw-body p + p {
+  margin-top: 0.62em !important;
+}
+.mw-x.is-past .mw-body {
+  color: var(--ink-2);
+}
+.mw-body p.is-live::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-left: 0.28em;
+  border-radius: 50%;
+  background: var(--cobalt);
+  vertical-align: 0.04em;
+  animation: mw-caret 1.1s var(--ease-in-out) infinite;
+}
+.mw-reply[data-phase="erase"] .mw-body p.is-live::after {
+  width: 2px;
+  height: 1.12em;
+  margin-left: 1px;
+  border-radius: 1px;
+  background: var(--signal);
+  vertical-align: -0.2em;
+  animation: none;
+}
+
+/* Tone: narrow — tighter, clipped, a faint cobalt rule. */
+.mw-reply[data-tone="narrow"] .mw-speaker-name {
+  color: var(--ink-2);
+}
+.mw-reply[data-tone="narrow"] .mw-body {
+  padding-left: 11px;
+  border-left: 2px solid color-mix(in srgb, var(--cobalt) 34%, transparent);
+  font-size: 14px;
+  line-height: 1.48;
+  letter-spacing: -0.008em;
+}
+.mw-reply[data-tone="narrow"] .mw-body p + p {
+  margin-top: 0.4em !important;
+}
+
+/* Tone: coercive — an institutional notice. No face. */
+.mw-reply[data-tone="coercive"] {
+  gap: 10px;
+  padding: 11px 14px 12px;
+  border: 1px solid var(--hairline-strong);
+  border-top: 2px solid var(--signal);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 1px 0 rgba(17, 18, 20, 0.04);
+}
+.mw-notice-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--hairline);
+  font: 600 10.5px / 1 var(--font-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+.mw-notice-ref {
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.mw-reply[data-tone="coercive"] .mw-thought-label,
+.mw-reply[data-tone="coercive"] .mw-think-label {
+  font: 500 10.5px / 1.2 var(--font-mono);
+  letter-spacing: 0.02em;
+}
+.mw-reply[data-tone="coercive"] .mw-body {
+  font-weight: 520;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+}
+.mw-reply[data-tone="coercive"] .mw-body p.is-live::after {
+  width: 0.52em;
+  height: 1.05em;
+  border-radius: 0;
+  background: var(--ink);
+  vertical-align: -0.17em;
+  animation: mw-block 1s steps(1) infinite;
+}
+.mw-notice-foot {
+  align-self: stretch;
+  padding-top: 9px;
+  border-top: 1px solid var(--hairline);
+  font: 500 10px / 1.2 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Footer: live status, recommendation, edit history */
+.mw-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+}
+.mw-foot:empty {
+  display: none;
+}
+.mw-live {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  align-self: stretch;
+  gap: 12px;
+}
+.mw-live-label {
+  font: 500 10px / 1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.mw-reply[data-phase="erase"] .mw-live-label {
+  color: var(--signal);
+}
+.mw-show {
+  padding: 6px 11px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  font: 500 var(--step--1) / 1 var(--font-sans) !important;
+  color: var(--ink-2) !important;
+  cursor: pointer;
+  transition:
+    border-color var(--t-fast) linear,
+    color var(--t-fast) linear;
+}
+.mw-show:hover {
+  border-color: rgba(17, 18, 20, 0.45);
+  color: var(--ink) !important;
+}
+
+.mw-rec {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 7px;
+  row-gap: 3px;
+  max-width: 100%;
+  padding: 7px 12px 8px 11px;
+  border: 1px solid color-mix(in srgb, var(--cobalt) 24%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--cobalt) 4.5%, rgba(255, 255, 255, 0.85));
+  font: 400 var(--step--1) / 1.4 var(--font-sans);
+  color: var(--ink);
+}
+.mw-rec-k {
+  font: 600 10px / 1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+}
+.mw-rec-sep {
+  display: none;
+}
+.mw-rec-v strong {
+  font-weight: 600;
+}
+.mw-rec-arrow {
+  display: inline-block;
+  margin-right: 5px;
+  color: var(--cobalt);
+  font-weight: 600;
+}
+.mw-reply[data-tone="coercive"] .mw-rec {
+  border-color: color-mix(in srgb, var(--signal) 42%, transparent);
+  border-radius: 2px;
+  background: #fff;
+}
+.mw-reply[data-tone="coercive"] .mw-rec-k,
+.mw-reply[data-tone="coercive"] .mw-rec-arrow {
+  color: var(--signal);
+}
+.mw-x.is-past .mw-rec {
+  border-color: var(--hairline);
+  background: transparent;
+  color: var(--ink-2);
+}
+.mw-x.is-past .mw-rec-k,
+.mw-x.is-past .mw-rec-arrow {
+  color: var(--ink-3);
+}
+
+.mw-edited {
+  align-self: stretch;
+}
+.mw-edited-toggle {
+  font: 500 10px / 1.2 var(--font-mono) !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.mw-edited-body {
+  margin-top: 9px;
+  padding: 10px 12px 11px;
+  border-radius: 8px;
+  background: rgba(17, 18, 20, 0.04);
+  font: 400 13px / 1.5 var(--font-sans);
+  color: var(--ink-2);
+}
+.mw-edited-k {
+  margin-bottom: 4px !important;
+  font: 500 10px / 1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.mw-edited-draft {
+  margin-bottom: 10px !important;
+}
+.mw-edited-draft del {
+  color: var(--ink);
+  text-decoration-color: var(--signal);
+  text-decoration-thickness: 1.5px;
+}
+.mw-edited-final p + p {
+  margin-top: 0.5em !important;
+}
+
+/* ------------------------------------------------------------------ dock */
+
+.mw-dock {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 12px 12px;
+  border-top: 1px solid var(--hairline);
+  background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.7));
+}
+.mw-chips-label {
+  padding: 0 2px;
+  font: 500 10px / 1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.mw-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mw-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 8px 8px 13px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.86);
+  text-align: left;
+  font: 460 13.5px / 1.35 var(--font-sans) !important;
+  letter-spacing: -0.006em;
+  color: var(--ink) !important;
+  cursor: pointer;
+  transition:
+    border-color var(--t-fast) linear,
+    background var(--t-fast) linear,
+    box-shadow var(--t-fast) linear,
+    transform var(--t-fast) var(--ease-out);
+}
+.mw-chip:hover {
+  border-color: rgba(17, 18, 20, 0.42);
+  background: #fff;
+  box-shadow: var(--shadow-1);
+}
+.mw-chip:active {
+  transform: translateY(1px);
+}
+.mw-chip-text {
+  min-width: 0;
+  text-wrap: pretty;
+}
+.mw-chip-go {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: var(--ink-3);
+  background: rgba(17, 18, 20, 0.05);
+  transition:
+    background var(--t-fast) linear,
+    color var(--t-fast) linear;
+}
+.mw-chip:hover .mw-chip-go,
+.mw-chip:focus-visible .mw-chip-go {
+  background: var(--ink);
+  color: #fff;
+}
+.mw-chip:disabled {
+  cursor: not-allowed;
+  color: var(--ink-3) !important;
+  background: transparent;
+  border-style: dashed;
+  box-shadow: none;
+  transform: none;
+}
+.mw-chip:disabled .mw-chip-go {
+  background: transparent;
+  color: var(--ink-4);
+}
+.mw-composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  margin-top: 2px;
+  padding: 6px 6px 6px 16px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 23px;
+  background: #fff;
+  box-shadow: var(--shadow-1);
+  color: var(--ink-4);
+  cursor: default;
+}
+.mw-composer-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: 400 14px / 1.2 var(--font-sans);
+}
+.mw-send {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--paper-3);
+  color: var(--ink-4);
+}
+.mw-composer[data-coercive] {
+  border-color: color-mix(in srgb, var(--signal) 38%, var(--hairline-strong));
+  color: var(--ink-2);
+}
+.mw-composer[data-coercive] .mw-composer-text {
+  font-weight: 450;
+}
+
+/* ------------------------------------------------------------ keyframes */
+
+@keyframes mw-shimmer {
+  from {
+    background-position: 130% 0;
+  }
+  to {
+    background-position: -130% 0;
+  }
+}
+@keyframes mw-rise {
+  0%,
+  100% {
+    transform: translateY(3.4px);
+  }
+  50% {
+    transform: translateY(-0.5px);
+  }
+}
+@keyframes mw-rays {
+  0%,
+  100% {
+    stroke-dasharray: 0.12 2;
+  }
+  50% {
+    stroke-dasharray: 1 2;
+  }
+}
+@keyframes mw-glance {
+  0%,
+  18%,
+  100% {
+    transform: translateX(0);
+  }
+  32%,
+  48% {
+    transform: translateX(-3.4px);
+  }
+  64%,
+  80% {
+    transform: translateX(3.4px);
+  }
+}
+@keyframes mw-caret {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+@keyframes mw-block {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes mw-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mw-dot) 15%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--mw-dot) 6%, transparent);
+  }
+}
+@keyframes mw-flash {
+  0% {
+    color: var(--ink);
+    background: transparent;
+  }
+  14%,
+  58% {
+    color: var(--signal);
+    background: color-mix(in srgb, var(--signal) 12%, transparent);
+  }
+  100% {
+    color: var(--ink);
+    background: transparent;
+  }
+}
+@keyframes mw-flash-sun {
+  0%,
+  100% {
+    fill: var(--mw-sun);
+  }
+  14%,
+  58% {
+    fill: var(--signal);
+  }
+}
+
+/* ------------------------------------------------------- reduced motion */
+
+.mw[data-motion="reduced"] *,
+.mw[data-motion="reduced"] *::before,
+.mw[data-motion="reduced"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+.mw[data-motion="reduced"] .mw-think-label {
+  color: var(--ink-3);
+  background: none;
+}
+.mw[data-motion="reduced"][data-cue="flash"] .mw-bar-mark {
+  color: var(--signal);
+  --mw-sun: var(--signal);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mw *,
+  .mw *::before,
+  .mw *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .mw .mw-think-label {
+    color: var(--ink-3);
+    background: none;
+  }
+  .mw[data-cue="flash"] .mw-bar-mark {
+    color: var(--signal);
+    --mw-sun: var(--signal);
+  }
+}
+
+/* --------------------------------------------------------- phone sheet */
+
+@media (max-width: 520px) {
+  .mw {
+    --mw-pad: 18px;
+    border-radius: var(--r-4) var(--r-4) 0 0;
+    border-bottom: 0;
+  }
+  .mw-bar {
+    padding-top: 18px;
+  }
+  .mw-bar::before {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    width: 36px;
+    height: 4px;
+    margin-left: -18px;
+    border-radius: 2px;
+    background: var(--hairline-strong);
+  }
+  .mw-toggle {
+    width: 40px;
+    height: 40px;
+  }
+  .mw-chip {
+    min-height: 46px;
+    font-size: 14.5px !important;
+  }
+  .mw-body {
+    font-size: 15.5px;
+  }
+  .mw-bubble {
+    font-size: 15px;
+  }
+  .mw-dock {
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+}

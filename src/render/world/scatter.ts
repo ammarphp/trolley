@@ -56,7 +56,7 @@ class Pool {
 }
 
 interface CellContent {
-  instances: Array<{ pool: Pool; index: number }>;
+  instances: Array<{ pool: Pool; index: number; x: number; z: number; clear: number }>;
   objects: THREE.Object3D[];
 }
 
@@ -112,7 +112,7 @@ export class Scatter {
     return pool;
   }
 
-  private place(content: CellContent, kind: string, variant: number, level: number, x: number, z: number, rot: number, scale: number): void {
+  private place(content: CellContent, kind: string, variant: number, level: number, x: number, z: number, rot: number, scale: number, clear = 6): void {
     const pool = this.pool({ kind, variant, level });
     if (!pool) return;
     const m = new THREE.Matrix4().compose(
@@ -120,10 +120,11 @@ export class Scatter {
       new THREE.Quaternion().setFromEuler(new THREE.Euler(0, rot, 0)),
       new THREE.Vector3(scale, scale, scale),
     );
-    content.instances.push({ pool, index: pool.add(m) });
+    content.instances.push({ pool, index: pool.add(m), x, z, clear });
   }
 
-  private placeObject(content: CellContent, object: THREE.Object3D, x: number, z: number, rot: number): void {
+  private placeObject(content: CellContent, object: THREE.Object3D, x: number, z: number, rot: number, clear = 24): void {
+    object.userData.scatterClear = clear;
     object.position.set(x, this.heightAt(x, z), z);
     object.rotation.y = rot;
     object.traverse((o) => {
@@ -158,7 +159,7 @@ export class Scatter {
       const dead = rng.chance(env.ruin * 0.6 + env.drought * 0.3);
       const conifer = !dead && rng.chance(0.22);
       const kind = dead ? "dead-tree" : conifer ? "conifer" : "tree";
-      this.place(content, kind, rng.int(0, Math.max(0, this.assets.prefabVariants(kind) - 1)), conifer || dead ? 3 : leafLevel, x, z, rng.range(0, Math.PI * 2), rng.range(0.8, 1.25));
+      this.place(content, kind, rng.int(0, Math.max(0, this.assets.prefabVariants(kind) - 1)), conifer || dead ? 3 : leafLevel, x, z, rng.range(0, Math.PI * 2), rng.range(0.8, 1.25), 7);
     }
     // Hedgerow along a field edge.
     if (rng.chance(0.35 * env.vegetation * d) && env.uniformity < 0.5) {
@@ -211,7 +212,7 @@ export class Scatter {
       const big = lm === "data-center" || lm === "cooling-tower" || lm === "power-station" || lm === "solar-farm";
       if (clear(lx, lz, big ? 110 : 30)) {
         const obj = this.assets.landmark(lm, { seed: `${cx}:${cz}`, env });
-        this.placeObject(content, obj, lx, lz, rng.pick([0, Math.PI / 2, Math.PI, -Math.PI / 2]) + rng.range(-0.2, 0.2));
+        this.placeObject(content, obj, lx, lz, rng.pick([0, Math.PI / 2, Math.PI, -Math.PI / 2]) + rng.range(-0.2, 0.2), big ? 110 : 30);
       }
     }
     // Herds while the land still holds them.
@@ -261,6 +262,29 @@ export class Scatter {
       this.cells.delete(key);
     }
     for (const o of this.tickers) (o.userData.tick as (dt: number, t: number) => void)(dt, t);
+  }
+
+  /**
+   * A fork has been laid out: clear anything now standing in its corridor.
+   * Cells were populated before the branches existed.
+   */
+  cullNear(network: TrackNetwork, x: number, z: number, radius: number): void {
+    for (const content of this.cells.values()) {
+      content.instances = content.instances.filter((inst) => {
+        if ((inst.x - x) ** 2 + (inst.z - z) ** 2 > radius * radius) return true;
+        if (network.distanceToTrack(inst.x, inst.z, inst.clear + 2) > inst.clear) return true;
+        inst.pool.remove(inst.index);
+        return false;
+      });
+      content.objects = content.objects.filter((o) => {
+        const clear = (o.userData.scatterClear as number) ?? 24;
+        if ((o.position.x - x) ** 2 + (o.position.z - z) ** 2 > radius * radius) return true;
+        if (network.distanceToTrack(o.position.x, o.position.z, clear + 2) > clear) return true;
+        this.group.remove(o);
+        this.tickers.delete(o);
+        return false;
+      });
+    }
   }
 
   /** Remove everything (e.g. after a stage tunnel, the world is redrawn). */

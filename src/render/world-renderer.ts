@@ -397,6 +397,13 @@ export class InkWorldRenderer implements WorldRenderer {
     }
     const stakesPlaceholder: Stake[] = [];
     const j = this.journey.prepare(view.decisionId!, stakesPlaceholder, { loop: view.rail?.loopSide ?? null, minToe });
+    // The fork's branches now exist: lay them out and clear their corridor.
+    j.left.extendTo(420);
+    j.right.extendTo(420);
+    this.journey.network.index(j.left);
+    this.journey.network.index(j.right);
+    const toe = j.stem.pose(j.toe);
+    this.scatter.cullNear(this.journey.network, toe.x, toe.z, 520);
     const tableau = buildTableau(j, view.staging!, this.assets, view.seed, view.rail ? { rail: view.rail } : {});
     this.worldRoot.add(tableau.group);
     this.tableau = tableau;
@@ -636,8 +643,10 @@ export class InkWorldRenderer implements WorldRenderer {
     this.journey.tick(reduced && this.journey.phase !== "passage" ? 0 : dt);
     if (reduced) this.journey.tick(0);
     const rig = this.journey.rig;
+    // Generate (not draw) well ahead so scenery always knows where the line goes.
+    const lookahead = rig.line === this.journey.network.current && !rig.line.abandoned ? rig.s + 620 : 0;
     for (const line of this.journey.network.lines) {
-      line.extendTo(line.drawTo + 4);
+      line.extendTo(Math.max(line.drawTo + 4, line === rig.line ? lookahead : 0, line === this.journey.junction?.left || line === this.journey.junction?.right ? 420 : 0));
       this.journey.network.index(line);
     }
     // Floating origin: keep the camera near zero.

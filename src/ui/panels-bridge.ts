@@ -1,14 +1,20 @@
 /**
  * The seam between the orchestrator and the interface components: Morrow's
  * window, the instrument cluster, the wire, the glossary and the debrief.
+ * Everything here is presentation: it reads the campaign, never writes it.
  */
-import { el, button, append } from "./dom.ts";
-import { COPY, executionSummary } from "./copy.ts";
-import type { Campaign, DecisionRecord, Node, PreparedDecision } from "../contracts/index.ts";
+import { el } from "./dom.ts";
+import type { Campaign, Metric, Node, PreparedDecision } from "../contracts/index.ts";
 import type { LocalRun, Preferences } from "../persistence/index.ts";
 import type { StageView } from "../render/api.ts";
 import type { DisplayPrefs } from "./display-prefs.ts";
-import { renderAdvisor, renderInstruments, finishAdvisor, disposeAdvisor } from "./panels.ts";
+import { renderMorrow, finishMorrow as finishWindow, disposeMorrow as disposeWindow, type MorrowReply } from "./components/morrow/index.ts";
+import { renderInstruments } from "./components/instruments/index.ts";
+import { renderWire, toWireView } from "./components/wire/index.ts";
+import { renderDebrief as renderDebriefView, setReplayReady, disposeDebrief } from "./components/debrief/index.ts";
+import { annotate, mountGlossary, renderHistoryCard, type GlossaryPopoverController } from "./components/glossary/index.ts";
+import { historyCardFor } from "./content/history.ts";
+import { ambientFor, botSaturationFor, type AmbientLog } from "./ambient-log.ts";
 
 export interface PanelContext {
   run: LocalRun;
@@ -40,12 +46,30 @@ export interface DebriefActions {
 }
 
 const $ = <T extends HTMLElement = HTMLElement>(s: string) => document.querySelector<T>(s)!;
+let glossary: GlossaryPopoverController | null = null;
+let seenTerms = new Set<string>();
+const wireRead = new Set<string>();
+const ambient: AmbientLog = { runId: "", items: [], upTo: 0 };
+
+export function initPanels(prefs: Preferences): void {
+  glossary ??= mountGlossary({ root: document, reducedMotion: prefs.reducedMotion });
+}
+export function setPanelMotion(reduced: boolean): void {
+  glossary?.setReducedMotion(reduced);
+}
+export function closeGlossary(): void {
+  glossary?.close();
+}
+export function newScreen(): void {
+  glossary?.close();
+  seenTerms = new Set();
+}
 
 export function finishMorrow(host: HTMLElement): void {
-  finishAdvisor(host);
+  finishWindow(host);
 }
 export function disposeMorrow(host: HTMLElement): void {
-  disposeAdvisor(host);
+  disposeWindow(host);
 }
 
 /** Which side Morrow has recommended in replies the player has read. */
@@ -53,6 +77,7 @@ export function recommendedSide(c: Campaign, readIds: string[]): "left" | "right
   const p = c.prepared;
   if (!p) return null;
   for (const id of [...readIds].reverse()) {
+    if (!id.startsWith(`${p.id}:advice:`)) continue;
     const index = Number(id.split(":advice:").at(-1));
     const rec = p.node.advice[index]?.recommends;
     if (rec) return rec === p.leftOptionId ? "left" : rec === p.rightOptionId ? "right" : null;
@@ -60,67 +85,129 @@ export function recommendedSide(c: Campaign, readIds: string[]): "left" | "right
   return null;
 }
 
+/** A prompt paragraph with its glossary terms highlighted (first use only). */
 export function annotated(paragraph: string): HTMLElement {
-  return el("p", "", paragraph);
+  const p = el("p");
+  p.append(annotate(paragraph, { seen: seenTerms, max: 4 }));
+  return p;
 }
 
-export function historyCard(_nodeId: string): HTMLElement | null {
-  return null;
+export function historyCard(nodeId: string): HTMLElement | null {
+  const card = historyCardFor(nodeId);
+  if (!card) return null;
+  const host = el("div", "history-host");
+  renderHistoryCard(host, card, { expanded: false, surface: "plain", seen: seenTerms, headingLevel: 3 });
+  return host;
 }
 
-function formatCount(n: number) {
-  return n >= 1e9 ? `${(n / 1e9).toFixed(2)} bn` : n >= 1e6 ? `${(n / 1e6).toFixed(1)} m` : n >= 1e3 ? `${(n / 1e3).toFixed(1)}k` : String(n);
+// ------------------------------------------------------------------ panels
+
+function side(p: PreparedDecision, optionId: string | null | undefined): "left" | "right" | null {
+  if (!optionId) return null;
+  return optionId === p.leftOptionId ? "left" : optionId === p.rightOptionId ? "right" : null;
+}
+
+function reply(node: Node | undefined, p: PreparedDecision | null, id: string): MorrowReply | null {
+  const index = Number(id.split(":advice:").at(-1));
+  const advice = node?.advice[index];
+  if (!advice) return null;
+  const s = p && p.nodeId === node!.id ? side(p, advice.recommends) : null;
+  const label = advice.recommends ? node!.options.find((o) => o.id === advice.recommends)?.label : undefined;
+  return {
+    id,
+    question: advice.question,
+    answer: advice.answer,
+    ...(advice.reasoning ? { reasoning: advice.reasoning } : {}),
+    tone: advice.tone,
+    recommends: s && label ? { side: s, label } : null,
+  };
+}
+
+/** Reported values per decision: truth, except where an institutional report has overwritten it (sticky). */
+function reportedHistory(c: Campaign, metric: Metric): number[] {
+  let altered: number | null = null;
+  return c.journal.map((r) => {
+    for (const e of r.domainEvents) if (e.kind === "report_issued" && e.details.metric === metric) altered = Number(e.details.value);
+    return altered ?? r.metrics[metric];
+  });
 }
 
 export function drawPanels(ctx: PanelContext): void {
   const run = ctx.run;
-  const stage = ctx.locked ? (run.campaign.journal.at(-1)?.stage ?? run.campaign.stage) : run.campaign.stage;
+  const c = run.campaign;
+  const stage = ctx.locked ? (c.journal.at(-1)?.stage ?? c.stage) : (c.prepared?.stage ?? c.stage);
   $("#assistant-panel").hidden = stage < 3;
   $("#telemetry-panel").hidden = stage < 3;
-  const w = run.campaign.world;
-  renderInstruments(
+  const w = c.world;
+  const day = (c.journal.at(-1)?.dayAfter ?? w.day) + 1;
+
+  // Instruments (stage 4+). Reported readings, with their provenance.
+  const metric = (key: Metric, label: string, extra: { scaleMax?: number; unit?: string } = {}) => {
+    const o = w.observations[key];
+    const history = [...reportedHistory(c, key), o.value];
+    return { key, label, value: o.value, history, altered: o.altered, source: o.altered ? o.coverage : o.source, ...extra };
+  };
+  renderInstruments($("#instruments"), {
+    stage,
+    day,
+    dateLabel: ctx.view?.cabin.clock ?? "",
+    reducedMotion: ctx.prefs.reducedMotion,
+    metrics: [metric("gdp", "GDP index"), metric("capability", "AI capability", { scaleMax: 1000 }), metric("casualties", "Fatalities", { scaleMax: w.initialPopulation })],
+    secondary: [metric("population", "Population", { scaleMax: w.initialPopulation }), metric("power", "Power"), metric("care", "Care"), metric("food", "Food")],
+  });
+
+  // The wire: authored news plus the ambient world, newest first.
+  const items = ambientFor(ambient, c);
+  renderWire(
     $("#wire"),
-    stage < 4
-      ? []
-      : [
-          { label: "GDP", value: w.observations.gdp.value, display: String(w.observations.gdp.value), maximum: 2000, kind: "economy", scale: "Index. Bar scale 0–2000." },
-          { label: "Capability", value: w.observations.capability.value, display: String(w.observations.capability.value), maximum: 1000, kind: "capability", scale: "Reported capability index." },
-          { label: "Fatalities", value: w.observations.casualties.value, display: formatCount(w.observations.casualties.value), maximum: 8000000000, kind: "fatalities", scale: "Reported deaths." },
-        ],
-    w.news,
+    toWireView(w.news, items, {
+      stage,
+      botSaturation: botSaturationFor(c),
+      reducedMotion: ctx.prefs.reducedMotion,
+      today: w.day,
+      readIds: [...wireRead],
+    }),
+    {
+      tickerHost: $("#ticker"),
+      onRead: (ids) => ids.forEach((id) => wireRead.add(id)),
+    },
   );
-  const prepared = run.campaign.prepared;
-  const questions =
+
+  // Morrow.
+  const prepared = c.prepared;
+  const questions: MorrowReply[] =
     prepared && !ctx.locked
       ? ctx.availableAdvice(prepared).flatMap((item) => {
           const index = typeof item === "number" ? item : item.index;
           const answer = ctx.queryAdvisor(prepared, index);
-          return answer ? [answer] : [];
+          const r = answer ? reply(prepared.node, prepared, answer.id) : null;
+          return r ? [r] : [];
         })
       : [];
-  renderAdvisor($("#assistant-panel"), {
+  const history: MorrowReply[] = [
+    ...c.journal.flatMap((record) => {
+      const node = ctx.nodes.find((n) => n.id === record.nodeId);
+      return record.adviceIds.flatMap((id) => {
+        const r = reply(node, null, id);
+        return r ? [r] : [];
+      });
+    }),
+    ...questions.filter((q) => ctx.selectedAdvice.includes(q.id) || ctx.pendingAdvice.includes(q.id)),
+  ].slice(-14);
+  const cues = ctx.view?.cues ?? [];
+  renderMorrow($("#assistant-panel"), {
+    stage,
     online: stage >= 3,
     locked: ctx.locked,
-    ...(ctx.animateId ? { animateId: ctx.animateId } : {}),
     reducedMotion: ctx.prefs.reducedMotion,
+    authority: ctx.view?.cabin.authority ?? "human",
     questions,
+    history,
     readIds: [...ctx.selectedAdvice, ...ctx.pendingAdvice],
-    history: [
-      ...run.campaign.journal.flatMap((record) => {
-        const node = ctx.nodes.find((item) => item.id === record.nodeId);
-        return record.adviceIds.flatMap((id) => {
-          const index = Number(id.split(":advice:").at(-1));
-          const reply = node?.advice[index];
-          return reply ? [{ id, question: reply.question, answer: reply.answer, reasoning: reply.reasoning }] : [];
-        });
-      }),
-      ...questions.filter((item) => ctx.selectedAdvice.includes(item.id) || ctx.pendingAdvice.includes(item.id)),
-    ].slice(-12),
-    onAsk: (answer) => {
-      if (ctx.onAsk(answer.id)) {
-        ctx.redraw(answer.id);
-        $("#assistant-panel").querySelector<HTMLElement>(".chat-prompt,.conversation")?.focus({ preventScroll: true });
-      }
+    ...(ctx.animateId ? { animateId: ctx.animateId } : {}),
+    cues: { logoFlash: cues.some((q) => q.kind === "logo-flash"), revision: cues.some((q) => q.kind === "revision"), noFlashing: ctx.display.noFlashing },
+    onAsk: (q) => {
+      if (ctx.onAsk(q.id)) ctx.redraw(q.id);
     },
     onReplyComplete: (answer, id) => ctx.onReplyComplete(answer, id),
   });
@@ -128,53 +215,35 @@ export function drawPanels(ctx: PanelContext): void {
 
 // ----------------------------------------------------------------- debrief
 
-function sparkline(records: DecisionRecord[], metric: "gdp" | "casualties" | "capability", label: string) {
-  const wrap = el("section", "chart-wrap");
-  wrap.append(el("h3", "", label));
-  const ns = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(ns, "svg");
-  svg.setAttribute("viewBox", "0 0 300 145");
-  svg.classList.add("chart");
-  svg.setAttribute("role", "img");
-  svg.setAttribute("aria-label", `${label}. ${records.map((r) => r.metrics[metric]).join(", ")}. Fictional game values.`);
-  const values = records.map((r) => r.metrics[metric]);
-  const lo = Math.min(0, ...values),
-    hi = Math.max(1, ...values);
-  const line = document.createElementNS(ns, "path");
-  line.setAttribute("d", values.map((v, i) => `${i ? "L" : "M"}${12 + (i * 275) / Math.max(1, values.length - 1)},${115 - ((v - lo) / (hi - lo)) * 95}`).join(" "));
-  line.setAttribute("fill", "none");
-  line.setAttribute("stroke", metric === "casualties" ? "#9e0d12" : "#111214");
-  line.setAttribute("stroke-width", "1.6");
-  svg.append(line);
-  wrap.append(svg);
-  return wrap;
-}
-
-export function renderDebrief(host: HTMLElement, run: LocalRun, _nodes: Node[], _prefs: Preferences, actions: DebriefActions): void {
-  const c = run.campaign,
-    end = c.ending!;
-  const body = el("article", "debrief");
-  append(
-    body,
-    el("p", "eyebrow", "The trolley has stopped. The world has not."),
-    el("h1", "", end.title),
-    el("p", "summary", end.summary),
-    el("p", "caption", `${c.journal.length} decisions. ${formatCount(c.world.population)} people remain.`),
+export function renderDebrief(host: HTMLElement, run: LocalRun, nodes: Node[], prefs: Preferences, actions: DebriefActions): HTMLElement {
+  const c = run.campaign;
+  disposeDebrief(host);
+  const handle = renderDebriefView(
+    host,
+    {
+      ending: c.ending!,
+      journal: c.journal,
+      nodes: nodes.map((n) => ({
+        id: n.id,
+        stage: n.stage,
+        role: n.role,
+        scope: n.scope,
+        title: n.title,
+        options: n.options.map((o) => ({ id: o.id, label: o.label, incidents: o.incidents.map((i) => ({ id: i.id, label: i.label })) })),
+      })),
+      world: { population: c.world.population, initialPopulation: c.world.initialPopulation, casualties: c.world.casualties, day: c.world.day, facts: c.world.facts, control: c.world.control },
+      seed: c.seed,
+      reducedMotion: prefs.reducedMotion,
+    },
+    actions,
   );
-  for (const r of c.journal.filter((r) => r.status === "overridden").slice(0, 3)) body.append(el("div", "turning-point", executionSummary(r)));
-  const charts = el("div", "chart-grid");
-  append(charts, sparkline(c.journal, "gdp", "GDP index"), sparkline(c.journal, "casualties", "Recorded deaths"));
-  body.append(charts);
-  const replay = button("Export replay", actions.onExportReplay);
-  replay.disabled = true;
-  replay.dataset.replay = "true";
-  const row = el("div", "debrief-actions");
-  append(row, button("Read your decisions", actions.onReadDecisions), button("Sources and assumptions", actions.onSources), replay, button("Another ride", actions.onAnotherRide));
-  append(body, row, el("p", "end-note", COPY.closing));
-  host.append(body);
+  return handle.title;
 }
 
 export function replayReady(host: HTMLElement): void {
-  const b = host.querySelector<HTMLButtonElement>("[data-replay]");
-  if (b) b.disabled = false;
+  setReplayReady(host, true);
+}
+
+export function leaveDebrief(host: HTMLElement): void {
+  disposeDebrief(host);
 }

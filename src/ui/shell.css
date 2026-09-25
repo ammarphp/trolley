@@ -199,7 +199,7 @@ section[tabindex="-1"]:focus {
 .side-panel {
   position: absolute;
   top: 12px;
-  width: min(352px, 26vw);
+  width: min(322px, 24vw);
   max-height: calc(100% - 200px);
   display: flex;
   flex-direction: column;
@@ -211,20 +211,38 @@ section[tabindex="-1"]:focus {
 }
 .side-left {
   left: var(--panel-left, var(--gutter));
+  top: var(--panel-top, 12px);
+  height: min(620px, calc(100% - var(--panel-top, 12px) - 24px));
+}
+body.has-ticker .side-left {
+  height: min(620px, calc(100% - var(--panel-top, 12px) - 62px));
 }
 .side-right {
   right: var(--gutter);
-  max-height: calc(100% - 96px);
 }
 #instruments:empty,
 #wire:empty {
   display: none;
 }
-#wire {
+#instruments {
+  flex: 0 1 auto;
   min-height: 0;
-  flex: 1 1 auto;
+  max-height: 62%;
+  overflow: auto;
+  scrollbar-width: none;
+  border-radius: var(--r-3);
+}
+#wire {
+  min-height: 230px;
+  flex: 1 1 260px;
   display: flex;
   flex-direction: column;
+}
+.side-right {
+  height: calc(100% - 24px);
+}
+body.has-ticker .side-right {
+  height: calc(100% - 64px);
 }
 #app {
   position: absolute;
@@ -282,6 +300,10 @@ body[data-authority="overridden"] .dispatch-kicker .dot {
   font: 400 var(--step-1) / 1.58 var(--font-sans);
   letter-spacing: -0.006em;
   scrollbar-width: thin;
+}
+.decision-prompt.long {
+  font-size: var(--step-0);
+  line-height: 1.55;
 }
 .decision-prompt p {
   margin: 0 0 0.7em;
@@ -558,6 +580,10 @@ body[data-authority="overridden"] .route.preselected .route-kicker::before {
   right: 0;
   bottom: 0;
 }
+body.has-ticker .lever-control {
+  bottom: calc(var(--lever-bottom, 22px) + 38px);
+}
+
 
 /* -------------------------------------------------------------- start */
 

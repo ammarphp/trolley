@@ -223,11 +223,16 @@ function positionHud(a: SceneAnchors | null) {
   const narrow = matchMedia("(max-width: 1100px), (max-height: 560px)").matches;
   if (narrow) return;
   const top = $(".hud-top").getBoundingClientRect().height;
-  // Keep Morrow clear of the side mirror, where the controller's face lives.
-  const mirrorRight = anchors.mirror.width > 0 ? anchors.mirror.x + anchors.mirror.width : 0;
+  // Keep Morrow clear of the side mirror, where the controller's face lives:
+  // below it when there is room, otherwise beside it.
   const leftPanel = $("#assistant-panel");
-  const panelLeft = Math.max(16, Math.min(mirrorRight + 14, vw * 0.16));
+  const mirrorBottom = anchors.mirror.height > 0 ? anchors.mirror.y + anchors.mirror.height - top : 0;
+  const mirrorRight = anchors.mirror.width > 0 ? anchors.mirror.x + anchors.mirror.width : 0;
+  const below = mirrorBottom > 0 && mirrorBottom < (innerHeight - top) * 0.52;
+  const panelLeft = below ? 16 : Math.max(16, Math.min(mirrorRight + 14, vw * 0.16));
+  const panelTop = below ? Math.max(12, mirrorBottom + 14) : 12;
   document.body.style.setProperty("--panel-left", `${panelLeft}px`);
+  document.body.style.setProperty("--panel-top", `${panelTop}px`);
   const leftEdge = leftPanel.hidden ? 16 : panelLeft + leftPanel.getBoundingClientRect().width + 16;
   const rightPanel = $("#telemetry-panel");
   const rightEdge = rightPanel.hidden ? vw - 16 : rightPanel.getBoundingClientRect().left - 16;
@@ -266,6 +271,7 @@ function positionHud(a: SceneAnchors | null) {
 
 function openDrawer(title: string, body: HTMLElement) {
   panels.finishMorrow($("#assistant-panel"));
+  panels.closeGlossary();
   cancelGesture();
   stopClock();
   scene.pause(true);
@@ -288,6 +294,9 @@ drawer.addEventListener("close", () => {
 
 function clearApp() {
   panels.disposeMorrow($("#assistant-panel"));
+  const debriefHost = document.querySelector<HTMLElement>(".debrief-host");
+  if (debriefHost) panels.leaveDebrief(debriefHost);
+  panels.newScreen();
   leverGesture?.dispose();
   leverGesture = null;
   app.replaceChildren();
@@ -307,6 +316,7 @@ function setToolbar(playing: boolean) {
   $("#assistant-panel").hidden = !playing || stage < 3;
   $("#telemetry-panel").hidden = !playing || stage < 3;
   $("#ticker").hidden = !playing || stage < 3;
+  document.body.classList.toggle("has-ticker", playing && stage >= 3);
   if (!playing) $("#stats-chip").hidden = true;
 }
 
@@ -481,7 +491,7 @@ function renderDecision(newClock = true) {
   const kicker = el("div", "dispatch-kicker");
   append(kicker, el("span", "dot"), mono(`Decision ${p.ordinal} · ${p.node.role}`));
   heading.append(kicker);
-  const prompt = el("div", "decision-prompt");
+  const prompt = el("div", `decision-prompt${p.node.prompt.length > 620 ? " long" : ""}`);
   for (const paragraph of p.node.prompt.split(/\n\n+/)) prompt.append(panels.annotated(paragraph));
   heading.append(prompt);
   const detail = button("i", inspect, "decision-detail");
@@ -787,6 +797,7 @@ function settings() {
       prefs[key] = input.checked;
       scene.settings(rendererSettings());
       document.documentElement.dataset.motion = prefs.reducedMotion ? "reduced" : "full";
+      panels.setPanelMotion(prefs.reducedMotion);
       if (key === "audio") void audio.unlock(input.checked);
       void persist();
     };
@@ -957,14 +968,14 @@ function renderDebrief() {
     },
     onSettings: settings,
   };
-  panels.renderDebrief(hostEl, run, nodes, prefs, actions);
+  const title = panels.renderDebrief(hostEl, run, nodes, prefs, actions);
   void exportRun(c, manifest, nodes)
     .then((value) => {
       replay = value;
       panels.replayReady(hostEl);
     })
     .catch(() => notice("This replay could not be prepared. Export the run record from Settings."));
-  focusTitle(hostEl);
+  title.focus({ preventScroll: true });
   announce(`${c.ending!.title}. ${c.ending!.summary}`);
 }
 
@@ -1009,6 +1020,7 @@ $("#history-button").onclick = recordPanel;
 
 async function init() {
   display = displayPrefs(detectQuality());
+  panels.initPanels(prefs);
   audio = createAudioBridge(display.volume);
   world = await createWorldHost(host, rendererSettings(), audio.renderer);
   scene = world.renderer;

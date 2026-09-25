@@ -64,7 +64,7 @@ export interface PortraitModule {
 }
 
 export interface AssetProvider {
-  person(spec: { role: PersonRole; pose?: Pose; seed: string; name?: string }): THREE.Object3D;
+  person(spec: { role: PersonRole; pose?: Pose; seed: string; name?: string; detail?: -1 | 0 | 1 | 2; ground?: number }): THREE.Object3D;
   animal(species: AnimalId, spec: { seed: string; behavior?: "graze" | "walk" | "alert" | "flee" | "rest" }): THREE.Object3D;
   vehicle(id: VehicleId, spec: { seed: string }): THREE.Object3D;
   machine(id: MachineId, spec: { seed: string }): THREE.Object3D;
