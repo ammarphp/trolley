@@ -36,7 +36,7 @@ This decision supersedes the "No React/Vite/3D rewrite" clause in `docs/plan/ACC
   - pause and settings stay live;
   - flashes respect a no-flashing setting.
 - Collection remains disabled. The stats chip shows only genuine eligible aggregates at n ≥ 20.
-- Stage tunnels hold the next dilemma until the cab is out of the far portal (14 s at most, skippable with any key or a click). The decision is not interactive while held, and the active clock starts only when it is revealed, so time spent in the tunnel never counts as deliberation. Reduced motion skips the tunnel entirely.
+- Stage tunnels hold the next dilemma until the cab is out of the far portal (14 s of the player's presence at most; a key aimed at the page or a click on the world skips ahead). While held, the decision is neither exposed, consulted nor timed: exposure is recorded, Morrow takes questions and the active clock starts only when it is revealed, and never behind an open drawer. Reduced motion skips the tunnel entirely.
 
 ## Consequences
 

@@ -115,6 +115,8 @@ export function wireDrag(
     },
     options,
   );
+  // A key released after focus has left can never click the grip.
+  grip.addEventListener("blur", () => (keyHeld = false), options);
   grip.addEventListener(
     "click",
     (event) => {

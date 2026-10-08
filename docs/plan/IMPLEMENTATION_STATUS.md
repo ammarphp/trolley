@@ -16,10 +16,11 @@ The 154-dilemma campaign runs in a new real-time ink world ([ADR 006](../decisio
 
 ## Verification on this checkpoint
 
-- `pnpm typecheck`, `pnpm test` (16 legacy and 246 v2 tests) and `pnpm build` pass.
+- `pnpm typecheck`, `pnpm test` (16 legacy and 255 v2 tests) and `pnpm build` pass.
 - `pnpm test:browser` passes against the WebGL2 ink renderer: explicit choice, cancellation, crash-resume, pause, HUD layout, phone reflow, ending, charts and private/opt-out request isolation.
 - `pnpm inspect:content` reports 154 executable and reviewed nodes with no errors; `pnpm collector:build` builds the wrapper without provisioning anything.
-- Frame times measured headless on Apple silicon (Metal) at 1440×900: 16.7 ms median through the first decisions, with occasional single dropped frames.
+- Frame times measured headless on Apple silicon (Metal) at 1440×900 (`scripts/perf.mjs`): on the high drawing tier, a 16.7 ms (60 fps) median through most of a run, with occasional heavier scenes at 33 ms; the medium tier holds 60 fps throughout. GPU textures stay near 100 across a run.
+- An independent review of the overhaul (research contracts, renderer lifecycle, accessibility and input, settings, privacy) confirmed 35 defects; all are fixed, with regression tests where they can be exercised headlessly.
 - Full runs were played and photographed with `scripts/capture.mjs`; stage transitions, tunnels, crossings and the ending were inspected frame by frame.
 
 ## Open scope
