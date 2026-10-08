@@ -22,6 +22,7 @@ You drive a trolley. Every decision is a fork in the track, and you choose it wi
   - into data halls, pylons and cooling towers;
   - then surveillance, storms and fire;
   - and finally ruin, or an immaculate order with no one in it.
+- Stage changes run through a tunnel; you come out into the next world. Now and then the line crosses a river.
 - The only view of the controller is your own face, in the left side mirror. It changes.
 - Every other glitch in the drawing is scripted and deliberate, and pause always works.
 

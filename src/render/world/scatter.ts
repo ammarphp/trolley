@@ -11,7 +11,7 @@ import * as THREE from "three";
 import type { AnimalId, EnvironmentTarget, LandmarkId } from "../api.ts";
 import type { AssetProvider, ScatterPrefab } from "../assets.ts";
 import { createRng, type Rng } from "../core/rng.ts";
-import { createInkMaterial } from "../core/ink-material.ts";
+import { createInkMaterial, releaseObject } from "../core/ink-material.ts";
 import type { TrackNetwork } from "./track/network.ts";
 
 const CELL = 60;
@@ -23,12 +23,22 @@ interface PoolKey {
   level: number;
 }
 
+/**
+ * One instanced prefab variant. Slots live on the CPU; each cull pass packs
+ * the instances that can be seen (or can throw a shadow into view) into the
+ * draw buffer, so a forest behind the cab costs nothing in either pass.
+ */
 class Pool {
   readonly mesh: THREE.InstancedMesh;
+  readonly prefab: ScatterPrefab;
+  private matrices: Float32Array;
+  private spheres: Float32Array;
+  private alive: Uint8Array;
   private free: number[] = [];
   private used = 0;
-  readonly prefab: ScatterPrefab;
-  constructor(prefab: ScatterPrefab, capacity: number) {
+  /** Beyond this distance the prefab is below the pen's resolution. */
+  private readonly maxDistance: number;
+  constructor(prefab: ScatterPrefab, private capacity: number) {
     this.prefab = prefab;
     const material = createInkMaterial({ ...prefab.material, instanceInk: false });
     this.mesh = new THREE.InstancedMesh(prefab.geometry, material, capacity);
@@ -36,24 +46,58 @@ class Pool {
     this.mesh.castShadow = true;
     this.mesh.receiveShadow = true;
     this.mesh.frustumCulled = false;
+    this.matrices = new Float32Array(capacity * 16);
+    this.spheres = new Float32Array(capacity * 4);
+    this.alive = new Uint8Array(capacity);
+    this.maxDistance = Math.min(RADIUS, Math.max(150, prefab.radius * 130));
   }
   get full(): boolean {
-    return this.free.length === 0 && this.used >= this.mesh.instanceMatrix.count;
+    return this.free.length === 0 && this.used >= this.capacity;
   }
   add(matrix: THREE.Matrix4): number {
     const i = this.free.length ? this.free.pop()! : this.used++;
-    this.mesh.setMatrixAt(i, matrix);
-    this.mesh.count = Math.max(this.mesh.count, i + 1);
-    this.mesh.instanceMatrix.needsUpdate = true;
+    matrix.toArray(this.matrices, i * 16);
+    const e = matrix.elements;
+    const scale = Math.hypot(e[0]!, e[1]!, e[2]!);
+    const r = Math.max(0.5, this.prefab.radius * scale);
+    this.spheres.set([e[12]!, e[13]! + r * 0.8, e[14]!, r * 1.6], i * 4);
+    this.alive[i] = 1;
     return i;
   }
   remove(i: number): void {
-    const zero = new THREE.Matrix4().makeScale(0, 0, 0);
-    this.mesh.setMatrixAt(i, zero);
-    this.mesh.instanceMatrix.needsUpdate = true;
+    if (!this.alive[i]) return;
+    this.alive[i] = 0;
     this.free.push(i);
   }
+  cull(frustum: THREE.Frustum, ex: number, ez: number, ox: number, oz: number, keepNear: number): void {
+    const out = this.mesh.instanceMatrix.array as Float32Array;
+    const sphere = Pool.sphere;
+    let n = 0;
+    for (let i = 0; i < this.used; i++) {
+      if (!this.alive[i]) continue;
+      const k = i * 4;
+      const x = this.spheres[k]!;
+      const z = this.spheres[k + 2]!;
+      const d2 = (x - ex) ** 2 + (z - ez) ** 2;
+      if (d2 > this.maxDistance * this.maxDistance) continue;
+      if (d2 > keepNear * keepNear) {
+        sphere.center.set(x + ox, this.spheres[k + 1]!, z + oz);
+        sphere.radius = this.spheres[k + 3]! + 6;
+        if (!frustum.intersectsSphere(sphere)) continue;
+      }
+      out.set(this.matrices.subarray(i * 16, i * 16 + 16), n * 16);
+      n++;
+    }
+    this.mesh.count = n;
+    this.mesh.instanceMatrix.clearUpdateRanges();
+    this.mesh.instanceMatrix.addUpdateRange(0, n * 16);
+    this.mesh.instanceMatrix.needsUpdate = true;
+  }
+  private static sphere = new THREE.Sphere();
 }
+
+/** Free what a scenery object put on the GPU (shared prefab geometry is re-uploaded if reused). */
+const disposeObject = releaseObject;
 
 interface CellContent {
   instances: Array<{ pool: Pool; index: number; x: number; z: number; clear: number }>;
@@ -271,6 +315,7 @@ export class Scatter {
       for (const o of content.objects) {
         this.group.remove(o);
         this.tickers.delete(o);
+        disposeObject(o);
       }
       this.cells.delete(key);
     }
@@ -279,6 +324,32 @@ export class Scatter {
       this.lastNight = this.night;
       for (const content of this.cells.values()) for (const o of content.objects) (o.userData.setNight as ((on: boolean) => void) | undefined)?.(this.night);
     }
+  }
+
+  private cullClock = 0;
+  private readonly frustum = new THREE.Frustum();
+  private readonly viewProj = new THREE.Matrix4();
+  private readonly eye = new THREE.Vector3();
+  private readonly offset = new THREE.Vector3();
+
+  /**
+   * Pack each pool's visible instances for this view. Run every few frames;
+   * the sphere margin covers the camera's movement in between, and anything
+   * within `keepNear` metres stays drawn for the shadows it casts into view.
+   */
+  cullFor(camera: THREE.Camera, dt: number, keepNear = 90): void {
+    this.cullClock -= dt;
+    if (this.cullClock > 0) return;
+    this.cullClock = 0.05;
+    camera.updateMatrixWorld();
+    this.viewProj.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+    this.frustum.setFromProjectionMatrix(this.viewProj);
+    camera.getWorldPosition(this.eye);
+    this.group.updateWorldMatrix(true, false);
+    this.offset.setFromMatrixPosition(this.group.matrixWorld);
+    const ex = this.eye.x - this.offset.x;
+    const ez = this.eye.z - this.offset.z;
+    for (const list of this.pools.values()) for (const pool of list) pool.cull(this.frustum, ex, ez, this.offset.x, this.offset.z, keepNear);
   }
 
   /**
@@ -299,6 +370,7 @@ export class Scatter {
         if (network.distanceToTrack(o.position.x, o.position.z, clear + 2) > clear) return true;
         this.group.remove(o);
         this.tickers.delete(o);
+        disposeObject(o);
         return false;
       });
     }
@@ -320,6 +392,7 @@ export class Scatter {
         if (!test(o.position.x, o.position.z)) return true;
         this.group.remove(o);
         this.tickers.delete(o);
+        disposeObject(o);
         return false;
       });
     }
@@ -335,7 +408,10 @@ export class Scatter {
   clear(): void {
     for (const content of this.cells.values()) {
       for (const inst of content.instances) inst.pool.remove(inst.index);
-      for (const o of content.objects) this.group.remove(o);
+      for (const o of content.objects) {
+        this.group.remove(o);
+        disposeObject(o);
+      }
     }
     this.cells.clear();
     this.tickers.clear();
@@ -354,6 +430,7 @@ export class Scatter {
         for (const o of content.objects) {
           this.group.remove(o);
           this.tickers.delete(o);
+          disposeObject(o);
         }
         this.cells.delete(key);
       }

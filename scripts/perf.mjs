@@ -1,5 +1,5 @@
 // Measure frame times in the running game (GPU headless). Serves dist/.
-//   node scripts/perf.mjs [--decisions 6] [--w 1440 --h 900]
+//   node scripts/perf.mjs [--decisions 6] [--from 1] [--w 1440 --h 900] [--dpr 1] [--css "<rule>"]
 import { chromium } from "playwright";
 import { spawn } from "node:child_process";
 import { once } from "node:events";
@@ -21,14 +21,18 @@ const sample = async (label) => {
   const info = await page.evaluate(() => { const c = document.querySelector("#scene canvas"); return c ? `${c.width}x${c.height}` : "no canvas"; });
   console.log(`${label.padEnd(18)} frames ${r.length}  p50 ${p(0.5)}ms  p95 ${p(0.95)}ms  max ${p(0.999)}ms  canvas ${info}`);
 };
+const css = opt("css", "");
+if (css) await page.addInitScript((rule) => document.addEventListener("DOMContentLoaded", () => { const s = document.createElement("style"); s.textContent = rule; document.head.append(s); }), css);
 await page.goto(`http://127.0.0.1:${port}/?private=1`);
 await page.getByRole("button", { name: "Start the trolley", exact: true }).waitFor();
 await sample("title");
 await page.getByRole("button", { name: "Start the trolley", exact: true }).click();
 const n = Number(opt("decisions", 6));
+const from = Number(opt("from", 1));
 for (let i = 1; i <= n; i++) {
   await page.locator(".route").first().waitFor({ timeout: 60000 });
-  await sample(`decision ${i}`);
+  if (i >= from) await sample(`decision ${i}`);
+  await page.mouse.move(4, 4);
   await page.locator(".route").first().click();
   await page.locator("#lever").click();
   await page.locator(".continue").waitFor({ timeout: 60000 });

@@ -16,7 +16,7 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { Kit, composeMatrix, extrude, lathe, normalise, type PartOptions, type Tone } from "../../core/geometry.ts";
-import { createInkCanvas, inkMaterial, paintGeometry } from "../../core/ink-material.ts";
+import { createInkCanvas, inkMaterial, paintGeometry, textureCache } from "../../core/ink-material.ts";
 import { ACCENT, TONE, type AccentName } from "../../core/palette.ts";
 import type { EnvironmentTarget } from "../../api.ts";
 import { createNoise } from "../../core/noise.ts";
@@ -311,7 +311,7 @@ export class LampSet {
 
 // ---------------------------------------------------------------- decals
 
-const atlasCache = new Map<string, THREE.Texture | null>();
+const atlasCache = textureCache<THREE.Texture>(24);
 
 /**
  * An inked canvas atlas, drawn once per key and shared by every instance.
@@ -319,11 +319,9 @@ const atlasCache = new Map<string, THREE.Texture | null>();
  * Returns null outside a browser (tests), in which case decals are skipped.
  */
 export function inkAtlas(key: string, w: number, h: number, draw: (g: CanvasRenderingContext2D, w: number, h: number) => void): THREE.Texture | null {
-  if (atlasCache.has(key)) return atlasCache.get(key)!;
-  if (typeof document === "undefined") {
-    atlasCache.set(key, null);
-    return null;
-  }
+  if (typeof document === "undefined") return null;
+  const hit = atlasCache.get(key);
+  if (hit) return hit;
   const { ctx, texture } = createInkCanvas(w, h);
   ctx.clearRect(0, 0, w, h);
   draw(ctx, w, h);

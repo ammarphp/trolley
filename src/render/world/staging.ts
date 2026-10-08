@@ -7,6 +7,7 @@ import * as THREE from "three";
 import type { Occupant, OptionStaging, SideStaging } from "../api.ts";
 import type { AssetProvider } from "../assets.ts";
 import { createRng, type Rng } from "../core/rng.ts";
+import { releaseObject } from "../core/ink-material.ts";
 import type { Stake } from "./journey.ts";
 import type { Junction, Side } from "./track/network.ts";
 import type { TrackLine } from "./track/path.ts";
@@ -85,8 +86,10 @@ export function buildTableau(junction: Junction, staging: SideStaging, assets: A
     if (option.destination) {
       const dest = assets.landmark(option.destination, { seed: `${seed}:${junction.key}:${side}:dest`, env: {} });
       const footprint = (dest.userData.footprint as { width?: number; depth?: number } | undefined) ?? {};
-      const clearance = Math.max(18, ((footprint.width ?? 20) + (footprint.depth ?? 20)) / 3);
-      place(dest, line, rng.range(130, 175), outward * clearance, 0, "track", rng);
+      // A bridge lies along the line (it is long, and would otherwise span it).
+      const bridge = !!dest.userData.bridge;
+      const clearance = bridge ? Math.max(24, (footprint.width ?? 10) / 2 + 16) : Math.max(18, ((footprint.width ?? 20) + (footprint.depth ?? 20)) / 3);
+      place(dest, line, rng.range(130, 175), outward * clearance, 0, bridge ? "along" : "track", rng);
       add(dest);
     }
   }
@@ -94,15 +97,16 @@ export function buildTableau(junction: Junction, staging: SideStaging, assets: A
     const rng = createRng(`${seed}:${junction.key}:landmark:${i}`);
     const lm = assets.landmark(id, { seed: `${seed}:${junction.key}:lm${i}`, env: {} });
     const side = i % 2 === 0 ? junction.left : junction.right;
-    place(lm, side, rng.range(60, 110), (i % 2 === 0 ? -1 : 1) * rng.range(30, 55), 0, "track", rng);
+    const bridge = !!lm.userData.bridge;
+    place(lm, side, rng.range(60, 110), (i % 2 === 0 ? -1 : 1) * rng.range(bridge ? 40 : 30, 55), 0, bridge ? "along" : "track", rng);
     add(lm);
   }
-  // The junction signal stands at the toe, well out to the right, turned
-  // toward the cab: it reads beside the fork rather than over a route tag.
+  // The junction signal stands beyond the toe, well out to the right and
+  // turned toward the cab, so it reads beside the right route tag, not under it.
   const signal = assets.signal();
   const stemRng = createRng(`${seed}:${junction.key}:signal`);
-  place(signal, junction.stem, junction.toe + 4, 5, 0, "trolley", stemRng);
-  signal.rotation.y = -junction.stem.pose(junction.toe).heading - 0.3;
+  place(signal, junction.stem, junction.toe + 8, 6.2, 0, "trolley", stemRng);
+  signal.rotation.y = -junction.stem.pose(junction.toe).heading - 0.42;
   signal.userData.setAspect?.("red");
   signal.userData.setRoute?.(null);
   add(signal);
@@ -254,10 +258,7 @@ function placeOccupant(occ: Occupant, c: PlaceContext): number {
 
 export function disposeTableau(t: Tableau): void {
   t.group.removeFromParent();
-  t.group.traverse((o) => {
-    const m = o as THREE.Mesh;
-    if (m.isMesh && m.geometry && !m.userData.sharedGeometry) m.geometry.dispose();
-  });
+  releaseObject(t.group);
 }
 
 export function occupantsDescription(option: OptionStaging): string {

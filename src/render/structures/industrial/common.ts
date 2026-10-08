@@ -14,7 +14,7 @@
  */
 import * as THREE from "three";
 import { Kit, block, cylinder, type PartOptions, type Tone } from "../../core/geometry.ts";
-import { createInkCanvas, createInkLineMaterial, createInkMaterial, inkMaterial, type HatchSpace, type InkMaterialOptions } from "../../core/ink-material.ts";
+import { createInkCanvas, createInkLineMaterial, createInkMaterial, inkMaterial, textureCache, type HatchSpace, type InkMaterialOptions } from "../../core/ink-material.ts";
 import type { AccentName } from "../../core/palette.ts";
 import type { Rng } from "../../core/rng.ts";
 import type { EnvironmentTarget } from "../../api.ts";
@@ -420,18 +420,16 @@ export function noShadow(o: THREE.Object3D): void {
 
 // ------------------------------------------------------------ inked signage
 
-const signCache = new Map<string, THREE.Texture | null>();
+const signCache = textureCache<THREE.Texture>(32);
 
 /**
  * A cached inked canvas texture. Returns null outside a browser so builders
  * stay usable from Node (coverage tests); the caller skips the sign then.
  */
 export function signTexture(key: string, w: number, h: number, draw: (g: CanvasRenderingContext2D, w: number, h: number) => void): THREE.Texture | null {
-  if (signCache.has(key)) return signCache.get(key)!;
-  if (typeof document === "undefined") {
-    signCache.set(key, null);
-    return null;
-  }
+  if (typeof document === "undefined") return null;
+  const hit = signCache.get(key);
+  if (hit) return hit;
   const { ctx, texture } = createInkCanvas(w, h);
   draw(ctx, w, h);
   texture.needsUpdate = true;

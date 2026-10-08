@@ -1,25 +1,29 @@
-# UI replacement map
+# Interface and rendering modules
 
-Owner revision: `docs/decisions/003-reference-and-conversation-redirection.md`.
+The interface is a full-viewport drawn world behind a glass HUD ([ADR 006](../decisions/006-ink-world-overhaul.md)). The semantic DOM stays the real interaction surface: every control in the world (route tags, the lever) has an accessible DOM twin, and nothing the renderer does can commit a choice or touch campaign state.
 
-| Change | Owning module | Contract |
+| Concern | Module | Contract |
 | --- | --- | --- |
-| Dilemma, option, assistant and bulletin copy | `src/content/prose.json`, `editorial.ts`, `slice.ts` | Allowlisted prose overlay on schema-validated mechanics. Editing prose creates a new content hash; preserve prior bundles for existing saves. |
-| Replaceable side panels | `src/ui/panels.ts` | Receives view values, authored questions/history and explicit callbacks. It cannot commit choices or mutate campaign state. |
-| Interface voice and execution receipts | `src/ui/copy.ts` | Distinguishes freely chosen, imposed-but-agreed and actually overridden actions. No authored text is executed as code. |
-| Safe semantic elements | `src/ui/dom.ts` | Small text-based element helpers; no unsafe authored HTML. |
-| Lever gestures | `src/ui/lever-input.ts` | Cancellable, disposable pointer handler. Cancellation releases capture and suppresses a trailing click; only the owning app callback can request a commit. |
-| Page composition and input | `src/ui/app.ts` | Applies engine commands, persists before animation, and supplies panel/scene view models. Route selection and lever commitment are separate. |
-| Layout, typography and density | `src/ui/shell.css`, `game.css` | Shell layout plus reusable controls; three desktop columns; normal-flow prompt, world, routes, toggle. At 900px, play, conversation and reports stack. No narrative element is positioned over canvas. |
-| Illustration catalogue and states | `src/presentation/glyph-catalogue.ts`, `ink-art.ts`, `technical-art.ts`, `environment-art.ts` | Original layered cabin, terrain and architecture geometry, species/variant/pose/mood/damage, no gameplay authority. |
-| Railway and camera | `src/presentation/geometry.ts`, `cabin-scene.ts` | Persistent world pose and geometry. Cosmetic time never advances fictional time. |
-| Intensity curve | `src/presentation/visual-state.ts` | Maps supplied causal state to visual treatment, independently respects reduced graphic detail. |
-| Persistence and replay editions | `src/persistence/`, `src/content/registry.ts` | Exact bundle lookup, immutable archive, conflict-aware local save. Unknown versions remain exportable; never reinterpret an old choice under new text. |
+| Page composition, input and the research order | `src/ui/app.ts` | Applies engine commands. Commit → record → persist happens before any animation. Route selection and lever commitment are separate steps. The active clock runs only while a decision is visible and the page has attention; after a stage change it starts when the decision is revealed beyond the tunnel. |
+| The world host | `src/ui/world-host.ts` | Creates the ink renderer (or the static fallback) and projects the campaign into it through the presentation director. The only place the UI touches rendering. |
+| Presentation director | `src/presentation/derive.ts` | Pure function from the immutable campaign to a `StageView`: environment channels, time of day, the controller's face, glass damage, receipts, scripted cues and the staging of the current fork. |
+| Renderer contract | `src/render/api.ts` | `WorldRenderer`: `update`, `commit`, `setLever`, `pause`, `settings`, `describe`, anchors for the HUD, lever input, `whenClear` (resolves once a stage tunnel is behind the cab). `commit` always resolves, including when paused, in reduced motion or after context loss. |
+| The ink world | `src/render/world-renderer.ts`, `src/render/world/` | Track network and journey, scenery, tableaux, tunnels, lineside poles and wires, river crossings, the cab and its camera. Cosmetic time never advances fictional time; cosmetic randomness is seeded. |
+| Asset seam | `src/render/assets.ts`, `src/render/assets-real.ts` | The director asks for things by id; the provider builds them from the procedural library. A placeholder provider keeps the renderer runnable in tests. |
+| Fork staging | `src/render/staging/` | What stands on each branch of all 154 forks, keyed by node and option id, outside the hashed content bank. |
+| Morrow's window | `src/ui/components/morrow/` | Receives authored questions, history and callbacks. Only fully delivered replies count as advice exposure; committing while one is pending cancels it. No free text, no remote model. |
+| Instruments | `src/ui/components/instruments/` | Reported fictional values with their provenance (GDP index, capability, fatalities; population, power, care and food from stage 5). Hidden before stage 4. Never the simulation's hidden truth. |
+| The wire | `src/ui/components/wire/`, `src/ui/wire/`, `src/ui/brand/` | Authored news plus a seeded ambient feed of fictional outlets and accounts that turns to bots as the run goes on. Presentation only; it never reaches the journal. |
+| Glossary and history cards | `src/ui/components/glossary/`, `src/ui/content/` | Hover and focus definitions with registry-honest sources; dilemma history cards. |
+| Debrief | `src/ui/components/debrief/` | The ending as an editorial debrief: causal receipts, hidden facts revealed after the fact, and an authority timeline. |
+| Interface voice | `src/ui/copy.ts` | Distinguishes freely chosen, imposed-but-agreed and actually overridden actions. No authored text is executed as code. |
+| Lever gestures | `src/ui/lever-input.ts` | Cancellable, disposable pointer handler. Cancellation releases capture and suppresses a trailing click; only the app can request a commit. |
+| Layout and type | `src/ui/theme.css`, `shell.css`, `game.css` | Tokens, the glass HUD and component styles. Geist and Geist Mono, self-hosted. Narrow screens stack the HUD over a shorter world. |
+| Persistence and replay editions | `src/persistence/`, `src/content/registry.ts` | Exact bundle lookup, immutable archive, conflict-aware local save. Never reinterpret an old choice under new text. |
 
-The canvas host is one persistent element moved into the current view, retaining its Pixi instance and resize observer. Main text takes natural height. Canvas has its own bounded row. Buttons wrap within independent cells; side panels scroll internally and never share a coordinate system with the drawing. The semantic DOM remains the real interaction surface, including reduced-motion mode.
+## Rules for changes
 
-The assistant is authored, with constrained suggested questions. There is no free-text box or remote model. Responses have local Thinking/streaming states, a full-reply shortcut and an expandable authored assessment. Only fully delivered replies are recorded as advice exposure; committing while one is pending cancels it. Reduced motion reveals the reply immediately. The panel owns disposable animation state, never gameplay state. The conversation shows recent exchanges from the current run, reconstructed from its pinned narrative bundle. News contains authored events from the run; no fabricated player statistics appear in these panels.
-
-Instrument bars are reported fictional values: GDP index 0–2000, capability index 0–1000, fatalities 0–8 billion. Exact displayed values remain visible even if a bar is saturated. These are neither forecasts nor latent access to the simulation's hidden truth. Their accessible names explain the scale.
-
-For a new panel, add a semantic renderer and input view type, then assign it a layout region. Avoid adding an absolute overlay to `#scene`. Keep deep explanations in the accessible information panel or run record. For a new content edition, register the exact pinned bundle and verify saved-run replay before changing the default.
+- A new panel gets a semantic renderer and an input view type, and is placed by the HUD layout (`positionHud` in `app.ts`), which keeps panels clear of the face mirror and the route tags.
+- Anything shown over the world must have a DOM equivalent reachable by keyboard and screen reader. The world itself is described in words by `WorldRenderer.describe()`.
+- Display preferences (no flashing, drawing quality, volume) live in their own local key. `Preferences` stays exactly four booleans, because it feeds comparison keys.
+- For a new content edition, register the exact pinned bundle and verify saved-run replay before changing the default.

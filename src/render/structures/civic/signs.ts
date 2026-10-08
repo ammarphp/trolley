@@ -7,7 +7,7 @@
  * one texture. Outside a browser (tests, workers) signs are skipped.
  */
 import * as THREE from "three";
-import { createInkCanvas, inkMaterial } from "../../core/ink-material.ts";
+import { createInkCanvas, inkMaterial, textureCache } from "../../core/ink-material.ts";
 import type { Rng } from "../../core/rng.ts";
 
 export type SignKind =
@@ -39,7 +39,7 @@ export interface SignDesign {
   density?: number;
 }
 
-const cache = new Map<string, THREE.CanvasTexture>();
+const cache = textureCache<THREE.CanvasTexture>(40);
 
 function canDraw(): boolean {
   if (typeof document === "undefined") return false;

@@ -219,39 +219,84 @@ function handleCue(kind: string, id: string, data?: Record<string, string | numb
   }
 }
 
+/**
+ * HUD geometry the per-frame layout depends on. Reading it forces layout, so
+ * it is measured only when something has resized, never every frame.
+ */
+const hud = {
+  dirty: true,
+  top: 0,
+  leftW: 0,
+  rightLeft: 0,
+  cardBottom: 120,
+  tagW: { left: 220, right: 220 },
+};
+const narrowQuery = matchMedia("(max-width: 1100px), (max-height: 560px)");
+const hudResize = new ResizeObserver(() => {
+  hud.dirty = true;
+  requestAnimationFrame(() => positionHud(null));
+});
+function watchHud() {
+  hudResize.disconnect();
+  for (const sel of [".hud-top", "#assistant-panel", "#telemetry-panel", ".decision-heading", ".route.left", ".route.right"]) {
+    const node = document.querySelector(sel);
+    if (node) hudResize.observe(node);
+  }
+  hud.dirty = true;
+}
+addEventListener("resize", () => (hud.dirty = true));
+
+function measureHud() {
+  hud.dirty = false;
+  hud.top = $(".hud-top").getBoundingClientRect().height;
+  const leftPanel = $("#assistant-panel");
+  hud.leftW = leftPanel.hidden ? 0 : leftPanel.getBoundingClientRect().width;
+  const rightPanel = $("#telemetry-panel");
+  hud.rightLeft = rightPanel.hidden ? innerWidth : rightPanel.getBoundingClientRect().left;
+  const card = document.querySelector<HTMLElement>(".decision-heading");
+  hud.cardBottom = card ? card.getBoundingClientRect().bottom - hud.top : 120;
+  for (const side of ["left", "right"] as const) hud.tagW[side] = document.querySelector<HTMLElement>(`.route.${side}`)?.offsetWidth || 220;
+}
+
+const written = new WeakMap<HTMLElement, Map<string, string>>();
+function setVar(node: HTMLElement, name: string, value: string) {
+  let vars = written.get(node);
+  if (!vars) written.set(node, (vars = new Map()));
+  if (vars.get(name) === value) return;
+  vars.set(name, value);
+  node.style.setProperty(name, value);
+}
+
 function positionHud(a: SceneAnchors | null) {
   if (a) lastAnchors = a;
   const anchors = lastAnchors;
-  if (!anchors) return;
+  if (!anchors || narrowQuery.matches) return;
+  // Reads first (and only when stale), then writes: no forced layout per frame.
+  if (hud.dirty) measureHud();
   const vw = innerWidth;
-  const narrow = matchMedia("(max-width: 1100px), (max-height: 560px)").matches;
-  if (narrow) return;
-  const top = $(".hud-top").getBoundingClientRect().height;
+  const top = hud.top;
+  const body = document.body;
   // Keep Morrow clear of the side mirror, where the controller's face lives:
   // below it when there is room, otherwise beside it.
   const leftPanel = $("#assistant-panel");
   const mirrorBottom = anchors.mirror.height > 0 ? anchors.mirror.y + anchors.mirror.height - top : 0;
   const mirrorRight = anchors.mirror.width > 0 ? anchors.mirror.x + anchors.mirror.width : 0;
   const below = mirrorBottom > 0 && mirrorBottom < (innerHeight - top) * 0.52;
-  const panelLeft = below ? 16 : Math.max(16, Math.min(mirrorRight + 14, vw * 0.16));
-  const panelTop = below ? Math.max(12, mirrorBottom + 14) : 12;
-  document.body.style.setProperty("--panel-left", `${panelLeft}px`);
-  document.body.style.setProperty("--panel-top", `${panelTop}px`);
-  const leftEdge = leftPanel.hidden ? 16 : panelLeft + leftPanel.getBoundingClientRect().width + 16;
-  const rightPanel = $("#telemetry-panel");
-  const rightEdge = rightPanel.hidden ? vw - 16 : rightPanel.getBoundingClientRect().left - 16;
-  const center = (leftEdge + rightEdge) / 2;
-  document.body.style.setProperty("--center-x", `${center}px`);
-  document.body.style.setProperty("--center-width", `${Math.max(360, rightEdge - leftEdge)}px`);
+  const panelLeft = Math.round(below ? 16 : Math.max(16, Math.min(mirrorRight + 14, vw * 0.16)));
+  const panelTop = Math.round(below ? Math.max(12, mirrorBottom + 14) : 12);
+  setVar(body, "--panel-left", `${panelLeft}px`);
+  setVar(body, "--panel-top", `${panelTop}px`);
+  const leftEdge = leftPanel.hidden ? 16 : panelLeft + hud.leftW + 16;
+  const rightEdge = $("#telemetry-panel").hidden ? vw - 16 : hud.rightLeft - 16;
+  setVar(body, "--center-x", `${Math.round((leftEdge + rightEdge) / 2)}px`);
+  setVar(body, "--center-width", `${Math.round(Math.max(360, rightEdge - leftEdge))}px`);
   // Windshield tags: pinned over each branch, clamped into the clear glass,
   // and kept apart when the fork is still distant.
-  const card = document.querySelector<HTMLElement>(".decision-heading");
-  const minY = (card ? card.getBoundingClientRect().bottom - top : 120) + 70;
+  const minY = hud.cardBottom + 70;
   const placed: Record<"left" | "right", { x: number; y: number; w: number; dx: number; dy: number }> = {} as never;
   for (const side of ["left", "right"] as const) {
-    const tag = document.querySelector<HTMLElement>(`.route.${side}`);
     const point = anchors[side];
-    const w = tag?.offsetWidth || 220;
+    const w = hud.tagW[side];
     const desiredX = point.visible ? point.x : vw * (side === "left" ? 0.38 : 0.62);
     const desiredY = point.visible ? point.y - top - 20 : innerHeight * 0.52;
     placed[side] = { x: desiredX, y: Math.max(minY, Math.min(innerHeight - top - 150, desiredY)), w, dx: desiredX, dy: desiredY };
@@ -268,19 +313,19 @@ function positionHud(a: SceneAnchors | null) {
     const p = placed[side];
     const x = Math.max(leftEdge + p.w / 2, Math.min(rightEdge - p.w / 2, p.x));
     const y = Math.min(p.y, Math.max(minY, placed.left.y, placed.right.y));
-    tag.style.setProperty("--x", `${x}px`);
-    tag.style.setProperty("--y", `${y}px`);
+    setVar(tag, "--x", `${Math.round(x)}px`);
+    setVar(tag, "--y", `${Math.round(y)}px`);
     const dx = p.dx - x;
     const dy = Math.max(18, p.dy + 20 - y);
-    tag.style.setProperty("--lead-y", `${Math.hypot(dx, dy)}px`);
-    tag.style.setProperty("--lead-angle", `${(-Math.atan2(dx, dy) * 180) / Math.PI}deg`);
+    setVar(tag, "--lead-y", `${Math.round(Math.hypot(dx, dy))}px`);
+    setVar(tag, "--lead-angle", `${((-Math.atan2(dx, dy) * 180) / Math.PI).toFixed(1)}deg`);
   }
   const lever = document.querySelector<HTMLElement>(".lever-control");
   if (lever) {
     const r = anchors.lever;
     const cx = r.width > 0 ? r.x + r.width / 2 : vw * 0.72;
     const x = Math.max(leftEdge + 110, Math.min(rightEdge - 110, cx));
-    lever.style.setProperty("--lever-x", `${x - 110}px`);
+    setVar(lever, "--lever-x", `${Math.round(x - 110)}px`);
   }
 }
 
@@ -558,6 +603,7 @@ function renderDecision(newClock = true) {
   panels.drawPanels(panelContext());
   if (recommended && view.cabin.authority !== "human") preselect(recommended);
   refreshArming();
+  watchHud();
   requestAnimationFrame(() => positionHud(null));
   const reveal = () => {
     scene.setInteractive(true);

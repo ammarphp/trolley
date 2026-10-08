@@ -30,6 +30,8 @@ import { Scatter } from "./world/scatter.ts";
 import { buildTableau, disposeTableau, occupantsDescription, FIRST_STAKE, type Tableau } from "./world/staging.ts";
 import { buildTunnel, type Tunnel } from "./world/tunnel.ts";
 import { Lineside } from "./world/lineside.ts";
+import type { TrackLine } from "./world/track/path.ts";
+import { buildRiverCrossing, type RiverCrossing } from "./world/river-crossing.ts";
 import { createRng } from "./core/rng.ts";
 import { setSkyLook } from "./world/terrain/glsl.ts";
 
@@ -52,6 +54,8 @@ export interface WorldRendererOptions {
 }
 
 const CAB_FLOOR = 1.1;
+/** Metres of an untaken branch that stay drawn once its fork is behind. */
+const KEEP_ABANDONED = 96;
 const LIT_REF = (2.2 * 0.92 + 0.9) / Math.PI;
 
 function lerpEnv(a: EnvironmentTarget, b: EnvironmentTarget, k: number): void {
@@ -88,6 +92,9 @@ export class InkWorldRenderer implements WorldRenderer {
   private tunnel: Tunnel | null = null;
   private tunnelExclusion: (() => void) | null = null;
   private lastScreenToe = Number.NaN;
+  private crossings: Array<{ crossing: RiverCrossing; release: () => void }> = [];
+  private decisionsSinceRiver = 1;
+  private retracting = new WeakMap<TrackLine, number>();
   private clearWaiters: Array<() => void> = [];
   private selection: THREE.Mesh | null = null;
   private view: StageView | null = null;
@@ -139,6 +146,8 @@ export class InkWorldRenderer implements WorldRenderer {
     const q = this.settingsState.quality;
     this.pipeline = new InkPipeline({ canvas, maxPixelRatio: q === "high" ? 2 : q === "medium" ? 1.5 : 1, shadows: q !== "low", preserveDrawingBuffer: options.preserveDrawingBuffer ?? false });
     this.manual = options.manual ?? false;
+    // Opt-in inspection hook for profiling (?debug in the URL); nothing reads it.
+    if (typeof location !== "undefined" && /[?&]debug\b/.test(location.search)) (globalThis as { __inkWorld?: unknown }).__inkWorld = this;
     this.scene.add(this.worldRoot);
     this.scene.add(this.cabRoot);
     this.cabRoot.add(this.camera);
@@ -178,7 +187,8 @@ export class InkWorldRenderer implements WorldRenderer {
     this.worldRoot.add(this.scatter.group);
     this.lineside = new Lineside(this.assets, (x, z) => this.heightAt(x, z), (line, s) => {
       const t = this.tunnel;
-      return !!t && line === t.line && s > t.start - 58 && s < t.start + t.length + 58;
+      if (t && line === t.line && s > t.start - 58 && s < t.start + t.length + 58) return true;
+      return this.crossings.some(({ crossing: c }) => c.line === line && Math.abs(s - c.s) < c.half + 10);
     });
     this.worldRoot.add(this.lineside.group);
 
@@ -448,6 +458,33 @@ export class InkWorldRenderer implements WorldRenderer {
       line.extendTo(minToe + 10);
       line.drawTo = Math.max(line.drawTo, Math.min(minToe, this.journey.rig.s + 260));
     }
+    // Now and then the line crosses a river on a bridge before the fork. The
+    // choice is seeded by the decision, so a replay draws the same country.
+    this.decisionsSinceRiver++;
+    if (!this.settingsState.reducedMotion && this.decisionsSinceRiver >= 3) {
+      const line = this.journey.network.current;
+      const tunnelEnd = tunnelCue && this.tunnel?.line === line ? this.tunnel.start + this.tunnel.length : null;
+      const at = tunnelEnd !== null ? tunnelEnd + 70 : this.journey.rig.s + 125;
+      const roll = createRng(`${view.seed}:${view.decisionId}:river`).next();
+      if (roll < 0.4) {
+        const drawn = this.drawnNear(line, at);
+        const crossing = buildRiverCrossing(this.worldRoot, drawn, line, at, this.assets, this.heightAt, view.seed, this.env);
+        if (crossing) {
+          this.decisionsSinceRiver = 0;
+          const release = this.scatter.exclude((x, z) => crossing.covers(x, z));
+          this.crossings.push({ crossing, release });
+          this.lineside.forget(line, at - crossing.half - 10, at + crossing.half + 10);
+          for (const old of this.oldTableaux) for (const child of old.group.children) if (crossing.covers(child.position.x, child.position.z)) child.visible = false;
+          minToe = Math.max(minToe ?? 0, at + crossing.half + 45);
+          line.extendTo(minToe + 10);
+        }
+      }
+    }
+    while (this.crossings.length > 3) {
+      const old = this.crossings.shift()!;
+      old.release();
+      old.crossing.dispose();
+    }
     const stakesPlaceholder: Stake[] = [];
     const j = this.journey.prepare(view.decisionId!, stakesPlaceholder, { loop: view.rail?.loopSide ?? null, minToe });
     // The fork's branches now exist: lay them out and clear their corridor.
@@ -464,6 +501,24 @@ export class InkWorldRenderer implements WorldRenderer {
     this.armed = null;
     this.leverTarget = 0;
     this.selectionVisible(null);
+  }
+
+  /**
+   * Whether a point lies within r of track that is (or will stay) drawn: the
+   * line ahead up to the crossing's far side, other lines up to what they keep.
+   */
+  private drawnNear(crossingLine: TrackLine, crossingS: number): (x: number, z: number, r: number) => boolean {
+    const samples: Array<[number, number]> = [];
+    const p = { x: 0, z: 0, heading: 0 };
+    for (const line of this.journey.network.lines) {
+      const drawn = Math.min(line.drawTo, line.drawLimit);
+      const limit = line === crossingLine ? Math.min(line.length, crossingS + 90) : line.abandoned ? Math.min(drawn, KEEP_ABANDONED) : drawn;
+      for (let s = 0; s <= limit; s += 6) {
+        line.pose(s, p);
+        samples.push([p.x, p.z]);
+      }
+    }
+    return (x, z, r) => samples.some(([sx, sz]) => (sx - x) ** 2 + (sz - z) ** 2 < r * r);
   }
 
   private selectionVisible(side: "left" | "right" | null): void {
@@ -529,7 +584,8 @@ export class InkWorldRenderer implements WorldRenderer {
         actor.object.getWorldPosition(p);
         p.y += 1.1;
         const at = this.cabin.uvAt(p, this.camera);
-        if (at) uv = { u: Math.min(0.85, Math.max(0.15, at.u)), v: Math.min(0.8, Math.max(0.2, at.v)) };
+        // Thrown up and to the struck side: the mark should not sit over the next fork.
+        if (at) uv = { u: Math.min(0.86, Math.max(0.14, at.u + (side === "left" ? -0.15 : 0.15))), v: Math.min(0.84, Math.max(0.3, at.v + 0.14)) };
       }
       this.cabin.impact({ ...uv, severity: living ? rng.range(0.5, 0.7) : 0.25, blood });
       this.audio?.trigger("glass-crack", { intensity: living ? 0.8 : 0.4 });
@@ -733,17 +789,36 @@ export class InkWorldRenderer implements WorldRenderer {
     }
     const rigWorld = new THREE.Vector3(rig.pose.x, 0, rig.pose.z);
     this.track.update(this.journey.network, rig.pose.x, rig.pose.z);
+    // The road not taken: once a fork is behind, the pen lifts its far reaches
+    // a stretch at a time, keeping only what stands by the junction.
+    const open = this.journey.junction && !this.journey.junction.chosen ? this.journey.junction : null;
+    for (const line of this.journey.network.lines) {
+      if (!line.abandoned || line === rig.line || line === open?.left || line === open?.right || line.drawTo <= KEEP_ABANDONED) continue;
+      const clock = (this.retracting.get(line) ?? 0) + dt;
+      if (clock < 0.15) {
+        this.retracting.set(line, clock);
+        continue;
+      }
+      this.retracting.set(line, 0);
+      line.drawTo = Math.max(KEEP_ABANDONED, (Math.ceil(line.drawTo / 12) - 1) * 12);
+    }
     this.lineside.update(this.journey.network, this.journey.junction, rig.line, rig.s, rig.pose.x, rig.pose.z);
+    for (const { crossing } of this.crossings) crossing.tick(dt, env, rigWorld, this.camera);
     this.scatter.night = env.timeOfDay >= 0.82 || env.timeOfDay <= 0.12;
     this.scatter.update(this.journey.network, rigWorld, env, dt, this.clock);
+    this.scatter.cullFor(this.camera, dt);
     if (this.journey.network.lines.length > 12) this.journey.network.prune(rig.pose.x, rig.pose.z, 1100);
-    for (const old of this.oldTableaux.splice(0)) {
-      const ahead = old.junction.chosen ? old.junction.chosen === "left" ? old.junction.left : old.junction.right : null;
-      const far = ahead ? Math.hypot(ahead.pose(40).x - rig.pose.x, ahead.pose(40).z - rig.pose.z) > 260 : true;
-      if (far) disposeTableau(old);
-      else this.oldTableaux.push(old);
-      if (this.oldTableaux.length > 3) disposeTableau(this.oldTableaux.shift()!);
-      break;
+    // Tableaux behind the cab go once they are well out of sight (at most three linger).
+    if (this.oldTableaux.length) {
+      const keep: Tableau[] = [];
+      for (const old of this.oldTableaux) {
+        const ahead = old.junction.chosen ? (old.junction.chosen === "left" ? old.junction.left : old.junction.right) : null;
+        const far = ahead ? Math.hypot(ahead.pose(40).x - rig.pose.x, ahead.pose(40).z - rig.pose.z) > 260 : true;
+        if (far) disposeTableau(old);
+        else keep.push(old);
+      }
+      while (keep.length > 3) disposeTableau(keep.shift()!);
+      this.oldTableaux = keep;
     }
     for (const t of [this.tableau, ...this.oldTableaux]) for (const o of t?.tickers ?? []) (o.userData.tick as (dt: number, t: number) => void)(dt, this.clock);
 

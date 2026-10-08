@@ -23,6 +23,12 @@ export interface Ticking {
   tick?(dt: number, t: number): void;
 }
 
+export interface RiverPiece {
+  object: THREE.Mesh;
+  update(dt: number, env: EnvironmentTarget, rig: THREE.Vector3, camera: THREE.Camera): void;
+  dispose(): void;
+}
+
 export interface ScatterPrefab {
   geometry: THREE.BufferGeometry;
   material: InkMaterialOptions;
@@ -84,6 +90,10 @@ export interface AssetProvider {
   prefabVariants(kind: string): number;
   /** Wire attachment points (prefab-local) for a telegraph-pole variant of the "pole" family. */
   poleAttachments?(variant: number): THREE.Vector3[];
+  /** A river ribbon along a world-space polyline (absolute metres). */
+  river?(options: { points: Array<[number, number]>; width: number; bank?: number }): RiverPiece | null;
+  /** A railway bridge; `userData.bridge` carries its span, length and deck height. Its line runs along local Z. */
+  bridge?(spec: { seed: string; env: Partial<EnvironmentTarget>; variant: number }): THREE.Object3D;
   herd?(species: AnimalId, spec: { count: number; seed: string; radius: number }): THREE.Object3D;
   flock?(kind: "starlings" | "crows" | "geese", spec: { count: number; seed: string }): { object: THREE.Object3D; update(dt: number, t: number, center: THREE.Vector3): void; setViewer?(v: THREE.Vector3 | null): void };
   droneSwarm?(spec: { count: number; seed: string }): THREE.Object3D;

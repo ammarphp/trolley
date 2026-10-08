@@ -12,7 +12,7 @@ import { propAssets } from "./props/index.ts";
 import { buildIndustrial, isIndustrialId } from "./structures/industrial/index.ts";
 import { buildCivic, isCivicId } from "./structures/civic/index.ts";
 import { buildPrefab, NATURE_CATALOGUE, LEAF_LEVELS, createLeafFall, getTelegraphAttachments, isNaturePrefabId, type NaturePrefabId } from "./world/nature/index.ts";
-import { createGround } from "./world/terrain/index.ts";
+import { createGround, createRiver } from "./world/terrain/index.ts";
 import { createSky, createWeather } from "./world/sky/index.ts";
 import { createCabin } from "./cabin/index.ts";
 import { createPortrait } from "./portrait/index.ts";
@@ -118,6 +118,8 @@ export function createRealAssets(quality: "low" | "medium" | "high"): AssetProvi
     prefab,
     prefabVariants: (kind) => familyVariants(kind).length,
     poleAttachments: (variant) => getTelegraphAttachments(variant),
+    river: (o) => createRiver({ points: o.points, width: o.width, ...(o.bank !== undefined ? { bank: o.bank } : {}) }),
+    bridge: (spec) => buildCivic("bridge", { seed: spec.seed, env: spec.env, variant: spec.variant }),
     sky: () => createSky({ quality }),
     ground: () => createGround({ quality }),
     weather: () => createWeather({ quality }),

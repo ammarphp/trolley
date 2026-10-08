@@ -8,7 +8,7 @@
  * fall back to plain geometry.
  */
 import * as THREE from "three";
-import { createInkCanvas, inkMaterial } from "../core/ink-material.ts";
+import { createInkCanvas, inkMaterial, textureCache } from "../core/ink-material.ts";
 import { createRng, type Rng } from "../core/rng.ts";
 import { OBJECT_ID } from "./common.ts";
 
@@ -34,7 +34,7 @@ export function canDraw(): boolean {
   return drawable;
 }
 
-const cache = new Map<string, THREE.CanvasTexture>();
+const cache = textureCache<THREE.CanvasTexture>(48);
 
 export type Painter = (g: CanvasRenderingContext2D, w: number, h: number) => void;
 

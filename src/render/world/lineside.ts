@@ -102,7 +102,7 @@ export class Lineside {
     const live = new Set(network.lines);
     for (const [line, r] of this.routes) {
       const keep = r.poles.filter((p) => {
-        const gone = !live.has(line) || Math.hypot(p.x - rigX, p.z - rigZ) > FORGET || (line === rigLine && p.s < rigS - BEHIND - SPACING);
+        const gone = !live.has(line) || Math.hypot(p.x - rigX, p.z - rigZ) > FORGET || (line === rigLine && p.s < rigS - BEHIND - SPACING) || (line !== rigLine && p.s > line.drawTo + 4);
         if (gone) this.remove(p);
         return !gone;
       });

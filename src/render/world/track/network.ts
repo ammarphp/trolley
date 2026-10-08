@@ -61,7 +61,10 @@ export class TrackNetwork {
     const right = this.addLine(at, branchProgramme(1, theta, rng.fork("r")), meander(rng.fork("rm"), restless));
     left.drawTo = 0;
     right.drawTo = 0;
+    // The stem ends at the toe: anything already inked beyond it (a branch
+    // drawn far out while it was being chosen) is lifted.
     stem.drawLimit = toe;
+    stem.drawTo = Math.min(stem.drawTo, toe);
     const junction: Junction = { id: this.history.length + 1, key, stem, toe, left, right, chosen: null, loop: options.loop ?? null, createdAt: 0 };
     this.junction = junction;
     this.history.push(junction);

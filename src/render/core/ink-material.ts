@@ -354,6 +354,7 @@ export function createInkMaterial(options: InkMaterialOptions = {}): THREE.MeshL
     uInkSway: { value: options.sway ?? 0 },
   };
   material.userData.ink = uniforms;
+  if (options.map) material.userData.inkMap = options.map;
   if (options.decal) {
     material.depthWrite = false;
     material.userData.inkDecal = true;
@@ -391,11 +392,61 @@ export function createInkMaterial(options: InkMaterialOptions = {}): THREE.MeshL
 }
 
 /**
+ * Release what an object put on the GPU: geometry (unless shared), materials
+ * and their drawn maps. A cached map that is drawn again is re-uploaded.
+ */
+export function releaseObject(root: THREE.Object3D): void {
+  root.traverse((o) => {
+    const m = o as THREE.Mesh;
+    if (!m.isMesh) return;
+    if (m.geometry && !m.userData.sharedGeometry) m.geometry.dispose();
+    // Each animated figure carries a bone-matrix texture; it would outlive the figure.
+    (m as THREE.SkinnedMesh).skeleton?.dispose();
+    for (const mat of Array.isArray(m.material) ? m.material : [m.material]) {
+      const map = mat?.userData?.inkMap as THREE.Texture | undefined;
+      if (map) {
+        map.dispose();
+        mat.dispose();
+      }
+    }
+  });
+}
+
+/**
+ * A bounded cache of drawn textures (signs, documents, labels). The least
+ * recently used texture is released from the GPU when the cache is full; a
+ * texture still in use is simply uploaded again from its canvas.
+ */
+export function textureCache<T extends THREE.Texture>(limit: number): { get(key: string): T | undefined; set(key: string, texture: T): void } {
+  const map = new Map<string, T>();
+  return {
+    get(key) {
+      const hit = map.get(key);
+      if (hit) {
+        map.delete(key);
+        map.set(key, hit);
+      }
+      return hit;
+    },
+    set(key, texture) {
+      map.set(key, texture);
+      while (map.size > limit) {
+        const [oldest, old] = map.entries().next().value as [string, T];
+        map.delete(oldest);
+        old.dispose();
+      }
+    },
+  };
+}
+
+/**
  * Shared material lookup for the common case: many meshes with identical
- * appearance should share one material so they batch well.
+ * appearance should share one material so they batch well. Materials with a
+ * drawn map are not kept, so a retired sign's canvas can be collected.
  */
 export function inkMaterial(options: InkMaterialOptions = {}): THREE.MeshLambertMaterial {
-  const key = JSON.stringify({ ...options, alphaMap: options.alphaMap ? options.alphaMap.uuid : null, map: options.map ? options.map.uuid : null });
+  if (options.map) return createInkMaterial(options);
+  const key = JSON.stringify({ ...options, alphaMap: options.alphaMap ? options.alphaMap.uuid : null, map: null });
   let m = cache.get(key);
   if (!m) {
     m = createInkMaterial(options);
@@ -482,5 +533,11 @@ export function createInkCanvas(width: number, height: number): {
   texture.anisotropy = 4;
   texture.generateMipmaps = true;
   texture.minFilter = THREE.LinearMipmapLinearFilter;
+  // Opt-in allocation tracing for memory profiling; absent in normal play.
+  const registry = (globalThis as { __inkTextureRegistry?: Map<THREE.Texture, string> }).__inkTextureRegistry;
+  if (registry) {
+    registry.set(texture, (new Error().stack ?? "").split("\n").slice(2, 5).map((l) => l.trim()).join(" < "));
+    texture.addEventListener("dispose", () => registry.delete(texture));
+  }
   return { canvas, ctx, texture };
 }

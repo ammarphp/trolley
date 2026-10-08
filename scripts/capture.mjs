@@ -49,6 +49,9 @@ try {
       await page.waitForTimeout(settle);
       await page.screenshot({ path: `${out}/${String(n).padStart(2, "0")}-stage${stage}.png` });
     }
+    // Move off any glossary term so its card closes before reaching for a route.
+    await page.mouse.move(4, 4);
+    await page.waitForTimeout(450);
     const routes = page.locator(".route");
     const labels = await routes.allInnerTexts();
     let pick = 0;

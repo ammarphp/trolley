@@ -1,4 +1,4 @@
-# Ink asset kit: conventions for world builders
+# Ink asset kit: conventions for the asset library
 
 The new renderer draws a real-time 3D world as technical pen work: contour lines from depth/normal discontinuities, cross-hatching driven by light and shadow, solid ink fills, and a few pigments. Everything on screen is procedural TypeScript geometry. No downloaded models, textures or fonts inside the 3D scene.
 
@@ -74,7 +74,7 @@ The ids come from `src/render/api.ts`. Every id in the relevant union must be bu
 
 ## Verify visually, every time
 
-Each builder directory has one or more `*.lab.ts` files exporting `scenes: LabScene[]` (see `src/render/lab/types.ts`). Provide:
+Each asset directory has one or more `*.lab.ts` files exporting `scenes: LabScene[]` (see `src/render/lab/types.ts`). Provide:
 
 1. A **lineup** sheet showing every id and variant side by side with captions, viewed from about 25° above eye level.
 2. An **in-situ** view from the cab's viewpoint: camera at y = 2.5, looking down the track (−Z), 55° fov, with your assets placed at realistic distances (15–150 m) on either side of a straight track. This is how the player sees them.
@@ -85,7 +85,7 @@ Render a scene through the real pipeline on the GPU:
 node scripts/lab-shot.mjs <scene-name> --file src/render/<dir>/<file>.lab.ts --out <scratch>/shot.png --w 1280 --h 720 --t 1
 ```
 
-Then read the PNG and critique it honestly against the quality bar above. Iterate on proportions, silhouette, detail placement and tone until it looks like a professional illustration. `pnpm typecheck` must pass for your files.
+Judge the PNG against the quality bar above, and iterate on proportions, silhouette, detail placement and tone until it reads as a professional illustration. `pnpm typecheck` must pass.
 
 ## Boundaries
 
