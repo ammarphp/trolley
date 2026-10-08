@@ -487,14 +487,19 @@ export class InkWorldRenderer implements WorldRenderer {
     }
     const stakesPlaceholder: Stake[] = [];
     const j = this.journey.prepare(view.decisionId!, stakesPlaceholder, { loop: view.rail?.loopSide ?? null, minToe });
-    // The fork's branches now exist: lay them out and clear their corridor.
-    j.left.extendTo(420);
-    j.right.extendTo(420);
+    // The fork's branches now exist: lay them out well ahead (their later
+    // course is fixed by the seed) and clear their corridor.
+    j.left.extendTo(700);
+    j.right.extendTo(700);
     this.journey.network.index(j.left);
     this.journey.network.index(j.right);
     const toe = j.stem.pose(j.toe);
     this.scatter.cullNear(this.journey.network, toe.x, toe.z, 520);
-    const tableau = buildTableau(j, view.staging!, this.assets, view.seed, view.rail ? { rail: view.rail } : {});
+    const network = this.journey.network;
+    const tableau = buildTableau(j, view.staging!, this.assets, view.seed, {
+      ...(view.rail ? { rail: view.rail } : {}),
+      clearOfTrack: (x, z, r) => network.distanceToTrack(x, z, r + 2) > r,
+    });
     this.worldRoot.add(tableau.group);
     this.tableau = tableau;
     this.journey.prepare(view.decisionId!, tableau.stakes);

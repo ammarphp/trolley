@@ -47,7 +47,36 @@ function place(object: THREE.Object3D, line: TrackLine, s: number, lateral: numb
 
 const CROWD_CAP = 28;
 
-export function buildTableau(junction: Junction, staging: SideStaging, assets: AssetProvider, seed: string, options: { rail?: { loopSide?: Side; brakeOnLoop?: boolean } } = {}): Tableau {
+/** True when a footprint of radius r at (x, z) stands clear of every drawn line. */
+export type ClearOfTrack = (x: number, z: number, r: number) => boolean;
+
+/** Footprint radius of a placed building (metres), from its declared footprint. */
+function footprintRadius(o: THREE.Object3D): number {
+  const f = (o.userData.footprint as { width?: number; depth?: number } | undefined) ?? {};
+  return Math.hypot(f.width ?? 20, f.depth ?? 20) / 2;
+}
+
+/**
+ * Place a large object beside a line, stepping it farther out until it stands
+ * clear of all track (the line continues past it and may bend toward it).
+ * Returns false (and places nothing) when no clear spot is found.
+ */
+function placeClear(o: THREE.Object3D, line: TrackLine, s: number, lateral: number, facing: "track" | "along", rng: Rng, clear: ClearOfTrack | undefined): boolean {
+  const r = footprintRadius(o) + 4;
+  for (const k of [1, 1.35, 1.8, 2.4]) {
+    place(o, line, s, lateral * k, 0, facing, rng);
+    if (!clear || clear(o.position.x, o.position.z, r)) return true;
+  }
+  return false;
+}
+
+export function buildTableau(
+  junction: Junction,
+  staging: SideStaging,
+  assets: AssetProvider,
+  seed: string,
+  options: { rail?: { loopSide?: Side; brakeOnLoop?: boolean }; clearOfTrack?: ClearOfTrack } = {},
+): Tableau {
   const group = new THREE.Group();
   group.name = `tableau:${junction.key}`;
   const stakes: Stake[] = [];
@@ -89,8 +118,7 @@ export function buildTableau(junction: Junction, staging: SideStaging, assets: A
       // A bridge lies along the line (it is long, and would otherwise span it).
       const bridge = !!dest.userData.bridge;
       const clearance = bridge ? Math.max(24, (footprint.width ?? 10) / 2 + 16) : Math.max(18, ((footprint.width ?? 20) + (footprint.depth ?? 20)) / 3);
-      place(dest, line, rng.range(130, 175), outward * clearance, 0, bridge ? "along" : "track", rng);
-      add(dest);
+      if (placeClear(dest, line, rng.range(130, 175), outward * clearance, bridge ? "along" : "track", rng, options.clearOfTrack)) add(dest);
     }
   }
   for (const [i, id] of staging.landmarks.entries()) {
@@ -98,8 +126,8 @@ export function buildTableau(junction: Junction, staging: SideStaging, assets: A
     const lm = assets.landmark(id, { seed: `${seed}:${junction.key}:lm${i}`, env: {} });
     const side = i % 2 === 0 ? junction.left : junction.right;
     const bridge = !!lm.userData.bridge;
-    place(lm, side, rng.range(60, 110), (i % 2 === 0 ? -1 : 1) * rng.range(bridge ? 40 : 30, 55), 0, bridge ? "along" : "track", rng);
-    add(lm);
+    const lateral = (i % 2 === 0 ? -1 : 1) * Math.max(rng.range(bridge ? 40 : 30, 55), footprintRadius(lm) + 12);
+    if (placeClear(lm, side, rng.range(60, 110), lateral, bridge ? "along" : "track", rng, options.clearOfTrack)) add(lm);
   }
   // The junction signal stands beyond the toe, well out to the right and
   // turned toward the cab, so it reads beside the right route tag, not under it.
