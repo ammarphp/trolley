@@ -288,7 +288,7 @@ export function buildBarbedFence(variant: number): THREE.BufferGeometry {
   } else {
     const lean = kind === "three strand, leaning" ? new THREE.Vector2(rng.range(-0.12, 0.12), rng.range(-0.08, 0.08)) : new THREE.Vector2(rng.range(-0.03, 0.03), rng.range(-0.03, 0.03));
     roundPost(k, x0, postTop, 0.065, lean, "light");
-    // A stay post at alternate segments is left to the integrator's rhythm.
+    // A stay post at alternate segments is left to the scatter's rhythm.
   }
   heights.forEach((y, i) => {
     const zOff = kind === "concrete, cranked" && y > postTop ? -(y - postTop) * 0.68 : 0.04;

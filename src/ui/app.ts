@@ -61,6 +61,8 @@ let manifest = CAMPAIGN_MANIFEST,
 let currentView: StageView | null = null;
 let lastAnchors: SceneAnchors | null = null;
 let shownInterstitials = new Set<string>();
+/** Set while a stage tunnel holds the next decision back; skip() reveals it. */
+let transit: { skip: () => void } | null = null;
 
 // ------------------------------------------------------------ utilities
 
@@ -210,7 +212,9 @@ function handleCue(kind: string, id: string, data?: Record<string, string | numb
     box.style.animation = "none";
     void box.offsetWidth;
     box.style.animation = "";
-    setTimeout(() => (box.hidden = true), 4300);
+    setTimeout(() => {
+      if (!transit) box.hidden = true;
+    }, 4300);
     announce(`You have been appointed ${role}.`);
   }
 }
@@ -239,22 +243,35 @@ function positionHud(a: SceneAnchors | null) {
   const center = (leftEdge + rightEdge) / 2;
   document.body.style.setProperty("--center-x", `${center}px`);
   document.body.style.setProperty("--center-width", `${Math.max(360, rightEdge - leftEdge)}px`);
-  // Windshield tags: pinned over each branch, clamped into the clear glass.
+  // Windshield tags: pinned over each branch, clamped into the clear glass,
+  // and kept apart when the fork is still distant.
+  const card = document.querySelector<HTMLElement>(".decision-heading");
+  const minY = (card ? card.getBoundingClientRect().bottom - top : 120) + 70;
+  const placed: Record<"left" | "right", { x: number; y: number; w: number; dx: number; dy: number }> = {} as never;
+  for (const side of ["left", "right"] as const) {
+    const tag = document.querySelector<HTMLElement>(`.route.${side}`);
+    const point = anchors[side];
+    const w = tag?.offsetWidth || 220;
+    const desiredX = point.visible ? point.x : vw * (side === "left" ? 0.38 : 0.62);
+    const desiredY = point.visible ? point.y - top - 20 : innerHeight * 0.52;
+    placed[side] = { x: desiredX, y: Math.max(minY, Math.min(innerHeight - top - 150, desiredY)), w, dx: desiredX, dy: desiredY };
+  }
+  const gap = (placed.left.w + placed.right.w) / 2 + 28;
+  if (placed.right.x - placed.left.x < gap) {
+    const mid = (placed.left.x + placed.right.x) / 2;
+    placed.left.x = mid - gap / 2;
+    placed.right.x = mid + gap / 2;
+  }
   for (const side of ["left", "right"] as const) {
     const tag = document.querySelector<HTMLElement>(`.route.${side}`);
     if (!tag) continue;
-    const point = anchors[side];
-    const w = tag.offsetWidth || 220;
-    const card = document.querySelector<HTMLElement>(".decision-heading");
-    const minY = (card ? card.getBoundingClientRect().bottom - top : 120) + 70;
-    const desiredX = point.visible ? point.x : vw * (side === "left" ? 0.38 : 0.62);
-    const desiredY = point.visible ? point.y - top - 20 : innerHeight * 0.52;
-    const x = Math.max(leftEdge + w / 2, Math.min(rightEdge - w / 2, desiredX));
-    const y = Math.max(minY, Math.min(innerHeight - top - 150, desiredY));
+    const p = placed[side];
+    const x = Math.max(leftEdge + p.w / 2, Math.min(rightEdge - p.w / 2, p.x));
+    const y = Math.min(p.y, Math.max(minY, placed.left.y, placed.right.y));
     tag.style.setProperty("--x", `${x}px`);
     tag.style.setProperty("--y", `${y}px`);
-    const dx = desiredX - x;
-    const dy = Math.max(18, desiredY + 20 - y);
+    const dx = p.dx - x;
+    const dy = Math.max(18, p.dy + 20 - y);
     tag.style.setProperty("--lead-y", `${Math.hypot(dx, dy)}px`);
     tag.style.setProperty("--lead-angle", `${(-Math.atan2(dx, dy) * 180) / Math.PI}deg`);
   }
@@ -530,24 +547,61 @@ function renderDecision(newClock = true) {
   control.append(help);
   app.append(control);
   leverGesture = wireDrag(grip, {
-    busy: () => busy || afterChoice || saveConflict,
+    busy: () => busy || afterChoice || saveConflict || transit !== null,
     latched: () => latched,
     preview: (side) => scene.setLever(side === "left" ? -1 : 1, { armed: side }),
     commit: (side) => {
       void choose(side);
     },
   });
-  scene.setInteractive(true);
   scene.setLever(0, { armed: null });
   panels.drawPanels(panelContext());
   if (recommended && view.cabin.authority !== "human") preselect(recommended);
   refreshArming();
   requestAnimationFrame(() => positionHud(null));
-  if (newClock) beginClock();
-  heading.focus({ preventScroll: true });
-  announce(
-    `Decision ${p.ordinal}. ${p.node.prompt} ${armed ? `Morrow has preselected the ${armed} route. Pull the lever to confirm, or choose again.` : "No route selected."}${prefs.descriptions ? " " + scene.describe() : ""}`,
-  );
+  const reveal = () => {
+    scene.setInteractive(true);
+    if (newClock) beginClock();
+    heading.focus({ preventScroll: true });
+    announce(
+      `Decision ${p.ordinal}. ${p.node.prompt} ${armed ? `Morrow has preselected the ${armed} route. Pull the lever to confirm, or choose again.` : "No route selected."}${prefs.descriptions ? " " + scene.describe() : ""}`,
+    );
+  };
+  if (newClock && holdForTunnel(view, p.ordinal, reveal)) return;
+  reveal();
+}
+
+/**
+ * A stage change runs through a tunnel. The next dilemma waits until the cab
+ * is out of the far portal (or the player skips), so it is read in the world
+ * it belongs to. The active clock starts only when the decision is revealed.
+ */
+function holdForTunnel(view: StageView, ordinal: number, reveal: () => void): boolean {
+  if (prefs.reducedMotion || !scene.whenClear || !view.cues.some((c) => c.kind === "tunnel")) return false;
+  scene.setInteractive(false);
+  document.body.classList.add("in-transit");
+  let done = false;
+  const finish = () => {
+    if (done) return;
+    done = true;
+    transit = null;
+    document.body.classList.remove("in-transit");
+    const box = $("#interstitial");
+    if (!box.hidden) {
+      box.classList.add("leaving");
+      setTimeout(() => {
+        box.hidden = true;
+        box.classList.remove("leaving");
+      }, 600);
+    }
+    if (run?.campaign.prepared?.ordinal === ordinal && currentPhase() === "decision") {
+      reveal();
+      requestAnimationFrame(() => positionHud(null));
+    }
+  };
+  transit = { skip: finish };
+  void Promise.race([scene.whenClear(), new Promise((resolve) => setTimeout(resolve, 14000))]).then(finish);
+  return true;
 }
 
 /**
@@ -570,7 +624,7 @@ function jamCue(): { forced: Side } | null {
 }
 
 function arm(side: Side) {
-  if (saveConflict || busy || paused || afterChoice || !run?.campaign.prepared) return;
+  if (transit || saveConflict || busy || paused || afterChoice || !run?.campaign.prepared) return;
   const jam = jamCue();
   armed = side;
   scene.setLever(side === "left" ? -1 : 1, { armed: side });
@@ -611,7 +665,7 @@ function refreshArming() {
 }
 
 async function choose(side: Side) {
-  if (saveConflict || busy || paused || afterChoice || drawer.open || !run?.campaign.prepared) return;
+  if (transit || saveConflict || busy || paused || afterChoice || drawer.open || !run?.campaign.prepared) return;
   let committed = false;
   const prepared = run.campaign.prepared,
     option = optionFor(side)!;
@@ -982,6 +1036,12 @@ function renderDebrief() {
 // ----------------------------------------------------------------- input
 
 document.addEventListener("keydown", (e) => {
+  if (transit && !drawer.open && !paused && ["Enter", " ", "Escape", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+    if ((e.target as HTMLElement | null)?.closest("button,a,input,select,textarea,summary")) return;
+    e.preventDefault();
+    transit.skip();
+    return;
+  }
   if (drawer.open || paused || busy || !run?.campaign.prepared || afterChoice) return;
   if (e.key === "Escape") {
     cancelGesture();
@@ -997,6 +1057,8 @@ document.addEventListener("keydown", (e) => {
     $("#lever").focus({ preventScroll: true });
   }
 });
+// A click on the world during a tunnel skips ahead to the decision.
+host.addEventListener("pointerdown", () => transit?.skip());
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
     panels.finishMorrow($("#assistant-panel"));
@@ -1026,7 +1088,7 @@ async function init() {
   scene = world.renderer;
   scene.onAnchors((a) => positionHud(a));
   scene.onLever((input) => {
-    if (!run?.campaign.prepared || busy || afterChoice || drawer.open) return;
+    if (transit || !run?.campaign.prepared || busy || afterChoice || drawer.open) return;
     if (input.type === "drag" || input.type === "grab") {
       const side: Side | null = input.value < -0.35 ? "left" : input.value > 0.35 ? "right" : null;
       scene.setLever(input.value, { armed: side });

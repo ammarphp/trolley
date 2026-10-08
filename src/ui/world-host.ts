@@ -27,10 +27,12 @@ export function detectQuality(): RendererSettings["quality"] {
 
 export async function createWorldHost(host: HTMLElement, settings: RendererSettings, audio: AudioLike | null): Promise<WorldHost> {
   let renderer: WorldRenderer;
+  // Canvas signage in the world is lettered in Geist; make sure it has loaded.
+  await Promise.race([document.fonts?.load?.('600 32px "Geist"').catch(() => null), new Promise((r) => setTimeout(r, 1500))]);
   if (supportsInk()) {
     try {
-      const [{ InkWorldRenderer }, { realAssets }] = await Promise.all([import("../render/world-renderer.ts"), import("../render/assets-real.ts")]);
-      renderer = new InkWorldRenderer({ host, assets: realAssets, settings, audio });
+      const [{ InkWorldRenderer }, { createRealAssets }] = await Promise.all([import("../render/world-renderer.ts"), import("../render/assets-real.ts")]);
+      renderer = new InkWorldRenderer({ host, assets: createRealAssets(settings.quality), settings, audio });
     } catch (error) {
       console.warn("Ink renderer unavailable; using the static drawing.", error);
       host.replaceChildren();

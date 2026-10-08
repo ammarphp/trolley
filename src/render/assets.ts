@@ -56,11 +56,16 @@ export interface CabinModule {
   tick(dt: number, t: number): void;
   recommendedCamera(aspect: number): { fov: number; position: THREE.Vector3; pitch: number };
   anchors(camera: THREE.Camera): { lever: DOMRectInit; mirror: DOMRectInit; dash: DOMRectInit };
+  flashMark?(): void;
+  /** Where a world point appears on the glass (u 0 left..1 right, v 0 bottom..1 top). */
+  uvAt?(world: THREE.Vector3, camera: THREE.Camera): { u: number; v: number } | null;
 }
 
 export interface PortraitModule {
   texture: THREE.Texture;
-  draw(face: FaceState, t: number, opts: { speed: number; crack: number; glitch?: number; reducedMotion: boolean }): void;
+  /** speed in km/h. */
+  draw(face: FaceState, t: number, opts: { speed: number; crack: number; glitch?: number; reducedMotion: boolean; env?: Partial<EnvironmentTarget> }): void;
+  settle?(face?: FaceState): void;
 }
 
 export interface AssetProvider {
@@ -77,8 +82,10 @@ export interface AssetProvider {
   /** Instanceable scatter by kind: "tree", "tree-bare", "conifer", "dead-tree", "bush", "grass", "rock", "hay", "fence", "pole", "crop", "orchard-tree", "house", "barn", ... */
   prefab(kind: string, variant: number, env: Partial<EnvironmentTarget>): ScatterPrefab | null;
   prefabVariants(kind: string): number;
+  /** Wire attachment points (prefab-local) for a telegraph-pole variant of the "pole" family. */
+  poleAttachments?(variant: number): THREE.Vector3[];
   herd?(species: AnimalId, spec: { count: number; seed: string; radius: number }): THREE.Object3D;
-  flock?(kind: "starlings" | "crows" | "geese", spec: { count: number; seed: string }): { object: THREE.Object3D; update(dt: number, t: number, center: THREE.Vector3): void };
+  flock?(kind: "starlings" | "crows" | "geese", spec: { count: number; seed: string }): { object: THREE.Object3D; update(dt: number, t: number, center: THREE.Vector3): void; setViewer?(v: THREE.Vector3 | null): void };
   droneSwarm?(spec: { count: number; seed: string }): THREE.Object3D;
   sky?(): SkyModule;
   ground?(): SkyModule & { heightAt(x: number, z: number): number };

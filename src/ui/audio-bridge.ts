@@ -24,17 +24,14 @@ interface Engine {
   trigger(ev: string, opts?: { intensity?: number; pan?: number }): void;
 }
 
-// Resolved at runtime until the synthesized engine is integrated.
-const AUDIO_MODULE: string = "./audio.js";
-
 export function createAudioBridge(initialVolume: number): AudioBridge {
   let engine: Engine | null = null;
   let loading: Promise<Engine | null> | null = null;
   let enabled = false;
   let volume = initialVolume;
   const load = () =>
-    (loading ??= import(/* audio engine */ AUDIO_MODULE)
-      .then((m) => (m as unknown as { createAudioEngine(): Engine }).createAudioEngine())
+    (loading ??= import("../audio/index.ts")
+      .then((m) => m.createAudioEngine() as unknown as Engine)
       .catch(() => null));
   const renderer: AudioLike = {
     setRail: (r) => engine?.setRail(r),

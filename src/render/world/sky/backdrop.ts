@@ -24,7 +24,7 @@ import { Kit } from "../../core/geometry.ts";
 import { INK2D_GLSL, SKY_LOOK_UNIFORMS, SKY_OUT_GLSL } from "../terrain/glsl.ts";
 import { heightAt } from "../terrain/height.ts";
 import { INK_GLOBALS } from "../../core/ink-material.ts";
-import { CH, SKYLINE_CHANNEL, skylineElement, type SkylineKind } from "./skyline.ts";
+import { CH, SKYLINE_CHANNEL, kitHeight, plume, skylineElement, type SkylineKind } from "./skyline.ts";
 
 /** Outer radius the layout is designed for (m). */
 const DESIGN_FAR = 1560;
@@ -98,6 +98,22 @@ function ringGeometry(spec: RingSpec): THREE.BufferGeometry {
   return ni;
 }
 
+/** Smooth a column's normals toward its vertical axis so billows don't outline every puff. */
+function columnNormals(g: THREE.BufferGeometry, ax: number, az: number, amount: number): void {
+  const pos = g.getAttribute("position") as THREE.BufferAttribute;
+  const nrm = g.getAttribute("normal") as THREE.BufferAttribute;
+  const n = new THREE.Vector3();
+  const r = new THREE.Vector3();
+  for (let i = 0; i < pos.count; i++) {
+    n.fromBufferAttribute(nrm, i);
+    r.set(pos.getX(i) - ax, 0, pos.getZ(i) - az).normalize();
+    r.y = n.y * 0.6;
+    n.lerp(r.normalize(), amount).normalize();
+    nrm.setXYZ(i, n.x, n.y, n.z);
+  }
+  nrm.needsUpdate = true;
+}
+
 /** Stamp the backdrop attributes onto an element's geometry. */
 function tagged(geometry: THREE.BufferGeometry, channel: number, threshold: number, baseY: number, seed: number): THREE.BufferGeometry {
   const count = geometry.getAttribute("position").count;
@@ -138,7 +154,7 @@ void main() {
     n = normalize(vec3(n.x * fl, n.y, n.z * fl));
     vRel = 0.0;
   } else {
-    float v = ch < 1.5 ? uEnvA.x : ch < 2.5 ? uEnvA.y : ch < 3.5 ? uEnvA.z : ch < 4.5 ? uEnvA.w : ch < 5.5 ? uEnvB.z : uEnvB.y;
+    float v = ch < 1.5 ? uEnvA.x : ch < 2.5 ? uEnvA.y : ch < 3.5 ? uEnvA.z : ch < 4.5 ? uEnvA.w : ch < 5.5 ? uEnvB.z : ch < 6.5 ? uEnvB.y : uEnvA.y * (1.0 - uEnvB.x * 0.8);
     grow = smoothstep(aB.y, aB.y + 0.1, v);
     // Ruin truncates about half the skyline to broken stumps.
     if (ch < 3.5) grow *= mix(1.0, 0.25 + 0.55 * fract(aB.w * 7.31), uEnvB.x * step(0.45, fract(aB.w * 3.17)));
@@ -146,6 +162,10 @@ void main() {
     if (ch > 5.5) {
       // Smoke leans downwind and breathes.
       p.x += sin(uTime * 0.25 + aB.w * 6.0 + h * 0.015) * h * 0.035;
+    }
+    if (ch > 6.5) {
+      // Plumes rise from their chimney top only as the chimney itself rises.
+      p.y = aB.z * fl + (h) * grow;
     }
     p.y = aB.z * fl + h * grow;
     vRel = h;
@@ -176,6 +196,7 @@ uniform vec4 uLook2; // contour weight, storm, sync (uniformity), time
 uniform vec4 uEnvA;
 uniform float uObjectId;
 uniform float uSnow;
+uniform float uArcR;
 ${INK2D_GLSL}
 ${SKY_OUT_GLSL}
 
@@ -184,8 +205,10 @@ float bHatch(vec2 q, vec2 dqx, vec2 dqy, float tone, float pr) {
   float t1 = smoothstep(0.1, 0.26, tone);
   float t2 = smoothstep(0.42, 0.58, tone);
   float t3 = smoothstep(0.68, 0.82, tone);
-  vec2 n1 = normalize(vec2(0.45, 1.0));
-  vec2 n2 = normalize(vec2(-0.8, 0.6));
+  // 3-4-5 directions: with the arc coordinate's 10 m wrap step (see main)
+  // every family meets itself exactly across the atan() seam.
+  vec2 n1 = vec2(0.6, 0.8);
+  vec2 n2 = vec2(-0.8, 0.6);
   if (t1 > 0.0) h = max(h, tgPen(dot(q, n1), dot(q, vec2(n1.y, -n1.x)), tgMpp(dqx, dqy, n1), 2.0, 2.0 * (0.12 + 0.42 * tone), 0.55 * pr, 1.6 * pr, 3.4 * pr, 2.0, 0.7, 1.0) * t1);
   if (t2 > 0.0) h = max(h, tgPen(dot(q, n2), dot(q, vec2(n2.y, -n2.x)), tgMpp(dqx, dqy, n2), 2.0, 2.0 * (0.1 + 0.36 * tone), 0.55 * pr, 1.5 * pr, 3.4 * pr, 6.0, 0.7, 1.0) * t2);
   if (t3 > 0.0) h = max(h, tgPen(q.y, q.x, tgMpp(dqx, dqy, vec2(0.0, 1.0)), 1.6, 1.6 * (0.1 + 0.4 * tone), 0.55 * pr, 1.5 * pr, 3.0 * pr, 9.0, 0.7, 1.0) * t3);
@@ -206,15 +229,24 @@ void main() {
   // Snowfields on the high mountains stay paper.
   float snow = uSnow * smoothstep(150.0, 185.0, vPos.y) * smoothstep(0.55, 0.8, n.y) * isTerrain;
   tone *= 1.0 - snow;
-  if (ch > 5.5) tone = 0.45 + shade * 0.35; // smoke
+  if (ch > 5.5 && ch < 6.5) tone = mix(0.62, 0.22, smoothstep(10.0, 160.0, vRel)) + shade * 0.3; // smoke: dark root, paler head
+  if (ch > 6.5) tone = 0.04 + shade * 0.3 + gloom * 0.08; // pale plumes
   // Night: the country becomes a dark mass under a darker sky.
   tone = mix(tone, 0.8 + albedo * 0.1 - smoothstep(0.4, 0.9, ndl) * 0.15, night);
   tone = clamp(tone, 0.0, 1.0);
 
-  float arc = atan(vPos.x, -vPos.z) * length(vPos.xz);
+  // Arc coordinate with a whole number of 10 m steps around the ring.
+  float ringR = uArcR;
+  float a1 = atan(vPos.x, -vPos.z);
+  float a2 = atan(-vPos.x, vPos.z); // same angle + pi, wrapping on the other side
+  float arc = a1 * ringR;
   vec2 q = vec2(arc, vPos.y);
-  vec2 dqx = dFdx(q);
-  vec2 dqy = dFdy(q);
+  // Derivatives from whichever angle is continuous here.
+  vec2 d1 = vec2(dFdx(a1), dFdy(a1));
+  vec2 d2 = vec2(dFdx(a2), dFdy(a2));
+  vec2 da = abs(a1) < 1.5708 ? d1 : d2;
+  vec2 dqx = vec2(da.x * ringR, dFdx(vPos.y));
+  vec2 dqy = vec2(da.y * ringR, dFdy(vPos.y));
   float cov = bHatch(q, dqx, dqy, tone, pr);
   // Topographic form lines on the terrain, stronger on shadowed slopes.
   if (isTerrain > 0.5) {
@@ -326,6 +358,8 @@ export function createBackdrop(options: BackdropOptions = {}): Backdrop {
         uLook2: { value: new THREE.Vector4(spec.edge, 0, 0, 0) },
         uObjectId: { value: spec.objectId },
         uSnow: { value: snow },
+        // 2 pi uArcR is a multiple of 10 m (hatch period 2 m, 3-4-5 directions).
+        uArcR: { value: (Math.round((2 * Math.PI * (spec.r0 + spec.r1)) / 2 / 10) * 10) / (2 * Math.PI) },
       },
     });
     materials.push(m);
@@ -336,6 +370,7 @@ export function createBackdrop(options: BackdropOptions = {}): Backdrop {
   let skyline: THREE.Mesh | null = null;
   let monoliths: THREE.Mesh | null = null;
   let smoke: THREE.Mesh | null = null;
+  let plumeMesh: THREE.Mesh | null = null;
   const geometries: THREE.BufferGeometry[] = [];
   const meshes: THREE.Mesh[] = [];
   const addMesh = (g: THREE.BufferGeometry, m: THREE.ShaderMaterial, name: string) => {
@@ -390,17 +425,30 @@ export function createBackdrop(options: BackdropOptions = {}): Backdrop {
     const parts: THREE.BufferGeometry[] = [];
     const monoParts: THREE.BufferGeometry[] = [];
     const smokeParts: THREE.BufferGeometry[] = [];
+    const plumeParts: THREE.BufferGeometry[] = [];
     const sectorNoise = (th: number) => noise.n2(Math.cos(th) * 1.8 + 9, Math.sin(th) * 1.8 - 4);
-    const count = Math.round(120 * detail);
-    const plan: Array<{ kind: SkylineKind; th: number }> = [];
+    // Sectors of the horizon lean toward town, works or compute, with ragged
+    // edges; elements outside their home sector appear only at high values,
+    // so a channel near 1 fills the whole horizon.
+    const count = Math.round(170 * detail);
+    const plan: Array<{ kind: SkylineKind; th: number; away: number }> = [];
     for (let i = 0; i < count; i++) {
       const th = ((i + rng.range(0, 0.9)) / count) * Math.PI * 2;
       const sn = sectorNoise(th);
+      const jn = sn + rng.range(-0.45, 0.45);
       let kind: SkylineKind;
-      if (sn < -0.15) kind = rng.pick(["houses", "houses", "houses", "church", "water-tower", "office", "houses"] as const);
-      else if (sn < 0.2) kind = rng.pick(["shed", "chimney", "gasometer", "crane", "cooling-tower", "shed", "chimney", "houses"] as const);
-      else kind = rng.pick(["data-hall", "data-hall", "mast", "pylon", "pylon", "cooling-tower", "turbine", "crane"] as const);
-      plan.push({ kind, th });
+      let home: number;
+      if (jn < -0.12) {
+        kind = rng.pick(["houses", "houses", "houses", "church", "water-tower", "office", "houses"] as const);
+        home = sn < -0.12 ? 0 : 1;
+      } else if (jn < 0.22) {
+        kind = rng.pick(["shed", "chimney", "gasometer", "crane", "cooling-tower", "shed", "chimney", "houses"] as const);
+        home = sn >= -0.12 && sn < 0.22 ? 0 : 1;
+      } else {
+        kind = rng.pick(["data-hall", "data-hall", "mast", "pylon", "pylon", "cooling-tower", "turbine", "crane"] as const);
+        home = sn >= 0.22 ? 0 : 1;
+      }
+      plan.push({ kind, th, away: home });
     }
     const orderRng = rng.fork("order");
     for (const p of plan) {
@@ -412,13 +460,24 @@ export function createBackdrop(options: BackdropOptions = {}): Backdrop {
       const baseY = -16 + (spec.height(x, z, p.th) + 16) * envelope(s) - 2.5;
       const k = skylineElement(p.kind, orderRng);
       const g = k.build();
-      const m = new THREE.Matrix4().makeRotationY(-p.th);
+      // Drawn a third larger than life, as illustrators do with far skylines.
+      const m = new THREE.Matrix4().makeRotationY(-p.th).scale(new THREE.Vector3(1.35, 1.35, 1.35));
       m.setPosition(x, baseY, z);
       g.applyMatrix4(m);
-      // Earlier kinds of each channel appear first (small thresholds).
-      const early = p.kind === "houses" || p.kind === "shed" || p.kind === "pylon" || p.kind === "data-hall" ? 0 : 0.25;
-      const thr = THREE.MathUtils.clamp(early + orderRng.range(0.05, 0.7), 0.04, 0.9);
-      parts.push(tagged(g, ch, thr, baseY, orderRng.next()));
+      // Earlier kinds of each channel appear first (small thresholds); away
+      // from their home sector, elements wait for high values.
+      const early = p.kind === "houses" || p.kind === "shed" || p.kind === "pylon" || p.kind === "data-hall" ? 0 : 0.2;
+      const thr = THREE.MathUtils.clamp(early + p.away * 0.3 + orderRng.range(0.05, 0.5), 0.04, 0.92);
+      const seedV = orderRng.next();
+      parts.push(tagged(g, ch, thr, baseY, seedV));
+      if (p.kind === "chimney" || p.kind === "cooling-tower") {
+        const top = kitHeight(g) - baseY;
+        const pg = plume(orderRng, p.kind === "cooling-tower").build();
+        const pm = new THREE.Matrix4().makeRotationY(-p.th);
+        pm.setPosition(x, baseY + top - 2, z);
+        pg.applyMatrix4(pm);
+        plumeParts.push(tagged(pg, CH.plume, thr + 0.05, baseY, seedV));
+      }
     }
     // Monoliths: an identical rhythm every 7.5 degrees.
     const mono = Math.round(48 * detail);
@@ -435,42 +494,44 @@ export function createBackdrop(options: BackdropOptions = {}): Backdrop {
     }
     // Smoke columns: billowing puffs that thicken as they rise and shear
     // downwind into a spreading head.
-    const plumes = 7;
-    for (let i = 0; i < plumes; i++) {
-      const th = ((i + rng.range(0.1, 0.9)) / plumes) * Math.PI * 2;
+    const columns = 7;
+    for (let i = 0; i < columns; i++) {
+      const th = ((i + rng.range(0.1, 0.9)) / columns) * Math.PI * 2;
       const r = spec.r0 + rng.range(10, 60);
       const x = Math.sin(th) * r;
       const z = -Math.cos(th) * r;
       const k = new Kit();
-      const H = rng.range(260, 400);
-      // Steps proportional to the puff radius keep the puffs heavily
-      // overlapped, so the pen finds a billowing outline, not a stack.
-      let y = 0;
-      let cx = x;
-      let cz = z;
-      const lean = rng.range(0.1, 0.25);
-      while (y < H) {
-        const t = y / H;
-        const rr = (10 + t * 38) * rng.range(0.85, 1.15);
-        const head = THREE.MathUtils.smoothstep(t, 0.65, 1);
-        cx += rr * (lean * 0.5 + head * 0.35) + rng.range(-0.12, 0.12) * rr;
-        cz += rng.range(-0.1, 0.1) * rr;
-        const g = new THREE.SphereGeometry(rr, 9, 6);
-        g.scale(1 + head * 0.6, 0.9 - head * 0.3, 1 + head * 0.3);
-        k.add(g, { tone: "mid", position: [cx, y + rr * 0.5, cz] });
-        if (rng.chance(0.6)) {
-          const br = rr * rng.range(0.45, 0.65);
+      // A fire's column: a dark root rising, then bending over and carried
+      // downwind as a long, widening, paler trail.
+      const H = rng.range(170, 250);
+      const D = rng.range(380, 560);
+      let sPar = 0;
+      const pathLen = H + D * 0.6;
+      while (sPar < 1) {
+        const rr = (14 + 50 * sPar) * rng.range(0.85, 1.15);
+        const cy = H * (1 - (1 - sPar) * (1 - sPar));
+        const cx = x + D * sPar * sPar + rng.range(-0.15, 0.15) * rr;
+        const cz = z + rng.range(-0.2, 0.2) * rr;
+        const lumps = sPar > 0.35 ? 2 : 1;
+        for (let j = 0; j < lumps; j++) {
+          const r = rr * (j === 0 ? 1 : rng.range(0.6, 0.8));
+          const g = new THREE.SphereGeometry(r, 8, 5);
+          g.scale(1.15, 0.8, 1);
           const a = rng.range(0, Math.PI * 2);
-          k.add(new THREE.SphereGeometry(br, 7, 5), { tone: "mid", position: [cx + Math.cos(a) * rr * 0.55, y + rr * 0.5 + rng.range(-0.2, 0.4) * rr, cz + Math.sin(a) * rr * 0.55] });
+          const off = j === 0 ? 0 : rr * rng.range(0.45, 0.8);
+          k.add(g, { tone: "mid", position: [cx + Math.cos(a) * off, cy + rr * 0.35 + (j ? rng.range(-0.3, 0.35) * rr : 0), cz + Math.sin(a) * off * 0.5] });
         }
-        y += rr * 0.5;
+        sPar += (rr * 0.6) / pathLen;
       }
-      smokeParts.push(tagged(k.build(), CH.smoke, rng.range(0.1, 0.5), 0, rng.next()));
+      const sg = k.build();
+      columnNormals(sg, x, z, 0.72);
+      smokeParts.push(tagged(sg, CH.smoke, rng.range(0.1, 0.5), 0, rng.next()));
     }
     skyline = addMesh(mergeGeometries(parts)!, ringMaterial, "skyline");
     monoliths = addMesh(mergeGeometries(monoParts)!, ringMaterial, "monoliths");
     smoke = addMesh(mergeGeometries(smokeParts)!, ringMaterial, "smoke");
-    for (const p of [...parts, ...monoParts, ...smokeParts]) p.dispose();
+    plumeMesh = addMesh(mergeGeometries(plumeParts)!, ringMaterial, "plumes");
+    for (const p of [...parts, ...monoParts, ...smokeParts, ...plumeParts]) p.dispose();
   }
 
   // --- ring C: mountains
@@ -501,6 +562,7 @@ export function createBackdrop(options: BackdropOptions = {}): Backdrop {
       if (skyline) skyline.visible = Math.max(st.habitation, st.industry, st.compute) > 0.03;
       if (monoliths) monoliths.visible = Math.max(st.uniformity, st.perfection) > 0.25;
       if (smoke) smoke.visible = Math.max(st.fire, st.ruin * 0.4) > 0.08;
+      if (plumeMesh) plumeMesh.visible = st.industry > 0.05;
       for (const m of materials) {
         const l = m.uniforms.uLook!.value as THREE.Vector4;
         l.y = st.night;

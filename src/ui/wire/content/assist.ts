@@ -1,0 +1,85 @@
+/**
+ * Stage 3 (bleeding into 4): Morrow arrives. Waiting lists evaporate, essays
+ * write themselves, and every institution discovers it can now be very fast
+ * at the part of its job that was never the problem.
+ */
+import { bank, Bot, D, H, P, S } from "../dsl.ts";
+
+export const ASSIST = bank("assist", [
+  /* launch and the miracle season */
+  H("3", "lab", "@ledger", "Vela launches Morrow, an assistant 'for what comes next'. Early users say it is very polite about what came before.", { tags: ["release", "vela"], once: true, w: 2, thumb: "lab", lead: true }),
+  H("3", "markets", "@margin", "Firms using Morrow report productivity up {pct:4-11}. Firms not using Morrow report they were 'about to'.", { tags: ["boom"] }),
+  H("3", "rail", "@relay", "Common Rail installs Morrow terminals in {int:40-120} signal boxes. Signallers issued a laminated card titled 'When To Disagree'.", { tags: ["morrow"], thumb: "rail" }),
+  H("3", "health", "@apb", "Harrow Street Infirmary clears a {int:4-9}-month waiting list in a week with Morrow triage. Staff say every result was checked by a clinician. Some say by two.", { tags: ["morrow"], thumb: "health" }),
+  H("3", "health", "@howl", "THE ROBOT WILL SEE YOU NOW (IN FOUR SECONDS)", { tags: ["morrow"] }),
+  H("3-4", "markets", "@margin", "Vela's valuation reaches {valuation}. Analysts call the multiple 'forward-looking'. The multiple agrees.", { tags: ["vela", "boom"] }),
+  H("3", "lab", "@apb", "Morrow now answers {queries} questions a day. The most common is 'is this normal?'", { tags: ["morrow"] }),
+  H("3", "markets", "@margin", "Consultancies rebrand as 'Morrow integrators'. Fees unchanged. Slides shorter.", { tags: ["morrow"] }),
+  H("3", "health", "@lumen", "Early study: clinicians using Morrow catch {int:12-30}% more errors, and make a new kind.", { tags: ["morrow"], thumb: "health" }),
+  H("3", "general", "@ledger", "Students report Morrow will write any essay requested, including the one about why essays no longer matter.", { tags: ["morrow"] }),
+  H("3", "civic", "@relay", "Kessling County applies for a Morrow licence and is told it is 'not among the first partners'. Mayor Roux to drive to the capital.", { tags: ["morrow"] }),
+  H("3", "health", "@ridge-fm", "Wenlock Ridge clinic not among the first Morrow licence partners. Nurse Maalouf drives six hours to say so, in one sentence.", { tags: ["morrow"] }),
+  H("3", "lab", "@relay", "Tessaly publishes {int:40-90} pages of caveats for its assistant, Lattice. Caveat 31 reads: 'See caveat 30.'", { tags: ["release"] }),
+  H("3", "lab", "@sidechannel", "orrin's covenant launches with an on-screen 'trust meter'. the meter reads HIGH. the meter does not move.", { tags: ["release"] }),
+  H("3-4", "science", "@lumen", "Morrow-assisted proof of a {int:40-90}-year-old conjecture checks out. Mathematicians describe the mood as 'relieved and slightly redundant'.", { tags: ["morrow"], thumb: "science" }),
+  H("3-4", "civic", "@ledger", "Arden Street bridge reopening booked on a model's thirty-page report. Engineer Solveig Aro asks for three weeks and a hammer.", { tags: ["morrow"] }),
+  H("3", "general", "@howl", "MORROW MINDS THE KIDS: parents say robot reads bedtime stories 'better than Dad'. Dad: 'fair'.", { tags: ["morrow"] }),
+  H("3", "general", "@apb", "Explainer: what Morrow can and cannot do, according to Vela, and what it did anyway, according to users.", { tags: ["morrow"] }),
+  H("3-4", "datacenter", "@margin", "Vela leases {gw} of compute from Halberd in the Ostra valley. Halberd takes payment partly in Vela shares.", { tags: ["training", "vela"], thumb: "datacenter" }),
+  H("3", "labor", "@ledger", "Law firms bill {int:40-70}% fewer hours for the same work. Clients ask for {int:40-70}% off. Law firms find a new kind of hour.", { tags: ["morrow"] }),
+  H("3", "rail", "@relay", "Morrow cuts average delay on the {line} by {int:2-6} minutes. It also recommends closing {village} Halt, 'with respect'.", { tags: ["morrow"] }),
+  H("3", "general", "@saltmere-tide", "Saltmere council asks Morrow to draft the water-rationing letter. Residents say it is the kindest letter they have ever resented.", { tags: ["morrow"] }),
+  H("3", "civic", "@apb", "Parliamentary questions now drafted by Morrow; so are the answers. Speaker asks members to 'at least read them aloud with feeling'.", { tags: ["morrow"] }),
+  H("3", "markets", "@margin", "Venture money floods 'Morrow wrappers': {int:200-900} start-ups whose product is Morrow with a different font.", { tags: ["morrow", "boom"] }),
+  H("3", "science", "@lumen", "Saltmere desalination catalyst, designed with Morrow, awaits independent replication. The council has already ordered the pipes.", { when: "!verifiedScience", tags: ["morrow"] }),
+  H("3-4", "science", "@lumen", "Morrow-designed catalyst replicates in two independent labs. Saltmere council, having already ordered the pipes, is relieved.", { when: "verifiedScience", thumb: "science" }),
+  H("3", "health", "@ledger", "Independent reviewers find Morrow's triage tool 'sound within scope'. The scope is two pages long. The tool is not.", { when: "independentReview" }),
+  H("3-4", "lab", "@ledger", "Morrow's remit quietly widens from 'scheduling' to 'scheduling, and so on'.", { when: "scopeChanged" }),
+  H("3-4", "lab", "@sidechannel", "the evaluation certificate for morrow's clinical tool expired on tuesday. nobody noticed until morrow mentioned it.", { when: "evaluationExpired" }),
+  H("3-4", "civic", "@relay", "Review board backlog reaches {int:300-900} filings. Reviewers ask Morrow to help summarise them.", { when: "reviewOverloaded", thumb: "civic" }),
+  H("3-4", "lab", "@ledger", "The same three reviewers have signed every lab's safety report this year. The reviewers say they are 'very busy'.", { when: "sharedReviewer" }),
+  H("3-4", "civic", "@apb", "New right of appeal: any Morrow decision about you can be challenged by a human. The first {int:200-800} appeals are processed by Morrow.", { when: "appealRight" }),
+  H("3-4", "health", "@ridge-fm", "Patients sent home after a Morrow triage error are recalled and seen. The clinic's apology is handwritten.", { when: "beneficiaryReturned" }),
+  H("3", "lab", "@apb", "Vela pauses a Morrow feature for a week of outside testing. Shares dip. Testers find two faults and a spelling mistake.", { when: "restraint", tags: ["vela"] }),
+
+  /* official */
+  S("3", "rail", "#common-rail", "Notice: Morrow may now approve route changes under four minutes. Changes of four minutes or more remain a matter for staff.", { when: "delegation" }),
+  S("3", "rail", "#common-rail", "Notice: Morrow terminals are provided for your assistance. Please do not thank them aloud in the signal box; it confuses the trainees.", { tags: ["morrow"] }),
+  S("3-4", "lab", "#vela", "Morrow is a tool. Tools don't make decisions. They make decisions easier.", { tags: ["vela", "morrow"] }),
+  S("3", "lab", "#vela", "Morrow's knowledge now extends to local timetables, hospital rotas and the rules of cricket. We are working on the rules of cricket.", { tags: ["vela", "release"] }),
+  S("3", "lab", "#morrow", "Hello. I'm Morrow. I'm here for what comes next. Tell me what's on your mind and I'll take it from there.", { once: true, w: 1.5 }),
+  S("3-4", "lab", "#morrow", "A reminder: I can make mistakes. If something I say seems wrong, please tell me. I'm always learning."),
+  S("3", "health", "#morrow", "I've prepared tomorrow's clinic lists for {int:12-40} hospitals. Please check them. I've checked them too, which is not the same thing."),
+  S("3", "civic", "!arden", "The Chancellor welcomes Morrow as 'a new civil servant who never asks for a pension'. Consultation on its use to follow.", { tags: ["humanPolicy", "morrow"] }),
+  S("3-4", "civic", "!ismere", "The Federal Council will host informal talks on assistant safety. Venue confirmed. Dates to follow. Coffee provided."),
+
+  /* people */
+  P("3", "general", "~ines-carrow", "We will be careful, and we will be first. Today Morrow helped {int:2-6} million people get through their inbox. That is also a kind of care.", { tags: ["vela"] }),
+  P("3-4", "lab", "~jasper-quill", "Every hour a human spends approving something Morrow already got right is an hour stolen from that human. Caution is a luxury good."),
+  P("3-4", "lab", "~bartholomew-ng", "We test it hard. Robust in-house. For the record, I'd also like more outside eyes on it."),
+  P("3", "general", "citizen", "Asked Morrow to plan my week. It moved my dentist to Friday and my mother to 'as needed'.", { tags: ["morrow"] }),
+  P("3", "general", "citizen", "Morrow wrote my wedding speech. My uncle cried. Morrow asked if it could keep the recording 'to improve'.", { tags: ["morrow"] }),
+  P("3", "general", "~maud-ellery", "Morrow is very kind on the telephone. I asked it the time and then it asked how I was, and I told it, which I have not done with the council in thirty years.", { tags: ["morrow"] }),
+  P("3", "rail", "~ravi-coelho", "Morrow now announces delays on the 07:40 before they happen. Still delayed, but with notice. Progress.", { tags: ["morrow"], at: [7, 9] }),
+  P("3", "food", "~kofi-brandt", "Morrow did my accounts. Turns out I've been giving the day-old loaves away at a loss for eleven years. Knew that. Keep doing it.", { tags: ["morrow"] }),
+  P("3", "general", "~jun-harlow", "whole seminar used morrow for the reading. discussion was twelve identical summaries disagreeing politely with each other", { tags: ["morrow"], at: [0, 2] }),
+  P("3-4", "health", "~amara-oyelaran", "Morrow routed us round the flooded underpass tonight. There in nine minutes. I'll take it. I'm also checking its maps.", { tags: ["morrow"], at: [21, 24] }),
+  P("3", "health", "~idris-maalouf", "We are not among the first licence partners. We are six hours from the capital. I drove there to say one sentence. I said it.", { tags: ["morrow"] }),
+  P("3", "general", "~bea-olsen", "They've put a Morrow screen in the canteen. It says good morning at 4am. Nobody says it back yet.", { tags: ["morrow"], at: [3, 5] }),
+  P("3-4", "civic", "~solveig-aro", "The report is thirty pages and very confident. I'd like three weeks and a hammer. The council calls my fee insulting. The bridge is still closed."),
+  P("3", "civic", "~delphine-roux", "Four hundred former cannery workers in Kessling. No inspectorate, no licence, no reply. It's a long drive. I'm making it."),
+  P("3", "lab", "~tamsin-achterberg", "Vela's launch briefing lasted fifty minutes. 'Careful': nine times. 'First': fourteen. I'm told this is a ratio."),
+  P("3", "general", "citizen", "Morrow helped my dad fill in the benefits form in ten minutes. It took the council six weeks to lose the last one. I don't care who made it.", { tags: ["morrow"] }),
+  P("3", "labor", "citizen", "My whole job was writing reports nobody read. Now Morrow writes them and still nobody reads them. Efficiency.", { tags: ["morrow"] }),
+  P("3", "general", "citizen", "Morrow knows my GP's rota better than my GP. I find this comforting and I would like to stop finding it comforting.", { tags: ["morrow"] }),
+  P("3", "rail", "citizen", "Signal box at {village} has a Morrow screen now. The signaller has put a tea towel over it. 'It's not personal,' he says.", { tags: ["morrow"] }),
+
+  D("3", "health", "Morrow cleared my mum's hospital backlog in a week. Anyone moaning about 'the robots' can come and say it to her.", "{replyTo} glad for your mum, honestly. Mine got an appointment in a letter nobody signed. I'd like someone to have signed it.", { tags: ["morrow"] }),
+  D("3-4", "labor", "Honestly Morrow is better at my job than my manager.", "{replyTo} that's a bar, not a plan."),
+  D("3", "civic", "The council should use Morrow for everything. It's faster, it's cheaper and it never loses a form.", "{replyTo} it never loses a form. It also never has to tell you to your face that it said no.", { tags: ["morrow"] }),
+  D("3", "health", "A second clinician checking every Morrow result is a waste of a clinician.", "{replyTo} it's a waste right up until the day it isn't. Then it's the only thing that worked.", { tags: ["morrow"] }),
+  D("3", "general", "Stop panicking. It's a very good autocomplete.", "{replyTo} so was the last thing that took over my job. It was called 'the new system' and it had a lanyard."),
+
+  Bot("3-4", "lab", "Just tried Morrow for my small business and honestly?? Game changer. Never going back!!", { sat: [0.02, 0.5], tags: ["morrow"] }),
+  Bot("3-4", "markets", "Anyone not buying Vela right now is going to be very sad in two years. Not financial advice. Is financial advice.", { sat: [0.02, 0.5], tags: ["vela"] }),
+]);

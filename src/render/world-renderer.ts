@@ -29,7 +29,9 @@ import { TrackRenderer, RAIL_TOP } from "./world/track/mesh.ts";
 import { Scatter } from "./world/scatter.ts";
 import { buildTableau, disposeTableau, occupantsDescription, FIRST_STAKE, type Tableau } from "./world/staging.ts";
 import { buildTunnel, type Tunnel } from "./world/tunnel.ts";
+import { Lineside } from "./world/lineside.ts";
 import { createRng } from "./core/rng.ts";
+import { setSkyLook } from "./world/terrain/glsl.ts";
 
 export interface AudioLike {
   setRail(r: { sleepersPerSecond: number; curve: number; onBridge: boolean; inTunnel: boolean }): void;
@@ -66,13 +68,14 @@ export class InkWorldRenderer implements WorldRenderer {
   private scene = new THREE.Scene();
   private worldRoot = new THREE.Group();
   private cabRoot = new THREE.Group();
-  private camera = new THREE.PerspectiveCamera(52, 1, 0.05, 1600);
+  private camera = new THREE.PerspectiveCamera(52, 1, 0.04, 1700);
   private sun = new THREE.DirectionalLight(0xffffff, 2.2);
   private hemi = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.9);
   private origin = new THREE.Vector3();
   private journey: Journey;
   private track = new TrackRenderer();
   private scatter: Scatter;
+  private lineside: Lineside;
   private sky: SkyModule | null = null;
   private ground: (SkyModule & { heightAt(x: number, z: number): number }) | null = null;
   private weather: SkyModule | null = null;
@@ -83,6 +86,9 @@ export class InkWorldRenderer implements WorldRenderer {
   private tableau: Tableau | null = null;
   private oldTableaux: Tableau[] = [];
   private tunnel: Tunnel | null = null;
+  private tunnelExclusion: (() => void) | null = null;
+  private lastScreenToe = Number.NaN;
+  private clearWaiters: Array<() => void> = [];
   private selection: THREE.Mesh | null = null;
   private view: StageView | null = null;
   private env: EnvironmentTarget;
@@ -170,7 +176,13 @@ export class InkWorldRenderer implements WorldRenderer {
     this.scatter = new Scatter({ seed, assets: this.assets, heightAt: (x, z) => this.heightAt(x, z) });
     this.scatter.density = q === "high" ? 1 : q === "medium" ? 0.75 : 0.5;
     this.worldRoot.add(this.scatter.group);
+    this.lineside = new Lineside(this.assets, (x, z) => this.heightAt(x, z), (line, s) => {
+      const t = this.tunnel;
+      return !!t && line === t.line && s > t.start - 58 && s < t.start + t.length + 58;
+    });
+    this.worldRoot.add(this.lineside.group);
 
+    setSkyLook(this.pipeline.look);
     this.sky = this.assets.sky?.() ?? null;
     if (this.sky) this.scene.add(this.sky.object);
     this.ground = this.assets.ground?.() ?? null;
@@ -192,7 +204,10 @@ export class InkWorldRenderer implements WorldRenderer {
     this.cabin = this.assets.cabin?.(seed) ?? null;
     if (this.cabin) this.cabRoot.add(this.cabin.group);
     this.portrait = this.assets.portrait?.(seed) ?? null;
-    if (this.cabin && this.portrait) this.cabin.setMirrorTexture(this.portrait.texture);
+    if (this.cabin && this.portrait) {
+      this.portrait.settle?.();
+      this.cabin.setMirrorTexture(this.portrait.texture);
+    }
     this.leafFall = this.assets.leafFall?.() ?? null;
     if (this.leafFall) this.scene.add(this.leafFall.object);
     this.flock = this.assets.flock?.("starlings", { count: 140, seed }) ?? null;
@@ -248,7 +263,7 @@ export class InkWorldRenderer implements WorldRenderer {
     if (this.appliedImpacts < 0) {
       for (let i = 0; i < c.impacts; i++) {
         const rng = createRng(`${view.seed}:glass:${i}`);
-        this.cabin?.impact({ u: rng.range(0.2, 0.8), v: rng.range(0.35, 0.75), severity: rng.range(0.4, 0.9), blood: i < c.bloodied && !this.settingsState.reducedGraphics });
+        this.cabin?.impact({ u: rng.range(0.25, 0.75), v: rng.range(0.35, 0.7), severity: rng.range(0.25, 0.5), blood: i < c.bloodied && !this.settingsState.reducedGraphics });
       }
       this.appliedImpacts = c.impacts;
       this.appliedBlood = c.bloodied;
@@ -275,6 +290,7 @@ export class InkWorldRenderer implements WorldRenderer {
     }
     // The lever: yours, or moved for you.
     this.leverTarget = side === "left" ? -1 : 1;
+    this.routeSignal(side);
     if (executor !== "human") {
       this.cabin?.setAuthority("overridden");
       this.audio?.trigger("glitch", { intensity: 0.4 });
@@ -309,7 +325,18 @@ export class InkWorldRenderer implements WorldRenderer {
     this.leverTarget = v;
     this.journey.previewPoints(v);
     this.selectionVisible(this.armed);
+    // The junction signal shows where the points actually lie: under a
+    // standing order, the feather lights the forced route, not yours.
+    const routed = this.armed ? (this.jam?.forced ?? this.armed) : null;
+    this.routeSignal(routed);
     if (options.immediate) this.cabin?.setLever(v, 1);
+  }
+
+  private routeSignal(side: "left" | "right" | null): void {
+    const signal = this.tableau?.signal;
+    if (!signal) return;
+    (signal.userData.setRoute as ((r: "left" | "right" | null) => void) | undefined)?.(side);
+    (signal.userData.setAspect as ((a: "red" | "amber" | "green" | "dark") => void) | undefined)?.(side ? "green" : "red");
   }
 
   pause(paused: boolean): void {
@@ -357,6 +384,12 @@ export class InkWorldRenderer implements WorldRenderer {
     this.leverCb = cb;
   }
 
+  whenClear(): Promise<void> {
+    const t = this.tunnel;
+    if (!t || this.settingsState.reducedMotion || t.passed(this.journey.rig.line, this.journey.rig.s)) return Promise.resolve();
+    return new Promise((resolve) => this.clearWaiters.push(resolve));
+  }
+
   setInteractive(enabled: boolean): void {
     this.interactive = enabled;
     this.pipeline.domElement.style.cursor = "";
@@ -370,6 +403,7 @@ export class InkWorldRenderer implements WorldRenderer {
 
   destroy(): void {
     this.destroyed = true;
+    for (const resolve of this.clearWaiters.splice(0)) resolve();
     this.journey.settle();
     cancelAnimationFrame(this.raf);
     this.resizeObserver?.disconnect();
@@ -379,18 +413,37 @@ export class InkWorldRenderer implements WorldRenderer {
 
   // ------------------------------------------------------------ internals
 
+  private pendingWipe = false;
+
   private prepareJunction(view: StageView): void {
+    // The wipers run as the next fork is inked: they smear, they do not clean.
+    if (this.pendingWipe) {
+      this.pendingWipe = false;
+      this.cabin?.wipe();
+      this.audio?.trigger("wiper");
+    }
     if (this.tableau) this.oldTableaux.push(this.tableau);
     this.tableau = null;
     const tunnelCue = view.cues.find((c) => c.kind === "tunnel");
     let minToe: number | undefined;
     if (tunnelCue && !this.settingsState.reducedMotion) {
       // A stage change passes through a tunnel; the world is redrawn inside.
+      // It is built far enough ahead to ink in before the cab reaches it.
       const line = this.journey.network.current;
-      const start = this.journey.rig.s + 55;
+      const start = this.journey.rig.s + 120;
       this.tunnel?.dispose();
-      this.tunnel = buildTunnel(line, start, 90, this.heightAt);
-      this.worldRoot.add(this.tunnel.group);
+      this.tunnelExclusion?.();
+      const tunnel = buildTunnel(line, start, 90, this.heightAt, {
+        seed: view.seed,
+        prefab: (kind, variant) => this.assets.prefab(kind, variant, { leaves: this.env.leaves, vegetation: 1 }),
+        variants: (kind) => this.assets.prefabVariants(kind),
+      });
+      this.tunnel = tunnel;
+      this.tunnelExclusion = this.scatter.exclude((x, z) => tunnel.covers(x, z));
+      this.lineside.forget(line, start - 58, start + 90 + 58);
+      // Earlier tableaux (a destination depot, a landmark) must not stand in the hill.
+      for (const old of this.oldTableaux) for (const child of old.group.children) if (tunnel.covers(child.position.x, child.position.z)) child.visible = false;
+      this.worldRoot.add(tunnel.group);
       minToe = start + 90 + 70;
       line.extendTo(minToe + 10);
       line.drawTo = Math.max(line.drawTo, Math.min(minToe, this.journey.rig.s + 260));
@@ -465,13 +518,22 @@ export class InkWorldRenderer implements WorldRenderer {
     const rng = createRng(`${this.view?.seed}:contact:${this.view?.decisionId}:${index}`);
     this.shake = Math.max(this.shake, living ? 0.6 : 0.25);
     this.audio?.trigger("impact", { intensity: living ? 1 : 0.4, pan: rng.range(-0.3, 0.3) });
-    // Mark the glass once per decision, at the first living contact.
+    // Mark the glass once per decision, and only for what breaks glass.
     const decisionImpacts = this.view?.cabin.impacts ?? 0;
-    if (this.cabin && index === (this.tableau?.stakes.findIndex((st) => st.side === side) ?? -1)) {
+    const heavy = actor ? /vehicle|machine|robot|carriage|wagon|truck|bus|van/.test(String(actor.object.userData.kind ?? actor.object.userData.id ?? "")) : false;
+    if (this.cabin && (living || heavy) && index === (this.tableau?.stakes.findIndex((st) => st.side === side) ?? -1)) {
       const blood = living && !this.settingsState.reducedGraphics;
-      this.cabin.impact({ u: rng.range(0.3, 0.7), v: rng.range(0.4, 0.7), severity: living ? rng.range(0.55, 1) : 0.3, blood });
+      let uv = { u: rng.range(0.35, 0.65), v: rng.range(0.4, 0.62) };
+      if (actor && this.cabin.uvAt) {
+        const p = new THREE.Vector3();
+        actor.object.getWorldPosition(p);
+        p.y += 1.1;
+        const at = this.cabin.uvAt(p, this.camera);
+        if (at) uv = { u: Math.min(0.85, Math.max(0.15, at.u)), v: Math.min(0.8, Math.max(0.2, at.v)) };
+      }
+      this.cabin.impact({ ...uv, severity: living ? rng.range(0.5, 0.7) : 0.25, blood });
       this.audio?.trigger("glass-crack", { intensity: living ? 0.8 : 0.4 });
-      if (blood) window.setTimeout(() => this.cabin?.wipe(), 900);
+      this.pendingWipe = this.pendingWipe || blood;
       this.appliedImpacts = Math.max(this.appliedImpacts, decisionImpacts);
     }
   }
@@ -508,6 +570,7 @@ export class InkWorldRenderer implements WorldRenderer {
         this.audio?.trigger("glitch");
         break;
       case "logo-flash":
+        if (!this.settingsState.noFlashing) this.cabin?.flashMark?.();
         this.screenState.alert = true;
         window.setTimeout(() => {
           this.screenState.alert = false;
@@ -539,7 +602,7 @@ export class InkWorldRenderer implements WorldRenderer {
         mode: "dispatch",
         lines: [
           `DAY SERVICE  ${v.cabin.clock}`,
-          Number.isFinite(toe) ? `JUNCTION IN ${Math.max(0, Math.round(toe))} M` : "LINE CLEAR",
+          Number.isFinite(toe) ? (toe > 2 ? `JUNCTION IN ${Math.max(5, Math.round(toe / 5) * 5)} M` : "AT JUNCTION") : "LINE CLEAR",
           v.staging ? `L  ${(v.staging.left.sign ?? "ROUTE A").slice(0, 22)}` : "",
           v.staging ? `R  ${(v.staging.right.sign ?? "ROUTE B").slice(0, 22)}` : "",
         ].filter(Boolean),
@@ -636,6 +699,19 @@ export class InkWorldRenderer implements WorldRenderer {
       this.tunnelCleared = true;
     }
     if (!inTunnel) this.tunnelCleared = false;
+    this.tunnel?.tick(dt);
+    // The dispatch screen counts the junction down as the trolley closes on it.
+    if (this.view && !this.view.cabin.morrow && !this.jam) {
+      const toe = this.journey.toToe;
+      const key = Number.isFinite(toe) ? (toe > 2 ? Math.max(5, Math.round(toe / 5) * 5) : 0) : -1;
+      if (key !== this.lastScreenToe) {
+        this.lastScreenToe = key;
+        this.updateScreen();
+      }
+    }
+    if (this.clearWaiters.length && (!this.tunnel || this.tunnel.passed(this.journey.rig.line, this.journey.rig.s))) {
+      for (const resolve of this.clearWaiters.splice(0)) resolve();
+    }
     const env = this.env;
 
     // Journey.
@@ -657,6 +733,8 @@ export class InkWorldRenderer implements WorldRenderer {
     }
     const rigWorld = new THREE.Vector3(rig.pose.x, 0, rig.pose.z);
     this.track.update(this.journey.network, rig.pose.x, rig.pose.z);
+    this.lineside.update(this.journey.network, this.journey.junction, rig.line, rig.s, rig.pose.x, rig.pose.z);
+    this.scatter.night = env.timeOfDay >= 0.82 || env.timeOfDay <= 0.12;
     this.scatter.update(this.journey.network, rigWorld, env, dt, this.clock);
     if (this.journey.network.lines.length > 12) this.journey.network.prune(rig.pose.x, rig.pose.z, 1100);
     for (const old of this.oldTableaux.splice(0)) {
@@ -679,7 +757,7 @@ export class InkWorldRenderer implements WorldRenderer {
     const motion = reduced ? 0 : 1;
     const bounce = motion * Math.sin(this.clock * rig.speed * 1.2) * 0.004 * Math.min(1, rig.speed / 10);
     const jolt = motion * this.shake * 0.02;
-    this.cabRoot.position.set(rig.pose.x - this.origin.x, h + RAIL_TOP + CAB_FLOOR - 0.63 + bounce + jolt * Math.sin(this.clock * 61), rig.pose.z - this.origin.z);
+    this.cabRoot.position.set(rig.pose.x - this.origin.x, h + RAIL_TOP + CAB_FLOOR + bounce + jolt * Math.sin(this.clock * 61), rig.pose.z - this.origin.z);
     this.cabRoot.rotation.set(0, -rig.pose.heading, motion * this.sway + jolt * 0.4 * Math.sin(this.clock * 47), "YXZ");
 
     // Light: one long day.
@@ -695,6 +773,7 @@ export class InkWorldRenderer implements WorldRenderer {
     this.ground?.update(dt, env, rigWorld, cam);
     this.weather?.update(dt, env, rigWorld, cam);
     this.leafFall?.update(dt, (1 - env.leaves) * env.vegetation * (reduced ? 0 : 1), cam);
+    this.flock?.setViewer?.(this.camera.getWorldPosition(new THREE.Vector3()));
     this.flock?.update(dt, this.clock, new THREE.Vector3(rig.pose.x + Math.sin(rig.pose.heading) * 160, 38, rig.pose.z - Math.cos(rig.pose.heading) * 160));
     if (this.flock) this.flock.object.visible = env.birds > 0.3;
 
@@ -712,7 +791,7 @@ export class InkWorldRenderer implements WorldRenderer {
         this.portraitTimer = 1 / 12;
         const face = this.view?.cabin.face ?? { stage: 0, smile: 0.8, fatigue: 0, grief: 0, shock: 0, dissociation: 0, age: 0 };
         const glitch = this.envOverride ? 1 : 0;
-        this.portrait.draw(face, this.clock, { speed: rig.speed / 20, crack: Math.min(1, (this.view?.cabin.impacts ?? 0) / 12), glitch, reducedMotion: reduced });
+        this.portrait.draw(face, this.clock, { speed: rig.speed * 3.6, crack: Math.min(1, (this.view?.cabin.impacts ?? 0) / 12), glitch, reducedMotion: reduced, env: this.env });
       }
     }
 

@@ -114,7 +114,10 @@ export async function runLab(registry: LabScene[]): Promise<void> {
       m.receiveShadow = true;
     }
   });
-  pipeline.calibrate(scene);
+  // Only calibrate when the scene brings its own lights (world labs set their own).
+  let lit = false;
+  scene.traverse((o) => (lit ||= (o as THREE.Light).isLight === true));
+  if (lit) pipeline.calibrate(scene);
   const resize = () => {
     pipeline.setSize(innerWidth, innerHeight);
     camera.aspect = innerWidth / innerHeight;

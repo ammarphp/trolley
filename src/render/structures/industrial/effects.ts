@@ -418,7 +418,7 @@ export function createSparks(sources: FireSource[], rng: Rng, count: number, dri
  * Warm point lights for the biggest fires: they light nearby walls so the
  * hatching thins where the blaze falls. Returned hidden; `setNight(true)`
  * reveals them. Note: toggling lights changes three.js program keys, so the
- * integrator may prefer to leave them off.
+ * world renderer may prefer to leave them off.
  */
 export function createFireLights(sources: FireSource[], rng: Rng, max = 3): Effect {
   const group = new THREE.Group();

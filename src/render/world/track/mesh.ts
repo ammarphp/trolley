@@ -102,7 +102,11 @@ export class TrackRenderer {
   private chunks = new Map<string, Chunk>();
   private height: HeightFn;
   private material = inkMaterial({ vertexInk: true, hatch: 0.11, shade: 0.8 });
-  private ballast = inkMaterial({ vertexInk: true, hatch: 0.07, pattern: "stipple", shade: 0.7, edge: 0.8 });
+  private ballast = (() => {
+    const m = inkMaterial({ vertexInk: true, hatch: 0.07, pattern: "stipple", shade: 0.7, edge: 0.8 });
+    m.shadowSide = THREE.FrontSide;
+    return m;
+  })();
   private highlight = inkMaterial({ vertexInk: true, hatch: 0.11 });
   private blades: { left: THREE.Mesh; right: THREE.Mesh; junction: Junction; value: number } | null = null;
 

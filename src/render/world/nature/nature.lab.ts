@@ -33,7 +33,7 @@ function label(text: string, width = 6): THREE.Mesh {
   const { ctx: g, texture } = createInkCanvas(1024, 128);
   g.clearRect(0, 0, 1024, 128);
   g.fillStyle = "#000";
-  g.font = "600 italic 58px Georgia, 'Times New Roman', serif";
+  g.font = "600 58px Geist, Helvetica, Arial, sans-serif";
   g.textAlign = "center";
   g.textBaseline = "middle";
   g.fillText(text, 512, 66);
@@ -136,7 +136,7 @@ interface Placement {
   scale?: number;
 }
 
-/** Group placements by prefab and draw each group as one InstancedMesh, as the integrator will. */
+/** Group placements by prefab and draw each group as one InstancedMesh, as the world renderer does. */
 function scatter(ctx: LabContext, items: Placement[], leaves: number): { drawCalls: number; triangles: number } {
   const groups = new Map<string, Placement[]>();
   for (const it of items) {
@@ -416,7 +416,7 @@ function pastoral(ctx: LabContext, late: boolean): void {
   const stats = scatter(ctx, items, leaves);
   hangWires(ctx, poles);
   (window as unknown as { __natureStats?: unknown }).__natureStats = stats;
-  console.info(`nature in situ: ${stats.drawCalls} instanced draw calls, ${stats.triangles} triangles`);
+  console.warn(`nature in situ: ${stats.drawCalls} instanced draw calls, ${stats.triangles} triangles`);
   if (late) {
     const fall = createLeafFall({ max: 260 });
     ctx.scene.add(fall.object);

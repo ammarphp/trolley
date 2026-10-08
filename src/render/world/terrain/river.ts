@@ -10,7 +10,7 @@
  *
  * The mesh sits a few centimetres above the height field and lifts slightly
  * with distance so the coarse far rings of the ground never poke through.
- * Rivers crossing the track need a bridge from the integrator: the banks are
+ * Rivers crossing the track need a bridge from the world renderer: the banks are
  * 0.4 m levees and are not flattened under the rails.
  */
 import * as THREE from "three";
@@ -20,6 +20,7 @@ import { heightAt } from "./height.ts";
 import { GROUND_LATTICE } from "./ground.ts";
 import { INK2D_GLSL } from "./glsl.ts";
 import { createInkLambert, trackPixelScale } from "./ink-lambert.ts";
+import { nightAmount } from "../sky/sun.ts";
 
 export interface RiverOptions {
   /** World XZ polyline (absolute metres), at least two points. */
@@ -97,6 +98,9 @@ varying vec2 vLat;
 uniform vec4 uREnv;  // water half-width (m), drought, storm, night
 uniform vec4 uRGeo;  // design half-width, bank width, gloom, perfection
 uniform vec2 uROff;  // world offset modulo the ground lattice
+uniform vec2 uROffDiv; // world offset / ground lattice (whole lattices)
+#define R_M ${GROUND_LATTICE.toFixed(1)}
+vec2 rBase(float L) { return uROffDiv * (R_M / L); }
 uniform float uREdge;
 uniform float uRObjectId;
 uniform vec3 uPxScale;
@@ -150,9 +154,9 @@ const FRAGMENT_OUT = /* glsl */ `
     cov = max(cov, smoothstep(0.8, 0.95, wTone));
     // Rain rings near the cab.
     if (storm > 0.2 && dist < 40.0) {
-      vec2 c = floor(wp / 0.9);
-      vec2 h = tgHash2(c + 3.0);
-      vec2 ctr = (c + 0.2 + 0.6 * h) * 0.9;
+      vec2 c = floor(wp / 0.75);
+      vec2 h = tgHash2(c + rBase(0.75) + 3.0);
+      vec2 ctr = (c + 0.2 + 0.6 * h) * 0.75;
       float ph = fract(INK_T * (0.7 + h.y) + h.x);
       float rr = ph * 0.45;
       vec2 d = wp - ctr;
@@ -169,9 +173,9 @@ const FRAGMENT_OUT = /* glsl */ `
     vec2 ts;
     vec2 sd;
     vec2 oid;
-    float e = tgVoronoi(wp / 0.9, 0.85, vec2(0.0), cid, ts, sd, oid) * 0.9;
+    float e = tgVoronoi(wp / 0.75, 0.85, rBase(0.75), cid, ts, sd, oid) * 0.75;
     float mppE = max(abs(dot(dpx, normalize(sd))) + abs(dot(dpy, normalize(sd))), 1e-6);
-    float cellPx = 0.9 / max(length(dpy), 1e-6) / pr;
+    float cellPx = 0.75 / max(length(dpy), 1e-6) / pr;
     float cracks = tgLine(e, mppE, mix(0.015, 0.05, tgHash(cid + oid)), 0.6 * pr, 1.6 * pr) * smoothstep(3.0, 7.0, cellPx);
     // Curled mud flakes: a short hatch in the middle of some cells.
     cov = max(cov, cracks * (0.55 + 0.45 * dry));
@@ -208,7 +212,17 @@ const FRAGMENT_OUT = /* glsl */ `
     cov = max(cov, tgLine(av - (H + B), mppV, 0.03, 0.6 * pr, 1.0 * pr) * 0.6);
     tone += smoothstep(0.08, 0.5, shadow) * 0.5;
   }
-  // Light and night hatching over everything.
+  // Night: the same horizon-parallel ruling as the land and sky.
+  if (night > 0.01) {
+    vec3 vv = -vViewPosition;
+    float focal = uPxScale.x;
+    float hPx = tgHorizonPx(vv, viewMatrix, focal);
+    float amb = night * (av < halfW ? 0.5 : 0.6);
+    float t = amb * (0.82 + 0.18 * smoothstep(-30.0 * pr, -260.0 * pr, hPx));
+    cov = max(cov * (1.0 - night * 0.3), tgRuled(hPx, focal * vv.x / max(-vv.z, 1e-4), t, pr, 0.0));
+    tone = gloom * 0.2;
+  }
+  // Light hatching over everything.
   if (tone > 0.1) {
     vec2 n1 = vec2(0.70710678, 0.70710678);
     float mpp1 = max(abs(dot(dpx, n1)) + abs(dot(dpy, n1)), 1e-6);
@@ -301,13 +315,14 @@ export function createRiver(options: RiverOptions): RiverModule {
     uREnv: { value: new THREE.Vector4(W / 2, 0, 0, 0) },
     uRGeo: { value: new THREE.Vector4(W / 2, B, 0, 0) },
     uROff: { value: new THREE.Vector2() },
+    uROffDiv: { value: new THREE.Vector2() },
     uRCam: { value: new THREE.Vector3() },
     uREdge: { value: 0.6 },
     uRObjectId: { value: options.objectId ?? 0.05 },
     uPxScale: { value: new THREE.Vector3(700, 1, 720) },
   };
   const material = createInkLambert({
-    key: "ink-river-v3",
+    key: "ink-river-v5",
     uniforms,
     vertexHead: VERTEX_HEAD,
     vertexTail: VERTEX_TAIL,
@@ -358,10 +373,11 @@ export function createRiver(options: RiverOptions): RiverModule {
       uniforms.uRCam.value.copy(cam);
       const M = GROUND_LATTICE;
       uniforms.uROff.value.set(off.x - Math.floor(off.x / M) * M, off.z - Math.floor(off.z / M) * M);
+      uniforms.uROffDiv.value.set(Math.floor(off.x / M), Math.floor(off.z / M));
       const water = THREE.MathUtils.clamp(env.water, 0, 1);
       const dry = THREE.MathUtils.smoothstep(env.drought, 0.15, 0.95);
       const half = (W / 2) * (0.3 + 0.7 * water) * (1 - dry * 0.93);
-      uniforms.uREnv.value.set(half, env.drought, env.storm, THREE.MathUtils.smoothstep(env.timeOfDay, 0.8, 0.94));
+      uniforms.uREnv.value.set(half, env.drought, env.storm, nightAmount(env.timeOfDay));
       uniforms.uRGeo.value.z = env.gloom;
       uniforms.uRGeo.value.w = env.perfection;
     },

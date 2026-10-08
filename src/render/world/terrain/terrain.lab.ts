@@ -20,7 +20,34 @@ import { Kit, block, gable } from "../../core/geometry.ts";
 import { inkMaterial } from "../../core/ink-material.ts";
 import { heightAt } from "./height.ts";
 
+import { createRiver } from "./river.ts";
+
 export const scenes: LabScene[] = [
+  {
+    name: "river-states",
+    description: "A river seen from its bank: params {water, drought}.",
+    build(ctx) {
+      const env = envOf({ timeOfDay: 0.3, ...(ctx.params as Partial<EnvironmentTarget>) });
+      const sun = ctx.standardStage({ ground: false });
+      applyLighting(ctx, sun, env, sunFor(env.timeOfDay));
+      const ground = createGround({ seed: "lab" });
+      ctx.scene.add(ground.object);
+      const river = createRiver({ points: [[-60, 40], [-20, -10], [5, -60], [0, -140], [-40, -230], [-120, -300]] });
+      ctx.scene.add(river.object);
+      const high = (ctx.params as { high?: boolean }).high;
+      // From the embankment of a line that runs beside the river.
+      const eye: [number, number, number] = high ? [40, 90, 60] : [30, heightAt(30, 0) + 7, 0];
+      ctx.view(eye, high ? [-8, 0, -40] : [0, heightAt(0, -70), -70], 55);
+      console.warn(`river length ${river.length.toFixed(0)} m, tris ${river.triangles}`);
+      ctx.camera.far = 1600;
+      ctx.camera.updateProjectionMatrix();
+      const rig = new THREE.Vector3(0, 0, 0);
+      ctx.onFrame((dt) => {
+        ground.update(dt, env, rig, ctx.camera);
+        river.update(dt, env, rig, ctx.camera);
+      });
+    },
+  },
   {
     name: "ground-shadow",
     description: "Cast shadows on the ground (a barn and a wall near the line).",

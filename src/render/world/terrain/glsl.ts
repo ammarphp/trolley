@@ -45,6 +45,14 @@ float tgNoiseB(vec2 p, vec2 base) {
   float d = tgHash(i + vec2(1.0, 1.0));
   return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
 }
+// Noise periodic in the angle a (radians, any range) with 'freq' features
+// per radian, varying with y: no seam where atan() wraps.
+float tgNoiseAngle(float a, float freq, float y) {
+  float t = fract(a / 6.2831853 + 0.5);
+  float L = 6.2831853 * freq;
+  float u = t * L;
+  return mix(tgNoise(vec2(u, y)), tgNoise(vec2(u - L, y)), t);
+}
 float tgFbm(vec2 p) {
   float s = tgNoise(p) * 0.5;
   s += tgNoise(p * 2.03 + 17.1) * 0.25;
@@ -100,6 +108,43 @@ float tgVoronoi(vec2 x, float jit, vec2 base, out vec2 cellId, out vec2 toSite, 
   toSite = mr;
   return md;
 }
+// Cheaper Voronoi borders (18 cell visits instead of 34): the border pass
+// searches only the 3x3 block around the nearest site. Exact for jitter up
+// to ~0.8; rare, tiny errors above that. Same outputs as tgVoronoi.
+float tgVoronoiFast(vec2 x, float jit, vec2 base, out vec2 cellId, out vec2 toSite, out vec2 siteDelta, out vec2 otherId) {
+  vec2 n = floor(x);
+  vec2 f = x - n;
+  vec2 mg = vec2(0.0);
+  vec2 mr = vec2(0.0);
+  float md = 8.0;
+  for (int j = -1; j <= 1; j++) {
+    for (int i = -1; i <= 1; i++) {
+      vec2 g = vec2(float(i), float(j));
+      vec2 o = 0.5 + (tgHash2(n + g + base) - 0.5) * jit;
+      vec2 r = g + o - f;
+      float d = dot(r, r);
+      if (d < md) { md = d; mr = r; mg = g; }
+    }
+  }
+  md = 8.0;
+  siteDelta = vec2(1.0, 0.0);
+  otherId = n + mg + base;
+  for (int j = -1; j <= 1; j++) {
+    for (int i = -1; i <= 1; i++) {
+      vec2 g = mg + vec2(float(i), float(j));
+      vec2 o = 0.5 + (tgHash2(n + g + base) - 0.5) * jit;
+      vec2 r = g + o - f;
+      vec2 dr = r - mr;
+      if (dot(dr, dr) > 1e-5) {
+        float d = dot(0.5 * (mr + r), normalize(dr));
+        if (d < md) { md = d; siteDelta = dr; otherId = n + g + base; }
+      }
+    }
+  }
+  cellId = n + mg + base;
+  toSite = mr;
+  return md;
+}
 // Parallel pen strokes. x: metres across the strokes; y: metres along them;
 // mpp: metres per pixel across the strokes. Strokes sit every 'period' metres
 // and are thinned out by octaves (every other stroke fades) whenever they
@@ -122,6 +167,31 @@ float tgPen(float x, float y, float mpp, float period, float worldW, float minPx
   float n2 = tgNoise(vec2(y / (p * 3.0 + 0.25) + 11.0, idx * 3.1 + seed));
   line *= mix(1.0, smoothstep(0.1, 0.22, n2), breakup * 0.9);
   return line;
+}
+// Device pixels above the true horizon for a view-space direction v.
+// Lines of constant value are straight on screen and parallel to the
+// horizon, whatever the camera's roll or pitch.
+float tgHorizonPx(vec3 v, mat4 view, float focal) {
+  vec3 U = mat3(view) * vec3(0.0, 1.0, 0.0);
+  vec2 sp = focal * v.xy / max(-v.z, 1e-4);
+  return (dot(sp, U.xy) - focal * U.z) / max(length(U.xy), 1e-4);
+}
+// Machine-ruled horizontal lines carrying tone t (0 paper .. 1 solid) at a
+// constant on-screen spacing. Light tones space the lines out (by octaves)
+// rather than thinning them below a pen's width. wob: 0..1 hand wobble.
+float tgRuled(float hPx, float xPx, float t, float pr, float wob) {
+  float spacing = 3.4 * pr;
+  float minW = 0.75 * pr;
+  float lvl = clamp(log2(minW / max(t * spacing, 1e-4)), 0.0, 4.0);
+  float per = spacing * exp2(floor(lvl));
+  float u = hPx / per;
+  float idx = floor(u + 0.5);
+  float n = tgNoise(vec2(xPx / (60.0 * pr), idx * 1.7)) - 0.5;
+  float w = max(t * per, minW) * (1.0 + n * wob);
+  float line = 1.0 - smoothstep(w * 0.5 - 0.5, w * 0.5 + 0.5, abs(u - idx) * per);
+  line *= 1.0 - mod(idx, 2.0) * fract(lvl) * step(lvl, 3.999);
+  line *= smoothstep(0.004, 0.02, t);
+  return max(line, smoothstep(0.86, 0.95, t));
 }
 // A single pen line at signed distance d (metres) with metres-per-pixel mpp.
 float tgLine(float d, float mpp, float worldW, float minPx, float maxPx) {

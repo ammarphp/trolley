@@ -21,6 +21,11 @@ export interface SkyOptions {
    * falling back to `sunDirection(timeOfDay)`.
    */
   sun?: "scene" | "timeOfDay" | THREE.DirectionalLight;
+  /**
+   * World direction toward the moon at night. Default: 25 degrees left of
+   * the -Z heading (the journey's heading 0), 17 degrees up.
+   */
+  moon?: THREE.Vector3;
 }
 
 export interface SkyModule {
@@ -29,7 +34,7 @@ export interface SkyModule {
   readonly dome: SkyDome;
   readonly clouds: CloudField;
   readonly backdrop: Backdrop;
-  /** Direction toward the sun (or moon at night) used last frame. */
+  /** Direction toward the key light (the sun) used last frame. */
   readonly sunDir: THREE.Vector3;
   readonly triangles: number;
   /** Suppress lightning screen flashes (also honoured by weather). */
@@ -45,7 +50,9 @@ export function createSky(options: SkyOptions = {}): SkyModule {
   const backdrop = createBackdrop({ seed: options.seed, quality: options.quality });
   group.add(dome.object, clouds.object, backdrop.object);
   const sunDir = new THREE.Vector3(0.3, 0.6, -0.7).normalize();
+  const moonDir = options.moon?.clone().normalize() ?? new THREE.Vector3(-Math.sin(0.44) * Math.cos(0.3), Math.sin(0.3), -Math.cos(0.44) * Math.cos(0.3));
   const windDir = new THREE.Vector2(1, 0);
+  const litDir = new THREE.Vector3();
   let light: THREE.DirectionalLight | null = options.sun instanceof THREE.DirectionalLight ? options.sun : null;
   let searchIn = 0;
   let time = 0;
@@ -68,16 +75,17 @@ export function createSky(options: SkyOptions = {}): SkyModule {
       if (light && light.parent) lightDirection(light, sunDir);
       else sunDirection(env.timeOfDay, sunDir);
       const night = nightAmount(env.timeOfDay);
+      litDir.copy(sunDir).lerp(moonDir, THREE.MathUtils.smoothstep(night, 0.3, 0.8)).normalize();
       const w = INK_GLOBALS.uInkWind.value;
       windDir.set(w.x, w.y);
       if (windDir.lengthSq() < 1e-6) windDir.set(1, 0);
       windDir.normalize();
-      dome.set({ sunDir, night, gloom: env.gloom, storm: env.storm, cloud: env.cloud, fire: env.fire, uniformity: Math.max(env.uniformity, env.perfection), time });
-      clouds.update(dt, { sunDir, cloud: env.cloud, storm: env.storm, gloom: env.gloom, night, fire: env.fire, wind: env.wind, windDir, uniformity: Math.max(env.uniformity, env.perfection) }, rigWorld, camera);
+      dome.set({ sunDir, moonDir, night, gloom: env.gloom, storm: env.storm, cloud: env.cloud, fire: env.fire, uniformity: Math.max(env.uniformity, env.perfection), time });
+      clouds.update(dt, { sunDir: litDir, cloud: env.cloud, storm: env.storm, gloom: env.gloom, night, fire: env.fire, wind: env.wind, windDir, uniformity: Math.max(env.uniformity, env.perfection) }, rigWorld, camera);
       backdrop.update(
         dt,
         {
-          sunDir,
+          sunDir: litDir,
           habitation: env.habitation,
           industry: env.industry,
           compute: env.compute,

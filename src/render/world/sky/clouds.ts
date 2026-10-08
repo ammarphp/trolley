@@ -35,7 +35,7 @@ interface Puff {
 /** One puff: a noise-displaced sphere, flattened below `floor`. */
 function puffGeometry(p: Puff, noise: Noise, floor: number, seed: number): THREE.BufferGeometry {
   const detail = p.detail ?? 1;
-  let g: THREE.BufferGeometry = new THREE.SphereGeometry(1, Math.max(6, Math.round(13 * detail)), Math.max(4, Math.round(9 * detail)));
+  let g: THREE.BufferGeometry = new THREE.SphereGeometry(1, Math.max(6, Math.round(11 * detail)), Math.max(4, Math.round(7 * detail)));
   g.deleteAttribute("uv");
   g = mergeVertices(g, 1e-5);
   const pos = g.getAttribute("position") as THREE.BufferAttribute;
@@ -150,7 +150,7 @@ export function cloudGeometry(kind: CloudKind, seed: number | string): THREE.Buf
     for (let i = 0; i < n; i++) {
       const t = i / (n - 1);
       const r = L * rng.range(0.07, 0.12) * (1 - Math.abs(t - 0.5) * 0.8);
-      puffs.push({ x: (t - 0.5) * L * 0.9 + rng.range(-0.02, 0.02) * L, y: rng.range(-12, 12), z: rng.range(-0.06, 0.06) * L, r, sy: rng.range(0.045, 0.07), sz: rng.range(0.35, 0.5), detail: 0.8 });
+      puffs.push({ x: (t - 0.5) * L * 0.9 + rng.range(-0.02, 0.02) * L, y: rng.range(-20, 20), z: rng.range(-0.06, 0.06) * L, r, sy: rng.range(0.09, 0.13), sz: rng.range(0.35, 0.5), detail: 0.8 });
     }
     floor = -Infinity;
   } else {
@@ -179,7 +179,33 @@ export function cloudGeometry(kind: CloudKind, seed: number | string): THREE.Buf
     puffs.push(...bubbles(rng, puffs.filter((p) => !p.sy), 26, [0.22, 0.34], 0.1));
   }
   const parts = puffs.map((p, i) => puffGeometry(p, noise, floor, i * 13.1));
-  return merge(parts);
+  const merged = merge(parts);
+  softenNormals(merged, kind === "stratus" ? 0.2 : 0.4, floor);
+  return merged;
+}
+
+/**
+ * Blend each puff normal toward the normal of the cloud's overall mass (an
+ * ellipsoid about its centroid), so the pen draws the scalloped silhouette
+ * and a few deep folds rather than outlining every sphere.
+ */
+function softenNormals(g: THREE.BufferGeometry, amount: number, floor: number): void {
+  g.computeBoundingBox();
+  const bb = g.boundingBox!;
+  const c = bb.getCenter(new THREE.Vector3());
+  const size = bb.getSize(new THREE.Vector3()).multiplyScalar(0.5);
+  const pos = g.getAttribute("position") as THREE.BufferAttribute;
+  const nrm = g.getAttribute("normal") as THREE.BufferAttribute;
+  const n = new THREE.Vector3();
+  const r = new THREE.Vector3();
+  for (let i = 0; i < pos.count; i++) {
+    n.fromBufferAttribute(nrm, i);
+    if (n.y < -0.99 && pos.getY(i) <= floor + 1e-3) continue; // keep the flat base
+    r.set((pos.getX(i) - c.x) / Math.max(size.x, 1), (pos.getY(i) - c.y) / Math.max(size.y, 1), (pos.getZ(i) - c.z) / Math.max(size.z, 1)).normalize();
+    n.lerp(r, amount).normalize();
+    nrm.setXYZ(i, n.x, n.y, n.z);
+  }
+  nrm.needsUpdate = true;
 }
 
 // --------------------------------------------------------------- material
@@ -357,7 +383,7 @@ export function createCloudField(options: CloudFieldOptions = {}): CloudField {
   };
 
   const spec: Array<{ kind: CloudKind; variants: number; perVariant: number }> = [
-    { kind: "cumulus", variants: q === "low" ? 3 : 6, perVariant: q === "low" ? 3 : 4 },
+    { kind: "cumulus", variants: q === "low" ? 3 : 5, perVariant: q === "low" ? 3 : 4 },
     { kind: "stratus", variants: 3, perVariant: 3 },
     { kind: "cumulonimbus", variants: 2, perVariant: 2 },
   ];
@@ -430,7 +456,7 @@ export function createCloudField(options: CloudFieldOptions = {}): CloudField {
       const shellFar = Math.min(SHELL_FAR, far * 0.975);
       const shellNear = Math.min(SHELL_NEAR, shellFar - 200);
       const want = {
-        cumulus: THREE.MathUtils.clamp(st.cloud * 1.15 - st.storm * 0.35 - st.uniformity * 0.5, 0, 1),
+        cumulus: THREE.MathUtils.clamp(st.cloud * 1.15 - st.storm * 0.6 - st.uniformity * 0.5, 0, 1),
         stratus: THREE.MathUtils.clamp(st.gloom * 1.1 + Math.max(0, st.cloud - 0.55) * 1.6 + st.storm * 0.4, 0, 1),
         cumulonimbus: THREE.MathUtils.clamp(st.storm * 1.2 - 0.1, 0, 1),
       };
@@ -474,7 +500,7 @@ export function createCloudField(options: CloudFieldOptions = {}): CloudField {
       su.uCloudA.value.set(0.16 + st.storm * 0.12, st.night, st.gloom, st.fire * 0.4);
       su.uCloudB.value.set(st.storm, st.uniformity, pixelRatio, 1);
       lu.uCloudA.value.set(0.0, st.night, st.gloom * 0.6, 0);
-      lu.uCloudB.value.set(0, st.uniformity, pixelRatio, 0.8);
+      lu.uCloudB.value.set(0, st.uniformity, pixelRatio, 0.55);
     },
     dispose() {
       for (const g of geometries) g.dispose();

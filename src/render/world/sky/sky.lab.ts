@@ -90,6 +90,35 @@ export const scenes: LabScene[] = [
     },
   },
   {
+    name: "world-fog",
+    description: "Fog banks low over the fields.",
+    build(ctx) {
+      worldLab(ctx, {
+        env: { cloud: 0.5, fog: 0.85, gloom: 0.2, water: 1, vegetation: 0.9, habitation: 0.35, timeOfDay: 0.3, wind: 0.1 },
+        river: LAB_RIVER,
+        origin: [-1200, 900],
+      });
+    },
+  },
+  {
+    name: "world-noflash",
+    description: "Storm with noFlashing: the bolt is drawn, no flash callback fires.",
+    build(ctx) {
+      const w = worldLab(ctx, {
+        env: { storm: 0.8, lightning: 1, gloom: 0.5, cloud: 0.8, timeOfDay: 0.5, drought: 0.3, vegetation: 0.6 },
+        strikeAt: 0.93,
+        strikeYaw: 0.25,
+        origin: [2400, -1800],
+      });
+      w.sky.setNoFlashing(true);
+      let flashes = 0;
+      w.weather.onLightning(() => flashes++);
+      ctx.onFrame((_dt, t) => {
+        if (t > 0.98 && t < 0.99) console.warn(`noFlashing flash callbacks: ${flashes}`);
+      });
+    },
+  },
+  {
     name: "cloud-lineup",
     description: "Cloud variants at render scale against paper.",
     build(ctx) {

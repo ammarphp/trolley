@@ -45,6 +45,9 @@ export function worldLab(ctx: LabContext, opts: WorldLabOptions): WorldLab {
   delete params.noTrack;
   delete (params as { trackNoShadow?: boolean }).trackNoShadow;
   delete (params as { light?: unknown }).light;
+  delete (params as { yaw?: unknown }).yaw;
+  delete (params as { perf?: unknown }).perf;
+  delete (params as { hide?: unknown }).hide;
   const env = envOf({ ...opts.env, ...params });
   INK_GLOBALS.uInkWorldOffset.value.set(origin[0], 0, origin[1]);
   const sun = ctx.standardStage({ ground: false });
@@ -84,6 +87,49 @@ export function worldLab(ctx: LabContext, opts: WorldLabOptions): WorldLab {
     weather.update(dt, env, rig, ctx.camera);
     river?.update(dt, env, rig, ctx.camera);
   });
+  // Optional: hide modules to profile them, params {hide: ["ground", ...]}.
+  const hide = (ctx.params as { hide?: string[] }).hide ?? [];
+  if (hide.length) {
+    ctx.onFrame(() => {
+      ground.object.visible = !hide.includes("ground");
+      sky.dome.object.visible = !hide.includes("dome");
+      sky.clouds.object.visible = !hide.includes("clouds");
+      sky.backdrop.object.visible = !hide.includes("backdrop");
+      weather.object.visible = !hide.includes("weather");
+      if (river) river.object.visible = !hide.includes("river");
+    });
+  }
+  // Optional camera yaw (degrees) to inspect other directions: params {yaw}.
+  const yaw = (ctx.params as { yaw?: number }).yaw;
+  if (yaw !== undefined) {
+    ctx.camera.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), (yaw * Math.PI) / 180);
+    ctx.camera.updateMatrixWorld();
+  }
+  // Optional GPU timing: params {perf: true} renders 40 frames and logs ms/frame.
+  if ((ctx.params as { perf?: boolean }).perf) {
+    let done = false;
+    ctx.onFrame((_dt, t) => {
+      if (done || t < 0.95) return;
+      done = true;
+      const r = ctx.pipeline.renderer;
+      const gl = r.getContext();
+      const px = new Uint8Array(4);
+      const sync = () => gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
+      for (let i = 0; i < 5; i++) ctx.pipeline.render(ctx.scene, ctx.camera, 1 / 60);
+      sync();
+      r.info.autoReset = false;
+      r.info.reset();
+      const N = 40;
+      const t0 = performance.now();
+      for (let i = 0; i < N; i++) {
+        ctx.pipeline.render(ctx.scene, ctx.camera, 1 / 60);
+        sync();
+      }
+      const ms = (performance.now() - t0) / N;
+      console.warn(`perf: ${ms.toFixed(2)} ms/frame synced (whole lab scene incl. shadow pass + composite), draw calls/frame ${(r.info.render.calls / N).toFixed(0)}, tris/frame ${(r.info.render.triangles / N).toFixed(0)}`);
+      r.info.autoReset = true;
+    });
+  }
   // Budgets after the first update (visible geometry only), printed as warnings.
   let reported = false;
   ctx.onFrame((_dt, t) => {
@@ -97,6 +143,14 @@ export function worldLab(ctx: LabContext, opts: WorldLabOptions): WorldLab {
     report("sky dome", sky.dome.object);
     report("clouds (visible)", sky.clouds.object);
     report("backdrop (visible)", sky.backdrop.object);
+    for (const c of sky.clouds.object.children) {
+      const m = c as THREE.InstancedMesh;
+      if (m.count) console.warn(`  clouds/${m.name}: ${m.count} x ${m.geometry.getAttribute("position").count / 3} tris`);
+    }
+    for (const c of sky.backdrop.object.children) {
+      const m = c as THREE.Mesh;
+      console.warn(`  backdrop/${m.name}: ${m.geometry.getAttribute("position").count / 3} tris, visible ${m.visible}`);
+    }
     report("weather (visible)", weather.object);
     if (river) report("river", river.object);
   });

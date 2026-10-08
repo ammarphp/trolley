@@ -1,6 +1,6 @@
 /**
  * Lineside furniture: telegraph poles (with wire attachment points so the
- * integrator can hang catenary wires between poles) and small marker posts.
+ * world renderer can hang catenary wires between poles) and small marker posts.
  *
  * Telegraph poles face +Z, which is the direction the wires run: crossarms
  * lie along local X, so place poles with local Z along the route.

@@ -21,6 +21,8 @@ export const CH = {
   order: 4,
   trees: 5,
   smoke: 6,
+  /** Chimney and cooling-tower plumes: grow with industry. */
+  plume: 7,
 } as const;
 
 export type SkylineKind =
@@ -215,6 +217,32 @@ export function skylineElement(kind: SkylineKind, rng: Rng): Kit {
       k.add(block(14, 90, 14), { tone: "paper" });
       break;
     }
+  }
+  return k;
+}
+
+/**
+ * A thin plume for a chimney (or a broad one for a cooling tower) standing
+ * on (0, 0, 0), drifting toward +x. Leaning and breathing happen in the
+ * backdrop's vertex shader.
+ */
+export function plume(rng: Rng, broad: boolean): Kit {
+  const k = new Kit();
+  let y = 0;
+  let x = 0;
+  const H = broad ? rng.range(80, 120) : rng.range(45, 80);
+  let s = 0;
+  // Rises, then bends over downwind: position along a quarter curve.
+  while (s < 1) {
+    const r = (broad ? 20 + s * 26 : 3 + s * 12) * rng.range(0.85, 1.15);
+    const bend = Math.sin(s * Math.PI * 0.5);
+    const along = (broad ? 260 : 220) * s * s;
+    x = along * bend + rng.range(-0.15, 0.15) * r;
+    y = H * Math.sqrt(s) + rng.range(-0.1, 0.1) * r;
+    const g = new THREE.SphereGeometry(r, 7, 4);
+    g.scale(1.2, 0.85, 1);
+    k.add(g, { tone: "pale", position: [x, y + r * 0.3, rng.range(-0.1, 0.1) * r] });
+    s += (Math.max(r, 7) * 0.6) / (broad ? 300 : 240);
   }
   return k;
 }

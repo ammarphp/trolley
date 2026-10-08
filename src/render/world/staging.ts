@@ -12,7 +12,7 @@ import type { Junction, Side } from "./track/network.ts";
 import type { TrackLine } from "./track/path.ts";
 import { GAUGE, RAIL_TOP } from "./track/mesh.ts";
 
-export const FIRST_STAKE = 19;
+export const FIRST_STAKE = 15;
 
 export interface PlacedActor {
   object: THREE.Object3D;
@@ -35,12 +35,13 @@ function place(object: THREE.Object3D, line: TrackLine, s: number, lateral: numb
   line.extendTo(s + 2);
   const p = line.offset(s, lateral);
   object.position.set(p.x, height, p.z);
-  // Assets face +Z. Heading h travels toward (sin h, -cos h).
-  const toward = -p.heading + Math.PI; // facing back down the line toward the trolley
+  // Assets face +Z. Heading h travels toward (sin h, -cos h), so a rotation
+  // of -h turns an asset's front back down the line, toward the trolley.
+  const toward = -p.heading;
   if (facing === "trolley") object.rotation.y = toward + rng.range(-0.35, 0.35);
-  else if (facing === "away") object.rotation.y = toward + Math.PI;
-  else if (facing === "along") object.rotation.y = toward + Math.PI / 2;
-  else object.rotation.y = toward + (lateral < 0 ? -Math.PI / 2 : Math.PI / 2) + rng.range(-0.3, 0.3);
+  else if (facing === "away") object.rotation.y = toward + Math.PI + rng.range(-0.3, 0.3);
+  else if (facing === "along") object.rotation.y = toward + (rng.chance(0.5) ? Math.PI / 2 : -Math.PI / 2);
+  else object.rotation.y = toward + (lateral < 0 ? Math.PI / 2 : -Math.PI / 2) + rng.range(-0.3, 0.3);
 }
 
 const CROWD_CAP = 28;
@@ -68,7 +69,9 @@ export function buildTableau(junction: Junction, staging: SideStaging, assets: A
     const option: OptionStaging = staging[side];
     const rng = createRng(`${seed}:${junction.key}:${side}`);
     const struck = option.beat === "impact" || option.beat === "stop" || option.beat === undefined;
-    let s = FIRST_STAKE;
+    // Small objects sit nearer the toe so they read from the cab.
+    const smallOnly = option.occupants.length > 0 && option.occupants.every((o) => o.kind === "prop" || o.kind === "document");
+    let s = smallOnly ? FIRST_STAKE - 6 : FIRST_STAKE;
     const outward = side === "left" ? -1 : 1;
     for (const occ of option.occupants) {
       s = placeOccupant(occ, { line, side, s, struck, rng, add, actors, stakes, assets, seed: `${seed}:${junction.key}:${side}`, deck, outward });
@@ -94,11 +97,14 @@ export function buildTableau(junction: Junction, staging: SideStaging, assets: A
     place(lm, side, rng.range(60, 110), (i % 2 === 0 ? -1 : 1) * rng.range(30, 55), 0, "track", rng);
     add(lm);
   }
-  let signal: THREE.Object3D | null = null;
-  signal = assets.signal();
+  // The junction signal stands at the toe, well out to the right, turned
+  // toward the cab: it reads beside the fork rather than over a route tag.
+  const signal = assets.signal();
   const stemRng = createRng(`${seed}:${junction.key}:signal`);
-  place(signal, junction.stem, junction.toe - 1.5, 3.1, 0, "trolley", stemRng);
-  signal.rotation.y = -junction.stem.pose(junction.toe).heading + Math.PI;
+  place(signal, junction.stem, junction.toe + 4, 5, 0, "trolley", stemRng);
+  signal.rotation.y = -junction.stem.pose(junction.toe).heading - 0.3;
+  signal.userData.setAspect?.("red");
+  signal.userData.setRoute?.(null);
   add(signal);
   return { group, stakes, actors, junction, signal, tickers };
 }
@@ -143,7 +149,9 @@ function placeOccupant(occ: Occupant, c: PlaceContext): number {
         });
         let at = s;
         let lateral = 0;
-        let facing: "track" | "trolley" | "away" | "along" = "trolley";
+        // Crews bent over the rail have their backs to the trolley; people on
+        // the move are side-on; everyone else has seen it coming.
+        let facing: "track" | "trolley" | "away" | "along" = occ.pose === "work" ? "away" : occ.pose === "walk" || occ.pose === "carry" || occ.pose === "queue" ? "along" : "trolley";
         if (spread === "across") {
           // Bound across the rails, bodies along local X, faces toward the trolley.
           at = s + i * 1.15;
@@ -194,7 +202,7 @@ function placeOccupant(occ: Occupant, c: PlaceContext): number {
     case "prop": {
       const n = Math.min(occ.count ?? 1, 8);
       for (let i = 0; i < n; i++) {
-        const prop = assets.prop(occ.prop, { seed: `${c.seed}:${s}:${i}`, scale: occ.scale ?? 1.6 });
+        const prop = assets.prop(occ.prop, { seed: `${c.seed}:${s}:${i}`, scale: occ.scale ?? 2.2 });
         const at = s + i * 0.9;
         const lateral = onRails ? (n > 1 ? (i % 2 ? 0.35 : -0.35) : GAUGE / 2) : c.outward * 2.6;
         place(prop, line, at, lateral, onRails ? c.deck : 0, "trolley", rng);
@@ -209,7 +217,7 @@ function placeOccupant(occ: Occupant, c: PlaceContext): number {
         const doc = assets.document(occ.doc, { seed: `${c.seed}:${s}:${i}`, ...(occ.label ? { label: occ.label } : {}) });
         doc.scale.setScalar(2.2);
         const at = s + i * 1.2;
-        place(doc, line, at, onRails ? 0 : c.outward * 2.6, onRails ? c.deck : 0, "trolley", rng);
+        place(doc, line, at, onRails ? 0 : c.outward * 2.6, onRails ? RAIL_TOP - 0.15 : 0, "trolley", rng);
         record(doc, at, false, onRails ? 0 : 3);
       }
       s += n * 1.2 + 3;
@@ -222,7 +230,7 @@ function placeOccupant(occ: Occupant, c: PlaceContext): number {
         const v = assets.vehicle(occ.vehicle, { seed: `${c.seed}:${s}:${i}` });
         const at = s + 4 + i * 9;
         const lateral = railVehicle && onRails ? 0 : c.outward * rng.range(4.5, 7);
-        place(v, line, at, lateral, railVehicle ? RAIL_TOP - 0.15 : 0, railVehicle ? "away" : "along", rng);
+        place(v, line, at, lateral, railVehicle ? RAIL_TOP : 0, railVehicle ? "away" : "along", rng);
         record(v, at, false, lateral);
       }
       s += n * 9 + 5;

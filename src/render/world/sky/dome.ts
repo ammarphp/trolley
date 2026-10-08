@@ -16,6 +16,8 @@ import { INK2D_GLSL, SKY_LOOK_UNIFORMS, SKY_OUT_GLSL } from "../terrain/glsl.ts"
 
 export interface SkyDomeState {
   sunDir: THREE.Vector3;
+  /** Direction toward the moon (drawn only at night). */
+  moonDir: THREE.Vector3;
   night: number;
   gloom: number;
   storm: number;
@@ -40,6 +42,7 @@ layout(location = 0) out highp vec4 outInk;
 layout(location = 1) out highp vec4 outInfo;
 in vec3 vDir;
 uniform vec3 uSunDir;
+uniform vec3 uMoonDir;
 uniform vec4 uSkyA; // night, gloom, storm, cloud
 uniform vec4 uSkyB; // fire, uniformity, time, sunVisible
 uniform vec3 uPx;   // radians per device px, device px per css px, seed
@@ -74,8 +77,9 @@ void main() {
 
   // ------------------------------------------------------------ tone
   // Bands: long horizontal belts of heavier ruling, drifting slowly.
-  float bandsN = tgNoise(vec2(az * 1.9 + 3.0 + time * 0.004, deg * 0.42));
-  float belt = smoothstep(0.3, 0.7, tgNoise(vec2(az * 0.9 - time * 0.003, deg * 0.22 + 7.0)) * 0.75 + tgNoise(vec2(az * 3.1, deg * 0.6)) * 0.25);
+  // Angular noise is periodic in azimuth, so no seam where atan() wraps.
+  float bandsN = tgNoiseAngle(az + time * 0.002, 1.9, deg * 0.42);
+  float belt = smoothstep(0.3, 0.7, tgNoiseAngle(az - time * 0.0033, 0.9, deg * 0.22 + 7.0) * 0.75 + tgNoiseAngle(az, 3.1, deg * 0.6) * 0.25);
   float bands = 0.35 + 0.9 * bandsN * (0.5 + 0.8 * belt);
   float t = 0.1 * smoothstep(12.0, 42.0, deg) * (1.0 - uniformity * 0.7);
   t += cloud * 0.05 * smoothstep(8.0, 34.0, deg);
@@ -83,7 +87,8 @@ void main() {
   t += storm * (0.16 + 0.34 * smoothstep(0.0, 28.0, deg)) * (0.45 + 0.9 * bandsN * (0.4 + 0.9 * belt));
   // Storms leave a pale gap low over the horizon, the light under the cloud.
   t *= 1.0 - storm * 0.55 * (1.0 - smoothstep(0.5, 6.0, deg));
-  t = min(t, mix(1.0, 0.82, (1.0 - night) * max(gloom, storm)));
+  // Keep storm skies as ruled pen work: never a solid fill by day.
+  t = min(t, mix(1.0, 0.72, (1.0 - night) * max(gloom, storm)));
   // Glow: the ruling thins out around a low sun and above the horizon.
   float glow = exp(-pow(ang / 0.55, 2.0)) * low * dayVis;
   t *= 1.0 - glow * 0.85;
@@ -93,27 +98,12 @@ void main() {
   t = clamp(t, 0.0, 1.0);
 
   // Machine-ruled lines, straight and parallel to the true horizon (so they
-  // tilt and slide with the cab, never curve). Light tones space the lines
-  // out rather than thinning them below a pen's width.
+  // tilt and slide with the cab, never curve).
   vec3 v = mat3(viewMatrix) * d;
-  vec3 U = mat3(viewMatrix) * vec3(0.0, 1.0, 0.0);
   float focal = 1.0 / radPx;
   vec2 sp = focal * v.xy / max(-v.z, 1e-4);
-  float hPx = (dot(sp, U.xy) - focal * U.z) / max(length(U.xy), 1e-4); // px above the horizon
-  float spacing = 3.4 * pr;
-  float minW = 0.75 * pr;
-  float lvl = clamp(log2(minW / max(t * spacing, 1e-4)), 0.0, 4.0);
-  float l0 = floor(lvl);
-  float per = spacing * exp2(l0);
-  float u = hPx / per;
-  float idx = floor(u + 0.5);
-  float wob = mix(tgNoise(vec2(sp.x / (60.0 * pr), idx * 1.7)) - 0.5, 0.0, uniformity);
-  float w = max(t * per, minW) * (1.0 + wob * 0.5 * (gloom + storm));
-  float dpx = abs(u - idx) * per;
-  float cov = 1.0 - smoothstep(w * 0.5 - 0.5, w * 0.5 + 0.5, dpx);
-  cov *= 1.0 - mod(idx, 2.0) * fract(lvl) * step(lvl, 3.999);
-  cov *= smoothstep(0.004, 0.02, t);
-  cov = max(cov, smoothstep(0.86, 0.95, t));
+  float hPx = tgHorizonPx(v, viewMatrix, focal);
+  float cov = tgRuled(hPx, sp.x, t, pr, mix(0.5 * (gloom + storm), 0.0, uniformity));
   // Storm: a crossing diagonal family where the ruling is heavy.
   float crossA = smoothstep(0.42, 0.62, t) * (1.0 - night);
   if (crossA > 0.0) {
@@ -184,11 +174,13 @@ void main() {
       cov *= 1.0 - star * starA;
     }
     // The moon: a crescent where the key light is at night.
-    float mA = night * uSkyB.w * smoothstep(-0.5, 2.0, deg);
+    vec3 moon = normalize(uMoonDir);
+    float mAng = acos(clamp(dot(d, moon), -1.0, 1.0)) / radPx;
+    float mA = night * uSkyB.w * smoothstep(-0.5, 2.0, deg) * (1.0 - storm) * (1.0 - gloom * 0.7);
     float rm = 0.026 / radPx;
-    if (mA > 0.0 && angPx < rm * 2.0) {
-      vec3 e1 = normalize(cross(sun, vec3(0.0, 1.0, 0.0)));
-      vec3 e2 = cross(e1, sun);
+    if (mA > 0.0 && mAng < rm * 2.0) {
+      vec3 e1 = normalize(cross(moon, vec3(0.0, 1.0, 0.0)));
+      vec3 e2 = cross(e1, moon);
       vec2 lp = vec2(dot(d, e1), dot(d, e2)) / radPx;
       float disc = 1.0 - smoothstep(rm - 0.6, rm + 0.4, length(lp));
       float bite = 1.0 - smoothstep(rm * 0.92 - 0.6, rm * 0.92 + 0.4, length(lp - vec2(rm * 0.42, rm * 0.28)));
@@ -200,9 +192,9 @@ void main() {
   // ------------------------------------------------------------ fire glow
   if (fire > 0.01) {
     // Glow over fires beyond the horizon: patches, not a band.
-    float where = smoothstep(0.55, 0.8, tgNoise(vec2(az * 3.1 + 17.0, 2.0)));
+    float where = smoothstep(0.55, 0.8, tgNoiseAngle(az, 3.1, 19.0));
     float band = (1.0 - smoothstep(0.0, 3.5 + 3.0 * where, deg)) * smoothstep(-0.5, 0.4, deg);
-    float flick = 0.7 + 0.3 * tgNoise(vec2(az * 9.0, time * 0.5));
+    float flick = 0.7 + 0.3 * tgNoiseAngle(az, 9.0, time * 0.5);
     accent = max(accent, vec2(band * where * fire * 0.55 * flick, 6.0));
   }
 
@@ -215,6 +207,7 @@ export interface SkyDome {
   object: THREE.Mesh;
   uniforms: {
     uSunDir: THREE.IUniform<THREE.Vector3>;
+    uMoonDir: THREE.IUniform<THREE.Vector3>;
     uSkyA: THREE.IUniform<THREE.Vector4>;
     uSkyB: THREE.IUniform<THREE.Vector4>;
     uPx: THREE.IUniform<THREE.Vector3>;
@@ -226,6 +219,7 @@ export interface SkyDome {
 export function createSkyDome(): SkyDome {
   const uniforms = {
     uSunDir: { value: new THREE.Vector3(0.3, 0.5, -0.8).normalize() },
+    uMoonDir: { value: new THREE.Vector3(-0.45, 0.4, -0.8).normalize() },
     uSkyA: { value: new THREE.Vector4() },
     uSkyB: { value: new THREE.Vector4(0, 0, 0, 1) },
     uPx: { value: new THREE.Vector3(0.001, 1, 0) },
@@ -261,6 +255,7 @@ export function createSkyDome(): SkyDome {
     uniforms,
     set(s) {
       uniforms.uSunDir.value.copy(s.sunDir);
+      uniforms.uMoonDir.value.copy(s.moonDir);
       uniforms.uSkyA.value.set(s.night, s.gloom, s.storm, s.cloud);
       uniforms.uSkyB.value.set(s.fire, s.uniformity, s.time, 1);
     },

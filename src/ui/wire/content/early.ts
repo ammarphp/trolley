@@ -1,0 +1,107 @@
+/**
+ * Stages 1-2: branch lines, livestock, fetes, the parish, the weather; then
+ * the lecture hall discovers the lever. AI appears only as a rumour from a
+ * start-up in Aldgrave.
+ */
+import { bank, D, H, P, S } from "../dsl.ts";
+
+export const EARLY = bank("early", [
+  /* ------------------------------------------------ stage 1: the branch line */
+  H("1-2", "rail", "@ridge-fm", "Cow named {cow} holds the 07:40 at {village} Halt for eleven minutes. Passengers describe her as unhurried.", { thumb: "rail" }),
+  H("1-2", "general", "@ridge-fm|@saltmere-tide", "{village} fete: marrow judged 'suspiciously large'. Grower declines to comment on his methods or his marrow."),
+  H("1", "rail", "@relay", "Common Rail repaints {int:12-40} level-crossing gates in 'Heritage Cream'. Gates otherwise unchanged in function or opinion."),
+  H("1-2", "general", "@ridge-fm", "Heron returns to the {river} footbridge for a {ord:3-9} year. Birdwatchers note that he has not aged and has not said why."),
+  H("1-2", "rail", "@ledger", "{village} signal box wins the regional geranium prize. Signalman credits 'south light and no interference from head office'.", { thumb: "rail" }),
+  H("1", "food", "@ledger", "Harvest forecast: steady. Farmers say 'steady' is the most frightening word a forecast can use."),
+  H("1-2", "food", "@saltmere-tide", "Egg prices unchanged for a {ord:4-9} consecutive month. {village} hens take no questions."),
+  H("1-2", "civic", "@saltmere-tide", "Parish council votes {int:5-9} to {int:1-4} to keep the {village} bus shelter's second bench. Minority report concerns 'bench creep'."),
+  H("1-2", "civic", "@saltmere-tide|@ledger", "Old Kessling cannery to become a heritage walk. The walk will be approximately the length of the cannery."),
+  H("1", "rail", "@ridge-fm", "Enthusiasts gather at {village} to watch a points motor being replaced. 'Worth the drive,' says one. 'Worth two,' says another."),
+  H("1-2", "general", "@ridge-fm", "Lost: one tortoise, answers to Brigadier. Last seen heading for the {village} sidings at his own pace. Do not approach; he is fine."),
+  H("1", "general", "@ridge-fm", "The {river} is at 'a nice height', says the water bailiff, who has been asked by the council to be more specific."),
+  H("1-2", "rail", "@relay", "Common Rail apologises after the 16:12 from {village} arrived at 16:12. 'We understand this was unexpected.'"),
+  H("1", "civic", "@saltmere-tide", "{village} completes its first census in forty years. Population up by one. Residents suspect the vicar's nephew."),
+  H("1-2", "rail", "@ledger", "Timetable reform: the {line} will now stop at {village} on request. Requests must be made in writing, by post, a week ahead."),
+  H("1-2", "rail", "@ridge-fm", "Sheep found on the platform at {village} Halt have been 'returned to their own timetable', Common Rail confirms."),
+  H("1", "rail", "@relay", "Summer timetable adds one train and removes one bench. Common Rail describes net comfort as 'broadly flat'."),
+  H("1-2", "health", "@ridge-fm", "Wenlock Ridge clinic extends Thursday hours by thirty minutes. Nurse Maalouf: 'We will use every one of them.'", { thumb: "health" }),
+  H("1-2", "general", "@saltmere-tide", "Saltmere lifeboat launched {int:2-5} times this week, each time to the same inflatable swan. Swan now 'known to the service'."),
+  H("1-2", "food", "@saltmere-tide|@ridge-fm", "Honey yields up at Larkspur orchards. The Achebe family credits bees, rain and 'minding our own business'.", { thumb: "food" }),
+  H("1", "rail", "@relay", "Relay brief: {river} bridge inspection finds one loose bolt, now tight. Inspector 'satisfied, in a general way'."),
+  H("1-2", "food", "@ledger", "Kessling milk co-op ships its {int:1200-2400}th churn by rail. The churn is returned empty, with ceremony."),
+  H("1", "general", "@ridge-fm", "Ridge FM's lost-property hour returns: one glove, two umbrellas, a ferret who is 'not lost, just independent'."),
+  H("1-2", "rail", "@ledger", "Common Rail to replace the {village} station clock, two minutes fast since before most staff were born. Petition to keep it: {int:300-900} signatures."),
+  H("1-2", "general", "@apb", "Aldgrave Philosophical Society debates whether a train can be late if nobody is waiting for it. Motion carried. Train still late."),
+  H("1", "disaster", "@ridge-fm", "Heavy rain on the Ridge. The {river} rises, looks around, and goes back down. No action required."),
+  H("1-2", "markets", "@margin", "Rural rail freight up {pct1:1-3}. Analysts attribute the rise to potatoes and decline to elaborate."),
+  H("1-2", "civic", "@apb", "Chancellor Holm opens the new {village} Halt waiting room: two chairs, one noticeboard, 'the finest view of the {river} on the network'."),
+  H("1", "general", "@howl", "PLOUGH MY GOSH! Farmer's furrow 'straightest in eleven years'. Judges re-measure 'out of politeness'."),
+  H("1-2", "rail", "@ledger", "Leaves on the line season opens early. Common Rail reminds leaves that the line is for trains."),
+
+  /* the start-up in Aldgrave */
+  H("1-2", "lab", "@sidechannel|@ledger", "Aldgrave start-up Vela demonstrates a program that writes sonnets about train timetables. The sonnets are punctual.", { w: 0.5 }),
+  H("1-2", "lab", "@sidechannel", "vela's model 'can summarise a parish council meeting in one line'. the line is 'nothing happened, at length'.", { w: 0.5 }),
+  H("1-2", "markets", "@margin", "Investors 'quietly excited' about software that answers email. Email unaware.", { w: 0.5 }),
+  H("2", "markets", "@margin", "Vela raises {m:20-60}. Pitch deck said 'assistance' {int:40-90} times and 'rail' once, on the cover.", { w: 0.6 }),
+  P("1-2", "lab", "~jonah-reyes", "leaked benchmark: vela's thing did the entire rail timetable puzzle in 0.4s. then it apologised for the delay. source: trust me", { w: 0.5, at: [1, 4] }),
+
+  /* official */
+  S("1-2", "rail", "#common-rail", "Notice {int:100-400}/{int:10-99}: Leaves are expected on the line. Leaves are reminded that the line is for trains."),
+  S("1-2", "rail", "#common-rail", "Notice: The {village} footbridge will be closed on Tuesday for the removal of one (1) kite. Thank you for your patience."),
+  S("1", "rail", "#common-rail", "Common Rail thanks passengers for their patience during Tuesday's goose."),
+  S("1-2", "rail", "#common-rail", "Notice: Livestock on the {line} have right of way under the 1911 Act. Passengers have right of way under a separate, shorter Act."),
+  S("2", "rail", "#common-rail", "Notice: Staff are reminded that the lever is not a metaphor."),
+  S("2", "rail", "#common-rail", "Common Rail commissions an ethics review of switching procedure. The review will report in due course, and on time."),
+
+  /* residents */
+  P("1-2", "rail", "~maud-ellery", "Station clock at {village} Halt, 07:58. Two minutes fast, as it has been since 1987. Some things you can rely on.", { at: [7, 9] }),
+  P("1-2", "rail", "~ravi-coelho", "The 07:40 was held up by a cow again. Honestly I'd rather be late behind {cow} than early behind most people.", { at: [7, 9] }),
+  P("1-2", "food", "~kofi-brandt", "Sourdough's up a bit this week. The flour's fine. I think the loaves are just getting confident.", { at: [5, 8] }),
+  P("1-2", "general", "~bea-olsen", "4:12am. Smelter's quiet. Someone's left the canteen radio on, reading the shipping forecast to nobody. Lovely, actually.", { at: [3, 5] }),
+  P("1", "general", "~amara-oyelaran", "Quiet shift. Two sprained ankles, one wasp, and a man who wanted directions to 1994.", { at: [22, 24] }),
+  P("1-2", "health", "~idris-maalouf", "Clinic's open till six on Thursdays now. Please come in. Please stop bringing us marrows."),
+  P("1-2", "rail", "citizen", "Is it just me or has the {village} crossing bell gone up a semitone?"),
+  P("1-2", "general", "citizen", "Took the kids to watch trains at {village}. They waved, the driver waved, a cow looked up. Honestly moved."),
+  P("1-2", "rail", "citizen", "The best thing about living on the {line} is you can set your watch by the goose."),
+  P("1", "general", "citizen", "Our village has one shop, one pub, one train an hour and one opinion about the bypass. It's 'no'."),
+  P("1-2", "food", "citizen", "Plum jam, year {int:11-30}. Not entering it in the {village} show. Last time the judges 'had words'."),
+  P("1-2", "rail", "citizen", "Overheard on the {line}: 'I don't mind it being slow, I mind it being slow on purpose.' It was not slow on purpose. It was a sheep."),
+  P("1", "general", "citizen", "Can confirm the heron is back on the {river} footbridge. Can also confirm he does not like being photographed. Sorry, Gerald."),
+  P("1-2", "rail", "~maud-ellery", "Wrote to Common Rail about the bench at {village} Halt. Received a very nice reply thanking me for my patience. I hadn't been patient. I'd been cross."),
+
+  /* ------------------------------------------------ stage 2: the lecture hall */
+  H("2", "science", "@lumen", "Survey of {int:2000-9000} commuters: {int:78-91}% would pull the lever. {int:60-72}% would rather not be asked.", { thumb: "science" }),
+  H("2", "general", "@apb", "Late-night panel asks whether a signal operator is responsible or merely nearby. Panel overruns. Nobody pulls anything."),
+  H("2", "general", "@ledger", "Aldgrave University fills its moral philosophy hall for the first time in living memory. Lecturer asks students to stop bringing their own diagrams."),
+  H("2", "general", "@howl", "BOFFINS ASK: WOULD YOU PUSH A STRANGER OFF A BRIDGE? HOWL READERS: 'WHICH BRIDGE?'"),
+  H("2", "markets", "@margin", "Insurers add a 'moral lever' clause to rail liability cover. The clause runs to {int:30-60} pages. The lever runs to one."),
+  H("2", "science", "@lumen", "Study: people judge a harm less harshly when a points motor causes it. Points motors decline to comment."),
+  H("2", "general", "@apb", "Explainer: what 'double effect' means for your commute, in three diagrams and one apology."),
+  H("2", "science", "@lumen", "Paper proposes measuring moral intuitions by reaction time. Reviewers take a very long time.", { thumb: "science" }),
+  H("2", "civic", "@apb", "Poll: {int:52-61}% trust signal operators 'a great deal'. The rest trust them 'mostly, in daylight'."),
+  H("2", "general", "@saltmere-tide", "Letters: 'I have taken the {line} for forty years and never once been asked to choose. I would like to keep it that way.'"),
+  H("2", "rail", "@relay", "Common Rail to trial 'decision support' software on three branch lines. Signallers ask what the decision is.", { w: 0.8 }),
+  H("2", "rail", "@ledger", "Inquest hears the signal was green, the timetable was correct, and a person is dead. Coroner: 'All three can be true.'", { tags: ["deaths"], sev: 1, once: true }),
+  H("2", "rail", "@ridge-fm", "Wenlock Ridge ambulance can reach the capital in six hours if the {line} is clear. Station master: 'It is usually clear.'"),
+  H("2", "general", "@ledger", "Philosophy graduates report {int:3-9}% fall in unemployment, attributed to 'the lever thing'. Economists decline to call it a trend."),
+  H("2", "lab", "@sidechannel", "vela says its new model refuses trolley problems by default. one tester: 'it also refused to tell me the time'.", { w: 0.6 }),
+  H("2", "general", "@howl", "LEVER-ARCH FILE: SIGNALMAN'S BINDER OF 'WHAT IFS' GOES VIRAL", { w: 0.7 }),
+  H("2", "civic", "@apb", "Common Rail chaplaincy extends its hours on the {line}. 'We are here to listen,' says the chaplain, 'and occasionally to say no.'", { tags: ["deaths"] }),
+  H("2", "science", "@lumen", "Moral psychologists report the 'bystander gap': people help more when told there is no lever. Nobody knows what to do with this."),
+
+  P("2", "general", "~jun-harlow", "prof put the trolley problem on the exam, said 'there's no right answer', then marked it. explain", { at: [0, 2] }),
+  P("2", "general", "~maud-ellery", "Our reading group has moved on from trolleys to lifeboats. I preferred the trolleys. At least you could see the tracks."),
+  P("2", "general", "citizen", "My ethics lecturer says the lever is a metaphor. Sir, I have seen the lever. It's at {village}."),
+  P("2", "health", "~amara-oyelaran", "Long one tonight. Don't want to talk about it. Be kind to your signal staff.", { tags: ["deaths"], at: [23, 24] }),
+  P("2", "rail", "~ravi-coelho", "Sat outside {village} for forty minutes 'awaiting a decision'. Nobody told us which decision. Someone started a sweepstake.", { at: [7, 10] }),
+  P("2", "general", "citizen", "Went to a talk called 'Would You Pull It?' and a man at the back said 'depends who's asking' and honestly that was the whole talk."),
+  P("2", "general", "citizen", "Our pub quiz now has an ethics round. Nobody gets the points. Everybody gets very quiet."),
+  P("2", "rail", "~winifred-oyelaran", "Signal staff are not a thought experiment. They are {int:4000-9000} people on shifts. Before you ask what they'd choose, ask when they last slept."),
+  P("2", "general", "~felix-marchmont", "Everyone's an ethicist now. My plumber asked if I'd sacrifice one pipe to save five. Reader, I did."),
+
+  D("2", "general", "You pull the lever. Five is more than one. This isn't hard.", "{replyTo} it's hard if you're the one. That's the whole point of it."),
+  D("2", "general", "The trolley problem is a silly puzzle for people who've never worked a signal box.", "{replyTo} my dad worked one for thirty years. He said it was the only puzzle there was."),
+  D("2", "general", "If the signal operator follows the rulebook, it isn't their fault. That's what rulebooks are for.", "{replyTo} the rulebook was written by someone who'd never stood at that lever. Somebody still has to be the one standing there."),
+  D("2", "science", "Moral intuitions are just noise. Do the arithmetic and stop feeling things.", "{replyTo} the arithmetic is the easy part. It's knowing which numbers are people that takes feeling."),
+  D("1-2", "rail", "They should close the {village} Halt. Twelve passengers a day isn't a railway, it's a hobby.", "{replyTo} I'm one of the twelve. It's how I get to my mother's. Hobby of mine, visiting her."),
+]);

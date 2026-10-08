@@ -160,7 +160,10 @@ function recordCasualties(record: DecisionRecord): number {
   return n;
 }
 
-/** Monotone windshield history: every struck stake leaves its mark. */
+/**
+ * Monotone windshield history. Only what can break glass marks it: people,
+ * animals, vehicles and machines struck by the trolley. Paper does not.
+ */
 export function impactHistory(c: Campaign, lookup: StagingLookup): { impacts: number; bloodied: number } {
   let impacts = 0;
   let bloodied = 0;
@@ -169,8 +172,10 @@ export function impactHistory(c: Campaign, lookup: StagingLookup): { impacts: nu
     const railContact = record.domainEvents.some((e) => e.kind === "rail_contact" && e.details.present === true);
     const struck = staging?.beat === "impact" || railContact;
     if (!struck) continue;
+    const living = staging ? staging.occupants.some((o) => o.kind === "people" || o.kind === "animal") : railContact;
+    const heavy = staging ? staging.occupants.some((o) => o.kind === "vehicle" || o.kind === "machine") : false;
+    if (!living && !heavy && !railContact) continue;
     impacts++;
-    const living = staging?.occupants.some((o) => o.kind === "people" || o.kind === "animal") ?? railContact;
     if (living && recordCasualties(record) > 0) bloodied++;
   }
   return { impacts, bloodied };

@@ -383,5 +383,10 @@ export interface WorldRenderer {
   onLever(cb: (input: LeverInput) => void): void;
   /** Allow pointer interaction with the 3D lever. */
   setInteractive(enabled: boolean): void;
+  /**
+   * Resolves once nothing scripted stands between the cab and the next fork
+   * (the cab has left a stage tunnel). Renderers without tunnels resolve at once.
+   */
+  whenClear?(): Promise<void>;
   destroy(): void;
 }

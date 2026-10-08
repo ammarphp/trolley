@@ -61,8 +61,15 @@ export interface InkMaterialOptions {
    * alpha < 0.5 is cut out. Draw with `createInkCanvas`.
    */
   map?: THREE.Texture | null;
+  /** How much the world's gloom (storm, night) darkens this material (default 1; the lit cab uses less). */
+  gloom?: number;
   /** Pen technique: parallel hatching (default) or stippled dots (gravel, earth, cloud). */
   pattern?: "hatch" | "stipple";
+  /**
+   * A mark on a surface (cracks, blood, rain on glass): drawn without contour
+   * lines around it and without writing depth, so it reads as paint, not an object.
+   */
+  decal?: boolean;
 }
 
 export interface InkUniforms {
@@ -74,6 +81,7 @@ export interface InkUniforms {
   uInkShade: THREE.IUniform<number>;
   uInkObjectId: THREE.IUniform<number>;
   uInkOpacity: THREE.IUniform<number>;
+  uInkGloomScale: THREE.IUniform<number>;
   uInkSway: THREE.IUniform<number>;
 }
 
@@ -101,6 +109,7 @@ uniform float uInkObjectId;
 uniform float uInkOpacity;
 uniform float uInkLitRef;
 uniform float uInkGloom;
+uniform float uInkGloomScale;
 uniform float uInkTension;
 uniform float uInkTime;
 varying vec3 vInkPos;
@@ -158,8 +167,13 @@ float inkStipple(vec2 p, float tone, float period) {
   return mix(cov, tone * 0.85, clamp(aa * 1.3 - 0.3, 0.0, 1.0));
 }
 float inkHatchAt(vec2 p, float tone, float period, float baseAngle) {
+  // Where strokes fall below a pixel (distance, fine print, the mirror's
+  // engraving), converge to a linear tone so values stay faithful.
+  vec2 q = p / period;
+  float alias = clamp((fwidth(q.x) + fwidth(q.y)) * 0.9 - 0.45, 0.0, 1.0);
+  float flatTone = smoothstep(0.1, 1.0, tone) * 0.94;
   #ifdef INK_STIPPLE
-  return max(inkStipple(p, tone, period), smoothstep(0.9, 0.98, tone));
+  return mix(max(inkStipple(p, tone, period), smoothstep(0.9, 0.98, tone)), flatTone, alias);
   #endif
   float h = 0.0;
   float t1 = smoothstep(0.14, 0.3, tone);
@@ -169,7 +183,7 @@ float inkHatchAt(vec2 p, float tone, float period, float baseAngle) {
   float t3 = smoothstep(0.66, 0.8, tone);
   h = max(h, inkStrokes(p, baseAngle + 0.05, period * 0.75, 0.08 + 0.3 * tone) * t3);
   float solid = smoothstep(0.86, 0.96, tone);
-  return max(h, solid);
+  return mix(max(h, solid), flatTone, alias);
 }
 `;
 
@@ -255,8 +269,19 @@ const FRAGMENT_OUTPUT = /* glsl */ `
     vec4 texel = texture(uInkMap, vInkUv);
     if (texel.a < 0.5) discard;
     float lum = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
-    float red = clamp((texel.r - max(texel.g, texel.b)) * 2.0, 0.0, 1.0);
-    if (red > 0.25) { accent = vec2(clamp(red * 1.4, 0.0, 1.0), texel.r < 0.62 ? 1.0 : 2.0); }
+    // Saturated texels become pigment: red (blood when dark, signal when
+    // bright), amber, cobalt or cyan. Everything else is ink by luminance.
+    float hi = max(texel.r, max(texel.g, texel.b));
+    float lo = min(texel.r, min(texel.g, texel.b));
+    float chroma = hi - lo;
+    if (chroma > 0.25) {
+      float amt = clamp(chroma * 1.4, 0.0, 1.0);
+      float id;
+      if (texel.r >= hi - 1e-4) id = texel.g > 0.45 * texel.r + 0.12 ? 3.0 : (texel.r < 0.62 ? 1.0 : 2.0);
+      else if (texel.b >= hi - 1e-4) id = texel.g > 0.6 * texel.b ? 7.0 : 4.0;
+      else id = texel.b > 0.6 * texel.g ? 7.0 : 5.0;
+      accent = vec2(amt, id);
+    }
     else albedo = max(albedo, 1.0 - lum);
   }
   #endif
@@ -267,8 +292,8 @@ const FRAGMENT_OUTPUT = /* glsl */ `
   #endif
   // Shadow side darkens toward a hatched mid-tone; albedo sets the floor.
   float shadeAmt = (1.0 - smoothstep(0.18, 0.95, light)) * uInkShade;
-  float tone = albedo + (1.0 - albedo) * shadeAmt * 0.55;
-  tone = clamp(tone + uInkGloom * (0.35 + 0.65 * shadeAmt) * (1.0 - albedo) + uInkTension * 0.06, 0.0, 1.0);
+  float tone = albedo + (1.0 - albedo) * shadeAmt * 0.46;
+  tone = clamp(tone + uInkGloom * (0.35 + 0.65 * shadeAmt) * (1.0 - albedo) * uInkGloomScale + uInkTension * 0.06, 0.0, 1.0);
 
   // Triplanar stroke placement with soft blending across axes.
   vec3 n = normalize(vInkNrm);
@@ -321,13 +346,18 @@ export function createInkMaterial(options: InkMaterialOptions = {}): THREE.MeshL
       value: options.hatch ?? (space === "view" ? HATCH.cabin : space === "object" ? HATCH.actor : HATCH.world),
     },
     uInkHatchAngle: { value: options.hatchAngle ?? 0 },
-    uInkEdge: { value: options.edge ?? 1 },
+    uInkEdge: { value: options.decal ? 0 : (options.edge ?? 1) },
     uInkShade: { value: options.shade ?? 1 },
     uInkObjectId: { value: options.objectId ?? 0 },
     uInkOpacity: { value: options.opacity ?? 1 },
+    uInkGloomScale: { value: options.gloom ?? 1 },
     uInkSway: { value: options.sway ?? 0 },
   };
   material.userData.ink = uniforms;
+  if (options.decal) {
+    material.depthWrite = false;
+    material.userData.inkDecal = true;
+  }
   const mapUniform = { uInkMap: { value: options.map ?? null } };
   const defines: Record<string, string> = {};
   if (space === "view") defines.INK_SPACE_VIEW = "";

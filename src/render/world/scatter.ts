@@ -77,6 +77,10 @@ export class Scatter {
   env: EnvironmentTarget | null = null;
   /** Quality scale for densities (0.4 low .. 1 high). */
   density = 1;
+  /** Buildings light their windows at night. */
+  night = false;
+  private lastNight = false;
+  private exclusions = new Set<(x: number, z: number) => boolean>();
 
   constructor(options: ScatterOptions) {
     this.assets = options.assets;
@@ -113,6 +117,7 @@ export class Scatter {
   }
 
   private place(content: CellContent, kind: string, variant: number, level: number, x: number, z: number, rot: number, scale: number, clear = 6): void {
+    if (this.excluded(x, z)) return;
     const pool = this.pool({ kind, variant, level });
     if (!pool) return;
     const m = new THREE.Matrix4().compose(
@@ -124,6 +129,7 @@ export class Scatter {
   }
 
   private placeObject(content: CellContent, object: THREE.Object3D, x: number, z: number, rot: number, clear = 24): void {
+    if (this.excluded(x, z)) return;
     object.userData.scatterClear = clear;
     object.position.set(x, this.heightAt(x, z), z);
     object.rotation.y = rot;
@@ -137,6 +143,7 @@ export class Scatter {
     this.group.add(object);
     content.objects.push(object);
     if (typeof object.userData.tick === "function") this.tickers.add(object);
+    (object.userData.setNight as ((on: boolean) => void) | undefined)?.(this.night);
   }
 
   private populate(cx: number, cz: number, network: TrackNetwork, env: EnvironmentTarget): CellContent {
@@ -155,11 +162,17 @@ export class Scatter {
     for (let i = 0; i < trees; i++) {
       const x = clumpX + rng.gauss() * 9;
       const z = clumpZ + rng.gauss() * 9;
-      if (!clear(x, z, 7)) continue;
       const dead = rng.chance(env.ruin * 0.6 + env.drought * 0.3);
       const conifer = !dead && rng.chance(0.22);
       const kind = dead ? "dead-tree" : conifer ? "conifer" : "tree";
-      this.place(content, kind, rng.int(0, Math.max(0, this.assets.prefabVariants(kind) - 1)), conifer || dead ? 3 : leafLevel, x, z, rng.range(0, Math.PI * 2), rng.range(0.8, 1.25), 7);
+      const variant = rng.int(0, Math.max(0, this.assets.prefabVariants(kind) - 1));
+      const level = conifer || dead ? 3 : leafLevel;
+      const scale = rng.range(0.8, 1.25);
+      // Canopies must never overhang the line.
+      const radius = (this.assets.prefab(kind, variant, { leaves: level / 3 })?.radius ?? 5) * scale;
+      const clearance = radius + 3.5;
+      if (!clear(x, z, clearance)) continue;
+      this.place(content, kind, variant, level, x, z, rng.range(0, Math.PI * 2), scale, clearance);
     }
     // Hedgerow along a field edge.
     if (rng.chance(0.35 * env.vegetation * d) && env.uniformity < 0.5) {
@@ -262,6 +275,10 @@ export class Scatter {
       this.cells.delete(key);
     }
     for (const o of this.tickers) (o.userData.tick as (dt: number, t: number) => void)(dt, t);
+    if (this.night !== this.lastNight) {
+      this.lastNight = this.night;
+      for (const content of this.cells.values()) for (const o of content.objects) (o.userData.setNight as ((on: boolean) => void) | undefined)?.(this.night);
+    }
   }
 
   /**
@@ -285,6 +302,33 @@ export class Scatter {
         return false;
       });
     }
+  }
+
+  /**
+   * Keep scenery out of a region (a tunnel's hill): culls what is there now
+   * and refuses new placements until the returned function is called.
+   */
+  exclude(test: (x: number, z: number) => boolean): () => void {
+    this.exclusions.add(test);
+    for (const content of this.cells.values()) {
+      content.instances = content.instances.filter((inst) => {
+        if (!test(inst.x, inst.z)) return true;
+        inst.pool.remove(inst.index);
+        return false;
+      });
+      content.objects = content.objects.filter((o) => {
+        if (!test(o.position.x, o.position.z)) return true;
+        this.group.remove(o);
+        this.tickers.delete(o);
+        return false;
+      });
+    }
+    return () => this.exclusions.delete(test);
+  }
+
+  private excluded(x: number, z: number): boolean {
+    for (const test of this.exclusions) if (test(x, z)) return true;
+    return false;
   }
 
   /** Remove everything (e.g. after a stage tunnel, the world is redrawn). */

@@ -45,3 +45,10 @@ export const scenes: LabScene[] = [
     build: (ctx) => worldLab(ctx, placeholderAssets),
   },
 ];
+
+import { createRealAssets } from "./assets-real.ts";
+scenes.push({
+  name: "world-real",
+  description: "The full ink world renderer with the real asset library.",
+  build: (ctx) => worldLab(ctx, createRealAssets("high")),
+});

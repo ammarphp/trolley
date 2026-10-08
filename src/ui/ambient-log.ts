@@ -12,8 +12,10 @@ export interface AmbientLog {
   upTo: number;
 }
 
+import { ambientGenerator } from "./wire/index.ts";
+
 type Generator = (c: Campaign, ordinal: number) => AmbientFeedItemLike[];
-let generator: Generator | null = null;
+let generator: Generator | null = ambientGenerator as Generator;
 
 /** Install the ambient generator (src/ui/wire). */
 export function setAmbientGenerator(g: Generator): void {
@@ -34,10 +36,4 @@ export function ambientFor(log: AmbientLog, c: Campaign): AmbientFeedItemLike[] 
   return log.items;
 }
 
-/** How much of the feed is machine-made: rises with stage and with lost authority. */
-export function botSaturationFor(c: Campaign): number {
-  const stage = c.prepared?.stage ?? c.stage;
-  const f = c.world.facts;
-  const v = Math.max(0, stage - 3) * 0.12 + (f.delegation ? 0.1 : 0) + (f.authorityLost ? 0.35 : 0) + (f.evidenceHidden ? 0.05 : 0) - (f.publicRecords ? 0.15 : 0);
-  return Math.max(0, Math.min(1, v));
-}
+export { botSaturationForCampaign as botSaturationFor, tickerForCampaign, factoidForCampaign } from "./wire/index.ts";

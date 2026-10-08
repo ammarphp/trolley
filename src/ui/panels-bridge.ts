@@ -14,7 +14,9 @@ import { renderWire, toWireView } from "./components/wire/index.ts";
 import { renderDebrief as renderDebriefView, setReplayReady, disposeDebrief } from "./components/debrief/index.ts";
 import { annotate, mountGlossary, renderHistoryCard, type GlossaryPopoverController } from "./components/glossary/index.ts";
 import { historyCardFor } from "./content/history.ts";
-import { ambientFor, botSaturationFor, type AmbientLog } from "./ambient-log.ts";
+import { ambientFor, botSaturationFor, tickerForCampaign, factoidForCampaign, type AmbientLog } from "./ambient-log.ts";
+import { setWireBrand } from "./components/wire/brand-bridge.ts";
+import { brandForWire } from "./brand/wire-adapter.ts";
 
 export interface PanelContext {
   run: LocalRun;
@@ -53,6 +55,7 @@ const ambient: AmbientLog = { runId: "", items: [], upTo: 0 };
 
 export function initPanels(prefs: Preferences): void {
   glossary ??= mountGlossary({ root: document, reducedMotion: prefs.reducedMotion });
+  setWireBrand(brandForWire() as Parameters<typeof setWireBrand>[0]);
 }
 export function setPanelMotion(reduced: boolean): void {
   glossary?.setReducedMotion(reduced);
@@ -158,15 +161,16 @@ export function drawPanels(ctx: PanelContext): void {
 
   // The wire: authored news plus the ambient world, newest first.
   const items = ambientFor(ambient, c);
+  const wireView = toWireView(w.news, items, {
+    stage,
+    botSaturation: botSaturationFor(c),
+    reducedMotion: ctx.prefs.reducedMotion,
+    today: w.day,
+    readIds: [...wireRead],
+  });
   renderWire(
     $("#wire"),
-    toWireView(w.news, items, {
-      stage,
-      botSaturation: botSaturationFor(c),
-      reducedMotion: ctx.prefs.reducedMotion,
-      today: w.day,
-      readIds: [...wireRead],
-    }),
+    { ...wireView, ticker: tickerForCampaign(c), factoid: stage >= 4 ? factoidForCampaign(c) : null },
     {
       tickerHost: $("#ticker"),
       onRead: (ids) => ids.forEach((id) => wireRead.add(id)),

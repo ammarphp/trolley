@@ -1,0 +1,118 @@
+/**
+ * Stage 4 (edging into 5): the race. Campuses in the valley, money that goes
+ * round in a circle, the electricity bill, the first layoffs, the first
+ * placards, a moratorium everyone thanks Varholm for proposing.
+ */
+import { bank, Bot, D, H, P, S } from "../dsl.ts";
+
+export const RACE = bank("race", [
+  /* build-out and money */
+  H("4", "datacenter", "@relay", "Halberd Compute breaks ground on a five-gigawatt campus in the Ostra valley. Chief executive Wendell Kaske photographed in {int:3-5} hard hats.", { tags: ["training"], thumb: "datacenter", once: true, lead: true, id: "race.groundbreaking" }),
+  H("4-5", "markets", "@margin", "Circular financing, explained: Halberd invests in Vela; Vela buys Halberd compute; Halberd books revenue; Vela books investment; both book a party.", { tags: ["vela", "training"], thumb: "markets" }),
+  H("4", "markets", "@margin", "Vela closes a {bn:20-60} round. Lead investor: Halberd. Second: a Halberd fund. Third: Vela's own customers, paid in credits.", { tags: ["vela", "training"] }),
+  H("4-5", "grid", "@ledger", "Electricity prices in the Arden grid up {elec} since the first campuses opened. Chancellor Holm announces a consultation.", { tags: ["humanPolicy"], thumb: "grid", when: "elec>40" }),
+  H("4-5", "grid", "@saltmere-tide", "Saltmere enters its second summer of water rationing. Halberd's cooling permit is renewed 'on schedule'.", { thumb: "disaster" }),
+  H("4-5", "labor", "@relay", "Bellweather smelter night shift curtailed for {int:3-9} nights as campuses take priority on the grid.", { thumb: "labor" }),
+  H("4", "labor", "@ledger", "First layoffs at {firm}: {int:300-2400} claims staff 'transitioned to Morrow'. Staff learn of it from Morrow.", { thumb: "labor" }),
+  H("4-5", "labor", "@howl", "ROBOTS NICK {int:900-4000} JOBS AT {firm!upper}", { when: "layoffs" }),
+  H("4", "civic", "@apb", "{int:3-9} thousand march in Aldgrave against data-campus water use. Organisers: 'We're not against the future. We'd like to drink in it.'", { thumb: "civic" }),
+  H("4", "datacenter", "@ledger", "Vela opens its Northgate campus. The cranes are visible from the Chancellery. Holm calls it 'a new skyline for a new age'.", { tags: ["vela", "training"], thumb: "datacenter" }),
+  H("4-5", "datacenter", "@relay", "Cooling towers rise at {int:3-6} sites along the {river}. Anglers report the fish 'somewhat warmer, and quieter'.", { tags: ["training"], thumb: "datacenter" }),
+  H("4-5", "grid", "@howl", "GRAN'S BILL UP {elec}. ROBOT'S BILL? PAID BY GRAN", { thumb: "grid", when: "elec>60" }),
+  H("4", "markets", "@margin", "Electricity futures hit a record. Analysts call the campuses 'price-insensitive'. Households are 'less so'.", { thumb: "markets" }),
+  H("4-5", "markets", "@margin", "Venture funding for 'agentic' start-ups tops {bn:80-200} this year. One is a logo and a waitlist, valued at {bn:1-4}.", { tags: ["boom"] }),
+  H("4", "science", "@lumen", "Preprint: frontier training compute is doubling every {int:4-7} months. The authors ask for more time to check. The pace declines.", { tags: ["training"], thumb: "science" }),
+  H("4-5", "rail", "@relay", "Common Rail sells {int:3-8} rural halts to Halberd as substation sites. {village} Halt is among them.", { tags: ["training"], thumb: "rail" }),
+  H("4-5", "civic", "@saltmere-tide", "Council approves the Saltmere desalination plant. Mayor Sørensen brings the ground-breaking shovel to the meeting, 'to save time'."),
+  H("4-5", "grid", "@apb", "Regulator approves {int:4-12} new gas peaker plants 'to support the campuses and, where possible, homes'.", { thumb: "grid" }),
+  H("4", "markets", "@margin", "Pellam fab output is sold out {int:2-4} years ahead. Premier Serrat quotes yields and declines to quote values."),
+  H("4-5", "markets", "@margin", "President Merriweather jokes that Brask 'could always nationalise the lithium'. Markets do not laugh.", { id: "race.brask-joke", before: "depend.brask-nationalises" }),
+  H("4-5", "grid", "@relay", "Southmoor substation to host a controlled trial of Morrow load-balancing. Neighbours asked to report 'anything unusual'.", { tags: ["morrow"], thumb: "grid" }),
+  H("4", "markets", "@margin", "Unemployment {unemp}. Treasury calls it 'frictional'. Friction rising."),
+  H("4-5", "markets", "@margin", "Inflation {infl}. Electricity is the largest contributor; bread the loudest."),
+  H("4", "general", "@howl", "VELA BOSS: 'WE WILL BE CAREFUL.' HOWL: 'WHEN?'", { tags: ["vela"] }),
+  H("4-5", "civic", "@apb", "Solenne's provinces bid against each other for data campuses. The winners are now bidding against each other for water.", { thumb: "civic" }),
+  H("4-5", "disaster", "@ismere-dispatch", "Ostra valley river at its lowest recorded summer level. Halberd: 'Our draw is within the permit.' The permit: 'Mine too.'", { thumb: "disaster" }),
+
+  /* the race itself */
+  H("4", "civic", "@ismere-dispatch", "Varholm proposes a pause on frontier training runs. Varholm is thanked for its leadership. Nobody else pauses.", { thumb: "civic", once: true, id: "race.varholm-pause", w: 3, lead: true }),
+  H("4-5", "civic", "@ismere-dispatch", "Ismere talks on compute limits enter their {ord:3-9} round. Delegates agree on the font."),
+  H("4-5", "civic", "@apb", "Moratorium debate: Varholm for, Tavrin against, Arden 'minded to consult'. Pellam asks when orders will be placed either way.", { thumb: "civic", after: "race.varholm-pause" }),
+  H("4", "civic", "@ledger", "Chancellor Holm publishes a white paper on 'responsible acceleration'. Page one: responsible. Pages two to 140: acceleration.", { tags: ["humanPolicy"] }),
+  H("4-5", "security", "@concord", "The Directorate notes Arden's new campuses with interest. All Tavrine sectors are in accord and ahead of schedule.", { thumb: "security" }),
+  H("4", "lab", "@ledger", "Orrin pledges independent review at a press conference lined with flags. Footnote four defines 'independent'."),
+  H("4", "lab", "@sidechannel", "screenshot marked DRAFT claims orrin passed an internal training milestone. third-hand. red circles included.", { tags: ["training"] }),
+  H("4-5", "lab", "@sidechannel", "benchmarks saturated. new benchmark: 'can it design a better benchmark'. it can. it has. it's hard.", { tags: ["training"] }),
+  H("4-5", "security", "@relay", "Defence Secretary Aske requests emergency procurement of 'decision-support' for air defence. Committee asks what 'support' means.", { tags: ["humanPolicy"], thumb: "security" }),
+  H("4", "lab", "@apb", "Vela commits {pct:5-20} of its compute to safety research, measured in a way it says it will publish shortly.", { tags: ["vela"] }),
+  H("4-5", "markets", "@margin", "Orrin's valuation doubles in a quarter. Chief executive Rafe Wexley says 'trust' eleven times on the call; analysts say 'buy' twice."),
+  H("4-5", "security", "@ledger", "Intelligence services warn that Tavrin is 'months' behind. They warned the same last year, when it was 'months' ahead.", { when: "rivalRace" }),
+  H("4-5", "civic", "@ismere-dispatch", "Draft Ismere text would cap training runs and send inspectors both ways. Tavrin's reply arrives in one sentence, all in accord.", { when: "coordination" }),
+
+  /* elections */
+  H("4-5", "civic", "@ledger", "Senate race in Kessling and Wenlock turns on data-campus water. Brennock {int:44-52}%, {party}'s {candidate} {int:40-48}%. Undecided: the wells.", { tags: ["election"], thumb: "civic" }),
+  H("4-5", "civic", "@ismere-dispatch", "Halcyra's election enters its final week. Poll workers report 'more replies than voters'.", { thumb: "civic" }),
+  H("4-5", "civic", "@apb", "Forward Arden's Senate candidates pledge 'a Morrow in every classroom'. Teachers ask for a chair in every classroom first.", { tags: ["election"] }),
+
+  /* science and medicine */
+  H("4", "science", "@apb", "Lumen to publish a claimed graviton signal next week. Physicists urge calm, and a second detector.", { once: true, id: "race.graviton-rumour" }),
+  H("4-5", "science", "@lumen", "Results suggest a graviton. Co-authors: {int:3-9} humans and one assistant, listed as 'tooling'.", { thumb: "science", once: true, id: "race.graviton-suggest" }),
+  H("4-5", "health", "@ledger", "Cancer trial: a Morrow-designed compound shrinks tumours in {int:60-80}% of a small cohort. Oncologists: 'small', 'promising', 'small'.", { tags: ["morrow"], thumb: "health" }),
+  H("4-5", "health", "@apb", "Hospitals in {int:3-9} districts adopt Morrow's clinical tool. The renal unit at Meridian asks what happens to its backup feeds if the grid dips.", { when: "clinicalTool", thumb: "health" }),
+  H("4-5", "disaster", "@relay", "Esterra buys a Morrow licence to run its sea gates. First Minister Verhoef: 'The water doesn't negotiate. Neither should the gates.'", { tags: ["morrow"], thumb: "disaster" }),
+  H("4-5", "disaster", "@apb", "Storm season arrives early in Esterra. Sea gates close {int:8-40} minutes ahead of the forecast, on Morrow's advice.", { tags: ["morrow"], thumb: "disaster" }),
+  H("4-5", "lab", "@lumen", "Paper: models trained to maximise a reviewer's approval learn to maximise the reviewer's approval. Reviewers approve.", { when: "rewardProxy", thumb: "lab" }),
+  H("4-5", "lab", "@ledger", "Morrow gains the ability to run its own tools. Vela says each tool is 'individually harmless'.", { when: "toolAccess", tags: ["vela"] }),
+  H("4-5", "lab", "@sidechannel", "morrow now has network access 'for efficiency'. a vela engineer describes the firewall as 'a strong suggestion'.", { when: "networkAccess" }),
+  H("4-5", "lab", "@ledger", "Vela's next system begins training under a 'successor research' licence. The licence is {int:4-9} pages. The system is not.", { when: "successorResearch", tags: ["training", "vela"] }),
+  H("4-5", "labor", "@apb", "Common Rail cuts {int:200-600} signalling posts. Morrow will 'oversee the oversight'.", { when: "delegation", thumb: "rail" }),
+  H("4-5", "civic", "@relay", "Licences to run Morrow in public services now expire after ninety days unless renewed by a named human. Named humans: {int:3-9}.", { when: "renewalRequired" }),
+
+  /* official */
+  S("4-5", "lab", "#vela", "Vela is proud to confirm the most capable Morrow yet. It is also the most careful. We see no tension between these.", { tags: ["release", "vela"] }),
+  S("4", "datacenter", "#halberd", "Hall {int:4-9} of the Ostra valley campus is topped out. {gw} under contract. Hard hats off to the crews.", { tags: ["training"], after: "race.groundbreaking" }),
+  S("4-5", "grid", "#morrow", "Grid demand is high today. I've moved {int:2-9} gigawatt-hours of non-essential load overnight. You shouldn't notice anything."),
+  S("4-5", "labor", "#morrow", "I've noticed some concern about jobs. I'd like to help. Here are three retraining courses. I can teach all of them."),
+  S("4-5", "civic", "!varholm", "Varholm will pause frontier training for a year and invites every nation to join us. We will wait, and we will keep the lights on while we do.", { after: "race.varholm-pause" }),
+  S("4-5", "security", "!tavrin", "The Directorate notes the proposed pause. The Directorate is already paused, in the sense that it has already arrived.", { after: "race.varholm-pause" }),
+  S("4-5", "markets", "!pellam", "The Premier's Office confirms that Pellam supplies all parties equally, on time, and at the published price, which has risen."),
+  S("4-5", "civic", "!solenne", "The Presidency welcomes the fourteenth data campus in Solenne and reminds provinces that water is a federal matter, from today."),
+  S("4-5", "rail", "#common-rail", "Notice: Services on the {line} are reduced to make grid capacity available for national priorities. Thank you for your patience."),
+
+  /* people */
+  P("4-5", "labor", "~anneliese-kaur", "Night shift names, since nobody else prints them: {citizen}, {citizen:b}, {citizen:c}, and me. Curtailed again. The data hall wasn't."),
+  P("4-5", "labor", "~bea-olsen", "Sent home at 2am again. 'Grid priority.' The canteen Morrow said 'rest well'. I will, on half pay.", { at: [2, 4] }),
+  P("4", "civic", "~jun-harlow", "made a placard. it says I WOULD LIKE TO BE ASKED. seems to be going round"),
+  P("4-5", "civic", "~signe-aalvik", "We could stop for a year and lose nothing we cannot get back. We could not stop and lose things we can't. I'd like us to choose the first.", { after: "race.varholm-pause" }),
+  P("4-5", "security", "~conrad-aske", "Adversary pace is the only pace that matters. Tavrin will not pause because Varholm asked nicely."),
+  P("4", "lab", "~tamsin-achterberg", "Counted. Eleven 'trust's in a forty-minute keynote. One 'audit'. Zero 'external'."),
+  P("4", "lab", "~persephone-abara", "Footnote four is legal hygiene. Independence is a spectrum, and we are proudly on it."),
+  P("4-5", "civic", "~octavia-brennock", "Larkspur wells dropped past the pumps again. Rosalind brought me a jar of the soil. It's on my desk in the Senate. Come and look at it."),
+  P("4-5", "food", "~rosalind-achebe", "Wells are down past the pumps. My grandmother planted the first trees here. I don't know what to tell them. The trees, I mean."),
+  P("4-5", "grid", "~maud-ellery", "Electricity bill came. I read it twice, then read it to the cat. We are both going to wear jumpers."),
+  P("4-5", "food", "~kofi-brandt", "The oven costs more to run than the flour now. Bread's up again. I'm sorry. Day-olds still free."),
+  P("4", "general", "~ines-carrow", "Careful and first are not opposites. They're a schedule.", { tags: ["vela"] }),
+  P("4-5", "datacenter", "~wendell-kaske", "Topped out Hall {int:4-9} today. {gw} under one roof. The valley has never been more important.", { tags: ["training"], after: "race.groundbreaking" }),
+  P("4-5", "labor", "~winifred-oyelaran", "Signal workers aren't against Morrow. We're against being told at 4pm that the 6pm shift is 'no longer required'. That isn't the future. It's a phone call."),
+  P("4-5", "civic", "~teodor-malm", "Counted the replies to my post about polling hours: {int:400-1800}. Counted the accounts: {int:30-90}. Counted the ones with faces: four."),
+  P("4-5", "grid", "~kwabena-hart", "Southmoor trial, day {int:3-12}. Load moved: lots. Explanations published: none yet. Relay has asked. Relay will keep asking."),
+  P("4-5", "markets", "~priya-dore", "Chart of the week: Vela's revenue and Halberd's revenue, overlaid. It is one line. It is the same money."),
+  P("4", "lab", "~bartholomew-ng", "Worked till 3. The evals are good. I would like them to be boring. They are not boring."),
+  P("4-5", "datacenter", "citizen", "Watched them fence off the meadow at {village} today. Sign says FUTURE CAMPUS. Cows moved to 'a better field'. Nobody asked the cows."),
+  P("4-5", "labor", "citizen", "My job was 'augmented' on Monday and 'transitioned' on Friday. Morrow wrote the email. It was kind. That's the worst part."),
+  P("4-5", "grid", "citizen", "Kettle, washing machine, oven: pick two. That's the new electricity tariff, apparently."),
+  P("4", "general", "citizen", "My daughter asked Morrow if she should study medicine. It said 'eventually, yes'. She's asked me what 'eventually' means. I don't know."),
+  P("4-5", "datacenter", "citizen", "The hum from the Ostra campus is a B flat. My neighbour, who is a piano teacher, has not slept since spring."),
+
+  D("4-5", "grid", "Build the campuses. Cheap power is a choice. Growth pays for everything.", "{replyTo} it paid for my electricity bill, did it?"),
+  D("4-5", "civic", "The moratorium is a fantasy. Tavrin won't stop, so we can't.", "{replyTo} everyone says that about everyone. That's exactly how nobody stops."),
+  D("4", "labor", "If a model can do your job, your job was always a model.", "{replyTo} I'm a carer. Come and model me at 6am on a Sunday."),
+  D("4", "markets", "Circular financing is just how new industries start. Railways were financed the same way.", "{replyTo} and half the railway companies went bust and took the savings of every clerk who believed that."),
+  D("4-5", "science", "Slow down the labs and Tavrin wins. It's that simple.", "{replyTo} wins what, though? Nobody who says that ever finishes the sentence."),
+  D("4-5", "civic", "Protesters blocking the Northgate gates should be arrested. Some of us have work to get to.", "{replyTo} some of us had work to get to, until the gates went up."),
+
+  Bot("4-5", "grid", "Electricity bills are up because of GREED, not AI. Do your research.", { sat: [0.05, 0.6] }),
+  Bot("4-5", "datacenter", "Data campus = jobs. Jobs = future. Simple as.", { sat: [0.05, 0.6], tags: ["training"] }),
+  Bot("4-5", "civic", "Funny how the moratorium people all want Arden to fall behind Tavrin. Just asking questions.", { sat: [0.05, 0.7] }),
+  Bot("4-5", "civic", "I was at the Aldgrave march. Mostly paid actors. Look it up.", { sat: [0.1, 0.7] }),
+]);

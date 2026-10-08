@@ -178,14 +178,16 @@ void main() {
     // stroke hugs the object instead of the background.
     float nearer = step(z0, min(za, zb) * 1.02);
     depthEdge *= mix(0.55, 1.0, nearer);
-    vec3 na = decodeNormal(suv + d);
-    vec3 nb = decodeNormal(suv - d);
-    float nEdge = smoothstep(0.32, 0.62, max(1.0 - dot(n0, na), 1.0 - dot(n0, nb)));
-    float ida = texture(tInfo, suv + d).w;
-    float idb = texture(tInfo, suv - d).w;
-    float idEdge = step(0.002, max(abs(ida - id0), abs(idb - id0))) * nearer;
     float wa2 = texture(tInk, suv + d).a;
     float wb2 = texture(tInk, suv - d).a;
+    // Neighbours with zero contour weight (decals, grass) are see-through for
+    // normal and id edges, so painted marks never get outlined.
+    vec3 na = wa2 < 0.01 ? n0 : decodeNormal(suv + d);
+    vec3 nb = wb2 < 0.01 ? n0 : decodeNormal(suv - d);
+    float nEdge = smoothstep(0.32, 0.62, max(1.0 - dot(n0, na), 1.0 - dot(n0, nb)));
+    float ida = wa2 < 0.01 ? id0 : texture(tInfo, suv + d).w;
+    float idb = wb2 < 0.01 ? id0 : texture(tInfo, suv - d).w;
+    float idEdge = step(0.002, max(abs(ida - id0), abs(idb - id0))) * nearer;
     float wmin = min(weight0, max(wa2, wb2));
     edge = max(edge, max(depthEdge, max(nEdge * 0.85, idEdge)) * wmin);
   }
@@ -393,9 +395,14 @@ export class InkPipeline {
     u.uTime!.value += dt;
     INK_GLOBALS.uInkTime.value += dt;
 
-    // Cheap after the first pass: patched materials are skipped.
+    // Cheap after the first pass: patched materials are skipped. Decals
+    // (which write no depth) must draw after everything opaque behind them.
     if (this.inkifyCountdown-- <= 0) {
       inkify(scene);
+      scene.traverse((o) => {
+        const m = (o as THREE.Mesh).material as THREE.Material | undefined;
+        if (m && !Array.isArray(m) && m.userData.inkDecal && o.renderOrder < 50) o.renderOrder = 50;
+      });
       this.inkifyCountdown = 30;
     }
     const r = this.renderer;

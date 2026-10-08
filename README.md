@@ -1,87 +1,117 @@
 # trolley.
 
-A dark comedy about small decisions, useful machines, and the people who still get to make the next decision.
+**A short ride. A very long way down.**
 
-You sit behind a rail controller. The world keeps moving. Choose a track, then move the lever. A spilled coffee becomes a dispatch problem, a helpful assistant becomes infrastructure, and infrastructure becomes a government. Earlier choices determine whether control can still be recovered. Catastrophe is possible; useful, accountable AI and costly restraint are possible too.
+You drive a trolley. Every decision is a fork in the track, and you choose it with a lever. At first the stakes are a paper cup of coffee and a stack of compliance forms. Then they are five workers and one. Then a clinic's scheduling system, a certification you are asked to sign before anyone has tested the thing it certifies, and an assistant who is *so* helpful. By the end of the day the question is no longer whom to spare. It is whether anyone still has the authority to choose.
 
-**Campaign release:** this revision contains 154 authored scenes across seven stages, with a deterministic causal engine, original cabin animation, local saves and exact replay. A full-length route selects 27–43 decisions; early endings can shorten it. Thirty to forty-five minutes remains a pacing target, not a measured completion time. The campaign is live through [ammarphp/trolley](https://github.com/ammarphp/trolley). The [release evidence](reports/validation/full-campaign-release.md) records the checks, hashes and verified deployment. The optional public collector remains disabled.
+*trolley.* is an AI-safety parable in seven stages, drawn in pen and ink in real time. It runs in the browser, needs no account, and makes no calls to a live model.
 
+- **Play:** [ammarphp.github.io/trolley](https://ammarphp.github.io/trolley/)
+- **Rendering write-up:** [Drawing a moving world in ink](docs/render/RENDERING.md)
+- **Why the overhaul:** [ADR 006](docs/decisions/006-ink-world-overhaul.md)
 
-## Run
+## What it is
 
-Use Node 24 and pnpm 11.19.0.
+**A game.**
+- You play in first person from the cab.
+- The world never stops moving. When a fork appears, the trolley eases toward it and never quite arrives, so there is no deadline.
+- You choose a track on the windshield or drag the lever itself, then pull.
+- Behind you the landscape moves through a single day:
+  - from dawn fields, cows and rivers;
+  - through towns, clinics and depots;
+  - into data halls, pylons and cooling towers;
+  - then surveillance, storms and fire;
+  - and finally ruin, or an immaculate order with no one in it.
+- The only view of the controller is your own face, in the left side mirror. It changes.
+- Every other glitch in the drawing is scripted and deliberate, and pause always works.
+
+**A parable with a thesis.**
+- Morrow, a fictional assistant from a fictional lab, arrives in stage 3. It is useful, honest and candid about its limits, and it keeps being given more to do.
+- The game's warning is structural rather than villainous: capability races, evaluations that stop testing what is deployed, fallbacks retired because they were expensive, and authority transferred because transferring it produced real benefits.
+- Catastrophe is possible. So are costly restraint and accountable, useful AI.
+- There are eight ending families.
+
+**A reproducible research artifact.**
+- The whole campaign runs headlessly from a seed and an action log, and it produces a JSON record for every decision.
+- Replays are verified byte for byte.
+- The research layer separates what published work shows from what the fiction invents. Every number is authored fiction, not a forecast.
+
+## The world, briefly
+
+| Stage | Setting | New in the cab and interface |
+|---|---|---|
+| 1 | Dawn over farmland | The lever, the mirror, a paper cup |
+| 2 | Morning on the line | The classical problems (Foot, Thomson): switches, loops, brakes, consent, risk |
+| 3 | Town and clinic | Morrow installs itself on the dash; the wire (news and posts) begins |
+| 4 | The build-out | Instruments: GDP, reported capability, fatalities; the rails speed up |
+| 5 | Dependence | Mergers, audits, fallbacks retired; early endings become possible |
+| 6 | The control gap | Storms, seized authority, a lever that registers but does not route |
+| 7 | Aftermath | Whatever remains, and who decides for it |
+
+A full journey is 27–43 decisions drawn from 154 authored dilemmas. That is roughly 30–45 minutes, depending on the route and on how long you read.
+
+## How it is built
+
+| Path | What lives there |
+|---|---|
+| `src/simulation/`, `src/contracts/`, `src/content/` | The deterministic causal engine and the 154-node campaign (unchanged by the overhaul; content hashes pinned) |
+| `src/presentation/derive.ts` | A pure projection from the campaign to what should be seen: environment channels, the controller's face, glass damage, scripted disruptions |
+| `src/render/core/` | The ink pipeline: hatching and stippling materials, contour composite, palette, geometry kit |
+| `src/render/world/` | Track network and turnouts, the journey, scenery streaming, tableaux, tunnels |
+| `src/render/actors/`, `structures/`, `props/`, `world/nature/`, `world/terrain/`, `world/sky/` | The procedural asset library: people, animals, machines, buildings, trees, ground, sky and weather |
+| `src/render/cabin/`, `src/render/portrait/` | The first-person cab and the face in the mirror |
+| `src/render/staging/` | What stands on each branch of all 154 forks |
+| `src/audio/` | Original synthesized score and rail ambience |
+| `src/ui/` | The HUD, Morrow's window, instruments, the wire, glossary, debrief |
+| `src/ui/brand/`, `src/ui/wire/` | The fictional world's institutions, marks and ambient news |
+| `research/`, `docs/` | Sources, methodology, decisions, privacy |
+
+Every asset is original procedural TypeScript geometry. There are no downloaded models, textures or samples. Fonts are Geist and Geist Mono (SIL OFL), self-hosted.
+
+## Run it
+
+Use Node 24 and pnpm 11.19.
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open `http://127.0.0.1:4173`. If that port is occupied, use `PORT=4181 pnpm dev`. No API key, model service, account or collector is needed. The static game uses relative URLs and can be hosted beneath a GitHub Pages repository path.
+Then open `http://127.0.0.1:4173`. Other commands:
 
 ```sh
-pnpm check                         # strict types, unit/integration tests, static build
-pnpm simulate -- --profile campaign --runs 10000 --policy random --seed campaign-audit
-pnpm simulate -- --profile slice --runs 10000 --policy enumerate --seed slice-audit
-pnpm collector:build               # compile optional service; does not deploy
-pnpm preview                       # serve dist/
-pnpm exec playwright install chromium
-pnpm test:browser                   # browser CI suite
+pnpm check                      # strict types, unit/integration tests, static build
+pnpm test:browser               # the browser suite (WebGL2 via Metal or SwiftShader)
+node scripts/lab.mjs --serve    # the asset lab: every *.lab.ts scene
+node scripts/lab-shot.mjs <scene> --file <lab file> --out shot.png
+node scripts/capture.mjs        # play a run and photograph it
+node scripts/perf.mjs --dpr 2   # frame times in the running game
+pnpm simulate -- --runs 1000 --policy random
 ```
-
-The simulator defaults to the full campaign. Enumeration is restricted to the old slice; it is not a complete search of the campaign. Named policies use explicit anchor choices and synthetic intent priorities for other scenes, not a model of human behavior. Actual test evidence, including its limits, is in [reports/validation](reports/validation). A written test command is not evidence that it ran. The browser CI suite, manual desktop/phone-viewport inspection and physical-device accessibility testing are separate checks.
 
 ## Controls
 
-- Select either route, then press **Toggle lever**. The drawn lever reflects the executed route.
-- Arrow keys select a route. Enter or Space on the grip commits it. Escape cancels selection.
-- The lever stays where it was left, but each new decision starts unarmed. Waiting never chooses for you.
-- **Keep going** leaves the consequence and starts the next decision. There is no reading deadline.
-- Pause, settings and the run record remain available during the horror. Less motion, less graphic detail and sound are independent settings.
-- The information button beside the dilemma opens context, the scene description and sources. Morrow's conversation and the news feed enter at stage three, with selectable questions instead of a text box. The meters enter at stage four.
+- Choose a track: click its tag on the windshield, press ← or →, or drag the lever in the cab.
+- Pull the lever to commit: click **Pull the lever**, press Enter or Space, or release the dragged lever fully to one side.
+- Escape cancels a selection. Nothing is ever chosen for you by waiting.
+- Pause, settings and your record are always available, including during the horror.
 
-Your place is saved locally when browser storage is available. Reopening the page offers resume. Replay export includes the pinned content version and causal journal; exports exclude the private withdrawal key. Supported archived slice bundles remain available for exact replay and resume. Unknown content is rejected or kept exportable, rather than silently rewritten as campaign history.
+**Settings:**
+- Less motion (no optic flow)
+- Less graphic detail (no blood)
+- No flashing
+- Sound and volume
+- Drawing quality
+- Scene descriptions for screen readers
 
-## What exists
+## Privacy and research
 
-The v2 game separates a pure deterministic simulation from its observations, input, animation, persistence and telemetry. Prepared decisions are immutable; commitments are version checked and atomic. SHA-256 keyed randomness separates route selection from fictional incidents. A replay must reproduce every recorded decision and state hash. Cosmetic motion cannot draw an incident, advance a fictional day or kill anyone.
+- Your run stays in this browser. No account, no identifier, no model calls. Optional collection code exists but is disabled in this release.
+- Shared statistics appear only for genuine eligible aggregates of at least 20 runs, and are never invented.
+- See [privacy](docs/PRIVACY.md) and [methodology](docs/METHODOLOGY_V2.md).
 
-The full bank covers useful advice, bounded clinical benefits, incentives and financing pressure, permission creep, misleading assurance, maintained fallbacks, verified coordination, conditional loss of control, and the return or transfer of power. Eight ending families have explicit predicates. Earlier slice witnesses and tests remain historical evidence; the current full-campaign witnesses and coverage belong to the [release report](reports/validation/full-campaign-release.md). All incident probabilities and numeric outcomes are authored fiction, not estimates of real AI risk or judgments about a player.
+This is a warning, not a forecast, a study or a morality score. The mechanisms it dramatizes are drawn from published research, which is cited in the game's sources drawer and in `research/`. Its numbers, people, institutions and probabilities are authored fiction.
 
-Four early rail cases now resolve ordered contact, loop re-entry and independent brakes against distinct population cohorts, including identified fictional workers. Removing the stopping obstruction changes the causal outcome; drawing a curved rail alone does not. Most later casualties still use anonymous counts, and named characters in prose do not automatically become persistent simulated people. The [campaign review](reports/validation/campaign-editorial-review.md) distinguishes these implemented mechanics from remaining full-model obligations.
+## Licence
 
-The original illustration system uses technical line art, a rear view of the uniformed controller, stationary hands, a toggling lever, persistent world movement and changing environments. Sound is original browser synthesis. Earlier renderer and motion checks remain in [motion evidence](docs/art/SPIKE_EVIDENCE.md); they do not substitute for inspecting the full campaign. Further visual refinement and device review remain open.
-
-## Run collection
-
-Sharing is **disabled for this release**. Collector code exists, but publishing the game does not activate it. With a separately configured and approved service, a player could opt in when starting a fresh run. Each shared run gets a fresh random identifier and capability key. There is no user, visitor or cross-run identity in the application. Ten runs by one person are ten runs, not ten people.
-
-Only allowlisted decision/exposure events are sent. No name, free text, fingerprint or application-stored IP address is collected. Hosting providers can process connection metadata separately. Collection failure never blocks play. Public comparable cells require at least twenty eligible runs; test, development, delegated and overridden records are excluded. Suppression is not differential privacy or a guarantee of anonymity. Withdrawal affects stored events and future releases; it cannot recall copies already downloaded.
-
-The optional v2 service validates decisions by replaying the server's approved content. Its own tables and routes are separate from v1. The deployment wrapper closes new v1 submissions while preserving old withdrawal and aggregate access. Scheduled retention and aggregate-refresh code exists; no v2 service has been activated by this implementation. GitHub Actions writes aggregate snapshots into the Pages artifact, not into Git history. See [collection design](docs/privacy/v2-collection-design.md) and [service integration](collector/v2/README.md).
-
-The legacy implementation remains at `legacy.html`, with new sharing disabled in this branch. Its templates, exports and tests are retained. It is not counted as finished v2 content.
-
-## Research and boundaries
-
-[Research dossiers](research/README.md), the [public source registry](research/registry/public-sources.json), [model semantics](docs/architecture/SEMANTICS.md), and [methodology](docs/METHODOLOGY_V2.md) distinguish published mechanisms, authored assumptions, software verification and any future participant evidence. The local books are reading inputs, not redistributable assets; they are excluded from source publication and the build.
-
-This game is an AI-safety warning. It is not a controlled study, psychological diagnosis, real-world forecast or morality score. Formal recruitment and efficacy claims require a separate study protocol. No participant results have been invented or inferred from synthetic campaigns.
-
-## Repository
-
-| Path | Purpose |
-|---|---|
-| `src/contracts/` | Runtime-validated nodes, permissions, effects and records |
-| `src/simulation/` | Pure transitions, routing, incidents, endings and replay |
-| `src/content/campaign/` | The 154 authored scenes and campaign assembly |
-| `src/content/archive/` | Pinned prior content for exact replay |
-| `src/presentation/` | Original cabin, world geometry, line art and audio |
-| `src/ui/` | Semantic DOM, lever controls and debrief |
-| `src/persistence/` | Local runs, saves and safe exports |
-| `src/telemetry/` | Consent, bounded retry queue and public comparisons |
-| `collector/v2/` | Optional validation, storage, withdrawal and suppression |
-| `research/` | Evidence, candidate inventory and analysis specifications |
-| `docs/plan/` | Accepted plan and implementation status |
-| `reports/validation/` | Actual checks and reproducible evidence |
-
-Code and original artwork are MIT licensed. Third-party dependencies retain their own licenses; cited research is not included under the project's license. No source book or third-party illustration is bundled.
+Code and original artwork are MIT licensed. Geist fonts are SIL OFL 1.1. Third-party dependencies keep their own licences. Cited research is not included under the project's licence.

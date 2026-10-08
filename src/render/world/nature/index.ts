@@ -2,7 +2,7 @@
  * Nature and rural scatter: the public API.
  *
  * Every prefab variant is ONE BufferGeometry (per-part albedo in `inkAttr`)
- * plus the ink material options to render it with, so the integrator can draw
+ * plus the ink material options to render it with, so the world renderer can draw
  * any number of copies with a single THREE.InstancedMesh:
  *
  *   const p = buildPrefab("oak", 2, { leaves: 0.6 });

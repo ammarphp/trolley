@@ -28,6 +28,7 @@ import { buildNestedGrid } from "./grid.ts";
 import { heightAt, syncTerrainOrigin, TERRAIN_GLSL, TERRAIN_UNIFORMS } from "./height.ts";
 import { INK2D_GLSL } from "./glsl.ts";
 import { createInkLambert, trackPixelScale } from "./ink-lambert.ts";
+import { nightAmount } from "../sky/sun.ts";
 
 /** Master pattern lattice (m). Every lattice used by the ground divides it. */
 export const GROUND_LATTICE = 15360;
@@ -282,14 +283,18 @@ float gStubble(GCtx c, vec2 rel, vec2 dir, float seed) {
 
 // The ordered world: identical parcels ruled like graph paper, each with the
 // same regular lattice of dots.
-float gOrder(GCtx c, vec2 rel) {
+float gOrder(GCtx c, vec2 rel, float edgeD, vec2 edgeN) {
   vec2 q = rel / 4.0;
   vec2 cell = floor(q + 0.5);
   vec2 s = c.Jinv * (rel - cell * 4.0);
   float spacingPx = 4.0 / c.mppY / c.pr;
   float vis = smoothstep(4.5, 9.0, spacingPx);
   float r = 0.85 * c.pr;
-  return (1.0 - smoothstep(r - 0.5, r + 0.5, length(s))) * vis;
+  float dots = (1.0 - smoothstep(r - 0.5, r + 0.5, length(s))) * vis * step(3.0, edgeD);
+  // A second, finer rule 2 m inside every parcel edge: each plot framed alike.
+  float inset = tgLine(edgeD - 2.0, tgMpp(c.dpx, c.dpy, edgeN), 0.04, 0.6 * c.pr, 1.0 * c.pr);
+  float insetVis = smoothstep(3.0, 6.0, 2.0 / tgMpp(c.dpx, c.dpy, edgeN) / c.pr);
+  return max(dots, inset * insetVis * 0.9);
 }
 
 float gSlabs(GCtx c, vec2 rel, vec2 dir, float seed) {
@@ -301,28 +306,29 @@ float gSlabs(GCtx c, vec2 rel, vec2 dir, float seed) {
   return max(max(a, b), st * smoothstep(3.0, 6.0, 0.5 / c.mppY / c.pr) * 0.8);
 }
 
-// Cracked earth: polygon cracks at two scales.
-float gCracks(GCtx c, float amount, float quality) {
-  float cov = 0.0;
+// Cracked earth, hierarchical as real desiccation cracks are: a continuous
+// primary network of wandering polygons, secondary cracks that split them
+// (some edges missing, so they end in T-junctions), and hair cracks near by.
+float gCrackLevel(GCtx c, float L, float warp, float keepP, float wMin, float wMax, float maxPx, float amount, float salt) {
+  float vis = smoothstep(4.0, 9.0, L / c.mppY / c.pr);
+  if (vis <= 0.0) return 0.0; // too small to draw here: skip the cell search
   vec2 cid;
   vec2 ts;
   vec2 sd;
   vec2 oid;
-  // Major fissures: a broken, meandering network (not paving).
-  vec2 wq = c.p + (vec2(gNoise(c.p + 5.0, 3.0), gNoise(c.p + 9.0, 3.0)) - 0.5) * 1.6;
-  float e = tgVoronoi(wq / 6.0, 0.95, gBase(6.0), cid, ts, sd, oid) * 6.0;
+  vec2 wq = c.p + (vec2(gNoise(c.p + salt, L * 0.5), gNoise(c.p + salt + 9.0, L * 0.5)) - 0.5) * warp;
+  float e = tgVoronoiFast(wq / L, 0.8, gBase(L), cid, ts, sd, oid) * L;
   float mpp = tgMpp(c.dpx, c.dpy, normalize(sd));
-  float vis = smoothstep(4.0, 9.0, 6.0 / c.mppY / c.pr);
-  float keep = step(tgHash(cid + oid + 0.37 * abs(cid - oid)), 0.58);
-  float w = mix(0.03, 0.1, tgHash(cid + oid)) * amount;
-  cov = max(cov, tgLine(e, mpp, w, 0.75 * c.pr, 2.2 * c.pr) * vis * keep);
-  if (quality > 0.5) {
-    float e2 = tgVoronoi(c.p / 1.5, 0.85, gBase(1.5), cid, ts, sd, oid) * 1.5;
-    float mpp2 = tgMpp(c.dpx, c.dpy, normalize(sd));
-    float vis2 = smoothstep(4.0, 8.0, 1.5 / c.mppY / c.pr) * smoothstep(0.35, 0.8, amount);
-    float w2 = mix(0.008, 0.03, tgHash(cid * 1.3 + oid)) * amount;
-    cov = max(cov, tgLine(e2, mpp2, w2, 0.6 * c.pr, 1.4 * c.pr) * vis2);
-  }
+  float keep = step(tgHash(cid + oid + 0.37 * abs(cid - oid) + salt), keepP);
+  float w = mix(wMin, wMax, tgHash(cid + oid)) * amount;
+  return tgLine(e, mpp, w, 0.6 * c.pr, maxPx * c.pr) * vis * keep;
+}
+
+float gCracks(GCtx c, float amount, float quality) {
+  // Lattice sizes divide the master lattice (see gBase).
+  float cov = gCrackLevel(c, 7.5, 2.4, 1.0, 0.05, 0.12, 2.4, amount, 5.0);
+  cov = max(cov, gCrackLevel(c, 2.4, 0.9, 0.62, 0.015, 0.045, 1.5, amount, 17.0) * smoothstep(0.3, 0.7, amount));
+  if (quality > 0.5) cov = max(cov, gCrackLevel(c, 0.75, 0.3, 0.5, 0.006, 0.014, 1.0, amount, 29.0) * smoothstep(0.55, 0.9, amount));
   return cov;
 }
 
@@ -487,7 +493,7 @@ const FRAGMENT_OUT = /* glsl */ `
     else if (kind < 2.5) field = gCrops(c, f.rel, dir, fseed);
     else if (kind < 3.5) field = gStubble(c, f.rel, dir, fseed);
     else if (kind < 4.5) field = gSlabs(c, f.rel, dir, fseed);
-    else field = gOrder(c, f.rel);
+    else field = gOrder(c, f.rel, f.edgeD, f.edgeN);
     if (kind > 1.5 && kind < 2.5) field *= 1.0 - 0.6 * drought;
     field *= fieldFade;
   }
@@ -552,14 +558,15 @@ const FRAGMENT_OUT = /* glsl */ `
   // ------------------------------------------------------------ damage
   float pristine = 1.0 - perfect;
   float dmask = smoothstep(0.0, 0.25, drought * 1.25 - gNoise(c.p + 71.0, 192.0)) * pristine;
-  float cracks = dmask > 0.0 ? gCracks(c, dmask, quality) * (1.0 - smoothstep(120.0, 260.0, c.dist)) : 0.0;
+  float cracks = dmask > 0.0 && c.dist < 260.0 ? gCracks(c, dmask, quality) * (1.0 - smoothstep(120.0, 260.0, c.dist)) : 0.0;
 
   float scorchTone = 0.0;
   float craters = 0.0;
   float embers = 0.0;
   if (ruin > 0.01) {
     float cs;
-    craters = gCraters(c, ruin * pristine, sun, quality, cs) * (1.0 - smoothstep(250.0, 500.0, c.dist));
+    cs = 0.0;
+    craters = c.dist < 500.0 ? gCraters(c, ruin * pristine, sun, quality, cs) * (1.0 - smoothstep(250.0, 500.0, c.dist)) : 0.0;
     float sN = gNoise(c.p, 48.0) * 0.55 + gNoise(c.p + 7.0, 24.0) * 0.3 + gNoise(c.p + 3.0, 12.0) * 0.15;
     float sm = smoothstep(0.0, 0.05, sN + ruin * 0.3 - 0.82) * pristine;
     vec2 sc = floor(c.p / 0.5);
@@ -591,20 +598,9 @@ const FRAGMENT_OUT = /* glsl */ `
   float ruled = 0.0;
   if (amb > 0.01) {
     vec3 vv = -vViewPosition;
-    vec3 U = mat3(viewMatrix) * vec3(0.0, 1.0, 0.0);
-    vec2 sp = c.focal * vv.xy / max(-vv.z, 1e-4);
-    float hPx = (dot(sp, U.xy) - c.focal * U.z) / max(length(U.xy), 1e-4);
+    float hPx = tgHorizonPx(vv, viewMatrix, c.focal);
     float t = amb * (0.82 + 0.18 * smoothstep(-30.0 * c.pr, -260.0 * c.pr, hPx));
-    float spacing = 3.4 * c.pr;
-    float minW = 0.75 * c.pr;
-    float lvl = clamp(log2(minW / max(t * spacing, 1e-4)), 0.0, 4.0);
-    float per = spacing * exp2(floor(lvl));
-    float u = hPx / per;
-    float idx = floor(u + 0.5);
-    float w = max(t * per, minW);
-    ruled = 1.0 - smoothstep(w * 0.5 - 0.5, w * 0.5 + 0.5, abs(u - idx) * per);
-    ruled *= 1.0 - mod(idx, 2.0) * fract(lvl) * step(lvl, 3.999);
-    ruled = max(ruled, smoothstep(0.86, 0.95, t));
+    ruled = tgRuled(hPx, c.focal * vv.x / max(-vv.z, 1e-4), t, c.pr, 0.0);
   }
 
   float cov = max(max(field, boundary), max(cracks, craters));
@@ -638,7 +634,7 @@ export function createGround(options: GroundOptions = {}): GroundModule {
     uPxScale: { value: new THREE.Vector3(700, 1, 720) },
   };
   const material = createInkLambert({
-    key: "ink-ground-v4",
+    key: "ink-ground-v5",
     uniforms,
     vertexHead: VERTEX_HEAD,
     vertexNormal: VERTEX_NORMAL,
@@ -680,7 +676,7 @@ export function createGround(options: GroundOptions = {}): GroundModule {
         mesh.parent.worldToLocal(tmpScene);
       }
       mesh.position.copy(tmpScene);
-      const night = THREE.MathUtils.smoothstep(env.timeOfDay, 0.8, 0.94) + (1 - THREE.MathUtils.smoothstep(env.timeOfDay, 0.02, 0.14)) * 0.55;
+      const night = nightAmount(env.timeOfDay);
       uniforms.uGEnvA.value.set(env.vegetation, env.bloom, env.drought, env.ruin);
       uniforms.uGEnvB.value.set(env.fire, env.perfection, env.uniformity, env.industry);
       uniforms.uGEnvC.value.set(env.compute, env.habitation, Math.min(1, night), env.storm);

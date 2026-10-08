@@ -9,7 +9,7 @@
  * Lightning: a branching bolt (midpoint-displaced main channel plus forks)
  * built fresh for every strike, shown for 150 ms as a paper-white ribbon
  * that the contour pass outlines in ink. Each strike calls the registered
- * callbacks with a strength so the integrator can flash the pipeline; with
+ * callbacks with a strength so the renderer can flash the pipeline; with
  * noFlashing set the bolt is still drawn but no callback fires.
  *
  * Fog banks: low bands of mist at 350-800 m that erase what lies behind them
@@ -22,6 +22,7 @@ import { INK_GLOBALS } from "../../core/ink-material.ts";
 import { createRng, type Rng } from "../../core/rng.ts";
 import { COMPOSITE_FADE, INK2D_GLSL, SKY_LOOK_UNIFORMS, SKY_OUT_GLSL, syncSkyLook } from "../terrain/glsl.ts";
 import { heightAt } from "../terrain/height.ts";
+import { nightAmount } from "./sun.ts";
 
 // ------------------------------------------------------------------- rain
 
@@ -230,18 +231,20 @@ in float vAlong;
 uniform float uFog;
 uniform float uTime;
 uniform float uPr;
+uniform float uNight;
 ${INK2D_GLSL}
 void main() {
   float on = smoothstep(vRank, vRank + 0.15, uFog);
-  float arc = atan(vLocal.x, -vLocal.z) * length(vLocal.xz);
   float h = vLocal.y;
-  // A billowing crest, drifting slowly.
-  float crest = 18.0 + 26.0 * tgNoise(vec2(arc / 90.0 + vSeed * 17.0 + uTime * 0.01, vSeed)) + 10.0 * tgNoise(vec2(arc / 25.0, vSeed * 3.0));
+  // A billowing crest, drifting slowly (parameterised along the bank, so
+  // no seam where atan() wraps).
+  float crest = 10.0 + 38.0 * tgNoise(vec2(vAlong * 7.0 + vSeed * 17.0 + uTime * 0.01, vSeed)) + 14.0 * tgNoise(vec2(vAlong * 26.0, vSeed * 3.0));
   // Feathered ends: the bank thins out along its length.
   float ends = smoothstep(0.0, 0.3, vAlong) * smoothstep(1.0, 0.7, vAlong);
   crest *= 0.35 + 0.65 * ends;
   float body = 1.0 - smoothstep(crest * 0.5, crest, h);
-  float density = body * on * (0.4 + 0.6 * ends);
+  // At night mist is only lighter than the dark, never a white-out.
+  float density = body * on * (0.4 + 0.6 * ends) * (1.0 - 0.45 * uNight);
   // Erase in broken horizontal paper strokes (screen space), thicker low down.
   float row = gl_FragCoord.y / (2.6 * uPr);
   float ri = floor(row);
@@ -357,7 +360,7 @@ export function createWeather(options: WeatherOptions = {}): WeatherModule {
   group.add(bolt);
 
   const fogGeometry = fogBankGeometry(rng.fork("fog"), 14);
-  const fogUniforms = { uFog: { value: 0 }, uTime: { value: 0 }, uPr: { value: 1 } };
+  const fogUniforms = { uFog: { value: 0 }, uTime: { value: 0 }, uPr: { value: 1 }, uNight: { value: 0 } };
   const fogMaterial = new THREE.ShaderMaterial({
     glslVersion: THREE.GLSL3,
     vertexShader: FOG_VERT,
@@ -476,6 +479,7 @@ export function createWeather(options: WeatherOptions = {}): WeatherModule {
       fog.position.copy(tmp);
       fogUniforms.uFog.value = THREE.MathUtils.clamp(env.fog * 1.2 + env.storm * 0.25 - 0.05, 0, 1);
       fogUniforms.uTime.value = time;
+      fogUniforms.uNight.value = nightAmount(env.timeOfDay);
       fog.visible = fogUniforms.uFog.value > 0.01;
 
       // ---- lightning

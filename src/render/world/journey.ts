@@ -36,7 +36,7 @@ export interface Stake {
 }
 
 export const FRONTIER = 185; // metres of line the pen keeps drawn ahead while cruising
-export const HOLD_BEFORE_TOE = 8; // where the approach eases to
+export const HOLD_BEFORE_TOE = 6; // where the approach eases to
 export const DRAW_SPEED = 180; // metres per second a new branch inks outward
 export const BRANCH_DRAW = 520;
 export const STOP_BUFFER = 3.2; // cab front to obstruction when braked
