@@ -48,6 +48,8 @@ export class Journey {
   phase: JourneyPhase = "cruise";
   /** Cruise speed in m/s (eased toward target). */
   cruise = 11;
+  /** Where the current passage ends on the taken branch. */
+  private passageEnd = PASSAGE_END;
   cruiseTarget = 11;
   reducedMotion = false;
   private stakes: Stake[] = [];
@@ -114,6 +116,19 @@ export class Journey {
     return j;
   }
 
+  /** Less motion switched on mid-approach: make the same cut prepare() makes. */
+  cutToHold(): void {
+    const j = this.network.junction;
+    if (!j || j.chosen || this.phase !== "approach") return;
+    j.left.drawTo = Math.max(j.left.drawTo, BRANCH_DRAW);
+    j.right.drawTo = Math.max(j.right.drawTo, BRANCH_DRAW);
+    j.stem.drawTo = j.toe;
+    this.rig.line = j.stem;
+    this.rig.s = Math.max(this.rig.s, j.toe - HOLD_BEFORE_TOE);
+    this.rig.speed = 0;
+    j.stem.pose(this.rig.s, this.rig.pose);
+  }
+
   /** Preview the points (lever position before commitment), -1..1. */
   previewPoints(value: number): void {
     if (this.phase === "approach") this.pointsTarget = value;
@@ -127,6 +142,8 @@ export class Journey {
     this.pointsTarget = side === "left" ? -1 : 1;
     this.events.onPointsThrown?.(side);
     this.stopAt = stoppedBy ? Math.max(2, stoppedBy.s - STOP_BUFFER) : null;
+    // The passage runs on past the last stake on the taken branch, however long the line of them.
+    this.passageEnd = this.stakes.reduce((end, st) => (st.side === side ? Math.max(end, st.s + 4) : end), PASSAGE_END);
     this.phase = "passage";
     this.holdTimer = 0;
     const promise = new Promise<void>((resolve) => (this.passageResolve = resolve));
@@ -135,7 +152,7 @@ export class Journey {
       // A cut rather than a ride: land past the stakes (or at the stop) at once.
       const branch = side === "left" ? j.left : j.right;
       this.rig.line = branch;
-      this.rig.s = this.stopAt ?? PASSAGE_END;
+      this.rig.s = this.stopAt ?? this.passageEnd;
       branch.pose(this.rig.s, this.rig.pose);
       this.fireContacts(side, this.rig.s);
       this.finishPassage();
@@ -184,7 +201,7 @@ export class Journey {
           this.rig.line = branch;
           this.rig.s = 0;
         }
-        this.rig.s = Math.max(this.rig.s, this.stopAt ?? PASSAGE_END);
+        this.rig.s = Math.max(this.rig.s, this.stopAt ?? this.passageEnd);
         branch.pose(this.rig.s, this.rig.pose);
         this.fireContacts(j.chosen, this.rig.s);
       }
@@ -230,9 +247,11 @@ export class Journey {
     const before = this.rig.line;
     this.rig.advance(this.rig.speed * dt, this.network);
 
-    // Keep the pen ahead of the cab on the current line.
+    // Keep the pen ahead of the cab on the current line. A stem is drawn up
+    // to its toe (its draw limit) even while the fork waits: a tunnel or a
+    // crossing can set the toe beyond the frontier at the moment it is laid.
     const line = this.rig.line;
-    if (!line.abandoned && (!j || j.chosen || line !== j.stem)) {
+    if (!line.abandoned) {
       const want = Math.min(line.drawLimit, this.rig.s + FRONTIER);
       if (line.drawTo < want) line.drawTo = Math.min(want, line.drawTo + Math.max(this.rig.speed, 30) * dt + 0.5);
     }
@@ -246,7 +265,7 @@ export class Journey {
           this.holdTimer += dt;
           if (this.holdTimer > 0.9) this.finishPassage();
         }
-      } else if (branchS >= PASSAGE_END) {
+      } else if (branchS >= this.passageEnd) {
         this.finishPassage();
       }
     }

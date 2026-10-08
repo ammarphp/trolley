@@ -36,10 +36,10 @@ export async function createWorldHost(host: HTMLElement, settings: RendererSetti
     } catch (error) {
       console.warn("Ink renderer unavailable; using the static drawing.", error);
       host.replaceChildren();
-      renderer = new FallbackRenderer(host, settings);
+      renderer = new FallbackRenderer(host, settings, audio);
     }
   } else {
-    renderer = new FallbackRenderer(host, settings);
+    renderer = new FallbackRenderer(host, settings, audio);
   }
   const lookup = (id: string): NodeStaging | undefined => stagingFor(id);
   return {

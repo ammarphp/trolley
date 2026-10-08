@@ -120,6 +120,8 @@ export interface AnimalUserData {
   react: (kind: Reaction, direction?: THREE.Vector3) => void;
   setBehavior: (b: Behavior) => void;
   setLookAt: (target: THREE.Vector3 | null) => void;
+  /** Less graphic detail switches blood pools off (and removes one already formed). */
+  setBlood: (on: boolean) => void;
   species: AnimalId;
   behavior: Behavior;
   struck: boolean;

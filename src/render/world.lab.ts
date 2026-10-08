@@ -17,7 +17,8 @@ export async function worldLab(ctx: Parameters<LabScene["build"]>[0], assets: As
   const base = (): StageView => ({
     phase: "consequence", seed: "lab-run", stage: 2, ordinal: 1, decisionId: null, nodeId: null, staging: null,
     routeLabels: { left: "Keep going", right: "Turn" }, env: { ...titleEnvironment(), ...(ctx.params.env as object ?? {}) },
-    cabin: { face: { stage: 0, smile: 0.8, fatigue: 0, grief: 0, shock: 0, dissociation: 0, age: 0 }, impacts: 0, bloodied: 0, authority: "human", morrow: false, receipts: [], speedKmh: 40, clock: "06:40", keepsake: "coffee" },
+    cabin: { face: { stage: 0, smile: 0.8, fatigue: 0, grief: 0, shock: 0, dissociation: 0, age: 0 }, impacts: 0, bloodied: 0, authority: "human", morrow: false, receipts: [],
+    receiptTotal: 0, speedKmh: 40, clock: "06:40", keepsake: "coffee" },
     cues: [],
   });
   renderer.update(base());

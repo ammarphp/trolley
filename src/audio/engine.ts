@@ -248,6 +248,7 @@ class Engine implements SynthAudioEngine {
     if (Object.keys(this.pendingVolumes).length) r.setVolumes(this.pendingVolumes);
     if (this.pendingRail) this.rail.set(this.pendingRail);
     if (!this.enabled) r.enableGain.gain.value = 0;
+    if (this.paused) r.pauseGain.gain.value = 0;
   }
 
   private async resume(): Promise<void> {

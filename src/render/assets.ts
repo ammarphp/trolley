@@ -57,6 +57,8 @@ export interface CabinModule {
   setRain(amount: number): void;
   wipe(): void;
   clearGlass(): void;
+  /** Remove blood from the glass, keeping its cracks. */
+  clearBlood?(): void;
   setKeepsake(kind: "coffee" | "forms" | null): void;
   setAuthority(a: "human" | "delegated" | "overridden"): void;
   tick(dt: number, t: number): void;
@@ -75,8 +77,8 @@ export interface PortraitModule {
 }
 
 export interface AssetProvider {
-  person(spec: { role: PersonRole; pose?: Pose; seed: string; name?: string; detail?: -1 | 0 | 1 | 2; ground?: number }): THREE.Object3D;
-  animal(species: AnimalId, spec: { seed: string; behavior?: "graze" | "walk" | "alert" | "flee" | "rest" }): THREE.Object3D;
+  person(spec: { role: PersonRole; pose?: Pose; seed: string; name?: string; detail?: -1 | 0 | 1 | 2; ground?: number; blood?: boolean }): THREE.Object3D;
+  animal(species: AnimalId, spec: { seed: string; behavior?: "graze" | "walk" | "alert" | "flee" | "rest"; blood?: boolean }): THREE.Object3D;
   vehicle(id: VehicleId, spec: { seed: string }): THREE.Object3D;
   machine(id: MachineId, spec: { seed: string }): THREE.Object3D;
   prop(id: PropId, spec: { seed: string; scale?: number; label?: string }): THREE.Object3D;

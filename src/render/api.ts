@@ -287,6 +287,8 @@ export interface CabinState {
   morrow: boolean;
   /** Receipt lines printed so far (authority changes). */
   receipts: string[];
+  /** How many receipt lines the run has produced in all (receipts holds only the latest). */
+  receiptTotal: number;
   /** Speedometer reading, km/h, cosmetic. */
   speedKmh: number;
   /** Fictional clock label, e.g. "06:40". */
@@ -388,5 +390,7 @@ export interface WorldRenderer {
    * (the cab has left a stage tunnel). Renderers without tunnels resolve at once.
    */
   whenClear?(): Promise<void>;
+  /** Abandon a drag of the in-world lever in progress; its release then commits nothing. */
+  cancelLever?(): void;
   destroy(): void;
 }

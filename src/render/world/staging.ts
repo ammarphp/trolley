@@ -75,7 +75,7 @@ export function buildTableau(
   staging: SideStaging,
   assets: AssetProvider,
   seed: string,
-  options: { rail?: { loopSide?: Side; brakeOnLoop?: boolean }; clearOfTrack?: ClearOfTrack } = {},
+  options: { rail?: { loopSide?: Side; brakeOnLoop?: boolean }; clearOfTrack?: ClearOfTrack; reducedGraphics?: boolean } = {},
 ): Tableau {
   const group = new THREE.Group();
   group.name = `tableau:${junction.key}`;
@@ -104,7 +104,7 @@ export function buildTableau(
     let s = smallOnly ? FIRST_STAKE - 6 : FIRST_STAKE;
     const outward = side === "left" ? -1 : 1;
     for (const occ of option.occupants) {
-      s = placeOccupant(occ, { line, side, s, struck, rng, add, actors, stakes, assets, seed: `${seed}:${junction.key}:${side}`, deck, outward });
+      s = placeOccupant(occ, { line, side, s, struck, rng, add, actors, stakes, assets, seed: `${seed}:${junction.key}:${side}`, deck, outward, blood: !options.reducedGraphics });
     }
     if (option.sign) {
       const sign = assets.sign(option.sign, "enamel");
@@ -154,6 +154,8 @@ interface PlaceContext {
   seed: string;
   deck: number;
   outward: number;
+  /** False under less graphic detail: no pools after a strike. */
+  blood: boolean;
 }
 
 function placeOccupant(occ: Occupant, c: PlaceContext): number {
@@ -178,6 +180,7 @@ function placeOccupant(occ: Occupant, c: PlaceContext): number {
           detail: shown > 8 ? 0 : 1,
           ...(tied ? { ground: -c.deck } : {}),
           ...(occ.name && i === 0 ? { name: occ.name } : {}),
+          blood: c.blood,
         });
         let at = s;
         let lateral = 0;
@@ -209,7 +212,7 @@ function placeOccupant(occ: Occupant, c: PlaceContext): number {
         // Larger numbers: a denser mass beside the line conveys scale.
         const extra = Math.min(60, occ.count - shown);
         for (let i = 0; i < extra; i++) {
-          const person = assets.person({ role: occ.role, pose: "stand", seed: `${c.seed}:mass:${i}`, detail: 0 });
+          const person = assets.person({ role: occ.role, pose: "stand", seed: `${c.seed}:mass:${i}`, detail: 0, blood: c.blood });
           const at = s + rng.range(-2, 14);
           const lateral = c.outward * rng.range(4, 16);
           place(person, line, at, lateral, 0, "trolley", rng);
@@ -222,7 +225,7 @@ function placeOccupant(occ: Occupant, c: PlaceContext): number {
     }
     case "animal": {
       for (let i = 0; i < Math.min(occ.count, 12); i++) {
-        const a = assets.animal(occ.species, { seed: `${c.seed}:${s}:${i}`, behavior: "graze" });
+        const a = assets.animal(occ.species, { seed: `${c.seed}:${s}:${i}`, behavior: "graze", blood: c.blood });
         const at = s + i * 2.2;
         const lateral = onRails ? rng.range(-0.8, 0.8) : c.outward * rng.range(3, 7);
         place(a, line, at, lateral, onRails ? 0.35 : 0, "along", rng);

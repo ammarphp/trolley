@@ -16,7 +16,7 @@ You drive a trolley. Every decision is a fork in the track, and you choose it wi
 - You play in first person from the cab.
 - The world never stops moving. When a fork appears, the trolley eases toward it and never quite arrives, so there is no deadline.
 - You choose a track on the windshield or drag the lever itself, then pull.
-- Behind you the landscape moves through a single day:
+- Outside, the landscape moves through a single day:
   - from dawn fields, cows and rivers;
   - through towns, clinics and depots;
   - into data halls, pylons and cooling towers;
@@ -24,7 +24,7 @@ You drive a trolley. Every decision is a fork in the track, and you choose it wi
   - and finally ruin, or an immaculate order with no one in it.
 - Stage changes run through a tunnel; you come out into the next world. Now and then the line crosses a river.
 - The only view of the controller is your own face, in the left side mirror. It changes.
-- Every other glitch in the drawing is scripted and deliberate, and pause always works.
+- Every glitch in the drawing is scripted and deliberate, and pause always works.
 
 **A parable with a thesis.**
 - Morrow, a fictional assistant from a fictional lab, arrives in stage 3. It is useful, honest and candid about its limits, and it keeps being given more to do.

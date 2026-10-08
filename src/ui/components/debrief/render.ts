@@ -187,7 +187,6 @@ export function renderDebrief(
   metaItem("Decisions", formatInt(n));
   metaItem("Days", formatInt(w.day));
   metaItem("Overrides", formatInt(overrides));
-  metaItem("Ride", view.seed);
   hero.append(reveal(meta, 160));
   hero.append(
     reveal(
@@ -789,7 +788,7 @@ export function renderDebrief(
     el(
       "p",
       "db-methods-seed",
-      `Ride ${view.seed} · deterministic replay from seed and inputs.`,
+      "Deterministic replay from seed and inputs. Export replay saves both.",
     ),
   );
   closing.append(methods);

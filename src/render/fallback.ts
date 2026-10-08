@@ -2,6 +2,7 @@
  * A static drawing for browsers without WebGL2. It keeps the full game playable:
  * the same contract, immediate commits, and a truthful description.
  */
+import type { AudioLike } from "./world-renderer.ts";
 import type { Executor, LeverInput, RailOutcome, RendererSettings, SceneAnchors, StageView, WorldRenderer } from "./api.ts";
 import { occupantsDescription } from "./world/staging.ts";
 
@@ -29,7 +30,10 @@ export class FallbackRenderer implements WorldRenderer {
   private art: HTMLDivElement;
   private anchorsCb: ((a: SceneAnchors) => void) | null = null;
 
-  constructor(host: HTMLElement, _settings: RendererSettings) {
+  private audio: AudioLike | null;
+
+  constructor(host: HTMLElement, _settings: RendererSettings, audio: AudioLike | null = null) {
+    this.audio = audio;
     this.host = host;
     this.art = document.createElement("div");
     this.art.className = "fallback-art";
@@ -45,7 +49,10 @@ export class FallbackRenderer implements WorldRenderer {
     return new Promise((resolve) => setTimeout(resolve, 60));
   }
   setLever(_value: number): void {}
-  pause(_paused: boolean): void {}
+  pause(paused: boolean): void {
+    // The static drawing has nothing to stop, but the sound must still pause.
+    this.audio?.pause(paused);
+  }
   settings(_patch: Partial<RendererSettings>): void {}
   describe(): string {
     const v = this.view;

@@ -45,11 +45,13 @@ export interface PersonUserData {
   react: (kind: Reaction, direction?: THREE.Vector3) => void;
   setPose: (pose: Pose) => void;
   setLookAt: (target: THREE.Vector3 | null) => void;
+  /** Less graphic detail switches the pool off (and removes one already formed). */
+  setBlood: (on: boolean) => void;
   role: PersonRole;
   pose: Pose;
   name?: string;
   height: number;
-  /** Forward speed (m/s) matching the walk / carry cycle, for integrators that move walkers. */
+  /** Forward speed (m/s) matching the walk / carry cycle, for callers that move walkers. */
   walkSpeed: number;
   struck: boolean;
   mesh: THREE.SkinnedMesh;
@@ -185,8 +187,10 @@ export function createPerson(spec: PersonSpec): THREE.Object3D {
       furn(droppedHat(tailor.hatParts, at, styleRng.range(0.9, 1.4) * (styleRng.chance(0.5) ? 1 : -1)));
     }
   }
-  const blood = spec.blood !== false;
-  if (blood) {
+  // The pool is always built (it is scaled from zero), so blood can be
+  // switched on or off for the life of the figure.
+  let blood = spec.blood !== false;
+  {
     const pp = poolPart(0.72 * s, seedNum % 97);
     sink.add(B.pool, pp.g, pp.o);
   }
@@ -419,7 +423,7 @@ export function createPerson(spec: PersonSpec): THREE.Object3D {
       st.com.x += st.vel.x * dt;
       st.com.z += st.vel.z * dt;
       st.com.y += (groundY + 0.12 * s - st.com.y) * (1 - Math.exp(-6 * dt));
-      if (!st.pool && st.t > 1.6) {
+      if (blood && !st.pool && st.t > 1.6) {
         // Spread from under the chest, toward the head.
         const ax = _tmp.set(0, 1, 0).applyQuaternion(st.q).setY(0);
         st.pool = new THREE.Vector3(st.com.x, groundY, st.com.z).addScaledVector(ax.normalize(), 0.55 * s);
@@ -447,7 +451,7 @@ export function createPerson(spec: PersonSpec): THREE.Object3D {
       frame.p[B.furniture]!.copy(st.furnVel).multiplyScalar(k * (2 - k));
       frame.q[B.furniture]!.setFromAxisAngle(_tmp.copy(st.furnVel).normalize().cross(UP).negate().normalize(), st.furnSpin * k);
     }
-    if (st.pool) {
+    if (st.pool && blood) {
       st.poolT += dt;
       const r = Math.sqrt(Math.min(1, st.poolT / 8));
       frame.s[B.pool] = r;
@@ -563,6 +567,10 @@ export function createPerson(spec: PersonSpec): THREE.Object3D {
     setLookAt: (v) => {
       lookWorld = v ? v.clone() : null;
       flinchLook = false;
+    },
+    setBlood: (on) => {
+      blood = on;
+      if (!on && struck) struck.pool = null;
     },
     role: spec.role,
     pose,

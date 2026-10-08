@@ -37,15 +37,15 @@ class Grip extends EventTarget {
     return event.defaultPrevented;
   }
 }
-function fixture() {
+function fixture(current: Side | null = "right") {
   const grip = new Grip(),
     commits: Side[] = [],
-    previews: Side[] = [];
+    previews: Array<Side | null> = [];
   let ordinaryClicks = 0,
     busy = false;
   const handle = wireDrag(grip as unknown as HTMLButtonElement, {
     busy: () => busy,
-    latched: () => "right",
+    current: () => current,
     preview: (side) => previews.push(side),
     commit: (side) => commits.push(side),
   });
@@ -159,4 +159,58 @@ test("an unrelated pointer cannot finish the gesture, and becoming busy cancels 
   f.grip.pointer("pointerup", 0);
   assert.equal(f.grip.click(), true);
   assert.deepEqual(f.commits, []);
+});
+
+test("from the centre, the direction of the pull chooses the side", async () => {
+  for (const [to, side] of [
+    [200, "right"],
+    [0, "left"],
+  ] as const) {
+    const f = fixture(null);
+    f.grip.pointer("pointerdown", 100);
+    f.grip.pointer("pointermove", to);
+    f.grip.pointer("pointerup", to);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    assert.deepEqual(f.commits, [side]);
+  }
+});
+
+test("pulling an armed lever further the same way commits that side", () => {
+  const f = fixture("left");
+  f.grip.pointer("pointerdown", 100);
+  f.grip.pointer("pointermove", 20);
+  f.grip.pointer("pointerup", 20);
+  assert.deepEqual(f.commits, ["left"]);
+});
+
+test("a short drag from the centre commits nothing and returns the lever", () => {
+  const f = fixture(null);
+  f.grip.pointer("pointerdown", 100);
+  f.grip.pointer("pointerup", 120);
+  assert.deepEqual(f.commits, []);
+  assert.equal(f.previews.at(-1), null);
+});
+
+test("a drag away from the armed side commits the side it was pulled to, and swallows its click", () => {
+  for (const [armed, to, side] of [
+    ["left", 220, "right"],
+    ["right", -20, "left"],
+  ] as const) {
+    const f = fixture(armed);
+    f.grip.pointer("pointerdown", 100);
+    f.grip.pointer("pointermove", to);
+    f.grip.pointer("pointerup", to);
+    assert.deepEqual(f.commits, [side]);
+    assert.equal(f.grip.click(), true, "the trailing click is suppressed");
+    assert.equal(f.clicks(), 0);
+  }
+});
+
+test("a cancel with no gesture under way does not swallow the next assistive-technology press", () => {
+  const f = fixture();
+  // A drawer opened and closed: cancel() runs although nothing was being dragged or held.
+  f.handle.cancel();
+  // VoiceOver or Voice Control dispatches a click with no pointerdown and no keydown.
+  assert.equal(f.grip.click(), false, "the press is not swallowed");
+  assert.equal(f.clicks(), 1);
 });

@@ -146,6 +146,7 @@ export function createAnimal(species: AnimalId, spec: AnimalSpec): THREE.Object3
     setLookAt: (target: THREE.Vector3 | null) => {
       ctl.lookAt = target;
     },
+    setBlood: (on: boolean) => ctl.setBlood(on),
     species,
     behavior,
     struck: false,

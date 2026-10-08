@@ -28,6 +28,7 @@ export function createAudioBridge(initialVolume: number): AudioBridge {
   let engine: Engine | null = null;
   let loading: Promise<Engine | null> | null = null;
   let enabled = false;
+  let paused = false;
   let volume = initialVolume;
   const load = () =>
     (loading ??= import("../audio/index.ts")
@@ -39,7 +40,10 @@ export function createAudioBridge(initialVolume: number): AudioBridge {
     trigger: (ev, opts) => {
       if (enabled) engine?.trigger(ev, opts);
     },
-    pause: (p) => engine?.pause(p),
+    pause: (p) => {
+      paused = p;
+      engine?.pause(p);
+    },
   };
   return {
     renderer,
@@ -52,9 +56,11 @@ export function createAudioBridge(initialVolume: number): AudioBridge {
       const e = await load();
       if (!e) return;
       engine = e;
+      e.pause(paused);
       await e.unlock();
-      e.setEnabled(true);
+      // Sound may have been switched off while the engine was loading.
       e.setVolumes({ master: volume });
+      e.setEnabled(enabled);
     },
     volume(v) {
       volume = v;

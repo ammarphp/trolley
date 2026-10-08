@@ -212,7 +212,8 @@ function authorityFor(c: Campaign): CabinState["authority"] {
   return "human";
 }
 
-function receiptsFor(c: Campaign): string[] {
+/** Receipt lines for the cab printer: the last eight, plus how many there have been in all. */
+function receiptsFor(c: Campaign): { lines: string[]; total: number } {
   const lines: string[] = [];
   for (const record of c.journal) {
     for (const e of record.domainEvents) {
@@ -228,7 +229,7 @@ function receiptsFor(c: Campaign): string[] {
       }
     }
   }
-  return lines.slice(-8);
+  return { lines: lines.slice(-8), total: lines.length };
 }
 
 function keepsakeFor(c: Campaign): CabinState["keepsake"] {
@@ -335,7 +336,7 @@ export function deriveStageView(input: DeriveInput): StageView {
     bloodied: input.reducedGraphics ? 0 : history.bloodied,
     authority: c ? authorityFor(c) : "human",
     morrow: (c?.prepared?.stage ?? c?.stage ?? 1) >= 3,
-    receipts: c ? receiptsFor(c) : [],
+    ...(c ? (({ lines, total }) => ({ receipts: lines, receiptTotal: total }))(receiptsFor(c)) : { receipts: [], receiptTotal: 0 }),
     speedKmh: Math.round(38 + env.speed * 34),
     clock: clockLabel(env.timeOfDay),
     keepsake: c ? keepsakeFor(c) : null,

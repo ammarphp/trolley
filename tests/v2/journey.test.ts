@@ -138,3 +138,58 @@ test("track lines are deterministic from their seed", () => {
   b.extendTo(500);
   assert.deepEqual(a.pose(437.3), b.pose(437.3));
 });
+
+test("a long line of stakes is met in full before the passage completes", async () => {
+  const hits: number[] = [];
+  const j = new Journey("long-line", { onContact: (_side, s) => hits.push(s) });
+  run(j, 1);
+  // Thirty people along the branch, the last well beyond the usual passage length.
+  const stakes: Stake[] = Array.from({ length: 30 }, (_, i) => ({ side: "left" as const, s: 15 + i * 1.6, struck: true }));
+  j.prepare("d1", stakes);
+  run(j, 20);
+  let resolved = false;
+  const p = j.commit("left", null).then(() => (resolved = true));
+  for (let i = 0; i < 60 * 30 && !resolved; i++) {
+    j.tick(1 / 60);
+    await Promise.resolve();
+  }
+  await p;
+  assert.equal(hits.length, 30, "every stake on the taken branch was met");
+  assert.ok(j.rig.s >= stakes.at(-1)!.s, "and the trolley is past the last of them");
+});
+
+test("in reduced motion a long line of stakes is met in full by the cut", async () => {
+  const hits: number[] = [];
+  const j = new Journey("long-line-cut", { onContact: (_side, s) => hits.push(s) });
+  j.reducedMotion = true;
+  const stakes: Stake[] = Array.from({ length: 30 }, (_, i) => ({ side: "right" as const, s: 15 + i * 1.6, struck: true }));
+  j.prepare("d1", stakes);
+  await j.commit("right", null);
+  assert.equal(hits.length, 30);
+});
+
+test("a fork laid beyond the drawn frontier is joined by drawn track before the cab arrives", () => {
+  const j = new Journey("far-toe");
+  run(j, 1);
+  const junction = j.prepare("d1", [], { minToe: j.rig.s + 320 });
+  for (let i = 0; i < 60 * 90 && j.toToe > HOLD_BEFORE_TOE + 1; i++) {
+    j.tick(1 / 60);
+    // The pen always stays ahead of the cab.
+    assert.ok(junction.stem.drawTo >= Math.min(junction.toe, j.rig.s + 20), `drawn to ${junction.stem.drawTo.toFixed(1)} with the cab at ${j.rig.s.toFixed(1)}`);
+  }
+  assert.ok(junction.stem.drawTo >= junction.toe - 0.5, "the stem is drawn all the way to the toe");
+  assert.ok(junction.stem.drawTo <= junction.toe + 1e-6, "and not beyond it");
+});
+
+test("switching to less motion mid-approach cuts to the hold point", () => {
+  const j = new Journey("cut-to-hold");
+  run(j, 1);
+  const junction = j.prepare("d1", [], { minToe: j.rig.s + 300 });
+  run(j, 3);
+  assert.ok(j.toToe > HOLD_BEFORE_TOE + 50, "still well short of the fork");
+  j.reducedMotion = true;
+  j.cutToHold();
+  assert.ok(Math.abs(j.toToe - HOLD_BEFORE_TOE) < 1e-6, `at the hold point (${j.toToe.toFixed(2)} m)`);
+  assert.equal(j.rig.speed, 0);
+  assert.ok(junction.stem.drawTo >= junction.toe - 1e-6, "the stem is drawn to the toe");
+});

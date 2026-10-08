@@ -495,9 +495,12 @@ export function createWeather(options: WeatherOptions = {}): WeatherModule {
       }
       if (bolt.visible) {
         boltAge += dt * 1000;
-        // Two pulses inside the 150 ms: on, a brief gap, on again.
-        const on = boltAge < 55 || (boltAge > 80 && boltAge < BOLT_MS);
-        bolt.visible = boltAge < BOLT_MS;
+        // Two pulses inside the 150 ms: on, a brief gap, on again. With no
+        // flashing the bolt is one steady mark, held a little longer.
+        const quiet = noFlashing || FLAGS.noFlashing;
+        const span = quiet ? 500 : BOLT_MS;
+        const on = quiet ? boltAge < span : boltAge < 55 || (boltAge > 80 && boltAge < BOLT_MS);
+        bolt.visible = boltAge < span;
         (bolt.material as THREE.ShaderMaterial).visible = on;
       }
     },

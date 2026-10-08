@@ -223,7 +223,9 @@ export class TrackRenderer {
         const chunk = this.chunks.get(key);
         const complete = Math.min(s0 + CHUNK, line.drawTo);
         const builtTo = chunk ? (chunk.mesh.userData.builtTo as number) : -1;
-        if (!chunk || builtTo < complete - 0.25) {
+        // Rebuild when the drawn extent changed either way: lines grow as the
+        // pen draws them, and shrink when a stem is cut at a toe or a branch is lifted.
+        if (!chunk || builtTo < complete - 0.25 || builtTo > complete + 0.01) {
           if (chunk) this.disposeChunk(chunk);
           const mesh = this.buildChunk(line, i, j && (line === j.left || line === j.right) ? j : null);
           mesh.userData.builtTo = complete;

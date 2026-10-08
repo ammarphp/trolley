@@ -63,6 +63,15 @@ let lastAnchors: SceneAnchors | null = null;
 let shownInterstitials = new Set<string>();
 /** Set while a stage tunnel holds the next decision back; skip() reveals it. */
 let transit: { skip: () => void } | null = null;
+/** Set by cancelGesture: the cab lever's drag in progress commits nothing. */
+let leverVoid = false;
+/** Switches the player set on this page; they win over a saved ride's values on resume. */
+const chosenPrefs = new Set<keyof Preferences>();
+function resumedPrefs(saved: Preferences): Preferences {
+  const next = { ...saved };
+  for (const key of chosenPrefs) next[key] = prefs[key];
+  return next;
+}
 
 // ------------------------------------------------------------ utilities
 
@@ -83,7 +92,7 @@ function stopClock() {
   }
 }
 function resumeClock() {
-  if (run && !busy && !paused && !afterChoice && !document.hidden && !drawer.open) activeSince = performance.now();
+  if (run && !busy && !paused && !afterChoice && !transit && !document.hidden && !drawer.open && document.hasFocus()) activeSince = performance.now();
 }
 function beginClock() {
   activeMs = 0;
@@ -172,8 +181,9 @@ function updateScene(phase: "title" | "decision" | "consequence" | "ending") {
   document.body.dataset.stage = String(view.stage);
   document.body.dataset.authority = view.cabin.authority;
   document.documentElement.dataset.motion = prefs.reducedMotion ? "reduced" : "full";
-  scene.update(view);
+  // Settings first: a resumed ride's Less motion applies before its fork is laid.
   scene.settings(rendererSettings());
+  scene.update(view);
   if (phase !== "decision") scene.setLever(latched === "left" ? -1 : 1);
   audio.mood(view, run?.campaign.ending?.id);
   updateClock(view);
@@ -334,7 +344,7 @@ function positionHud(a: SceneAnchors | null) {
 function openDrawer(title: string, body: HTMLElement) {
   panels.finishMorrow($("#assistant-panel"));
   panels.closeGlossary();
-  cancelGesture();
+  cancelDrags();
   stopClock();
   scene.pause(true);
   audio.trigger("ui-open");
@@ -352,6 +362,7 @@ drawer.addEventListener("close", () => {
   scene.pause(paused || document.hidden);
   audio.trigger("ui-close");
   resumeClock();
+  flushDeferredReveal();
 });
 
 function clearApp() {
@@ -386,6 +397,7 @@ function setToolbar(playing: boolean) {
 
 function renderStart() {
   window.scrollTo(0, 0);
+  endTransit();
   setPhase("title");
   setToolbar(false);
   clearApp();
@@ -494,15 +506,18 @@ async function startRun(sharing: boolean) {
 }
 
 async function resumeRun(saved: LocalRun) {
+  if (busy) return;
   busy = true;
-  void audio.unlock(saved.preferences.audio);
+  void audio.unlock(resumedPrefs(saved.preferences).audio);
   try {
     const bundle = await resolveBundle(saved.campaign.contentHash);
     const verified = await replayRun(bundle.manifest, bundle.nodes, await exportRun(saved.campaign, bundle.manifest, bundle.nodes));
     manifest = bundle.manifest;
     nodes = bundle.nodes;
-    run = { ...saved, campaign: verified };
-    prefs = { ...saved.preferences };
+    // Computed after the awaits, so a switch flipped while loading also counts.
+    prefs = resumedPrefs(saved.preferences);
+    run = { ...saved, campaign: verified, preferences: { ...prefs } };
+    panels.setPanelMotion(prefs.reducedMotion);
     latched = saved.campaign.journal.at(-1)?.executedSide || "right";
     selectedAdvice = [...saved.adviceIds];
     pendingAdvice = [];
@@ -536,11 +551,9 @@ function renderDecision(newClock = true) {
     return;
   }
   window.scrollTo(0, 0);
+  if (newClock) endTransit();
   setPhase("decision");
   setToolbar(true);
-  recordExposure(run);
-  void persist();
-  void sync();
   clearApp();
   afterChoice = false;
   armed = null;
@@ -567,7 +580,8 @@ function renderDecision(newClock = true) {
     const b = button("", () => arm(side), `route ${side}`);
     b.dataset.side = side;
     b.setAttribute("aria-pressed", "false");
-    b.setAttribute("aria-label", `${side === "left" ? "Left" : "Right"}: ${o.label.replace(/\.$/, "")}${o.id === p.defaultOptionId ? ". Current course." : ""}`);
+    b.dataset.label = `${side === "left" ? "Left" : "Right"}: ${o.label.replace(/\.$/, "")}${o.id === p.defaultOptionId ? ". Current course." : ""}`;
+    b.setAttribute("aria-label", b.dataset.label);
     if (recommended === side) b.classList.add("recommended");
     append(b, mono(side === "left" ? "← Left track" : "Right track →", "route-kicker"), el("span", "route-label", o.label));
     choices.append(b);
@@ -593,21 +607,27 @@ function renderDecision(newClock = true) {
   app.append(control);
   leverGesture = wireDrag(grip, {
     busy: () => busy || afterChoice || saveConflict || transit !== null,
-    latched: () => latched,
-    preview: (side) => scene.setLever(side === "left" ? -1 : 1, { armed: side }),
+    current: () => armed,
+    preview: (side) => scene.setLever(side === "left" ? -1 : side === "right" ? 1 : 0, { armed: side }),
     commit: (side) => {
       void choose(side);
     },
   });
   scene.setLever(0, { armed: null });
   panels.drawPanels(panelContext());
-  if (recommended && view.cabin.authority !== "human") preselect(recommended);
   refreshArming();
   watchHud();
   requestAnimationFrame(() => positionHud(null));
   const reveal = () => {
+    // Exposure is recorded only now: a decision held behind a tunnel is not yet seen.
+    recordExposure(run!);
+    void persist();
+    void sync();
     scene.setInteractive(true);
+    // Under delegated authority, the route Morrow recommended arrives preselected (never committed).
+    if (recommended && view.cabin.authority !== "human") preselect(recommended);
     if (newClock) beginClock();
+    else resumeClock();
     heading.focus({ preventScroll: true });
     announce(
       `Decision ${p.ordinal}. ${p.node.prompt} ${armed ? `Morrow has preselected the ${armed} route. Pull the lever to confirm, or choose again.` : "No route selected."}${prefs.descriptions ? " " + scene.describe() : ""}`,
@@ -626,28 +646,63 @@ function holdForTunnel(view: StageView, ordinal: number, reveal: () => void): bo
   if (prefs.reducedMotion || !scene.whenClear || !view.cues.some((c) => c.kind === "tunnel")) return false;
   scene.setInteractive(false);
   document.body.classList.add("in-transit");
+  const runId = run?.id;
   let done = false;
+  const token = { skip: () => finish() };
   const finish = () => {
-    if (done) return;
-    done = true;
-    transit = null;
-    document.body.classList.remove("in-transit");
-    const box = $("#interstitial");
-    if (!box.hidden) {
-      box.classList.add("leaving");
-      setTimeout(() => {
-        box.hidden = true;
-        box.classList.remove("leaving");
-      }, 600);
+    // A hold that has been superseded (a resume, a new run) touches nothing.
+    if (done || transit !== token) return;
+    // Never reveal behind a drawer or an absent page: wait until the player is back.
+    if (paused || drawer.open || document.hidden) {
+      deferredReveal = finish;
+      return;
     }
-    if (run?.campaign.prepared?.ordinal === ordinal && currentPhase() === "decision") {
+    done = true;
+    endTransit();
+    if (run?.id === runId && run?.campaign.prepared?.ordinal === ordinal && currentPhase() === "decision") {
       reveal();
       requestAnimationFrame(() => positionHud(null));
     }
   };
-  transit = { skip: finish };
-  void Promise.race([scene.whenClear(), new Promise((resolve) => setTimeout(resolve, 14000))]).then(finish);
+  transit = token;
+  void scene.whenClear().then(finish);
+  // Fallback if the cab never clears the portal: 14 s of the player's presence,
+  // not of wall-clock time (a pause or a hidden tab does not count).
+  let waited = 0;
+  let last = performance.now();
+  const fallback = () => {
+    if (done || transit !== token) return;
+    const now = performance.now();
+    if (!paused && !drawer.open && !document.hidden) waited += now - last;
+    last = now;
+    if (waited >= 14000) finish();
+    else setTimeout(fallback, 250);
+  };
+  setTimeout(fallback, 250);
   return true;
+}
+
+/** A tunnel reveal that arrived while the player was away (a drawer, a hidden tab). */
+let deferredReveal: (() => void) | null = null;
+function flushDeferredReveal() {
+  const f = deferredReveal;
+  deferredReveal = null;
+  f?.();
+}
+
+/** Drop any tunnel hold: the decision card and controls come back into view. */
+function endTransit() {
+  if (!transit && !document.body.classList.contains("in-transit")) return;
+  transit = null;
+  document.body.classList.remove("in-transit");
+  const box = $("#interstitial");
+  if (!box.hidden) {
+    box.classList.add("leaving");
+    setTimeout(() => {
+      box.hidden = true;
+      box.classList.remove("leaving");
+    }, 600);
+  }
 }
 
 /**
@@ -657,6 +712,7 @@ function holdForTunnel(view: StageView, ordinal: number, reveal: () => void): bo
  */
 function preselect(side: Side) {
   if (busy || afterChoice || !run?.campaign.prepared) return;
+  if (transit) return; // nothing is armed for a decision that is not yet shown
   armed = side;
   scene.setLever(side === "left" ? -1 : 1, { armed: side });
   document.querySelector(`.route.${side}`)?.classList.add("preselected");
@@ -686,8 +742,18 @@ function arm(side: Side) {
   }
   refreshArming();
 }
+/** Abandon any drag in progress (a drawer, a blur, a hidden tab); the armed route stays armed. */
+function cancelDrags() {
+  leverGesture?.cancel();
+  scene?.cancelLever?.();
+  leverVoid = true;
+  if (armed) scene?.setLever(armed === "left" ? -1 : 1, { armed });
+}
+/** The player cancels the selection itself (Escape). */
 function cancelGesture() {
   leverGesture?.cancel();
+  scene?.cancelLever?.();
+  leverVoid = true;
   armed = null;
   scene?.setLever(0, { armed: null });
   refreshArming();
@@ -696,7 +762,11 @@ function refreshArming() {
   document.querySelectorAll<HTMLButtonElement>(".route").forEach((b) => {
     const yes = b.dataset.side === armed;
     b.classList.toggle("armed", yes);
+    // A preselection lasts only while that route is still the armed one.
+    if (!yes) b.classList.remove("preselected");
     b.setAttribute("aria-pressed", String(yes));
+    const note = b.classList.contains("preselected") ? " Morrow has preselected this route." : b.classList.contains("recommended") ? " Morrow recommends this route." : "";
+    b.setAttribute("aria-label", `${b.dataset.label ?? ""}${note}`.trim());
   });
   const g = document.querySelector<HTMLButtonElement>(".grip");
   if (g) {
@@ -763,10 +833,7 @@ async function choose(side: Side) {
           renderDebrief();
           return;
         }
-        recordExposure(run!);
-        void persist();
         renderDecision();
-        void sync();
       },
       "continue",
     );
@@ -779,7 +846,9 @@ async function choose(side: Side) {
   } catch (error) {
     busy = false;
     notice(committed ? "Your choice was recorded. The scene could not finish its motion." : `No choice was completed: ${error instanceof Error ? error.message : "unknown error"}`);
-    renderDecision(false);
+    // A committed choice moves on to the next decision with a fresh clock; an
+    // uncommitted one shows the same decision again and keeps the time counted.
+    renderDecision(committed);
   }
 }
 
@@ -819,7 +888,7 @@ function panelContext(locked = false): panels.PanelContext {
     busy: () => busy,
     afterChoice: () => afterChoice,
     onAsk: (id) => {
-      if (!run || busy || afterChoice || selectedAdvice.includes(id) || pendingAdvice.includes(id)) return false;
+      if (!run || transit || busy || afterChoice || selectedAdvice.includes(id) || pendingAdvice.includes(id)) return false;
       panels.finishMorrow($("#assistant-panel"));
       pendingAdvice.push(id);
       world.setAssistant({ thinking: true });
@@ -842,6 +911,7 @@ function panelContext(locked = false): panels.PanelContext {
       const rec = panels.recommendedSide(run.campaign, selectedAdvice);
       document.querySelectorAll<HTMLElement>(".route").forEach((b) => b.classList.toggle("recommended", b.dataset.side === rec));
       if (rec && !armed && currentView && currentView.cabin.authority !== "human") preselect(rec);
+      else refreshArming();
     },
     redraw: (animateId) => panels.drawPanels({ ...panelContext(), animateId }),
     availableAdvice,
@@ -895,10 +965,16 @@ function settings() {
     input.checked = prefs[key];
     input.onchange = () => {
       prefs[key] = input.checked;
+      chosenPrefs.add(key);
       scene.settings(rendererSettings());
       document.documentElement.dataset.motion = prefs.reducedMotion ? "reduced" : "full";
       panels.setPanelMotion(prefs.reducedMotion);
+      if (key === "reducedMotion" && run) {
+        const phase = currentPhase();
+        if (phase === "consequence" || (phase === "decision" && !busy)) panels.drawPanels(panelContext(phase === "consequence"));
+      }
       if (key === "audio") void audio.unlock(input.checked);
+      if (key === "reducedMotion" && input.checked) transit?.skip();
       void persist();
     };
     body.append(append(el("label", "settings-row"), append(el("span"), label, el("small", "", detail)), input));
@@ -1043,6 +1119,7 @@ function recordPanel() {
 function renderDebrief() {
   window.scrollTo(0, 0);
   if (!run?.campaign.ending) return;
+  endTransit();
   setPhase("ending");
   setToolbar(false);
   scene.pause(false);
@@ -1081,14 +1158,24 @@ function renderDebrief() {
 
 // ----------------------------------------------------------------- input
 
+/** Keys belong to the focused control first: only keys aimed at the page itself drive the game. */
+function keyForGame(e: KeyboardEvent): boolean {
+  if (e.defaultPrevented || e.altKey || e.metaKey || e.ctrlKey) return false;
+  const target = e.target as HTMLElement | null;
+  if (!target || target === document.body || target === document.documentElement) return true;
+  // The dilemma card and the controls are part of the game; any other focusable widget keeps its keys.
+  if (target.closest(".decision-heading, .choices, .lever-control, #scene")) return !target.closest("input,select,textarea,a,.glp");
+  return false;
+}
 document.addEventListener("keydown", (e) => {
   if (transit && !drawer.open && !paused && ["Enter", " ", "Escape", "ArrowLeft", "ArrowRight"].includes(e.key)) {
-    if ((e.target as HTMLElement | null)?.closest("button,a,input,select,textarea,summary")) return;
+    if (!keyForGame(e)) return;
     e.preventDefault();
     transit.skip();
     return;
   }
   if (drawer.open || paused || busy || !run?.campaign.prepared || afterChoice) return;
+  if (!keyForGame(e)) return;
   if (e.key === "Escape") {
     cancelGesture();
     announce("Route selection cancelled. No route is selected.");
@@ -1096,8 +1183,6 @@ document.addEventListener("keydown", (e) => {
   }
   if (e.repeat) return;
   if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-    const target = e.target as HTMLElement | null;
-    if (target?.closest(".term-popover,input,select,textarea")) return;
     e.preventDefault();
     arm(e.key === "ArrowLeft" ? "left" : "right");
     $("#lever").focus({ preventScroll: true });
@@ -1109,16 +1194,17 @@ document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
     panels.finishMorrow($("#assistant-panel"));
     stopClock();
-    cancelGesture();
+    cancelDrags();
     scene?.pause(true);
   } else {
     scene?.pause(paused || drawer.open);
     resumeClock();
+    flushDeferredReveal();
   }
 });
 window.addEventListener("blur", () => {
   stopClock();
-  cancelGesture();
+  cancelDrags();
 });
 window.addEventListener("focus", resumeClock);
 window.addEventListener("resize", () => positionHud(null));
@@ -1134,7 +1220,9 @@ async function init() {
   scene = world.renderer;
   scene.onAnchors((a) => positionHud(a));
   scene.onLever((input) => {
-    if (transit || !run?.campaign.prepared || busy || afterChoice || drawer.open) return;
+    // A cancelled drag stays void until the lever is grabbed afresh.
+    if (input.type === "grab") leverVoid = false;
+    if (leverVoid || transit || !run?.campaign.prepared || busy || afterChoice || drawer.open) return;
     if (input.type === "drag" || input.type === "grab") {
       const side: Side | null = input.value < -0.35 ? "left" : input.value > 0.35 ? "right" : null;
       scene.setLever(input.value, { armed: side });
@@ -1143,7 +1231,7 @@ async function init() {
       const side: Side | null = input.value < -0.75 ? "left" : input.value > 0.75 ? "right" : null;
       if (side) void choose(side);
       else if (armed) scene.setLever(armed === "left" ? -1 : 1, { armed });
-    } else cancelGesture();
+    } else cancelDrags();
   });
   try {
     const config = await fetch("./config.json").then((r) => r.json());

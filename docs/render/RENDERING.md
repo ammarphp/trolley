@@ -83,7 +83,7 @@ Global effects are uniforms of the same pass:
   - Chunks are built in local frames, so geometry precision holds across tens of kilometres.
 - **Journey** (`world/journey.ts`): the trolley eases toward a hold point 6 m short of the fork. Speed decays like `min(v, √(2·a·gap), k·gap)`: it approaches forever and never arrives, so reading time is unlimited while the scenery keeps moving. After commit it takes the executed branch, meets what is on it, and brakes smoothly where a mechanism stops it.
 - **Scatter** (`world/scatter.ts`): world-anchored cells are populated as they enter a 560 m radius, using the *environment at that moment*. Change therefore arrives with new landscape rather than popping in place. Repeated prefabs are instanced.
-- **Tableaux** (`world/staging.ts`): each option's occupants are placed along its branch, with a destination beyond and an enamel sign at the toe. Crews bent over the rail have their backs to the trolley; people on the move are side-on; everyone else has seen it coming. A colour-light junction signal stands beside the fork: it shows red while the decision is open, lights the feather of the armed route (or of the forced route, under a standing order), and clears to green when the lever is pulled. Authored staging covers all 154 nodes (`render/staging/`), outside the hashed content bank.
+- **Tableaux** (`world/staging.ts`): each option's occupants are placed along its branch, with a destination beyond and an enamel sign at the toe. Crews bent over the rail have their backs to the trolley; people on the move are side-on; everyone else has seen it coming. A colour-light junction signal stands beside the fork: it shows red while the decision is open, turns amber and lights the feather of the armed route (or of the forced route, under a standing order), and clears to green only when the lever is pulled. Authored staging covers all 154 nodes (`render/staging/`), outside the hashed content bank.
 - **The road not taken** is drawn for a while, then the pen lifts its far reaches a stretch at a time, keeping only what stands by the junction.
 - **Tunnels** (`world/tunnel.ts`): a stage change runs through a cutting into a wooded hill, under a masonry headwall with wing walls, through a ribbed bore lit by lamps. The tunnel inks in over a second and a half, ahead of the cab. The world outside is redrawn while the cab is inside, and the next dilemma waits until the cab is out of the far portal (any key or a click skips ahead), so it is read in the world it belongs to.
 - **Lineside** (`world/lineside.ts`): a pole route of telegraph poles with sagging wires follows the line, and runs out along both branches of an open fork so the two routes diverge with the track. Poles are instanced; the wires are one batch of hairlines rebuilt only when a pole comes or goes.
@@ -104,11 +104,11 @@ The game spans **one long day**: the first decision is at 06:40 and late decisio
 
 | Tier | Pixel ratio | Shadows | Scatter density |
 |---|---|---|---|
-| high | ≤ 2 | 2048² PCF | 100% |
-| medium | ≤ 1.5 | 1024² PCF | 75% |
+| high | ≤ 2 | 1536² PCF | 85% |
+| medium | ≤ 1.5 | 1024² PCF | 70% |
 | low | 1 | off | 50% |
 
-The pipeline costs one scene pass plus one fullscreen composite. Browsers without WebGL2 get `render/fallback.ts`: a static drawing with the same controls and scene descriptions.
+The pipeline costs one scene pass plus one fullscreen composite. Instanced scenery is culled per instance against the view (keeping everything within 90 m for the shadows it casts into view), and small prefabs drop out beyond the distance where the pen can no longer resolve them. The HUD panels are frosted paper rather than a backdrop blur: a blur over the live drawing would be recomputed every frame. Browsers without WebGL2 get `render/fallback.ts`: a static drawing with the same controls and scene descriptions.
 
 ## Verifying art
 

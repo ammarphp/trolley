@@ -36,6 +36,8 @@ export interface WindshieldApi {
   setRain(amount: number): void;
   wipe(): void;
   clear(): void;
+  /** Remove blood and its smears, keeping the cracks (less graphic detail). */
+  clearBlood(): void;
   /** Wipers run on their own while it rains (default true). */
   setAutoWipe(on: boolean): void;
   /** Glass u,v (0..1) where the line from the camera to a world point crosses the windshield, or null. */
@@ -615,6 +617,13 @@ export function buildWindshield(seed: string): WindshieldParts {
       impacts = 0;
       compose();
       rain.texture.needsUpdate = true;
+    },
+    clearBlood() {
+      splats.length = 0;
+      drips.length = 0;
+      carried.length = 0;
+      for (const l of [bloodL, smearL]) l.ctx.clearRect(0, 0, CW, CH);
+      compose();
     },
     setAutoWipe(on) {
       autoWipe = on;

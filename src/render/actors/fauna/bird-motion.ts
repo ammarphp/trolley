@@ -88,7 +88,7 @@ export class BirdController {
   private fleeDir = new THREE.Vector2(0, 1);
   private fleeLeft = 0;
   private struck: { t: number; vel: THREE.Vector3; pos: THREE.Vector3; side: number; pool: number } | null = null;
-  private readonly blood: boolean;
+  private blood: boolean;
   private readonly stormy: boolean;
 
   constructor(o: BirdControllerOptions) {
@@ -120,6 +120,12 @@ export class BirdController {
 
   get walkSpeed(): number {
     return this.m.walkSpeed;
+  }
+
+  /** Less graphic detail: no pool forms, and any pool already on the ground goes. */
+  setBlood(on: boolean): void {
+    this.blood = on;
+    if (!on && this.struck) this.struck.pool = 0;
   }
 
   get isStruck(): boolean {

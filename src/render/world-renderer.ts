@@ -116,9 +116,12 @@ export class InkWorldRenderer implements WorldRenderer {
   private leverCb: ((i: LeverInput) => void) | null = null;
   private interactive = false;
   private leverTarget = 0;
+  /** Where the player last asked the lever to be; under a jam the display springs back, this does not. */
+  private leverRequested = 0;
   private armed: "left" | "right" | null = null;
   private jam: { forced: "left" | "right" | null } | null = null;
   private handledCues = new Set<string>();
+  private rideSeed: string | null = null;
   private appliedImpacts = -1;
   private appliedBlood = 0;
   private printed = 0;
@@ -155,7 +158,8 @@ export class InkWorldRenderer implements WorldRenderer {
     this.scene.add(this.sun);
     this.scene.add(this.sun.target);
     this.sun.castShadow = q !== "low";
-    this.sun.shadow.mapSize.set(q === "high" ? 2048 : 1024, q === "high" ? 2048 : 1024);
+    // 1536² over a 180 m square is ~12 cm a texel: finer than the hatching it feeds.
+    this.sun.shadow.mapSize.set(q === "high" ? 1536 : 1024, q === "high" ? 1536 : 1024);
     const sc = this.sun.shadow.camera;
     sc.left = -90;
     sc.right = 90;
@@ -183,7 +187,7 @@ export class InkWorldRenderer implements WorldRenderer {
     this.env = { ...env0 };
     this.envTarget = { ...env0 };
     this.scatter = new Scatter({ seed, assets: this.assets, heightAt: (x, z) => this.heightAt(x, z) });
-    this.scatter.density = q === "high" ? 1 : q === "medium" ? 0.75 : 0.5;
+    this.scatter.density = q === "high" ? 0.85 : q === "medium" ? 0.7 : 0.5;
     this.worldRoot.add(this.scatter.group);
     this.lineside = new Lineside(this.assets, (x, z) => this.heightAt(x, z), (line, s) => {
       const t = this.tunnel;
@@ -253,6 +257,20 @@ export class InkWorldRenderer implements WorldRenderer {
   // ------------------------------------------------------------- contract
 
   update(view: StageView): void {
+    if (view.seed !== this.rideSeed) {
+      // A new ride, a resumed save or the title: start the glass, the printer,
+      // the dash and the cue bookkeeping over, so the restore below redraws
+      // exactly this run's history (silently).
+      this.rideSeed = view.seed;
+      this.cabin?.clearGlass();
+      this.handledCues.clear();
+      this.appliedImpacts = -1;
+      this.appliedBlood = 0;
+      this.printed = 0;
+      this.pendingWipe = false;
+      this.decisionsSinceRiver = 1;
+      this.screenState = { thinking: false, alert: false, lines: [] };
+    }
     this.view = view;
     this.envTarget = { ...view.env };
     const c = view.cabin;
@@ -260,10 +278,10 @@ export class InkWorldRenderer implements WorldRenderer {
     this.cabin?.setAuthority(c.authority);
     this.jam = null;
     for (const cue of view.cues) this.applyCue(cue);
-    // Receipts print once each.
-    if (this.printed < c.receipts.length) {
-      const fresh = c.receipts.slice(this.printed);
-      this.printed = c.receipts.length;
+    // Receipts print once each (counted over the whole run; the view keeps only the latest).
+    if (this.printed < c.receiptTotal) {
+      const fresh = c.receipts.slice(-Math.min(c.receipts.length, c.receiptTotal - this.printed));
+      this.printed = c.receiptTotal;
       if (this.appliedImpacts >= 0) for (const line of fresh.slice(-2)) {
         this.cabin?.printReceipt(line);
         this.audio?.trigger("printer");
@@ -295,12 +313,16 @@ export class InkWorldRenderer implements WorldRenderer {
     let stop: { s: number } | null = null;
     if (outcome?.stoppedBy) {
       const brake = /brake/i.test(outcome.stoppedBy);
-      const first = stakes.slice().sort((a, b) => a.s - b.s)[0];
-      stop = brake ? { s: FIRST_STAKE - 5 } : { s: (first?.s ?? FIRST_STAKE) + 3.5 };
+      const sorted = stakes.slice().sort((a, b) => a.s - b.s);
+      const first = sorted[0];
+      // An independent brake stands beyond what the branch strikes (S2-04: the
+      // worker, then the barrier): halt short of the last stake, not the first.
+      const last = sorted.at(-1);
+      stop = brake ? { s: last?.s ?? FIRST_STAKE - 5 } : { s: (first?.s ?? FIRST_STAKE) + 3.5 };
     }
     // The lever: yours, or moved for you.
-    this.leverTarget = side === "left" ? -1 : 1;
-    this.routeSignal(side);
+    this.leverTarget = this.leverRequested = side === "left" ? -1 : 1;
+    this.routeSignal(side, true);
     if (executor !== "human") {
       this.cabin?.setAuthority("overridden");
       this.audio?.trigger("glitch", { intensity: 0.4 });
@@ -321,6 +343,7 @@ export class InkWorldRenderer implements WorldRenderer {
 
   setLever(value: number, options: { armed?: "left" | "right" | null; immediate?: boolean } = {}): void {
     let v = Math.max(-1, Math.min(1, value));
+    this.leverRequested = v;
     if (this.jam?.forced && options.armed && options.armed !== this.jam.forced) {
       // The lever registers, then springs back: a mechanism that no longer routes.
       this.shake = Math.max(this.shake, 0.35);
@@ -342,11 +365,12 @@ export class InkWorldRenderer implements WorldRenderer {
     if (options.immediate) this.cabin?.setLever(v, 1);
   }
 
-  private routeSignal(side: "left" | "right" | null): void {
+  /** Feather for the route set; amber while it is only armed, green once the lever is pulled. */
+  private routeSignal(side: "left" | "right" | null, committed = false): void {
     const signal = this.tableau?.signal;
     if (!signal) return;
     (signal.userData.setRoute as ((r: "left" | "right" | null) => void) | undefined)?.(side);
-    (signal.userData.setAspect as ((a: "red" | "amber" | "green" | "dark") => void) | undefined)?.(side ? "green" : "red");
+    (signal.userData.setAspect as ((a: "red" | "amber" | "green" | "dark") => void) | undefined)?.(committed ? "green" : side ? "amber" : "red");
   }
 
   pause(paused: boolean): void {
@@ -356,8 +380,19 @@ export class InkWorldRenderer implements WorldRenderer {
   }
 
   settings(patch: Partial<RendererSettings>): void {
+    const wasReduced = this.settingsState.reducedGraphics;
     this.settingsState = { ...this.settingsState, ...patch };
+    // With less motion the cab no longer travels: nothing should wait on a tunnel.
+    if (this.settingsState.reducedMotion) for (const resolve of this.clearWaiters.splice(0)) resolve();
+    if (this.settingsState.reducedGraphics !== wasReduced) {
+      // Less graphic detail applies at once: pools go from the ground, blood from the glass.
+      const on = !this.settingsState.reducedGraphics;
+      for (const t of [this.tableau, ...this.oldTableaux]) for (const a of t?.actors ?? []) (a.object.userData.setBlood as ((b: boolean) => void) | undefined)?.(on);
+      if (!on) this.cabin?.clearBlood?.();
+    }
+    const wasMoving = !this.journey.reducedMotion;
     this.journey.reducedMotion = this.settingsState.reducedMotion;
+    if (wasMoving && this.settingsState.reducedMotion) this.journey.cutToHold();
     this.pipeline.look.boilRate = 0;
     this.pipeline.look.accentMute = 0;
     this.sky?.setNoFlashing?.(this.settingsState.noFlashing);
@@ -499,12 +534,14 @@ export class InkWorldRenderer implements WorldRenderer {
     const tableau = buildTableau(j, view.staging!, this.assets, view.seed, {
       ...(view.rail ? { rail: view.rail } : {}),
       clearOfTrack: (x, z, r) => network.distanceToTrack(x, z, r + 2) > r,
+      reducedGraphics: this.settingsState.reducedGraphics,
     });
     this.worldRoot.add(tableau.group);
     this.tableau = tableau;
     this.journey.prepare(view.decisionId!, tableau.stakes);
     this.armed = null;
     this.leverTarget = 0;
+    this.leverRequested = 0;
     this.selectionVisible(null);
   }
 
@@ -693,9 +730,11 @@ export class InkWorldRenderer implements WorldRenderer {
     canvas.addEventListener("pointerdown", (e) => {
       if (!this.interactive || !hitLever(e)) return;
       canvas.setPointerCapture(e.pointerId);
-      this.drag = { pointerId: e.pointerId, startX: e.clientX, startValue: this.leverTarget };
+      // Gestures start from the position the player asked for: under a jam the
+      // drawn lever has sprung back to the forced side, but the request stands.
+      this.drag = { pointerId: e.pointerId, startX: e.clientX, startValue: this.leverRequested };
       canvas.style.cursor = "grabbing";
-      this.leverCb?.({ type: "grab", value: this.leverTarget });
+      this.leverCb?.({ type: "grab", value: this.leverRequested });
     });
     const end = (e: PointerEvent, cancelled: boolean) => {
       if (!this.drag || e.pointerId !== this.drag.pointerId) return;
@@ -707,6 +746,16 @@ export class InkWorldRenderer implements WorldRenderer {
     canvas.addEventListener("pointerup", (e) => end(e, false));
     canvas.addEventListener("pointercancel", (e) => end(e, true));
     canvas.addEventListener("lostpointercapture", (e) => end(e, true));
+  }
+
+  /** Abandon a drag of the cab's lever in progress (Escape, blur, a drawer): its release commits nothing. */
+  cancelLever(): void {
+    const d = this.drag;
+    // Clear first: releasing capture dispatches lostpointercapture synchronously.
+    this.drag = null;
+    const canvas = this.pipeline.domElement;
+    canvas.style.cursor = "";
+    if (d && canvas.hasPointerCapture(d.pointerId)) canvas.releasePointerCapture(d.pointerId);
   }
 
   private resize(): void {
@@ -788,8 +837,15 @@ export class InkWorldRenderer implements WorldRenderer {
     }
     // Floating origin: keep the camera near zero.
     if (Math.hypot(rig.pose.x - this.origin.x, rig.pose.z - this.origin.z) > 1500) {
+      const px = this.origin.x;
+      const pz = this.origin.z;
       this.origin.set(Math.round(rig.pose.x / 1000) * 1000, 0, Math.round(rig.pose.z / 1000) * 1000);
       this.worldRoot.position.set(-this.origin.x, 0, -this.origin.z);
+      // Re-express the cab in the new frame at once, so everything that reads
+      // the camera this frame (river, scenery culling) sees one consistent frame.
+      this.cabRoot.position.x += px - this.origin.x;
+      this.cabRoot.position.z += pz - this.origin.z;
+      this.cabRoot.updateMatrixWorld(true);
       INK_GLOBALS.uInkWorldOffset.value.set(this.origin.x, 0, this.origin.z);
     }
     const rigWorld = new THREE.Vector3(rig.pose.x, 0, rig.pose.z);
@@ -811,7 +867,6 @@ export class InkWorldRenderer implements WorldRenderer {
     for (const { crossing } of this.crossings) crossing.tick(dt, env, rigWorld, this.camera);
     this.scatter.night = env.timeOfDay >= 0.82 || env.timeOfDay <= 0.12;
     this.scatter.update(this.journey.network, rigWorld, env, dt, this.clock);
-    this.scatter.cullFor(this.camera, dt);
     if (this.journey.network.lines.length > 12) this.journey.network.prune(rig.pose.x, rig.pose.z, 1100);
     // Tableaux behind the cab go once they are well out of sight (at most three linger).
     if (this.oldTableaux.length) {
@@ -824,6 +879,11 @@ export class InkWorldRenderer implements WorldRenderer {
       }
       while (keep.length > 3) disposeTableau(keep.shift()!);
       this.oldTableaux = keep;
+    }
+    for (const old of this.oldTableaux) {
+      const c = old.junction.chosen;
+      const branch = c === "left" ? old.junction.left : c === "right" ? old.junction.right : null;
+      if (branch === rig.line) for (const a of old.actors) if (a.struck && a.side === c && a.object.visible && rig.s + 2.4 >= a.s) a.object.visible = false;
     }
     for (const t of [this.tableau, ...this.oldTableaux]) for (const o of t?.tickers ?? []) (o.userData.tick as (dt: number, t: number) => void)(dt, this.clock);
 
@@ -839,6 +899,9 @@ export class InkWorldRenderer implements WorldRenderer {
     const jolt = motion * this.shake * 0.02;
     this.cabRoot.position.set(rig.pose.x - this.origin.x, h + RAIL_TOP + CAB_FLOOR + bounce + jolt * Math.sin(this.clock * 61), rig.pose.z - this.origin.z);
     this.cabRoot.rotation.set(0, -rig.pose.heading, motion * this.sway + jolt * 0.4 * Math.sin(this.clock * 47), "YXZ");
+    // Cull scenery against this frame's camera (after any floating-origin shift).
+    this.cabRoot.updateMatrixWorld(true);
+    this.scatter.cullFor(this.camera, dt);
 
     // Light: one long day.
     this.updateSun(env, rigWorld);
@@ -851,11 +914,13 @@ export class InkWorldRenderer implements WorldRenderer {
     cam.updateMatrixWorld();
     this.sky?.update(dt, env, rigWorld, cam);
     this.ground?.update(dt, env, rigWorld, cam);
-    this.weather?.update(dt, env, rigWorld, cam);
+    // Less motion: rain is drawn still and the flocks keep to their roosts.
+    this.weather?.update(reduced ? 0 : dt, env, rigWorld, cam);
     this.leafFall?.update(dt, (1 - env.leaves) * env.vegetation * (reduced ? 0 : 1), cam);
-    this.flock?.setViewer?.(this.camera.getWorldPosition(new THREE.Vector3()));
+    // Birds live in the world frame; the camera's scene position is shifted by the floating origin.
+    this.flock?.setViewer?.(this.camera.getWorldPosition(new THREE.Vector3()).add(this.origin));
     this.flock?.update(dt, this.clock, new THREE.Vector3(rig.pose.x + Math.sin(rig.pose.heading) * 160, 38, rig.pose.z - Math.cos(rig.pose.heading) * 160));
-    if (this.flock) this.flock.object.visible = env.birds > 0.3;
+    if (this.flock) this.flock.object.visible = env.birds > 0.3 && !reduced;
 
     if (this.cabin) {
       const lever = this.cabin.leverValue + (this.leverTarget - this.cabin.leverValue) * 0; // cabin eases internally
@@ -887,10 +952,13 @@ export class InkWorldRenderer implements WorldRenderer {
     this.negativeValue = Math.max(0, this.negativeValue - dt * 5);
     this.flashValue = Math.max(0, this.flashValue - dt * 1.5);
     look.negative = this.settingsState.noFlashing ? 0 : this.negativeValue;
-    look.flash = this.flashValue;
+    look.flash = this.settingsState.noFlashing ? 0 : this.flashValue;
+    // The signal glitch slips bands of the drawing. With no flashing (or less
+    // motion) it holds one still displacement instead of re-cutting 12 times a second.
     const glitching = this.clock < this.glitchUntil;
-    look.glitch = glitching ? 0.5 + 0.5 * Math.sin(this.clock * 40) : 0;
-    look.glitchSeed = glitching ? Math.floor(this.clock * 12) : 0;
+    const still = this.settingsState.noFlashing || reduced;
+    look.glitch = glitching ? (still ? 0.5 : 0.5 + 0.5 * Math.sin(this.clock * 40)) : 0;
+    look.glitchSeed = glitching ? (still ? Math.floor(this.glitchUntil * 12) : Math.floor(this.clock * 12)) : 0;
 
     // Audio.
     this.audio?.setRail({ sleepersPerSecond: rig.speed / 0.65, curve: Math.max(-1, Math.min(1, headingRate * 8)), onBridge: false, inTunnel });

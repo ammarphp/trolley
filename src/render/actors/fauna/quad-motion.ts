@@ -125,7 +125,7 @@ export class QuadController {
   private cock = 0;
   private stamp = 0;
   private struck: Struck | null = null;
-  private readonly blood: boolean;
+  private blood: boolean;
   private readonly heightAt?: (x: number, z: number) => number;
   private groundT = 0;
   private grounded = false;
@@ -911,6 +911,12 @@ export class QuadController {
       pose.p[Q.pool * 3] = st.pool.x;
       pose.p[Q.pool * 3 + 2] = st.pool.z;
     } else pose.s[Q.pool] = 0;
+  }
+
+  /** Less graphic detail: no pool forms, and any pool already on the ground goes. */
+  setBlood(on: boolean): void {
+    this.blood = on;
+    if (!on && this.struck) this.struck.pool = null;
   }
 
   get isStruck(): boolean {

@@ -417,7 +417,7 @@ body[data-authority="overridden"] .route.preselected .route-kicker::before {
   content: "Preselected · ";
   color: var(--cobalt);
 }
-.route.recommended .route-kicker::after {
+.route.recommended.preselected .route-kicker::after {
   content: " · Morrow has selected";
 }
 
@@ -566,14 +566,16 @@ body.in-transit .interstitial {
 }
 #app .decision-heading,
 #app .choices,
-#app .lever-control {
+#app .lever-control,
+#assistant-panel .mw-dock {
   transition:
     opacity 0.6s var(--ease-out),
     visibility 0s linear 0s;
 }
 body.in-transit #app .decision-heading,
 body.in-transit #app .choices,
-body.in-transit #app .lever-control {
+body.in-transit #app .lever-control,
+body.in-transit #assistant-panel .mw-dock {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -1004,7 +1006,7 @@ dialog#drawer::backdrop {
 @media (max-width: 1100px), (max-height: 560px) {
   html {
     scroll-padding-top: calc(var(--hud-top) + 16px);
-    scroll-padding-bottom: 210px;
+    scroll-padding-bottom: 250px;
   }
   body {
     overflow-x: hidden;
@@ -1092,11 +1094,22 @@ dialog#drawer::backdrop {
   }
   /* The routes and the lever ride together at the foot of the screen, so a
      long dilemma scrolls beneath them instead of pushing a route under the lever. */
+  body {
+    --tray-lift: 0px;
+  }
+  body.has-ticker {
+    /* The news ticker docks beneath the tray from stage 3 on. */
+    --tray-lift: 38px;
+  }
   .choices {
     position: sticky;
-    bottom: 80px;
+    bottom: calc(92px + var(--tray-lift));
     z-index: 14;
-    inset: auto auto 80px auto;
+    inset: auto auto calc(92px + var(--tray-lift)) auto;
+    /* A paper backing, so the dilemma scrolling beneath does not show through. */
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 14px var(--gutter) 6px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--paper) 14px);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
@@ -1116,13 +1129,17 @@ dialog#drawer::backdrop {
   .route::after {
     display: none;
   }
-  .lever-control {
+  .lever-control,
+  body.has-ticker .lever-control {
     position: sticky;
     left: auto !important;
     right: auto !important;
     top: auto !important;
-    bottom: 12px;
+    bottom: calc(12px + var(--tray-lift));
     z-index: 15;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 6px;
+    background: var(--paper);
   }
   .grip {
     width: 100%;
@@ -1151,6 +1168,26 @@ dialog#drawer::backdrop {
   }
   .ticker-dock {
     position: fixed;
+  }
+}
+/* Short screens (landscape phones): nothing sticks, so the dilemma always has
+   room; the world, the prompt, the routes and the lever simply scroll in turn. */
+@media (max-height: 560px) {
+  .world {
+    position: relative;
+    top: auto;
+    height: 72svh;
+    min-height: 0;
+  }
+  .choices,
+  .lever-control,
+  body.has-ticker .lever-control {
+    position: relative;
+    bottom: auto;
+    inset: auto;
+  }
+  html {
+    scroll-padding-bottom: 24px;
   }
 }
 @media (max-width: 520px) {
