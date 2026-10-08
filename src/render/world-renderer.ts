@@ -51,6 +51,11 @@ export interface WorldRendererOptions {
   /** Drive frames by calling advance(dt) instead of requestAnimationFrame (tests, lab). */
   manual?: boolean;
   preserveDrawingBuffer?: boolean;
+  /**
+   * WebGL without a GPU: draw at reduced resolution and at most 20 frames a
+   * second, so the page (and its controls) stay responsive.
+   */
+  software?: boolean;
 }
 
 const CAB_FLOOR = 1.1;
@@ -89,6 +94,7 @@ export class InkWorldRenderer implements WorldRenderer {
   private flock: ReturnType<NonNullable<AssetProvider["flock"]>> | null = null;
   private tableau: Tableau | null = null;
   private oldTableaux: Tableau[] = [];
+  private readonly software: boolean;
   private tunnel: Tunnel | null = null;
   private tunnelExclusion: (() => void) | null = null;
   private lastScreenToe = Number.NaN;
@@ -147,7 +153,14 @@ export class InkWorldRenderer implements WorldRenderer {
     canvas.setAttribute("aria-hidden", "true");
     this.host.append(canvas);
     const q = this.settingsState.quality;
-    this.pipeline = new InkPipeline({ canvas, maxPixelRatio: q === "high" ? 2 : q === "medium" ? 1.5 : 1, shadows: q !== "low", preserveDrawingBuffer: options.preserveDrawingBuffer ?? false });
+    this.software = options.software ?? false;
+    this.pipeline = new InkPipeline({
+      canvas,
+      maxPixelRatio: this.software ? 1 : q === "high" ? 2 : q === "medium" ? 1.5 : 1,
+      renderScale: this.software ? 0.6 : 1,
+      shadows: q !== "low" && !this.software,
+      preserveDrawingBuffer: options.preserveDrawingBuffer ?? false,
+    });
     this.manual = options.manual ?? false;
     // Opt-in inspection hook for profiling (?debug in the URL); nothing reads it.
     if (typeof location !== "undefined" && /[?&]debug\b/.test(location.search)) (globalThis as { __inkWorld?: unknown }).__inkWorld = this;
@@ -781,6 +794,9 @@ export class InkWorldRenderer implements WorldRenderer {
   private frame = (now: number): void => {
     if (this.destroyed) return;
     this.raf = requestAnimationFrame(this.frame);
+    // Software WebGL: leave the main thread room for input between frames.
+    // With less motion the scene is all but still, so it is redrawn sparingly.
+    if (this.software && now - this.lastFrame < (this.settingsState.reducedMotion ? 250 : 50)) return;
     const rawDt = Math.min(0.05, (now - this.lastFrame) / 1000);
     this.lastFrame = now;
     if (this.paused || document.hidden) return;

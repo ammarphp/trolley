@@ -29,6 +29,7 @@ try {
       reducedMotion: "reduce",
     }),
     page = await ctx.newPage(),
+    _throttle = process.env.TEST_CPU_THROTTLE ? await (await ctx.newCDPSession(page)).send("Emulation.setCPUThrottlingRate", { rate: Number(process.env.TEST_CPU_THROTTLE) }) : null,
     errors = [],
     posts = [],
     collectorRequests = [];

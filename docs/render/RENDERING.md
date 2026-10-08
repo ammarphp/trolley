@@ -107,6 +107,7 @@ The game spans **one long day**: the first decision is at 06:40 and late decisio
 | high | ≤ 2 | 1536² PCF | 85% |
 | medium | ≤ 1.5 | 1024² PCF | 70% |
 | low | 1 | off | 50% |
+| software WebGL (no GPU) | 0.6 | off | 50%, at most 20 frames a second (4 under Less motion) |
 
 The pipeline costs one scene pass plus one fullscreen composite. Instanced scenery is culled per instance against the view (keeping everything within 90 m for the shadows it casts into view), and small prefabs drop out beyond the distance where the pen can no longer resolve them. The HUD panels are frosted paper rather than a backdrop blur: a blur over the live drawing would be recomputed every frame. Browsers without WebGL2 get `render/fallback.ts`: a static drawing with the same controls and scene descriptions.
 
