@@ -14,13 +14,14 @@ await once(server.stdout, "data");
 // The world is WebGL2. Headless Chromium needs a GPU path: Metal on macOS,
 // SwiftShader elsewhere (CI). The app still falls back to a static drawing
 // if neither exists; the renderer assertion below records which one ran.
-const browser = await chromium.launch({
-  headless: true,
-  args:
-    process.platform === "darwin"
-      ? ["--use-angle=metal", "--enable-gpu", "--ignore-gpu-blocklist"]
-      : ["--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
-});
+// TEST_GL=swiftshader reproduces the CI path (software WebGL) on macOS too.
+const args =
+  process.platform !== "darwin"
+    ? ["--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"]
+    : process.env.TEST_GL === "swiftshader"
+      ? ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"]
+      : ["--use-angle=metal", "--enable-gpu", "--ignore-gpu-blocklist"];
+const browser = await chromium.launch({ headless: true, args });
 await mkdir("test-results/v2", { recursive: true });
 try {
   const ctx = await browser.newContext({

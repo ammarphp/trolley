@@ -338,8 +338,8 @@ body[data-authority="overridden"] .dispatch-kicker .dot {
 }
 .route {
   position: absolute;
-  left: var(--x, 30%);
-  top: var(--y, 55%);
+  left: var(--x, 38%);
+  top: var(--y, 52%);
   transform: translate(-50%, -100%);
   max-width: min(250px, 30vw);
   min-height: 0;
@@ -404,6 +404,10 @@ body[data-authority="overridden"] .dispatch-kicker .dot {
 }
 .route:disabled {
   opacity: 1;
+}
+/* Until the world reports where its branches are, each tag waits on its own side. */
+.route.right {
+  left: var(--x, 62%);
 }
 .route.preselected .route-kicker::before {
   content: "Preselected · ";
@@ -1115,7 +1119,8 @@ dialog#drawer::backdrop {
     gap: 10px;
     pointer-events: auto !important;
   }
-  .route {
+  .route,
+  .route.right {
     position: relative;
     left: auto;
     top: auto;
